@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import { Link, Route, Routes } from "react-router-dom";
 import Story from "./pages/Story";
 import Map from "./pages/Map";
+import Gallerypage from "./pages/Gallerypage";
 import Contact from "./pages/Contact";
 import Forum from "./pages/Forum";
 import GlowingText from "./components/GlowingText";
@@ -26,7 +27,10 @@ const App = () => {
   const slideRightRefs = useRef([]);
   const slideLeftRefs = useRef([]);
   const fadeInRefs = useRef([]);
-
+  useEffect(() => {
+    // 當路由變更時，將頁面滾動到頂部
+    window.scrollTo(0, 0);
+  }, [location]);
   // 淡入動畫
   useEffect(() => {
     // 只有淡入
@@ -321,8 +325,10 @@ const App = () => {
 
         <Route path="/Story" element={<Story />} />
         <Route path="/Map" element={<Map />} />
+        <Route path="/page/:pageId" element={<Gallerypage />} />
         <Route path="/Forum" element={<Forum />} />
         <Route path="/Contact" element={<Contact />} />
+        
       </Routes>
     </>
   );

@@ -38,6 +38,11 @@ function GalleryPage() {
   const location = imageConfig[pageId]?.location || "未登錄地點";
   const windowSize = useWindowSize(); // 使用自定義 Hook
 
+  useEffect(() => {
+    // 當路由變更時，將頁面滾動到頂部
+    window.scrollTo(0, 0);
+  }, [location]);
+
   // 添加回圖片路徑生成函數
   const generateImagePaths = (pageId) => {
     const config = imageConfig[pageId];
