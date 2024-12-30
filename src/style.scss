@@ -1,0 +1,3180 @@
+@use "reset";
+@use "variables"as *;
+@use "function"as *;
+@use "keyframes";
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Handjet:wght@100..900&family=Mina&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Zen+Maru+Gothic&display=swap");
+
+/* 重置字體 */
+
+body {
+  position: relative;
+  font-family: $Chinese;
+  /* 系統預設的無襯線字 */
+  font-size: 100%;
+  line-height: 1.5;
+  cursor: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  background-color: $deep;
+  color: #ffffff;
+  font-family: "Noto Sans TC", sans-serif;
+  height: 100%;
+}
+
+/* 重置標題字重 */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  /* 一般粗細 */
+}
+
+/* 重置清單符號 */
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* 重置圖片 */
+
+img {
+  display: block;
+  width: 100%;
+  /* 滿版 */
+  max-width: 100%;
+  height: auto;
+}
+
+/* 重置連接 */
+/* 基本超連結樣式 */
+a {
+  cursor: none;
+  display: block;
+  text-decoration: none;
+  color: white;
+}
+
+
+
+
+/* Menu */
+
+.Topbar {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: 60px 0 110px 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  overflow: visible;
+  background: linear-gradient(to bottom, rgba(42, 42, 42, 1) 20%, rgba(42, 42, 42, 0) 90%);
+  z-index: 998;
+  pointer-events: none;
+
+
+  .Topbar-right,
+  .nav-wrapper {
+    pointer-events: auto;
+  }
+
+  button {
+    background: none;
+    color: $primary-purple;
+    pointer-events: auto;
+  }
+
+  .logo {
+    width: 240px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+
+    &:hover {
+      filter: invert(42%) saturate(1352%) hue-rotate(140deg) brightness(120%) contrast(119%);
+    }
+
+    img {
+      width: 50px;
+      margin-right: 8px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .logoText {
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    color: $primary-green;
+  }
+
+  .Topbar-right {
+    display: flex;
+    padding: 0;
+    align-items: center;
+    margin-left: 115px;
+  }
+
+  /* 整體視窗背景遮罩 */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* 半透明深色背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  /* 主視窗 */
+  .modal {
+    background: #2a2a2a;
+    /* 深灰色背景 */
+    border-radius: 12px;
+    width: 350px;
+    padding: 60px 80px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: center;
+    font-family: "Arial", sans-serif;
+  }
+
+  /* 關閉按鈕 (叉叉) */
+  .close-btn {
+    position: absolute;
+    top: 0px;
+    right: -220px;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    font-weight: bold;
+    color: #acff6c;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .close-btn:hover {
+    color: #b595ff;
+    /* 懸停時變紫色 */
+  }
+
+  .title-login {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    /* LOGO 圖片  */
+    .login-LOGO {
+      width: 25%;
+    }
+
+    /* 標題 */
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #acff6c;
+      /* 螢光綠主色 */
+    }
+  }
+
+  /* 表單容器 */
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  /* 輸入框 */
+  .form-container input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #b595ff;
+    /* 淡紫色邊框 */
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    /* 白色背景 */
+    color: #2a2a2a;
+    /* 深灰色文字 */
+  }
+
+  .form-container input:focus {
+    outline: none;
+    border-color: #acff6c;
+    /* 聚焦時變綠色 */
+  }
+
+  /* 按鈕樣式 */
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: none;
+  }
+
+  /* 登入按鈕 */
+  .login-btn {
+    background-color: #acff6c;
+    color: #2a2a2a;
+  }
+
+  .login-btn:hover {
+    background-color: #95e05c;
+  }
+
+  /* 註冊按鈕 */
+  .register-btn {
+    background-color: #b595ff;
+    color: #ffffff;
+  }
+
+  .register-btn:hover {
+    background-color: #9c7fdd;
+  }
+
+  /* 訊息文字 */
+  p {
+    font-size: 14px;
+    color: #ffffff;
+    /* 白色文字 */
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  p:hover {
+    color: #b595ff;
+    /* 紫色 */
+  }
+
+  /* 密碼顯示文字 */
+  .password-display {
+    font-size: 16px;
+    color: #acff6c;
+    font-weight: bold;
+  }
+
+  .welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    .auth-btn {
+      cursor: none;
+      width: 60px;
+      color: $primary-purple;
+      font-weight: 400;
+      margin: 0 8px;
+      padding: 0 3px;
+      border-radius: 5px;
+      border-left: transparent 1px solid;
+      border-right: transparent 1px solid;
+
+      &:hover {
+        border-left: $primary-purple 1px solid;
+        border-right: $primary-purple 1px solid;
+      }
+    }
+
+    span {
+      color: white;
+    }
+
+
+  }
+}
+
+.member {
+  display: flex;
+  color: $primary-purple;
+  margin-left: 20px;
+  margin: 8px;
+  margin-bottom: 5px;
+
+  a {
+    color: $primary-purple;
+    font-weight: 400;
+    margin: 0 8px;
+    padding: 0 3px;
+    border-radius: 5px;
+    border-left: transparent 1px solid;
+    border-right: transparent 1px solid;
+
+    &:hover {
+      border-left: $primary-purple 1px solid;
+      border-right: $primary-purple 1px solid;
+    }
+  }
+
+  .auth-buttons {
+    display: flex;
+    cursor: none;
+
+  }
+
+
+}
+
+.nav-wrapper {
+  position: relative;
+  width: auto;
+  display: flex;
+  align-items: center;
+  margin-right: 115px;
+  overflow: visible;
+  z-index: 997;
+
+  /* 會員圖示 */
+
+  #Group {
+    margin-right: 20px;
+    width: 26px;
+
+    .group-info {
+      position: absolute;
+      top: 50px; // 根據實際 Navbar 調整
+      padding: 10px;
+      border-radius: 5px;
+
+      p {
+        color: white;
+        margin: 0 0 10px;
+      }
+
+      .auth-btn {
+        display: none;
+        background: none;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+          filter: brightness(200%)
+        }
+      }
+    }
+  }
+
+  #news {
+    margin-right: 20px;
+    width: 24px;
+  }
+
+  .navbar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    overflow: visible;
+    z-index: 997;
+    height: fit-content;
+
+    .hamburger {
+      position: relative;
+      background-color: transparent;
+      border: none;
+      cursor: none;
+      z-index: 999;
+      padding: 15px;
+
+      .bar {
+        display: block;
+        width: 24px;
+        height: 3px;
+        background-color: $light;
+        margin: 5px auto;
+        transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+      }
+
+      &.is-active {
+        .bar {
+          &:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+          }
+
+          &:nth-child(2) {
+            opacity: 0;
+          }
+
+          &:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+          }
+        }
+      }
+    }
+
+    .navigation {
+      position: absolute;
+      display: flex;
+      justify-content: space-around;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 600px;
+      padding: 85px;
+      border-radius: 8px;
+      background: linear-gradient(to bottom,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(0, 0, 0, 0.3) 100%);
+      transform: scale(0);
+      transform-origin: top right;
+      opacity: 0;
+      transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+      pointer-events: none; // 暫時關閉滑鼠事件
+
+      &.show {
+        transform: scale(1);
+        opacity: 1;
+        pointer-events: auto; // 恢復互動
+      }
+
+      .menu {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        font-family: $Chinese;
+        font-size: 26px;
+        font-weight: 1000;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+
+        li {
+          position: relative;
+          margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          padding-left: 30px; // 為圓點預留固定空間
+
+          a {
+            text-decoration: none;
+            @include font-style($font-medium-20);
+            color: #fff;
+            position: relative;
+            display: inline-block;
+            padding: 0px 30px;
+
+            // 重要：新增一個容器來確保矩形的顯示範圍
+            &::before {
+              content: "";
+              position: absolute;
+              top: 42%;
+              left: 0; // 與 li 的 padding-left 對應
+              background: $primary-green; // 用於測試範圍
+              z-index: 998;
+              width: 6px;
+              height: 6px;
+
+            }
+
+            &::after {
+              content: "";
+              position: absolute;
+              left: -30px;
+              right: -30px;
+              top: 50%;
+              height: 6px;
+              background-color: $primary-green;
+              transform: translateY(-50%) scaleX(0);
+              transform-origin: left;
+              transition: transform 0.3s ease-out;
+              z-index: 998;
+            }
+
+            &:hover::after,
+            &.active::after {
+              transform: translateY(-50%) scaleX(1);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 回到頂部 */
+.totop {
+  position: fixed;
+  transition: "bottom 0.3s ease";
+  right: 50px;
+  width: 50px;
+  height: 50px;
+  background: url("./images/gototop.svg");
+  background-repeat: no-repeat;
+  background-size: 60px;
+  padding: 60px;
+  border: none;
+  z-index: 999;
+  box-shadow: rgba(0, 0, 0, 0.5);
+  cursor: none;
+
+  &:hover {
+    cursor: none;
+    filter: invert(42%) saturate(1352%) hue-rotate(140deg) brightness(120%) contrast(119%);
+  }
+
+  &:active {
+    transform: translateY(2px);
+    filter: hue-rotate(150deg) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    cursor: none;
+  }
+}
+
+/* 地圖照片頁 */
+
+/* 地圖頁 */
+
+
+.map {
+  width: 100%;
+  height: 200vh;
+  cursor: none;
+
+  ul {
+    margin-top: 0;
+  }
+
+  .adding-location {
+    cursor: url('./images/Map/Vector.png'), auto !important;
+  }
+
+
+  .map-content {
+    display: flex;
+    margin: 110px 5%;
+    justify-content: space-around;
+    cursor: none;
+
+    .map-wrapper {
+      position: relative;
+      cursor: default;
+      height: 78vh;
+      width: 60%;
+      min-width: 640px;
+      overflow: hidden;
+      border-radius: 10px;
+      border: $primary-green 2px solid;
+      margin: 60px;
+
+      .leaflet-container {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        font-size: inherit;
+        font-family: inherit;
+        line-height: normal;
+        overflow: visible;
+
+
+        img {
+          display: inline;
+          width: auto;
+          max-width: none;
+        }
+
+
+
+
+        .leaflet-touch,
+        .leaflet-control-layers,
+        .leaflet-bar {
+          border: none;
+        }
+
+        .leaflet-top,
+        .leaflet-left {
+          z-index: 500;
+          border: none;
+
+          a {
+            border: $primary-green 1px solid;
+            background-color: $deep;
+            margin-top: 8px;
+            border-radius: 3px;
+            color: $primary-green;
+            outline: none;
+
+            &:hover {
+              border: $primary-purple 1px solid;
+              background-color: $primary-purple;
+              color: $deep;
+
+            }
+
+            &:active {
+              border: $light 1px solid;
+              transform: translateY(2px);
+              color: $light;
+
+            }
+
+          }
+        }
+
+        .leaflet-control-geosearch,
+        .leaflet-geosearch-bar {
+          position: absolute;
+          top: 20px !important;
+          left: 50% !important;
+          transform: translateX(-50%);
+          width: 300px;
+          z-index: 500;
+
+
+          form {
+            color: $light;
+            background-color: $deep;
+            border: $primary-green 1px solid;
+            border-radius: 3px;
+            @include font-style($font-regular-13);
+
+
+            .glass {
+              color: $light;
+              background-color: $deep;
+
+            }
+
+            button {
+              background-color: $primary-green;
+              border-radius: 0;
+
+              &:hover {
+                color: $light;
+              }
+            }
+
+            .results {
+              background-color: $deep;
+              color: $light;
+              @include font-style($font-regular-13);
+
+              div {
+                border-bottom: $primary-green 1px solid;
+
+                &:hover {
+                  background-color: $deep;
+                  color: $primary-green;
+                  border-left: none;
+                  border-right: none;
+                  border-top: none;
+
+                }
+              }
+
+            }
+          }
+        }
+
+        .leaflet-bottom,
+        .leaflet-right {
+          display: none;
+        }
+
+
+        .leaflet-popup-content-wrapper {
+          padding: 0;
+          border-radius: 8px;
+          overflow: hidden;
+
+        }
+
+
+        .custom-popup {
+          overflow: hidden;
+          color: $deep;
+
+          .leaflet-popup-content {
+            margin: 0;
+            width: 350px !important;
+            max-height: 550px !important;
+            overflow: hidden;
+            box-sizing: border-box;
+            background-color: $light;
+
+
+
+            .marker-display {
+              padding: 10px;
+              width: 100%;
+              height: 100%;
+              overflow: visible;
+              box-sizing: border-box;
+
+            }
+
+            .marker-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 0px;
+            }
+
+          }
+        }
+
+        .location-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          width: 100%;
+
+          .marker-header {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            flex-direction: row;
+
+            .user-info {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              height: auto;
+              margin-bottom: 5px;
+              text-align: center;
+
+              p {
+                text-align: center;
+                font-size: 11px;
+                margin: 2px 0 0 8px;
+                color: $grey;
+
+              }
+
+              .user-name {
+                @include font-style($font-medium-16);
+                color: $deep;
+
+              }
+
+              .user-avatar {
+                width: 20px;
+                height: 20px;
+                display: block;
+                border-radius: 50%;
+                border: #ffffff 3px solid;
+                overflow: hidden;
+
+              }
+
+              img {
+                width: 100%;
+              }
+            }
+
+            .button-group {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: flex-end;
+              box-sizing: border-box;
+              margin-right: 10px;
+
+              p {
+                margin: 0;
+                padding-bottom: 5px;
+                @include font-style($font-medium-14);
+                color: $primary-purple;
+              }
+
+              button {
+                background-color: transparent;
+                border-right: $primary-purple 1px solid;
+                border: none;
+                padding: 5px 8px;
+                color: $primary-purple;
+                @include font-style($font-regular-14);
+                cursor: none;
+
+                &:hover {
+                  color: $primary-green;
+                }
+
+                &:active {
+                  border: $light 1px solid;
+                  color: $light;
+                  transform: translateY(2px);
+                }
+
+              }
+            }
+          }
+
+          .marker-image {
+            width: 100%;
+            height: 200px;
+
+            object-fit: cover;
+            overflow: hidden;
+            padding: 0;
+
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              overflow: hidden;
+
+            }
+          }
+
+
+
+          ::-webkit-scrollbar {
+            width: 8px;
+            border-bottom: none;
+            border-top: none;
+            border-right: none;
+            cursor: none;
+          }
+
+
+          hr {
+            width: 100%;
+            background-color: #95e05c;
+            border: none;
+            height: 1.5px;
+            margin-bottom: 0px;
+            box-shadow: none;
+          }
+
+          .user-rating {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: center;
+
+            .average-rating {
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+
+
+              .rating {
+                display: flex;
+                justify-content: center;
+                margin-right: 8px;
+
+
+                .star-size {
+                  height: 26px;
+                  width: 26px;
+                  color: #95e05c;
+                  fill: #95e05c;
+
+                }
+
+                .emty-star {
+                  fill: none;
+                }
+
+              }
+
+              .average-starnum {
+                color: $grey;
+                margin-top: 0px;
+                margin-right: 20px;
+                @include font-style($font-regular-13)
+              }
+            }
+
+          }
+
+          .comments-area {
+            width: 100%;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            max-height: calc(500px - 3px);
+            overflow: auto;
+
+
+            .commentform {
+              width: 100%;
+              padding: 0;
+
+
+              .comment-title {
+                display: flex;
+                align-items: center;
+                margin-bottom: 5px;
+
+                h2 {
+                  @include font-style($font-regular-16);
+                }
+
+                .rating {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  margin-left: 8px;
+                  cursor: none;
+                }
+              }
+
+
+              .alert-message {
+                padding: 1rem;
+                margin-bottom: 1rem;
+                background-color: $primary-green;
+                border: none;
+                border-radius: 4px;
+                color: $deep;
+                position: relative;
+                ;
+
+                button {
+                  position: absolute;
+                  right: 3px;
+                  top: 0;
+                  background: none;
+                  border: none;
+                  @include font-style($font-medium-16);
+                  cursor: pointer;
+                }
+
+
+
+              }
+
+              textarea {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+                border: $primary-purple 1.5px solid;
+                background-color: #ffffff25;
+                color: $deep;
+                @include font-style($font-regular-14);
+                cursor: text;
+
+                border-radius: 10px;
+
+                &::placeholder {
+                  color: #949494;
+                  @include font-style($font-regular-13)
+                }
+
+                &:focus {
+                  border: #95e05c 2px solid;
+                  box-shadow: none;
+                  outline: none;
+                  cursor: text;
+
+                }
+
+                &:disabled {
+                  cursor: not-allowed;
+                  color: #949494;
+                  ;
+
+                  border-color: $grey;
+                }
+
+              }
+
+              .comment-buttom {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                box-sizing: border-box;
+                padding: 5px;
+
+                button {
+                  background-color: transparent;
+                  border: $primary-purple 1px solid;
+                  border-radius: 8px;
+                  padding: 5px 8px;
+                  color: $primary-purple;
+                  margin: 3px 3px;
+                  @include font-style($font-regular-14);
+                  cursor: none;
+
+                  &:hover {
+                    border: $primary-green 1px solid;
+
+                    color: $primary-green;
+                  }
+
+                  &:active {
+                    border: $light 1px solid;
+                    color: $light;
+                    transform: translateY(2px);
+                  }
+
+                }
+
+                .comment-length {
+                  margin-right: 8px;
+                  @include font-style($font-regular-14);
+                  color: $grey;
+                }
+              }
+
+            }
+
+            .no-comments {
+              @include font-style($font-medium-16);
+            }
+
+            .commentlist {
+              .solocomment {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin: 24px auto;
+
+                hr {
+                  width: 100%;
+                  margin-top: 0px;
+                  background-color: $primary-purple;
+                  height: 1.5px;
+                  border: none;
+                }
+
+                .preuser-data {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  width: 100%;
+
+                  .preuser-info {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: auto;
+
+                    .avatar {
+                      width: 32px;
+                      height: 32px;
+                      border-radius: 50%;
+                      border: #ffffff 3px solid;
+                      overflow: hidden;
+
+                      img {
+                        display: block;
+                        width: 100%;
+                      }
+                    }
+
+                    .user-name {
+                      @include font-style($font-medium-16);
+                      margin-left: 8px;
+                      color: $light;
+                    }
+
+                    button {
+                      background-color: transparent;
+                      border: none;
+                      text-align: center;
+                      line-height: 24px;
+                      border-radius: 8px;
+                      padding: 0px 3px;
+                      color: $primary-purple;
+                      margin: 3px 0 0 0;
+                      @include font-style($font-regular-13);
+                      cursor: pointer;
+
+                      &:hover {
+                        color: $primary-green;
+                      }
+
+                      &:active {
+                        color: $light;
+                        transform: translateY(2px);
+                      }
+
+
+                    }
+                  }
+
+                  .preuser-rating {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    margin-left: 16px;
+                    cursor: none;
+                  }
+
+                  .rating {
+                    display: inline-flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    flex-direction: row;
+                    gap: 1px;
+                    cursor: none;
+                  }
+                }
+
+                .comment-text {
+                  margin: 24px 0 0 45px;
+                  @include font-style($font-regular-16);
+                }
+
+                .comment-footer {
+                  display: flex;
+                  justify-content: flex-end;
+                  align-items: baseline;
+                  width: 100%;
+
+
+                  .comment-date {
+
+                    margin-top: 24px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    color: $grey;
+                    @include font-style($font-regular-13);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .list-panel {
+    display: flex;
+    flex-direction: column;
+    margin: 60px;
+    width: 40%;
+    height: 78vh;
+    overflow: hidden;
+
+
+    cursor: none;
+
+    .control-panel {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+
+      .icon-btn {
+        display: flex;
+
+        .toggle-favorites {
+          svg {
+            font-size: 20px;
+            stroke-width: 0.8px;
+
+          }
+
+        }
+
+        .toggle-add-location {
+
+          svg {
+            font-size: 24px;
+            stroke-width: 0;
+          }
+        }
+
+
+
+        button {
+          display: flex;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          padding: 0 8px;
+          overflow: hidden;
+          color: $primary-purple;
+          background: none;
+          border: none;
+
+
+          &:hover {
+            cursor: none;
+            color: $primary-green;
+
+          }
+
+          &:active {
+            transform: translateY(2px);
+            color: $light;
+
+            cursor: none;
+          }
+
+        }
+      }
+    }
+
+    .filter-panel {
+      overflow: hidden;
+      .filter-controls {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+       
+
+        .select-control {
+          display: flex;
+          justify-content: space-around;
+          flex-direction: row;
+          margin: 16px 0;
+          width: 100%;
+          gap: 20px;
+
+          .select-container {
+            display: flex;
+            width: 100%;
+            position: relative;
+            cursor: none;
+
+
+
+
+
+            select {
+              position: relative;
+              z-index: 10;
+              color: $light;
+              background-color: $deep;
+              border: $primary-green 1px solid;
+              @include font-style($font-regular-13);
+              border-radius: 5px;
+              width: 100%;
+              height: 100%;
+              padding: 10px 20px;
+              cursor: none;
+
+              &:focus {
+                outline: none;
+                border: $primary-purple 2px solid;
+              }
+
+              option {
+                &:hover {
+                  background-color: $primary-green !important;
+                  color: $deep !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .marker-list {
+      margin-top: 24px;
+      .list-area {
+        h3 {
+          @include font-style($font-medium-14);
+          color: $primary-purple;
+        }
+
+
+        .list-section {
+         margin-top: 8px;
+          max-height: calc(78vh - 160px);
+          overflow: auto;
+
+          .marker-list-item {
+            display: flex;
+            flex-direction: column;
+            padding-top: 30px;
+            @include font-style($font-medium-16);
+            &:hover{
+              background-color: $primary-purple;
+              color: $deep;
+              svg{
+                color: $deep;
+              }
+              hr{
+                height: 2px;
+                background-color: $deep;
+              }
+            
+            }
+            .adress{
+              margin-left:16px;
+            }
+            hr {
+              width: 100%;
+              background-color: $primary-green;
+              border: none;
+              height: 1.5px;
+              margin-bottom: 5px;
+              box-shadow: none;
+
+            }
+
+            svg {
+              margin-right: 8px;
+              color: $primary-purple;
+            }
+
+            .favorites-list {
+              margin-top: 0;
+            }
+
+            .all-list {
+              margin-top: 0;
+
+            }
+          }
+        }
+      }
+    }
+
+
+  }
+}
+
+.gallery-page {
+  display: flex;
+  justify-content: space-around;
+  padding: 110px 240px;
+  margin-top: 110px;
+  cursor: none;
+
+  div,
+  span {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+
+
+
+  .star-size {
+    width: 24px;
+    height: 24px;
+    cursor: none;
+  }
+
+  .star-inarrow {
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    cursor: none;
+  }
+
+  .location-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 500px;
+    height: 100%;
+    min-width: 460px;
+    border-radius: 5px;
+    border: $primary-purple 1.5px solid;
+
+    .cover-image {
+      width: calc(100% - 48px);
+      height: 285px;
+      object-fit: cover;
+      overflow: hidden;
+      padding: 24px;
+
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        overflow: hidden;
+
+      }
+    }
+
+    .info-area {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      box-sizing: border-box;
+      max-height: 100vh;
+
+      ::-webkit-scrollbar {
+        width: 12px;
+        border-bottom: none;
+        border-top: none;
+        border-right: none;
+        cursor: none;
+      }
+
+
+      hr {
+        width: 100%;
+        background-color: #95e05c;
+        border: none;
+        height: 1.5px;
+        margin-bottom: 0px;
+      }
+
+
+
+      .info-text {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: calc(100% - 80px);
+        border: none;
+        align-items: center;
+        overflow: hidden;
+
+
+
+
+        h1 {
+          text-align: center;
+          @include font-style($font-medium-36);
+          color: $light;
+        }
+
+        .user-rating {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: center;
+
+          .average-rating {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+
+            .rating {
+              display: flex;
+              justify-content: center;
+              margin-right: 8px;
+
+
+              .star-size {
+                height: 28px;
+                width: 28px;
+                color: $primary-green;
+                fill: $primary-green;
+
+              }
+
+              .emty-star {
+                fill: none;
+              }
+
+            }
+
+            .average-starnum {
+              color: $grey;
+              margin-top: 0px;
+              margin-right: 20px;
+              @include font-style($font-regular-13)
+            }
+          }
+
+        }
+
+        .comments-num {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          text-align: right;
+          color: $grey;
+          @include font-style($font-regular-13)
+        }
+      }
+    }
+
+  }
+
+  .comments-area {
+    width: 100%;
+    padding: 30px 40px;
+    box-sizing: border-box;
+    height: 100vh;
+
+
+
+    .commentform {
+      width: 100%;
+      padding: 0;
+
+
+      .comment-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+
+        h2 {
+          @include font-style($font-regular-16);
+        }
+
+        .rating {
+          display: flex;
+          align-items: center;
+          margin-left: 8px;
+          cursor: none;
+        }
+      }
+
+
+      .alert-message {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background-color: $primary-green;
+        border: none;
+        border-radius: 4px;
+        color: $deep;
+        position: relative;
+        ;
+
+        button {
+          position: absolute;
+          right: 3px;
+          top: 0;
+          background: none;
+          border: none;
+          @include font-style($font-medium-16);
+          cursor: pointer;
+        }
+
+
+
+      }
+
+      textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: $primary-purple 1.5px solid;
+        background-color: #ffffff25;
+        color: $light;
+        @include font-style($font-regular-14);
+        cursor: text;
+
+        border-radius: 10px;
+
+        &::placeholder {
+          color: #949494;
+          @include font-style($font-regular-13)
+        }
+
+        &:focus {
+          border-color: $primary-green;
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+          outline: none;
+          cursor: text;
+
+        }
+
+        &:disabled {
+          cursor: not-allowed;
+          color: #949494;
+          ;
+
+          border-color: $grey;
+        }
+
+      }
+
+      .comment-buttom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        box-sizing: border-box;
+        padding: 5px;
+
+        button {
+          background-color: transparent;
+          border: $primary-purple 1px solid;
+          border-radius: 8px;
+          padding: 5px 8px;
+          color: $primary-purple;
+          margin: 3px 3px;
+          @include font-style($font-regular-14);
+          cursor: none;
+
+          &:hover {
+            border: $primary-green 1px solid;
+
+            color: $primary-green;
+          }
+
+          &:active {
+            border: $light 1px solid;
+            color: $light;
+            transform: translateY(2px);
+          }
+
+        }
+
+        .comment-length {
+          margin-right: 8px;
+          @include font-style($font-regular-14);
+          color: $grey;
+        }
+      }
+
+    }
+
+    .no-comments {
+      @include font-style($font-medium-16);
+    }
+
+    .commentlist {
+      .solocomment {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 24px auto;
+
+        hr {
+          width: 100%;
+          margin-top: 0px;
+          background-color: $primary-purple;
+          height: 1.5px;
+          border: none;
+        }
+
+        .preuser-data {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+
+          .preuser-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: auto;
+
+            .avatar {
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              border: #ffffff 3px solid;
+              overflow: hidden;
+
+              img {
+                display: block;
+                width: 100%;
+              }
+            }
+
+            .user-name {
+              @include font-style($font-medium-16);
+              margin-left: 8px;
+              color: $light;
+            }
+
+            button {
+              background-color: transparent;
+              border: none;
+              text-align: center;
+              line-height: 24px;
+              border-radius: 8px;
+              padding: 0px 3px;
+              color: $primary-purple;
+              margin: 3px 0 0 0;
+              @include font-style($font-regular-13);
+              cursor: pointer;
+
+              &:hover {
+                color: $primary-green;
+              }
+
+              &:active {
+                color: $light;
+                transform: translateY(2px);
+              }
+
+
+            }
+          }
+
+          .preuser-rating {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-left: 16px;
+            cursor: none;
+          }
+
+          .rating {
+            display: inline-flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: row;
+            gap: 1px;
+            cursor: none;
+          }
+        }
+
+        .comment-text {
+          margin: 24px 0 0 45px;
+          @include font-style($font-regular-16);
+        }
+
+        .comment-footer {
+          display: flex;
+          justify-content: flex-end;
+          align-items: baseline;
+          width: 100%;
+
+
+          .comment-date {
+
+            margin-top: 24px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            color: $grey;
+            @include font-style($font-regular-13);
+          }
+        }
+      }
+    }
+  }
+
+  .gallery-area {
+    width: 880px;
+    margin-left: 40px;
+    max-height: calc(100vh + 333px);
+    overflow: auto;
+    scrollbar-width: none;
+
+    ::-webkit-scrollbar {
+      display: none;
+      cursor: none;
+    }
+
+
+
+
+    .image-wrapper {
+      overflow: hidden;
+
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+          filter: brightness(0.5);
+        }
+      }
+    }
+  }
+}
+
+/*HOME  */
+
+.home {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url("./images/noise.jpg") repeat;
+  background-size: auto;
+  background-blend-mode: normal;
+  z-index: 6;
+  isolation: isolate;
+
+  .banner {
+    position: relative;
+    background: url("./images/home_banner.jpg");
+    background-size: cover;
+    background-position: right top;
+    background-repeat: no-repeat;
+    mix-blend-mode: lighten;
+    overflow: hidden;
+    width: 100%;
+    min-height: 110vh;
+    z-index: 1;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    #fog-masked-g {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      width: 100vh;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      /* 使用遮罩限制霧的區域 */
+      mask-image: url("./images/fog-mask1.png");
+      mask-repeat: no-repeat;
+      mask-size: 100% auto;
+      mask-position: top 0;
+
+      /* Webkit 瀏覽器支持 */
+      -webkit-mask-image: url("./images/fog-mask1.png");
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-size: cover;
+
+      #fog-rotate-g {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        transform: rotate(-90deg);
+        .fog-area-g {
+          position: absolute;
+          overflow: hidden;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          overflow: hidden;
+          z-index: 0;
+          pointer-events: none;
+        }
+      }
+    }
+
+    .fog-area-p {
+      position: absolute;
+      overflow: hidden;
+      top: 0%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      /* 使用遮罩限制霧的區域 */
+      mask-image: url("./images/fog-mask2.png");
+      mask-repeat: no-repeat;
+      mask-size: auto;
+      mask-position: top 0;
+
+      /* Webkit 瀏覽器支持 */
+      -webkit-mask-image: url("./images/fog-mask2.png");
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-size: cover;
+      -webkit-mask-position: top 0;
+    }
+
+    .logoXL {
+      position: absolute;
+      z-index: 1;
+      top: 10%;
+      left: 5%;
+      left: 5%;
+      margin-top: 130px;
+      margin-left: 135px;
+      display: flex;
+      justify-content: flex-end;
+
+      #logoB {
+        width: 380px;
+        margin: 0;
+        animation: glowEffect 5s linear infinite;
+      }
+
+      .p {
+        color: $primary-green;
+        font-family: "Inter", serif;
+        font-size: 12px;
+        letter-spacing: 18px;
+        margin-left: 46px;
+        margin-top: 20px;
+      }
+
+      #mark {
+        margin-left: auto;
+        position: relative;
+        width: 80px;
+        animation: rotateY 6s ease-in-out infinite,
+          glowEffect 5s linear infinite;
+      }
+    }
+  }
+
+  @media (max-width: 1920px) {
+    .banner {
+      background-size: cover;
+      height: calc(100vh * 1200 / 1920);
+    }
+  }
+
+  .intro {
+    position: relative;
+    // transform-style: preserve-3d;
+    // perspective-origin: center;
+    background-color: $deep;
+    width: 100%;
+    overflow: hidden;
+    mix-blend-mode: lighten;
+    height: auto;
+    cursor: none;
+
+    .title {
+      @extend %box-center;
+      flex-direction: column;
+
+      position: relative;
+      margin-top: 30px;
+      left: 0px;
+      margin-bottom: $interval-l;
+      z-index: 10;
+
+      h2 {
+        @include font-style($font-medium-48);
+        color: $primary-green;
+
+        &:hover {
+          cursor: none;
+          font-family: "Handjet", serif;
+          font-weight: 900;
+          font-style: normal;
+          text-shadow: 5px 5px 0 rgba(255, 0, 0, 0.4),
+            -5px -5px 0 rgba(0, 255, 0, 0.4);
+        }
+      }
+
+      h3 {
+        @include font-style($font-medium-24);
+        margin-top: 16px;
+        &:hover {
+          cursor: none;
+          text-shadow: 5px 5px 0 rgba(255, 0, 0, 0.4),
+            -5px -5px 0 rgba(0, 255, 0, 0.4);
+        }
+      }
+    }
+
+    #intro1 {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      width: 100%;
+      margin-top: 60px;
+      height: auto;
+      min-height: 105vh;
+      overflow: visible;
+
+      .door {
+        position: absolute;
+        top: 20%;
+        width: 100%;
+        height: 100vh;
+        overflow: visible;
+        z-index: 4;
+
+        figure {
+          position: absolute;
+          width: 65%px;
+          top: 0;
+          left: 15%;
+          min-width: 600px;
+          animation: glowEffect-W 3s linear infinite;
+          z-index: 3;
+          overflow: hidden;
+          padding-left: 100px;
+        }
+
+        #intro_Q {
+          position: absolute;
+          top: 0%;
+          margin: right 100px;
+          right: 25%;
+          width: 355px;
+          display: column;
+          z-index: 4;
+
+          p {
+            margin-top: 30px;
+            margin-left: 21px;
+            @include font-style($font-regular-18);
+          }
+        }
+      }
+
+      .intro1fog-G {
+        position: absolute;
+        top: -10%;
+        right: -10%;
+        z-index: 2;
+        width: 150%;
+        opacity: 0.3;
+        overflow: hidden;
+      }
+      .intro1fog-P {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        z-index: 1;
+        width: auto;
+        opacity: 0.6;
+        overflow: hidden;
+      }
+    }
+
+    #intro2 {
+      position: relative;
+      mix-blend-mode: lighten;
+      margin-top: 100px;
+      margin-bottom: 100px;
+      isolation: isolate;
+      text-align: center;
+      overflow: visible;
+      z-index: 4;
+      width: 100%;
+      height: 100vh;
+
+      .carouselwrapper {
+        position: absolute;
+        top: 30%;
+        left: 0%;
+        z-index: 10;
+        width: 100%;
+        height: auto;
+      }
+
+      /* 完成動畫後，滑鼠事件接管 transform */
+      .laya-please.interactive {
+        transform: none;
+        /* 滑鼠事件控制 transform */
+        transition: none;
+        /* 停止 transition */
+      }
+
+      .paper1 {
+        z-index: 2;
+        position: absolute;
+        top: -100%;
+        left: 100px;
+        opacity: 0;
+        transform: translateY(50px);
+        mix-blend-mode: lighten;
+
+        img {
+          width: 50%;
+          overflow-y: visible;
+          object-fit: cover;
+          opacity: 100%;
+        }
+      }
+
+      .paper2 {
+        position: absolute;
+        top: 0%;
+        left: 0;
+        border: #ffffff 1px;
+        img {
+          width: 30%;
+          z-index: 1;
+          overflow-y: visible;
+          overflow-x: hidden;
+          object-fit: cover;
+          opacity: 100%;
+        }
+      }
+    }
+
+    #intro3 {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      width: 100%;
+      z-index: 5;
+      overflow: visible;
+      mix-blend-mode: lighten;
+
+      .intro3fog-P {
+        position: absolute;
+        top: -50%;
+        left: 0;
+        width: 1920px;
+        height: auto;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .map-area {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 2;
+        justify-content: center;
+        align-items: flex-end;
+        width: 100%;
+        overflow: hidden;
+        z-index: 3;
+        margin-right: 15%;
+        margin-top: 30px;
+
+        img {
+          width: 50%;
+          min-width: 900px;
+        }
+
+        .map-intro {
+          display: flex;
+          flex-direction: column;
+          width: auto;
+          text-align: left;
+
+          h4 {
+            color: $primary-green;
+            @include font-style($font-EN-medium-40);
+          }
+
+          p {
+            @include font-style($font-medium-18);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+          }
+        }
+      }
+    }
+
+    #intro4 {
+      position: relative;
+      margin-top: 200px;
+      margin-bottom: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      overflow: hidden;
+      z-index: 5;
+
+      .forum-gallery {
+        position: relative;
+        margin-top: 60px;
+        margin-top: 60px;
+        height: 620px;
+        display: inline-block;
+        width: 1120px;
+        padding: 0;
+
+        #Legends {
+          position: absolute;
+          position: absolute;
+          margin-bottom: 45px;
+          width: fit-content;
+
+          top: 0%;
+
+          top: 0%;
+          left: 0%;
+        }
+
+        #Horror {
+          position: absolute;
+          width: fit-content;
+          bottom: 0%;
+          left: 0%;
+          box-sizing: border-box;
+        }
+
+        #Exorcism {
+          position: absolute;
+          width: fit-content;
+          margin-bottom: 35px;
+          top: 0%;
+          right: 0%;
+        }
+
+        #Creeps {
+          position: absolute;
+          width: fit-content;
+          bottom: 0%;
+          right: 0%;
+        }
+
+        #Ruins {
+          position: absolute;
+          width: fit-content;
+          bottom: 0%;
+          left: 32.5%;
+        }
+
+        .image-link {
+          width: auto;
+          display: inline-block;
+          position: relative;
+          border: $primary-green solid 3px;
+          border-radius: 20px;
+          overflow: hidden;
+          margin-bottom: 10px;
+          margin-right: 10px;
+          box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+
+          &:hover {
+            cursor: none;
+            border: $primary-purple solid 3px;
+
+            img {
+              filter: brightness(70%);
+              transform: scale(1.2);
+            }
+
+            .text-link {
+              color: $primary-green;
+              border-bottom: 1px solid $primary-green;
+              border-top: 1px solid $primary-green;
+              border-radius: 10px;
+              padding: 0.5rem;
+              @include font-style($font-regular-18-n);
+            }
+          }
+
+          img {
+            z-index: 0;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border: none;
+            transition: transform 0.6s ease-in-out, filter 0.6s ease;
+          }
+
+          .text-link {
+            position: absolute;
+            @include font-style($font-regular-16);
+            @include font-style($font-regular-16);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 滑鼠 */
+#custom-cursor {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  background: url("./images/cursor.svg") no-repeat center / contain;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: normal;
+  transform: translate(-50%, -50%);
+  /* 確保指標居中 */
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 20px;
+
+
+  &.adding-location {
+    width: 32px;
+    height: 32px;
+    border: none; // 移除原有的邊框
+    background-image: url('./images/Vector.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    &.hovered {
+      transform: translate(-50%, -50%);
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+/* 外框動畫 - 初始狀態 */
+#custom-cursor::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  pointer-events: none;
+  opacity: 0;
+  animation: none;
+  /* 禁用動畫 */
+}
+
+/* 在 hover 狀態下啟用動畫 */
+a:hover #custom-cursor::after {
+  opacity: 1;
+  animation: expand 0.5s infinite linear;
+}
+
+button:hover #custom-cursor::after {
+  opacity: 1;
+  animation: expand 0.5s infinite linear;
+}
+
+#custom-cursor {
+  &.hovered::after {
+    opacity: 1;
+    animation: expand 2.5s infinite linear;
+  }
+}
+
+/* 定義動畫 */
+@keyframes expand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(3.5);
+    opacity: 0;
+  }
+}
+
+footer {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 350px;
+  background: url("./images/footer-paper.jpg");
+  mix-blend-mode: lighten;
+  isolation: isolate;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 1;
+  align-items: flex-end;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 30px 135px 0 135px;
+    width: 100%;
+    overflow: hidden;
+
+    img {
+      margin-top: 70px;
+      margin-right: 5%;
+      display: block;
+      width: 300px;
+      min-width: 300px;
+      mix-blend-mode: exclusion;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      small {
+        color: #6c5387;
+        margin-left: 60px;
+      }
+
+      .link {
+        display: flex;
+        flex-direction: row;
+
+        li {
+          margin-top: 40px;
+          margin-left: 60px;
+
+          a {
+            color: #ffffff;
+            @include font-style($font-regular-16);
+
+            &:hover {
+              color: $primary-purple;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 動畫效果 */
+
+@keyframes slide-in-buttom {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* glowEffect 5s linear infinite(發光效果放入css) */
+@keyframes glowEffect-W {
+  0% {
+    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #ffffff54);
+    opacity: 1;
+  }
+
+  50% {
+    filter: drop-shadow(0 0 20px #acff6c26) drop-shadow(0 0 30px #acff6c0b);
+    opacity: 0.5;
+  }
+
+  100% {
+    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #ffffff54);
+    opacity: 1;
+  }
+}
+
+@keyframes glowEffect {
+  0% {
+    filter: drop-shadow(0 0 5px#acff6c) drop-shadow(0 0 10px #acff6c54);
+    opacity: 1;
+  }
+
+  50% {
+    filter: drop-shadow(0 0 20px #ffffff85) drop-shadow(0 0 30px #ffffff0b);
+    opacity: 1;
+  }
+
+  100% {
+    filter: drop-shadow(0 0 5px#acff6c) drop-shadow(0 0 10px #acff6c54);
+    opacity: 1;
+  }
+}
+
+/* 設定字輪流變色時使用 */
+.glowing-text span {
+  position: relative;
+  animation: glowEffect 1.5s ease-in-out infinite,
+    colorChange 2s ease-in-out infinite;
+}
+
+/* animation:  rotateY 6s ease-in-out infinitee(旋轉效果放入css) */
+@keyframes rotateY {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+/* 文字變色 */
+@keyframes colorChange {
+  0% {
+    color: $primary-green;
+  }
+
+  33% {
+    color: #ffffff;
+  }
+
+  66% {
+    color: #deff67;
+  }
+
+  100% {
+    color: $primary-green;
+  }
+}
+// Forum //
+
+.forum-body {
+  position: relative;
+  z-index: 0;
+  background-color: $deep;
+  color: $light;
+  margin: 0 115px;
+  padding: 20px;
+  font-weight: 600;
+
+  .forum-container {
+    padding: 20px 0;
+  }
+
+  .forum-layout {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+
+    /* 網格間隙*/
+  }
+
+  .sidebar {
+    width: 20%;
+
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .category-board {
+      border: 1.5px solid $grey;
+      border-radius: 5px;
+      padding: 44px; // 調整內邊距
+    }
+
+    .category-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .category-item {
+      padding: 8px 15px; // 調整padding
+      margin: 5px 0;
+      color: $primary-green;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      border-radius: 8px; // 圓角
+
+      div {
+        display: flex;
+        justify-content: center;
+
+        img {
+          width: 24px; // 統一圖片大小
+          height: 24px;
+        }
+
+        p {
+          margin-left: 12px;
+          font-size: 18px; // 調整文字大小
+        }
+      }
+
+      &:hover {
+        background-color: $primary-purple; // hover 背景
+        color: $primary-green;
+      }
+    }
+  }
+
+
+
+  .ad-section {
+    aspect-ratio: 1/2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-content {
+    width: 80%;
+    border: 1.5px solid $grey;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .nav-buttons {
+
+    display: flex;
+    align-items: center;
+    gap: 15px; // 控制按鈕間距
+
+    div {
+      display: flex;
+      align-items: center; // 圖示與文字垂直對齊
+      padding: 5px 10px; // 增加按鈕區塊的內邊距
+      border-radius: 5px; // 圓角設計
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $primary-purple; // 滑鼠懸停時的背景效果
+
+        p {
+          color: $deep;
+        }
+      }
+
+      &.active {
+        background-color: #d8b4f8; // 選中按鈕的背景顏色
+      }
+
+      img {
+        width: 24px; // 控制圖示大小
+        height: 24px;
+        margin-right: 8px; // 圖示與文字的間距
+      }
+
+      .nav-button {
+        color: #acff6c; // 文字顏色
+        font-size: 18px;
+        border: none;
+        background: none;
+        letter-spacing: 2.7px;
+
+      }
+    }
+  }
+
+}
+
+
+
+.right-bar {
+  display: flex;
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    border: 2px solid $primary-green;
+    border-radius: 8px; // 圓角
+    overflow: hidden; // 避免子元素超出邊界
+    height: 40px; // 固定高度，確保子元素一致
+
+    .search-input {
+      flex: 1; // 填滿剩餘空間
+      padding: 0 12px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      color: $deep;
+      height: 100%; // 高度與父容器一致
+      box-sizing: border-box; // 包含內邊距和邊框在內
+
+      &::placeholder {
+        color: #a0a0a0; // placeholder 顏色
+      }
+    }
+
+    .search-button {
+      background-color: $primary-green;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; // 固定寬度
+      height: 100%; // 高度與父容器一致
+      padding: 0 8px;
+      cursor: pointer;
+
+      .search-icon {
+        width: 20px; // 適當縮小 icon
+        height: 20px;
+      }
+
+      &:hover {
+        background-color: #9fe75e; // 滑鼠懸停時的顏色變化
+      }
+    }
+  }
+
+
+}
+
+
+
+.article-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.article-card {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border-bottom: 1px solid $grey;
+}
+
+.article-content {
+  flex: 1;
+}
+
+.article-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+// 作者圖片外形狀
+.author-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.article-title {
+  color: $primary-green;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.article-preview {
+  color: $grey;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+
+  display: -webkit-box; // 讓容器變為多行文本容器
+  -webkit-line-clamp: 1; // 限制顯示一行
+  -webkit-box-orient: vertical; // 設定文本顯示方向為垂直
+  overflow: hidden; // 超出部分隱藏
+  text-overflow: ellipsis; // 超出部分顯示省略號
+  white-space: normal; // 確保文本換行
+}
+
+.interaction-bar {
+  display: flex;
+  gap: 20px;
+}
+
+.interaction-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: $light;
+}
+
+
+
+.article-Graphics-text {
+  display: flex;
+  justify-content: space-between; // 左右兩邊間隔
+  align-items: center; // 垂直對齊
+
+  .left {
+    flex: 1; //left 區塊佔用剩餘空間
+    padding-right: 20px; //讓內容與右邊距離不要太近
+  }
+
+  .right {
+    flex-shrink: 0; // 防止 .right 區塊縮小，保持圖片大小
+    width: 85px; // 可以根據需要設置圖片的寬度
+  }
+
+  .article-image {
+    width: 100%; //圖片佔滿 .right 區塊寬度
+    border-radius: 5px;
+    object-fit: cover;
+  }
+}
+
+// RWD 
+
+@media (max-width: 991px) {
+  .forum-layout {
+    flex-direction: column;
+  }
+
+  .sidebar,
+  .main-content {
+    width: 100%;
+  }
+
+  .search-bar {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .article-card {
+    flex-direction: column;
+  }
+
+  .article-image {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* 撰寫文章  */
+#postModal {
+  display: none; // 預設隱藏
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex; // 修正顯示時要用 flex 排版
+  justify-content: center;
+  align-items: center;
+
+  .modal-content {
+    background: $deep;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: #aaa;
+      cursor: pointer;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      #userName {
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+
+    #board-bar {
+      display: flex;
+
+      #boardSelect {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 15px;
+        font-size: 14px;
+      }
+
+    }
+
+
+
+    #postTitle,
+    #postContent {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+
+      &#postContent {
+        height: 120px;
+        resize: none;
+      }
+    }
+
+    .media-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+
+      button {
+        padding: 8px 12px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        padding: 8px 12px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }
+}
+
+/* 常見問題 */
+
+.contact-body {
+  position: relative;
+  z-index: 0;
+  background: url("../images/Contact/雜訊3.png") repeat;
+
+  .faq-contact {
+    padding: 40px 20px;
+
+    .faq-section,
+    .contact-section {
+      max-width: 1200px;
+      margin: 0 auto 50px;
+      text-align: center;
+      position: relative;
+      /* 確保可以使用絕對定位 */
+      z-index: 2;
+      /* 層級設置，確保在 footer 上層 */
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: $primary-green;
+      }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      .faq-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+
+        button {
+          padding: 12px 26px;
+          font-size: 1rem;
+          background-color: transparent;
+          color: white;
+          border: 1px solid $primary-green;
+          cursor: pointer;
+          transition: all 0.3s;
+          border-radius: 30px;
+
+          &:hover {
+            background-color: $primary-green;
+            color: black;
+          }
+        }
+      }
+
+      .faq-items {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .faq-item {
+          details {
+
+            border-bottom: 1px solid $primary-green;
+            padding: 10px;
+
+            summary {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              font-size: 1.2rem;
+              color: white;
+              cursor: pointer;
+
+              img {
+                width: 20px;
+                margin-left: 10px;
+              }
+            }
+
+            p {
+              margin-top: 10px;
+              padding: 10px;
+              color: white;
+              border-radius: 3px;
+            }
+          }
+        }
+      }
+    }
+
+    /* 聯絡我們 */
+    .contact-section {
+      position: relative;
+      padding: 50px 15px;
+      overflow: hidden;
+      /* 防止元素影響滾動條 */
+      min-height: 100vh;
+      /* 確保佔滿可視區高度 */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .contact-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+
+        .contact-bubble {
+          position: absolute;
+          top: 50px;
+          left: 200px;
+          /* 微調位置 */
+          z-index: 3;
+          overflow: visible;
+          flex: 1 1 300px;
+          width: 300px;
+
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* 確保圖片居中 */
+            z-index: 1;
+            opacity: 0.9;
+            width: 100%;
+            margin: 0 auto 10px;
+          }
+
+          .bubble-text {
+            position: relative;
+            /* 設置文字區塊為相對定位 */
+            z-index: 2;
+            /* 設置文字區塊層級高於圖片 */
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+          }
+        }
+
+        /* 人物圖片 */
+        .person-image {
+          position: absolute;
+          /* 絕對定位 */
+          bottom: -90px;
+          /* 設定到 footer 下方一層 */
+          left: 0%;
+          z-index: 1;
+          /* 層級設置低於 footer */
+          width: 400px;
+          /* 圖片大小 */
+          opacity: 0.9;
+        }
+
+        .contact-form {
+          flex: 1;
+          max-width: 50%;
+
+          p {
+            margin-bottom: 5px;
+            color: white;
+          }
+
+          input,
+          textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: $deep;
+            color: $light;
+            border: 1px solid $primary-green;
+            border-radius: 20px;
+          }
+
+          button {
+            width: 100%;
+            padding: 10px;
+            background-color: $primary-green;
+            color: $deep;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+
+            &:hover {
+              background-color: $light;
+              color: $deep;
+            }
+          }
+        }
+      }
+    }
+  }
+}
