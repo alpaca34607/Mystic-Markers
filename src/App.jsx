@@ -71,8 +71,8 @@ const App = () => {
         }
       );
     });
-     // 往上淡入
-     slideTopRefs.current.forEach((el) => {
+    // 往上淡入
+    slideTopRefs.current.forEach((el) => {
       gsap.fromTo(
         el,
         { opacity: 0, y: 100 },
@@ -143,10 +143,10 @@ const App = () => {
           element={
             <main className="home">
               <div className="custom-btn">
-              <GotoTop/>
+                <GotoTop />
               </div>
               <section className="banner">
-                
+
 
                 <div className="fog-area-p">
                   <Fog className="purpleFog" />
@@ -235,7 +235,7 @@ const App = () => {
                   </div>
                 </div>
                 <div id="intro3">
-                  <img src="/images/intro3_purplefog.png"alt=""  ref={(el) => fadeInRefs.current.push(el)} className="intro3fog-P"/>
+                  <img src="/images/intro3_purplefog.png" alt="" ref={(el) => fadeInRefs.current.push(el)} className="intro3fog-P" />
                   <div
                     className="title"
                     ref={(el) => slideTopRefs.current.push(el)}
@@ -328,7 +328,7 @@ const App = () => {
         <Route path="/page/:pageId" element={<Gallerypage />} />
         <Route path="/Forum" element={<Forum />} />
         <Route path="/Contact" element={<Contact />} />
-        
+
       </Routes>
     </>
   );

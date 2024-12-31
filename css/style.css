@@ -212,8 +212,10 @@ body {
   margin: 0;
   padding: 0;
   overflow: auto;
+  background-image: url("../images/noise.jpg");
+  background-repeat: repeat;
   background-color: #2A2A2A;
-  color: #ffffff;
+  color: #FFFFFF;
   font-family: "Noto Sans TC", sans-serif;
   height: 100%;
 }
@@ -992,7 +994,7 @@ a {
   font-weight: 300;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  line-height: 2;
+  line-height: 1.8;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-title .rating {
   display: flex;
@@ -1180,7 +1182,7 @@ a {
   font-weight: 300;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  line-height: 2;
+  line-height: 1.8;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .comment-footer {
   display: flex;
@@ -1499,7 +1501,7 @@ a {
   font-weight: 300;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  line-height: 2;
+  line-height: 1.8;
 }
 .gallery-page .comments-area .commentform .comment-title .rating {
   display: flex;
@@ -1686,7 +1688,7 @@ a {
   font-weight: 300;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  line-height: 2;
+  line-height: 1.8;
 }
 .gallery-page .comments-area .commentlist .solocomment .comment-footer {
   display: flex;
@@ -2182,12 +2184,12 @@ a {
   font-weight: 300;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  line-height: 2;
+  line-height: 1.8;
   font-family: "Noto Sans TC";
   font-weight: 300;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  line-height: 2;
+  line-height: 1.8;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -2280,8 +2282,7 @@ footer {
   display: inline-block;
   width: 100%;
   height: 350px;
-  background: url("./images/footer-paper.jpg");
-  mix-blend-mode: lighten;
+  background: url("./images/footer-paper.png");
   isolation: isolate;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2340,7 +2341,7 @@ footer .content .left .link li a {
   font-weight: 300;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  line-height: 2;
+  line-height: 1.8;
 }
 footer .content .left .link li a:hover {
   color: #B595FF;
@@ -2418,6 +2419,696 @@ footer .content .left .link li a:hover {
     color: #acff6c;
   }
 }
+/* Story */
+.Story {
+  background-color: rgb(26, 26, 26);
+  /* 精選文章 那些年一起追我們的女孩 */
+  /* 讓文字內容保持在背景圖範圍內 */
+  /* 裝飾紙張 */
+  /* 精選文章 內容 */
+  /* 鄉野奇談 */
+  /*故事集共用區*/
+  /* 紅衣小女孩 */
+  /* 紅衣小女孩文字背景圖 */
+  /* 文字內容區 */
+  /* 文字標題 */
+  /* 文章段落 */
+  /* 黃色小飛俠 */
+  /* 黃色小飛俠 文字背景圖 */
+  /* 文字內容區 */
+  /* 文字標題 */
+  /* 文章段落 */
+  /* 宮燈姐姐 */
+  /* 宮燈姐姐 文字背景圖 */
+  /* 文字內容區 */
+  /* 文字標題 */
+  /* 文章段落 */
+  /* 山羊人 */
+  /* 山羊人 文字背景圖 */
+  /* 文字內容區 */
+  /* 文字標題 */
+  /* 文章段落 */
+  /* RWD */
+}
+.Story body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  /* 保持高度佔滿視窗 */
+  overflow-y: auto;
+  /* 垂直滾動，只在需要時顯示 */
+  overflow-x: hidden;
+  /* 禁止水平滾動 */
+  background-image: url("../images/noise.jpg");
+  background-repeat: repeat;
+  overflow: hidden;
+  opacity: 80%;
+  position: relative;
+  z-index: -99;
+}
+.Story html {
+  overflow: hidden;
+  /* 禁止 html 顯示滾輪 */
+  height: 100%;
+  /* 保持高度佔滿視窗 */
+}
+.Story img,
+.Story video {
+  max-width: 100%;
+  /* 確保圖片和影片在小螢幕上不會超出範圍 */
+  height: auto;
+}
+.Story .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.Story .feature-story {
+  width: 100%;
+  position: relative;
+  background-image: url("../images/Story/featured-articles-img.png");
+  height: 105vh;
+  background-blend-mode: lighten;
+  background-size: cover;
+  /* 背景圖片自動填滿容器 */
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+}
+.Story .feature-story .feature-story-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  padding: 8.5% 12% 0 12%;
+  box-sizing: border-box;
+  /* 確保 padding 不會增加總高度 */
+  max-width: 100%;
+  /* 限制內容最大寬度 */
+  max-height: 100%;
+  /* 限制內容最大高度 */
+  overflow: visible;
+  margin: 0 auto;
+  /* 置中顯示 */
+  background-size: cover;
+  /* 背景圖填滿容器 */
+  box-sizing: border-box;
+  /* 圖片與元素設置 */
+}
+.Story .feature-story .feature-story-container img {
+  max-width: 100%;
+  height: auto;
+}
+.Story .feature-story-container p {
+  margin: 0;
+  padding: 10px;
+  /* 給文字內邊距，避免靠近容器邊緣 */
+  color: #fff;
+  /* 設置文字顏色，確保可讀性 */
+  line-height: 1.5;
+  /* 行距設置 */
+  word-wrap: break-word;
+  /* 避免單詞超出範圍 */
+}
+.Story .paper {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  width: auto;
+  transform: translate(10%, -10%);
+  /* border: 2px solid #6cc9ff; */
+}
+.Story .story-box {
+  display: flex;
+  /* margin: 10% 50%; */
+}
+.Story .user {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  color: #acff6c;
+}
+.Story .user-img {
+  width: 32px;
+  margin: 5px 5px;
+}
+.Story .story h2 {
+  display: flex;
+  justify-content: flex-end;
+  margin: 5px 5px;
+  font-size: 24px;
+  color: #B595FF;
+}
+.Story .story-title {
+  position: relative;
+  width: 20%;
+}
+.Story .text-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  overflow: visible;
+}
+.Story .blue-mark {
+  position: absolute;
+  width: 60%;
+  top: -10%;
+  left: 65%;
+  z-index: 2;
+  mix-blend-mode: exclusion;
+}
+.Story .story-content {
+  /* 限制行數 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* 隱藏超出範圍的文字 */
+  -webkit-line-clamp: 15;
+  /* 設定最大顯示行數 */
+  text-overflow: ellipsis;
+  width: 32rem;
+  height: 26.8rem;
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 1rem;
+  color: #f0f0f0;
+}
+.Story .story1 {
+  text-indent: 2em;
+  /* 開頭空兩隔 */
+}
+.Story .story a {
+  display: inline-block;
+  /* 保證a元素行為像塊元素 */
+  margin-top: 20px;
+  /* 給繼續閱讀加上一個向上的間距 */
+  text-decoration: none;
+  /* 移除預設的下劃線 */
+  color: #acff6c;
+  /* 設置顏色顏色 */
+  font-family: "Noto Sans TC";
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  line-height: 1.8;
+}
+.Story .share-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* 讓內容垂直對齊底部 */
+  align-items: center;
+  /* 讓內容水平居中 */
+  margin-bottom: 15%;
+  padding: 10px;
+  width: 24px;
+}
+.Story .share-link figure {
+  margin: 0;
+  /* 去除 figure 的預設外邊距 */
+}
+.Story .share-icon {
+  /* 去掉 ul 和 li 的預設樣式 */
+  list-style-type: none;
+  /* 去掉圓點符號 */
+  padding: 0;
+  /* 去掉內邊距 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.Story .share-icon img {
+  width: 24px;
+  /* 設置圖標大小 */
+  height: 24px;
+  /* 保持圖片為正方形 */
+  margin-top: 5px;
+  transition: transform 0.3s ease;
+  /* 為圖標添加懸停效果 */
+}
+.Story .share-icon img:hover {
+  transform: scale(1.5);
+  /* 鼠標懸停時放大圖片 */
+}
+.Story .countryside-story {
+  height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow: visible;
+  opacity: 0.6;
+}
+.Story .countryside-story-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+.Story .flying-papersblack {
+  width: 100%;
+  max-width: 1920px;
+  position: absolute;
+  top: -50%;
+  left: 0;
+  height: auto;
+  object-fit: cover;
+  z-index: 2;
+  opacity: 40%;
+}
+.Story .tree {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0;
+  z-index: 2;
+  opacity: 1;
+}
+.Story .taiwan-stories {
+  position: relative;
+  padding-bottom: 300px;
+  overflow: hidden;
+}
+.Story .story-grid {
+  height: 100vh;
+  overflow: visible;
+}
+.Story h3 {
+  margin-top: 5px;
+  /* 自定義上邊距 */
+  margin-bottom: 5px;
+  /* 自定義下邊距 */
+}
+.Story .story-item {
+  background-image: url("../images/Story/redgirl.png");
+  background-position: right;
+  background-size: cover;
+  /* 背景圖片自動調整大小以覆蓋容器 */
+  background-repeat: no-repeat;
+  /* 防止背景圖片重複 */
+  height: 100vh;
+  /* 設定容器高度為視窗高度 */
+  display: flex;
+  align-items: center;
+  /* 垂直居中 */
+  padding: 20px;
+  box-sizing: border-box;
+  /* 讓 padding 不影響容器的實際大小 */
+}
+.Story .red-girl-container {
+  background-image: url("../images/Story/old-torn-paper-inksplash-2.png");
+  background-size: contain;
+  /* 確保圖片完全顯示且不被裁切 */
+  background-repeat: no-repeat;
+  /* 防止背景圖片重複 */
+  background-position: left center;
+  /* 圖片靠左並垂直居中 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* 文字垂直居中 */
+  align-items: center;
+  /* 文字水平居中 */
+  width: 40%;
+  /* 根據視窗大小調整寬度 */
+  height: 600px;
+  /* 自動調整高度 */
+  padding: 100px 50px;
+  /* 內邊距，讓內容與背景保持距離 */
+  box-sizing: border-box;
+  /* 確保 padding 不會影響總尺寸 */
+  margin-left: 10%;
+  /* 確保容器靠左 */
+}
+.Story .red-girl-text {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 20px; */
+  margin-left: 10px;
+  width: 95%;
+  /* 撐滿容器 */
+  box-sizing: border-box;
+}
+.Story .red-girl-title h3 {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 2rem;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+  padding-left: 15px;
+}
+.Story .red-girl-title h3 span {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: 0.18rem;
+  line-height: 1.5;
+  color: #acff6c;
+  margin-left: 5px;
+  letter-spacing: 5px;
+  display: inline;
+  z-index: 2;
+}
+.Story .red-girl-title h3::after {
+  /* 在 <h3> 元素後插入一個伪元素 */
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 35px;
+  height: 35px;
+  background-color: #B595FF;
+  z-index: -1;
+}
+.Story .red-girl-text p {
+  text-indent: 2em;
+  color: #f0f0f0;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  /* 當文字長度過長時換行 */
+}
+.Story .story-item2 {
+  background-image: url("../images/Story/yellowman.png");
+  background-size: cover;
+  /* 背景圖片自動調整大小以覆蓋容器 */
+  background-repeat: no-repeat;
+  /* 防止背景圖片重複 */
+  height: 100vh;
+  /* 設定容器高度為視窗高度 */
+  display: flex;
+  align-items: center;
+  /* 垂直居中 */
+  padding: 20px;
+  box-sizing: border-box;
+  /* 讓 padding 不影響容器的實際大小 */
+  overflow: hidden;
+}
+.Story .yellow-peter-pan-container {
+  background-image: url("../images/Story/old-torn-paper-inksplash-2.png");
+  background-size: contain;
+  /* 確保圖片完全顯示且不被裁切 */
+  background-repeat: no-repeat;
+  /* 防止背景圖片重複 */
+  background-position: right center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* 文字垂直居中 */
+  align-items: center;
+  /* 文字水平居中 */
+  width: 40%;
+  /* 根據視窗大小調整寬度 */
+  height: 600px;
+  /* 自動調整高度 */
+  padding: 100px 50px;
+  /* 內邊距，讓內容與背景保持距離 */
+  box-sizing: border-box;
+  /* 確保 padding 不會影響總尺寸 */
+  margin-left: auto;
+  /* 自動將容器推到右邊 */
+  margin-right: 10%;
+  /* 控制容器與右邊界的距離 */
+}
+.Story .yellow-peter-pan {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 20px; */
+  margin-left: 10px;
+  width: 95%;
+  /* 撐滿容器 */
+  box-sizing: border-box;
+}
+.Story .yellow-peter-pan h3 {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 2rem;
+  color: #FFFFFF;
+  position: relative;
+  z-index: 2;
+  padding-left: 15px;
+}
+.Story .yellow-peter-pan h3 span {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: 0.18rem;
+  line-height: 1.5;
+  color: #acff6c;
+  margin-left: 5px;
+  letter-spacing: 5px;
+  display: inline;
+  z-index: 2;
+}
+.Story .yellow-peter-pan h3::after {
+  /* 在 <h3> 元素後插入一個伪元素 */
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 35px;
+  height: 35px;
+  background-color: #B595FF;
+  z-index: -1;
+}
+.Story .yellow-peter-pan-text {
+  text-indent: 2em;
+  color: #f0f0f0;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  /* 當文字長度過長時換行 */
+}
+.Story .story-item3 {
+  background-image: url("../images/Story/lightsis.png");
+  background-position: right;
+  background-size: cover;
+  /* 背景圖片自動調整大小以覆蓋容器 */
+  background-repeat: no-repeat;
+  /* 防止背景圖片重複 */
+  height: 100vh;
+  /* 設定容器高度為視窗高度 */
+  display: flex;
+  align-items: center;
+  /* 垂直居中 */
+  padding: 20px;
+  box-sizing: border-box;
+  /* 讓 padding 不影響容器的實際大小 */
+}
+.Story .lantern-sister-container {
+  background-image: url("../images/Story/old-torn-paper-inksplash-2.png");
+  background-size: contain;
+  /* 確保圖片完全顯示且不被裁切 */
+  background-repeat: no-repeat;
+  /* 防止背景圖片重複 */
+  background-position: left center;
+  /* 圖片靠左並垂直居中 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* 文字垂直居中 */
+  align-items: center;
+  /* 文字水平居中 */
+  width: 40%;
+  /* 根據視窗大小調整寬度 */
+  height: 600px;
+  /* 自動調整高度 */
+  padding: 100px 50px;
+  /* 內邊距，讓內容與背景保持距離 */
+  box-sizing: border-box;
+  /* 確保 padding 不會影響總尺寸 */
+  margin-left: 10%;
+  /* 確保容器靠左 */
+}
+.Story .lantern-sister-text {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 20px; */
+  margin-left: 10px;
+  width: 95%;
+  /* 撐滿容器 */
+  box-sizing: border-box;
+}
+.Story .lantern-sister-title h3 {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 2rem;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+  padding-left: 15px;
+  margin-left: 15px;
+}
+.Story .lantern-sister-title h3 span {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: 0.18rem;
+  line-height: 1.5;
+  color: #acff6c;
+  margin-left: 5px;
+  letter-spacing: 5px;
+  display: inline;
+  z-index: 2;
+}
+.Story .lantern-sister-title h3::after {
+  /* 在 <h3> 元素後插入一個伪元素 */
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  width: 35px;
+  height: 35px;
+  background-color: #B595FF;
+  z-index: -1;
+}
+.Story .lantern-sister-text p {
+  text-indent: 2em;
+  color: #f0f0f0;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  /* 當文字長度過長時換行 */
+}
+.Story .story-item4 {
+  background-image: url("../images/Story/goatman.png");
+  background-size: cover;
+  /* 背景圖片自動調整大小以覆蓋容器 */
+  background-repeat: no-repeat;
+  /* 防止背景圖片重複 */
+  height: 100vh;
+  /* 設定容器高度為視窗高度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 垂直居中 */
+  padding: 20px;
+  box-sizing: border-box;
+  /* 讓 padding 不影響容器的實際大小 */
+  margin-bottom: 20%;
+}
+.Story .goat-man-container {
+  background-image: url("../images/Story/old-torn-paper-inksplash-2.png");
+  background-size: contain;
+  /* 確保圖片完全顯示且不被裁切 */
+  background-repeat: no-repeat;
+  /* 防止背景圖片重複 */
+  background-position: right center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* 文字垂直居中 */
+  align-items: center;
+  /* 文字水平居中 */
+  width: 40%;
+  /* 根據視窗大小調整寬度 */
+  height: 600px;
+  /* 自動調整高度 */
+  padding: 100px 50px;
+  /* 內邊距，讓內容與背景保持距離 */
+  box-sizing: border-box;
+  /* 確保 padding 不會影響總尺寸 */
+  margin-left: auto;
+  /* 自動將容器推到右邊 */
+  margin-right: 10%;
+  /* 控制容器與右邊界的距離 */
+}
+.Story .goat-man-title {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 95%;
+  /* 撐滿容器 */
+  box-sizing: border-box;
+}
+.Story .goat-man-title h3 {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 2rem;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+  padding-left: 15px;
+  margin-left: 15px;
+}
+.Story .goat-man-title h3 span {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: 0.18rem;
+  line-height: 1.5;
+  color: #acff6c;
+  margin-left: 5px;
+  letter-spacing: 5px;
+  display: inline;
+  z-index: 2;
+}
+.Story .goat-man-title h3::after {
+  /* 在 <h3> 元素後插入一個伪元素 */
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: -5px;
+  width: 35px;
+  height: 35px;
+  background-color: #B595FF;
+  z-index: -1;
+}
+.Story .goat-man-text {
+  text-indent: 2em;
+  color: #f0f0f0;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  /* 當文字長度過長時換行 */
+}
+@media screen and (max-width: 1200px) {
+  .Story .feature-story-container {
+    padding: 20px;
+    /* 減少邊距，適應較小視窗 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .Story .feature-story-container p {
+    font-size: 18px;
+    /* 減小文字大小 */
+  }
+}
+@media screen and (max-width: 768px) {
+  .Story .feature-story-container {
+    padding: 15px;
+    /* 調整小視窗的邊距 */
+  }
+  .Story .feature-story-container p {
+    font-size: 16px;
+    /* 進一步縮小文字 */
+  }
+}
+@media screen and (max-width: 480px) {
+  .Story .feature-story-container {
+    padding: 10px;
+    /* 進一步調整小設備 */
+    background-size: contain;
+    /* 背景圖適應較小的裝置 */
+  }
+  .Story .feature-story-container p {
+    font-size: 14px;
+    /* 手機視窗下文字更小 */
+  }
+}
+
 .forum-body {
   position: relative;
   z-index: 0;
@@ -2787,7 +3478,7 @@ footer .content .left .link li a:hover {
 .contact-body {
   position: relative;
   z-index: 0;
-  background: url("../images/Contact/雜訊3.png") repeat;
+  background: url("./images/noise.jpg") repeat;
 }
 .contact-body .faq-contact {
   padding: 40px 20px;
