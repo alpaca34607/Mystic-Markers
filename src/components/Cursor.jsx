@@ -37,15 +37,15 @@ const Cursor = ({ isAddingLocation }) => {
         element.removeEventListener('mouseleave', handleMouseLeave);
       });
     };
-  }, [isAddingLocation]); // 添加 isAddingLocation 作為依賴
+  }, [isAddingLocation]); 
 
   return (
     <div
       id="custom-cursor"
       className={`cursor ${hovering ? 'hovered' : ''} ${isAddingLocation ? 'adding-location' : ''}`}
       style={{ 
-        left: `${position.x}px`, 
-        top: `${position.y}px`,
+        left: `${(position.x)+(0)}px`, 
+        top: `${(position.y)+(0)}px`,
       }}
     ></div>
   );

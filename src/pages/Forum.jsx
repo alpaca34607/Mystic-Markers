@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,  useEffect } from "react";
 import Navbar from "../components/Navbar"; //Navbar
 import "../style.scss";
 import ArticleList from "../components/ArticleList"; // 文章列表
@@ -11,6 +11,11 @@ import Contact from "./Contact";
 import App from "../App";
 
 const Forum = () => {
+  useEffect(() => {
+      // 當路由變更時，將頁面滾動到頂部
+      window.scrollTo(0, 0);
+    }, [location]);
+
   const [articles, setArticles] = useState(articlesData); // 狀態：所有文章
   const [sortedArticles, setSortedArticles] = useState(articles); // 排序後的文章
   const [currentCategory, setCurrentCategory] = useState("所有看板"); // 狀態：當前分類

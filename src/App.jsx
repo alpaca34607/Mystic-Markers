@@ -39,7 +39,7 @@ const App = () => {
         el,
         { opacity: 0, x: 0 },
         {
-          opacity: 1,
+          opacity: 0.6,
           x: 0,
           duration: 1.5,
           ease: "power2.out",
@@ -137,17 +137,13 @@ const App = () => {
     <>
       <Cursor />
       <Navbar />
+      <GotoTop />
       <Routes>
         <Route
           path="/"
           element={
             <main className="home">
-              <div className="custom-btn">
-                <GotoTop />
-              </div>
               <section className="banner">
-
-
                 <div className="fog-area-p">
                   <Fog className="purpleFog" />
                 </div>
@@ -210,13 +206,13 @@ const App = () => {
                     src="/images/intro1_purplefog.png"
                     className="intro1fog-P"
                     ref={(el) => fadeInRefs.current.push(el)}
-                    alt=""
+                    alt="紫色裝飾霧"
                   />
                   <img
                     src="/images/intro1_greenfog.png"
                     className="intro1fog-G"
                     ref={(el) => fadeInRefs.current.push(el)}
-                    alt=""
+                    alt="綠色裝飾霧"
                   />
                 </div>
                 <div id="intro2">
@@ -251,7 +247,7 @@ const App = () => {
                     <img
                       src="/images/map_intro.png"
                       ref={(el) => slideRightRefs.current.push(el)}
-                      alt="Map Intro"
+                      alt="地圖頁介紹"
                     />
                     <div className="map-intro">
                       <div ref={(el) => slideLeftRefs.current.push(el)}>

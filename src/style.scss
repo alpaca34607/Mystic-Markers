@@ -1,6 +1,6 @@
 @use "reset";
-@use "variables" as *;
-@use "function" as *;
+@use "variables"as *;
+@use "function"as *;
 @use "keyframes";
 
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Handjet:wght@100..900&family=Mina&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Zen+Maru+Gothic&display=swap");
@@ -550,14 +550,36 @@ a {
 
 .map {
   width: 100%;
-  height: 200vh;
+  overflow: hidden;
   cursor: none;
+
+  .alert-message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: $primary-green;
+    border: none;
+    border-radius: 4px;
+    color: $deep;
+    position: relative;
+
+    button {
+      position: absolute;
+      right: 3px;
+      top: 0;
+      background: none;
+      border: none;
+      @include font-style($font-medium-16);
+      cursor: pointer;
+    }
+  }
+
 
   ul {
     margin-top: 0;
   }
 
   .adding-location {
+
     cursor: url('./images/Map/Vector.png'), auto !important;
   }
 
@@ -597,9 +619,6 @@ a {
           width: auto;
           max-width: none;
         }
-
-
-
 
         .leaflet-touch,
         .leaflet-control-layers,
@@ -709,6 +728,7 @@ a {
         .custom-popup {
           overflow: hidden;
           color: $deep;
+          cursor: none;
 
           .leaflet-popup-content {
             margin: 0;
@@ -718,7 +738,19 @@ a {
             box-sizing: border-box;
             background-color: $light;
 
+            .favorite-button {
+              background-color: transparent;
+              border: none;
+              margin: 0 16px;
+              font-size: 20px;
+              color: $primary-purple;
+              cursor: none;
 
+              &:hover {
+                color: $primary-green;
+              }
+
+            }
 
             .marker-display {
               padding: 10px;
@@ -746,6 +778,17 @@ a {
           justify-content: flex-start;
           width: 100%;
 
+          h3 {
+            @include font-style($font-medium-24);
+            margin: 3px 0;
+          }
+
+          .comments-num {
+            @include font-style($font-regular-13);
+            color: $grey;
+            text-align: right;
+          }
+
           .marker-header {
             display: flex;
             width: 100%;
@@ -765,6 +808,7 @@ a {
                 font-size: 11px;
                 margin: 2px 0 0 8px;
                 color: $grey;
+                font-family: 'Noto Sans TC', sans-serif;
 
               }
 
@@ -860,11 +904,12 @@ a {
             width: 100%;
             background-color: #95e05c;
             border: none;
-            height: 1.5px;
+            height: 1px;
             margin-bottom: 0px;
             box-shadow: none;
           }
 
+          //地圖頁的評論
           .user-rating {
             display: flex;
             flex-direction: row;
@@ -872,7 +917,7 @@ a {
             align-items: center;
 
             .average-rating {
-              display: flex;
+              display: inline-flex;
               flex-direction: row;
               justify-content: center;
               align-items: center;
@@ -883,29 +928,35 @@ a {
                 justify-content: center;
                 margin-right: 8px;
 
+                .star-inarrow {
+                  display: inline-flex;
 
-                .star-size {
-                  height: 26px;
-                  width: 26px;
-                  color: #95e05c;
-                  fill: #95e05c;
+
+
+                  .star-size {
+                    height: 26px;
+                    width: 26px;
+                    color: #95e05c;
+                    fill: #95e05c;
+
+                  }
+
+
+                  .emty-star {
+                    fill: none;
+                  }
 
                 }
 
-                .emty-star {
-                  fill: none;
+
+                .average-starnum {
+                  color: $grey;
+                  margin-top: 0px;
+                  margin-right: 20px;
+                  @include font-style($font-regular-13)
                 }
-
-              }
-
-              .average-starnum {
-                color: $grey;
-                margin-top: 0px;
-                margin-right: 20px;
-                @include font-style($font-regular-13)
               }
             }
-
           }
 
           .comments-area {
@@ -920,11 +971,10 @@ a {
               width: 100%;
               padding: 0;
 
-
               .comment-title {
                 display: flex;
                 align-items: center;
-                margin-bottom: 5px;
+                margin-bottom: 3px;
 
                 h2 {
                   @include font-style($font-regular-16);
@@ -935,34 +985,16 @@ a {
                   flex-direction: row;
                   align-items: center;
                   margin-left: 8px;
+                  color: $grey;
                   cursor: none;
+
+                  .star-inarrow {
+                    display: inline-flex;
+
+                  }
                 }
               }
 
-
-              .alert-message {
-                padding: 1rem;
-                margin-bottom: 1rem;
-                background-color: $primary-green;
-                border: none;
-                border-radius: 4px;
-                color: $deep;
-                position: relative;
-                ;
-
-                button {
-                  position: absolute;
-                  right: 3px;
-                  top: 0;
-                  background: none;
-                  border: none;
-                  @include font-style($font-medium-16);
-                  cursor: pointer;
-                }
-
-
-
-              }
 
               textarea {
                 width: 100%;
@@ -999,7 +1031,7 @@ a {
 
               }
 
-              .comment-buttom {
+              .comment-bottom {
                 display: flex;
                 justify-content: space-between;
                 align-items: flex-start;
@@ -1049,7 +1081,7 @@ a {
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: flex-start;
-                margin: 24px auto;
+                margin: 16px auto;
 
                 hr {
                   width: 100%;
@@ -1066,14 +1098,14 @@ a {
                   width: 100%;
 
                   .preuser-info {
-                    display: flex;
+                    display:inline-flex;
                     justify-content: space-between;
                     align-items: center;
                     width: auto;
 
                     .avatar {
-                      width: 32px;
-                      height: 32px;
+                      width: 24px;
+                      height: 24px;
                       border-radius: 50%;
                       border: #ffffff 3px solid;
                       overflow: hidden;
@@ -1087,7 +1119,7 @@ a {
                     .user-name {
                       @include font-style($font-medium-16);
                       margin-left: 8px;
-                      color: $light;
+                      color: $deep;
                     }
 
                     button {
@@ -1130,11 +1162,21 @@ a {
                     flex-direction: row;
                     gap: 1px;
                     cursor: none;
+
+                    .star-inarrow {
+                      display: inline-flex;
+
+                      .star-size {
+                        height: 20px;
+                        width: 20px;
+                        color: $primary-purple;
+                      }
+                    }
                   }
                 }
 
                 .comment-text {
-                  margin: 24px 0 0 45px;
+                  margin: 8px 0 0 45px;
                   @include font-style($font-regular-16);
                 }
 
@@ -1147,7 +1189,7 @@ a {
 
                   .comment-date {
 
-                    margin-top: 24px;
+                    margin-top: 16px;
                     display: flex;
                     flex-direction: row;
                     justify-content: flex-end;
@@ -1359,6 +1401,86 @@ a {
 
 
   }
+
+  .top-markers {
+    margin: 110px 10%;
+
+    .heading {
+      display: inline-flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+
+      img {
+        display: inline-block;
+        width: fit-content;
+      }
+    }
+
+    .top-list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 60px;
+
+      .row {
+        display: flex;
+        margin: 30px 0;
+        gap: 30% 10%;
+        justify-content: space-between;
+
+        .top-item {
+          display: flex;
+          flex-direction: row;
+          flex: 1;
+          align-items: flex-start;
+          width: 200px;
+
+          .img-wrapper {
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+
+            overflow: hidden;
+
+            img {
+              width: 120px;
+              border-radius: 10px;
+            }
+          }
+
+
+          .top-discription {
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            margin: 0 30px;
+
+            a {
+              @include font-style($font-medium-18);
+              color: $primary-green;
+
+              &:hover {
+                color: $primary-purple;
+              }
+
+              &:active {
+                color: $light;
+                transform: translateY(2px);
+              }
+            }
+
+            p {
+              @include font-style($font-regular-16);
+              color: $grey;
+            }
+          }
+
+        }
+
+      }
+
+    }
+  }
 }
 
 .gallery-page {
@@ -1377,9 +1499,6 @@ a {
     line-height: 1.5;
     overflow-x: hidden;
   }
-
-
-
 
   .star-size {
     width: 24px;
@@ -1535,11 +1654,11 @@ a {
       width: 100%;
       padding: 0;
 
-
+      // 照片頁的評論
       .comment-title {
         display: flex;
         align-items: center;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
 
         h2 {
           @include font-style($font-regular-16);
@@ -1613,7 +1732,7 @@ a {
 
       }
 
-      .comment-buttom {
+      .comment-bottom {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -1821,15 +1940,15 @@ a {
 
   .banner {
     position: relative;
-    background: url("./images/home_banner.jpg");
+    background: url("./images/home_banner.png");
     background-size: cover;
     background-position: right top;
     background-repeat: no-repeat;
-    mix-blend-mode: lighten;
     overflow: hidden;
     width: 100%;
     min-height: 110vh;
     z-index: 1;
+    mix-blend-mode: lighten;
 
     &::before {
       content: "";
@@ -1956,10 +2075,8 @@ a {
     position: relative;
     // transform-style: preserve-3d;
     // perspective-origin: center;
-    background-color: $deep;
     width: 100%;
     overflow: hidden;
-    mix-blend-mode: lighten;
     height: auto;
     cursor: none;
 
@@ -2145,7 +2262,7 @@ a {
         position: absolute;
         top: -50%;
         left: 0;
-        width: 1920px;
+        width: 100%;
         height: auto;
         z-index: 1;
         pointer-events: none;
@@ -2395,81 +2512,7 @@ button:hover #custom-cursor::after {
   }
 }
 
-footer {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  height: 350px;
-  background: url("./images/footer-paper.png");
-  isolation: isolate;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 1;
-  align-items: flex-end;
-  flex-shrink: 0;
-  margin: 0;
-  padding: 0;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .content {
-    display: flex;
-    justify-content: space-between;
-
-    padding: 30px 135px 0 135px;
-    width: 100%;
-    overflow: hidden;
-
-    img {
-      margin-top: 70px;
-      margin-right: 5%;
-      display: block;
-      width: 300px;
-      min-width: 300px;
-      mix-blend-mode: exclusion;
-    }
-
-    .left {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      small {
-        color: #6c5387;
-        margin-left: 60px;
-      }
-
-      .link {
-        display: flex;
-        flex-direction: row;
-
-        li {
-          margin-top: 40px;
-          margin-left: 60px;
-
-          a {
-            color: #ffffff;
-            @include font-style($font-regular-16);
-
-            &:hover {
-              color: $primary-purple;
-            }
-          }
-        }
-      }
-    }
-  }
-}
 
 /* 動畫效果 */
 
@@ -2562,27 +2605,18 @@ footer {
 
 /* Story */
 .Story {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 
+  overflow: hidden;
+  background-image: url('../images/noise.jpg');
+  background-repeat: repeat;
+  overflow: hidden;
+  // opacity: 80%;
+  position: relative;
+  z-index: 0;
 
-
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    /* 保持高度佔滿視窗 */
-    overflow-y: auto;
-    /* 垂直滾動，只在需要時顯示 */
-    overflow-x: hidden;
-    /* 禁止水平滾動 */
-
-
-    background-image: url('../images/noise.jpg');
-    background-repeat: repeat;
-    overflow: hidden;
-    opacity: 80%;
-    position: relative;
-    z-index: -99;
-  }
 
   html {
     overflow: hidden;
@@ -2782,13 +2816,15 @@ footer {
     /* 讓內容垂直對齊底部 */
     align-items: center;
     /* 讓內容水平居中 */
-    margin-bottom: 15%;
+    margin-bottom: 55%;
     padding: 10px;
     width: 24px;
+    overflow: hidden;
   }
 
   .share-link figure {
     margin: 0;
+    overflow: hidden;
     /* 去除 figure 的預設外邊距 */
   }
 
@@ -2802,6 +2838,11 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
+    li{
+      overflow: hidden;
+    }
+
 
 
   }
@@ -2816,6 +2857,7 @@ footer {
 
     transition: transform 0.3s ease;
     /* 為圖標添加懸停效果 */
+    
   }
 
   .share-icon img:hover {
@@ -2828,6 +2870,9 @@ footer {
 
   /* 鄉野奇談 */
   .countryside-story {
+    position: absolute;
+    top: -30px;
+    left: 0;
     height: 100vh;
     width: 100%;
     max-width: 100%;
@@ -2847,9 +2892,8 @@ footer {
 
 
   .flying-papersblack {
-    width: 100%;
-    max-width: 1920px;
     position: absolute;
+    width: 100%;
     top: -50%;
     left: 0;
     height: auto;
@@ -2874,7 +2918,7 @@ footer {
 
   .taiwan-stories {
     position: relative;
-    padding-bottom: 300px;
+    padding-bottom: 60px;
     overflow: hidden;
 
   }
@@ -3003,7 +3047,7 @@ footer {
     /* 背景圖片自動調整大小以覆蓋容器 */
     background-repeat: no-repeat;
     /* 防止背景圖片重複 */
-    height: 100vh;
+    height: 115vh;
     /* 設定容器高度為視窗高度 */
     display: flex;
     align-items: center;
@@ -3011,7 +3055,7 @@ footer {
     padding: 20px;
     box-sizing: border-box;
     /* 讓 padding 不影響容器的實際大小 */
-    overflow: hidden;
+    overflow: visible;
   }
 
   /* 黃色小飛俠 文字背景圖 */
@@ -3975,6 +4019,71 @@ footer {
             &:hover {
               background-color: $light;
               color: $deep;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+footer {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 350px;
+  background: url("./images/footer-paper.png");
+  isolation: isolate;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 99;
+  align-items: flex-end;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 30px 135px 0 135px;
+    width: 100%;
+    overflow: hidden;
+
+    img {
+      margin-top: 70px;
+      margin-right: 5%;
+      display: block;
+      width: 300px;
+      min-width: 300px;
+      mix-blend-mode: exclusion;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      small {
+        color: #6c5387;
+        margin-left: 60px;
+      }
+
+      .link {
+        display: flex;
+        flex-direction: row;
+
+        li {
+          margin-top: 40px;
+          margin-left: 60px;
+
+          a {
+            color: #ffffff;
+            @include font-style($font-regular-16);
+
+            &:hover {
+              color: $primary-purple;
             }
           }
         }

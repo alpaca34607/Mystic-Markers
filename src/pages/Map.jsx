@@ -7,7 +7,6 @@ import Contact from "./Contact";
 import Forum from "./Forum";
 import Cursor from "../components/Cursor";
 import 'leaflet/dist/leaflet.css';
-import icon from 'leaflet/dist/images/marker-icon.png';
 import { BiLocationPlus, BiSolidLocationPlus } from 'react-icons/bi';
 import { FaLocationDot } from "react-icons/fa6";
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -29,6 +28,16 @@ const DEFAULT_COVER_PHOTO = '/images/default-location.jpg';
 const DEFAULT_AVATAR = '/images/Avatars/avatar (1).jpg';
 
 
+// 預設搜尋結果標記
+const searchResultIcon = L.icon({
+  iconUrl: '/images/Map/mark_purple.svg',
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
+});
+
+
+
 // 預設與被點擊的圖示
 const normalIcon = L.icon({
   iconUrl: '/images/Map/mark_green.svg',
@@ -43,6 +52,7 @@ const activeIcon = L.icon({
   iconAnchor: [16, 32],
   popupAnchor: [0, -38],
 });
+
 
 
 const handlePopupOpen = (markerId) => {
@@ -76,7 +86,7 @@ const CustomAlert = ({ message, onClose }) => (
 );
 
 let DefaultIcon = L.icon({
-   iconUrl: '/images/Map/mark_green.svg',
+  iconUrl: '/images/Map/mark_green.svg',
   shadowUrl: iconShadow,
   iconSize: [25, 41],
   iconAnchor: [12, 41]
@@ -128,10 +138,51 @@ export default function Map() {
   const mapboxAccessToken = 'pk.eyJ1IjoiYWxpc29uMzQ2MDciLCJhIjoiY201ODlqM2U5M2o2MDJscHpiMWF6NzczdSJ9.D76vzn6QIzDViT9R7nVPVA';
   const mapboxStyleURL = `https://api.mapbox.com/styles/v1/alison34607/cm589twvs00nz01sp790tayrs/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`;
   const [isAddingLocation, setIsAddingLocation] = useState(false);
+  
   useEffect(() => {
     // 當路由變更時，將頁面滾動到頂部
     window.scrollTo(0, 0);
   }, [location]);
+
+
+  const SearchControl = () => {
+    const map = useMap();
+
+    useEffect(() => {
+      let searchMarker = null;
+
+      const provider = new OpenStreetMapProvider({
+        params: {
+          'accept-language': 'zh',
+          countrycodes: 'tw'
+        },
+      });
+      // 自定搜尋結果的標記
+      const searchControl = new GeoSearchControl({
+        provider,
+        style: 'bar',
+        showMarker: true,
+        showPopup: false,
+        maxMarkers: 1,
+        retainZoomLevel: false,
+        animateZoom: true,
+        autoClose: true,
+        searchLabel: '搜尋地點...',
+        keepResult: true,
+        marker: {
+
+          icon: searchResultIcon,
+          draggable: false,
+        }
+      });
+
+      map.addControl(searchControl);
+      return () => map.removeControl(searchControl);
+    }, [map]);
+
+    return null;
+  };
+
 
   // 收藏
   const [favorites, setFavorites] = useState([]);
@@ -169,7 +220,7 @@ export default function Map() {
 
 
 
-  // 新增評論相關狀態
+  // 評論編輯與否狀態
   const [isEditing, setIsEditing] = useState(false);
   const [editingComment, setEditingComment] = useState(null);
 
@@ -491,7 +542,6 @@ export default function Map() {
 
   // 跳轉到指定標記
   const handleMarkerClick = (marker, e) => {
-    e?.stopPropagation();
     const map = mapRef.current;
     if (map) {
       map.flyTo(marker.position, 16);
@@ -558,9 +608,9 @@ export default function Map() {
                         position={marker.position}
                         icon={marker.id === activeMarkerId ? activeIcon : normalIcon}
                         eventHandlers={{
-                          click: (e) => handleMarkerClick(marker, e), 
-                          popupopen: () => setActiveMarkerId(marker.id), 
-                          popupclose: handlePopupClose, 
+                          click: (e) => handleMarkerClick(marker, e),
+                          popupopen: () => setActiveMarkerId(marker.id),
+                          popupclose: handlePopupClose,
                         }}
                       >
                         <Popup
@@ -652,7 +702,6 @@ export default function Map() {
                                     </div>
                                   )}
                                 </div>
-
                                 <img
                                   src={marker.coverPhoto || DEFAULT_COVER_PHOTO}
                                   alt={marker.title}
@@ -674,9 +723,7 @@ export default function Map() {
                                     </span>
                                   </div>
                                 </div>
-
                                 <hr />
-
                                 <div className="comments-area">
                                   <CommentForm
                                     onSubmit={(commentData) => handleSubmitComment(marker.id, commentData)}
@@ -771,7 +818,6 @@ export default function Map() {
                         <div className="list-area" >
                           <h3>已收藏的地點</h3>
                           <div className="list-section">
-
                             <ul className="favorites-list">
                               {favorites.length > 0 ? (
                                 favorites.map(marker => (
@@ -808,8 +854,8 @@ export default function Map() {
                                   ) : (
                                     <FaLocationDot className="location-icon" />
                                   )}
-                                  {marker.title} - {marker.city}{marker.district}</div>
-                                 
+                                    {marker.title} - {marker.city}{marker.district}</div>
+
                                   <hr />
                                 </li>
                               ))}
@@ -822,13 +868,78 @@ export default function Map() {
                 </div>
 
               </div>
-              <div>推薦地圖</div>
-              <ul>
-                <li><Link to="/page/1">民雄鬼屋</Link></li>
-                <li><Link to="/page/2">辛亥隧道</Link></li>
-                <li><Link to="/page/3">林開郡洋樓</Link></li>
-                <li><Link to="/page/4">西寧國宅</Link></li>
-              </ul>
+              <section className="top-markers">
+                <div className="heading">
+                  <img src="/images/Map/TOP-MARKERS.svg" alt="TOP-MARKERS" className="TOP-MARKERS" />
+                  <img src="/images/Map/everyone-search.svg" alt="everyone-search" className="everyone-search" />
+                </div>
+                <div className="top-list">
+                  <div className="row">
+                    <div className="top-item">
+                      <div className="img-wrapper">
+                        <img src="/images/Map/thumb1.jpg" alt="民雄鬼屋縮圖" />
+                      </div>
+                      <div className="top-discription">
+                        <h2><Link to="/page/1">民雄鬼屋</Link></h2>
+                        <p>劉家古厝，又稱民雄鬼屋，是位於臺灣嘉義縣民雄鄉興中村的閩洋折衷主義民宅，
+                          當地劉姓望族在1929年所建，戰後搬離後年久失修、荒煙蔓草，引起靈異傳說，成為當地觀光景點。</p>
+                      </div>
+                    </div>
+                    <div className="top-item">
+                      <div className="img-wrapper">
+                        <img src="/images/Map/thumb2.jpg" alt="辛亥隧道縮圖" />
+                      </div>
+                      <div className="top-discription">
+                        <h2><Link to="/page/2">辛亥隧道</Link></h2>
+                        <p>「辛亥隧道」這座赫赫有名的猛鬼隧道，位於台北市文山區，是連接大安跟文山兩區的隧道。由於隧道開挖當時的山上是墳墓用地，大安區一側的出口又是第二殯儀館，因此辛亥隧道自開通以來便流傳著許多傳說。</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="top-item">
+                      <div className="img-wrapper">
+                        <img src="/images/Map/thumb3.jpg" alt="林開郡洋樓縮圖" />
+                      </div>
+                      <div className="top-discription">
+                        <h2><Link to="/page/3">林開郡洋樓</Link></h2>
+                        <p>林開郡洋樓是一棟位於臺灣基隆市仁愛區的宅邸建築，是基隆市至今保存之日治時代民間建築中最龐大者，目前仍未具文化資產身分</p>
+                      </div>
+                    </div>
+                    <div className="top-item">
+                      <div className="img-wrapper">
+                        <img src="/images/Map/thumb4.jpg" alt="西寧國宅縮圖" />
+                      </div>
+                      <div className="top-discription">
+                        <h2><Link to="/page/4">西寧國宅</Link></h2>
+                        <p>「西寧國宅」鄰近西門町商圈，附近生活機能完善、交通便利，然而兇殺與輕生事件頻傳，自1981年建成以來，至少傳出30起命案，讓這處國宅成為網路上知名的「猛鬼大樓」。不過最近傳出台北市政府因西寧國宅建築結構老舊，補強效益不佳為由，決定將該國宅拆除，「猛鬼大樓」的傳說，或許也將就此告一段落。</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+                 <footer>
+                        <div className="content">
+                          <div className="left">
+                            <ul className="link">
+                              <li>
+                                <Link to="/">首頁</Link>
+                              </li>
+                              <li>
+                                <Link to="/Story">怪奇博物館</Link>
+                              </li>
+                              <li>
+                                <Link to="/Map">靈異導航</Link>
+                              </li>
+                              <li>
+                                <Link to="/Forum">鬼影探索</Link>
+                              </li>
+                            </ul>
+                            <small>&copy; 2024 Mystic Markers. All Rights Reserved.</small>
+                          </div>
+                          <img src="/images/LOGO_footer.svg" alt="神秘座標" />
+                        </div>
+                      </footer>
+
 
             </main>
           }

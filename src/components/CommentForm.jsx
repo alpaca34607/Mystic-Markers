@@ -113,7 +113,7 @@ function CommentForm({ onSubmit, existingComment, isEditing, onCancelEdit, comme
         disabled={isDisabled}
       />
 
-      <div className='comment-buttom'>
+      <div className='comment-bottom'>
         <div className="comment-length">
           {(userComment && !isEditing ? userComment.text : comment).length}/300
         </div>

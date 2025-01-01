@@ -669,8 +669,28 @@ a {
 /* 地圖頁 */
 .map {
   width: 100%;
-  height: 200vh;
+  overflow: hidden;
   cursor: none;
+}
+.map .alert-message {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #acff6c;
+  border: none;
+  border-radius: 4px;
+  color: #2A2A2A;
+  position: relative;
+}
+.map .alert-message button {
+  position: absolute;
+  right: 3px;
+  top: 0;
+  background: none;
+  border: none;
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
 }
 .map ul {
   margin-top: 0;
@@ -808,6 +828,7 @@ a {
 .map .map-content .map-wrapper .leaflet-container .custom-popup {
   overflow: hidden;
   color: #2A2A2A;
+  cursor: none;
 }
 .map .map-content .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content {
   margin: 0;
@@ -816,6 +837,17 @@ a {
   overflow: hidden;
   box-sizing: border-box;
   background-color: #FFFFFF;
+}
+.map .map-content .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content .favorite-button {
+  background-color: transparent;
+  border: none;
+  margin: 0 16px;
+  font-size: 20px;
+  color: #B595FF;
+  cursor: none;
+}
+.map .map-content .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content .favorite-button:hover {
+  color: #acff6c;
 }
 .map .map-content .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content .marker-display {
   padding: 10px;
@@ -837,6 +869,21 @@ a {
   justify-content: flex-start;
   width: 100%;
 }
+.map .map-content .map-wrapper .leaflet-container .location-info h3 {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: 0.18rem;
+  line-height: 1.5;
+  margin: 3px 0;
+}
+.map .map-content .map-wrapper .leaflet-container .location-info .comments-num {
+  font-family: "Noto Sans TC";
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: #B3B3B3;
+  text-align: right;
+}
 .map .map-content .map-wrapper .leaflet-container .location-info .marker-header {
   display: flex;
   width: 100%;
@@ -856,6 +903,7 @@ a {
   font-size: 11px;
   margin: 2px 0 0 8px;
   color: #B3B3B3;
+  font-family: "Noto Sans TC", sans-serif;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .marker-header .user-info .user-name {
   font-family: "Noto Sans TC";
@@ -935,7 +983,7 @@ a {
   width: 100%;
   background-color: #95e05c;
   border: none;
-  height: 1.5px;
+  height: 1px;
   margin-bottom: 0px;
   box-shadow: none;
 }
@@ -946,7 +994,7 @@ a {
   align-items: center;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .user-rating .average-rating {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -956,16 +1004,19 @@ a {
   justify-content: center;
   margin-right: 8px;
 }
-.map .map-content .map-wrapper .leaflet-container .location-info .user-rating .average-rating .rating .star-size {
+.map .map-content .map-wrapper .leaflet-container .location-info .user-rating .average-rating .rating .star-inarrow {
+  display: inline-flex;
+}
+.map .map-content .map-wrapper .leaflet-container .location-info .user-rating .average-rating .rating .star-inarrow .star-size {
   height: 26px;
   width: 26px;
   color: #95e05c;
   fill: #95e05c;
 }
-.map .map-content .map-wrapper .leaflet-container .location-info .user-rating .average-rating .rating .emty-star {
+.map .map-content .map-wrapper .leaflet-container .location-info .user-rating .average-rating .rating .star-inarrow .emty-star {
   fill: none;
 }
-.map .map-content .map-wrapper .leaflet-container .location-info .user-rating .average-rating .average-starnum {
+.map .map-content .map-wrapper .leaflet-container .location-info .user-rating .average-rating .rating .average-starnum {
   color: #B3B3B3;
   margin-top: 0px;
   margin-right: 20px;
@@ -987,7 +1038,7 @@ a {
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-title {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-title h2 {
   font-family: "Noto Sans TC";
@@ -1001,27 +1052,11 @@ a {
   flex-direction: row;
   align-items: center;
   margin-left: 8px;
+  color: #B3B3B3;
   cursor: none;
 }
-.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .alert-message {
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background-color: #acff6c;
-  border: none;
-  border-radius: 4px;
-  color: #2A2A2A;
-  position: relative;
-}
-.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .alert-message button {
-  position: absolute;
-  right: 3px;
-  top: 0;
-  background: none;
-  border: none;
-  font-family: "Noto Sans TC";
-  font-weight: 500;
-  font-size: 1rem;
-  cursor: pointer;
+.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-title .rating .star-inarrow {
+  display: inline-flex;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform textarea {
   width: 100%;
@@ -1054,14 +1089,14 @@ a {
   color: #949494;
   border-color: #B3B3B3;
 }
-.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-buttom {
+.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-bottom {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   box-sizing: border-box;
   padding: 5px;
 }
-.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-buttom button {
+.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-bottom button {
   background-color: transparent;
   border: #B595FF 1px solid;
   border-radius: 8px;
@@ -1074,16 +1109,16 @@ a {
   letter-spacing: 0.1rem;
   cursor: none;
 }
-.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-buttom button:hover {
+.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-bottom button:hover {
   border: #acff6c 1px solid;
   color: #acff6c;
 }
-.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-buttom button:active {
+.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-bottom button:active {
   border: #FFFFFF 1px solid;
   color: #FFFFFF;
   transform: translateY(2px);
 }
-.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-buttom .comment-length {
+.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-bottom .comment-length {
   margin-right: 8px;
   font-family: "Noto Sans TC";
   font-weight: 300;
@@ -1101,7 +1136,7 @@ a {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 24px auto;
+  margin: 16px auto;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment hr {
   width: 100%;
@@ -1117,14 +1152,14 @@ a {
   width: 100%;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .preuser-data .preuser-info {
-  display: flex;
+  display: inline-flex;
   justify-content: space-between;
   align-items: center;
   width: auto;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .preuser-data .preuser-info .avatar {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: #ffffff 3px solid;
   overflow: hidden;
@@ -1138,7 +1173,7 @@ a {
   font-weight: 500;
   font-size: 1rem;
   margin-left: 8px;
-  color: #FFFFFF;
+  color: #2A2A2A;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .preuser-data .preuser-info button {
   background-color: transparent;
@@ -1176,8 +1211,16 @@ a {
   gap: 1px;
   cursor: none;
 }
+.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .preuser-data .rating .star-inarrow {
+  display: inline-flex;
+}
+.map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .preuser-data .rating .star-inarrow .star-size {
+  height: 20px;
+  width: 20px;
+  color: #B595FF;
+}
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .comment-text {
-  margin: 24px 0 0 45px;
+  margin: 8px 0 0 45px;
   font-family: "Noto Sans TC";
   font-weight: 300;
   font-size: 1rem;
@@ -1191,7 +1234,7 @@ a {
   width: 100%;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .comment-footer .comment-date {
-  margin-top: 24px;
+  margin-top: 16px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -1347,6 +1390,76 @@ a {
 .map .list-panel .marker-list .list-area .list-section .marker-list-item .all-list {
   margin-top: 0;
 }
+.map .top-markers {
+  margin: 110px 10%;
+}
+.map .top-markers .heading {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.map .top-markers .heading img {
+  display: inline-block;
+  width: fit-content;
+}
+.map .top-markers .top-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+.map .top-markers .top-list .row {
+  display: flex;
+  margin: 30px 0;
+  gap: 30% 10%;
+  justify-content: space-between;
+}
+.map .top-markers .top-list .row .top-item {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: flex-start;
+  width: 200px;
+}
+.map .top-markers .top-list .row .top-item .img-wrapper {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+}
+.map .top-markers .top-list .row .top-item .img-wrapper img {
+  width: 120px;
+  border-radius: 10px;
+}
+.map .top-markers .top-list .row .top-item .top-discription {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 0 30px;
+}
+.map .top-markers .top-list .row .top-item .top-discription a {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 1.125rem;
+  letter-spacing: 0.18rem;
+  line-height: 1.5;
+  color: #acff6c;
+}
+.map .top-markers .top-list .row .top-item .top-discription a:hover {
+  color: #B595FF;
+}
+.map .top-markers .top-list .row .top-item .top-discription a:active {
+  color: #FFFFFF;
+  transform: translateY(2px);
+}
+.map .top-markers .top-list .row .top-item .top-discription p {
+  font-family: "Noto Sans TC";
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  line-height: 1.8;
+  color: #B3B3B3;
+}
 
 .gallery-page {
   display: flex;
@@ -1494,7 +1607,7 @@ a {
 .gallery-page .comments-area .commentform .comment-title {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 .gallery-page .comments-area .commentform .comment-title h2 {
   font-family: "Noto Sans TC";
@@ -1560,14 +1673,14 @@ a {
   color: #949494;
   border-color: #B3B3B3;
 }
-.gallery-page .comments-area .commentform .comment-buttom {
+.gallery-page .comments-area .commentform .comment-bottom {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   box-sizing: border-box;
   padding: 5px;
 }
-.gallery-page .comments-area .commentform .comment-buttom button {
+.gallery-page .comments-area .commentform .comment-bottom button {
   background-color: transparent;
   border: #B595FF 1px solid;
   border-radius: 8px;
@@ -1580,16 +1693,16 @@ a {
   letter-spacing: 0.1rem;
   cursor: none;
 }
-.gallery-page .comments-area .commentform .comment-buttom button:hover {
+.gallery-page .comments-area .commentform .comment-bottom button:hover {
   border: #acff6c 1px solid;
   color: #acff6c;
 }
-.gallery-page .comments-area .commentform .comment-buttom button:active {
+.gallery-page .comments-area .commentform .comment-bottom button:active {
   border: #FFFFFF 1px solid;
   color: #FFFFFF;
   transform: translateY(2px);
 }
-.gallery-page .comments-area .commentform .comment-buttom .comment-length {
+.gallery-page .comments-area .commentform .comment-bottom .comment-length {
   margin-right: 8px;
   font-family: "Noto Sans TC";
   font-weight: 300;
@@ -1744,15 +1857,15 @@ a {
 }
 .home .banner {
   position: relative;
-  background: url("./images/home_banner.jpg");
+  background: url("./images/home_banner.png");
   background-size: cover;
   background-position: right top;
   background-repeat: no-repeat;
-  mix-blend-mode: lighten;
   overflow: hidden;
   width: 100%;
   min-height: 110vh;
   z-index: 1;
+  mix-blend-mode: lighten;
 }
 .home .banner::before {
   content: "";
@@ -1863,10 +1976,8 @@ a {
 }
 .home .intro {
   position: relative;
-  background-color: #2A2A2A;
   width: 100%;
   overflow: hidden;
-  mix-blend-mode: lighten;
   height: auto;
   cursor: none;
 }
@@ -2040,7 +2151,7 @@ a {
   position: absolute;
   top: -50%;
   left: 0;
-  width: 1920px;
+  width: 100%;
   height: auto;
   z-index: 1;
   pointer-events: none;
@@ -2277,76 +2388,6 @@ button:hover #custom-cursor::after {
     opacity: 0;
   }
 }
-footer {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  height: 350px;
-  background: url("./images/footer-paper.png");
-  isolation: isolate;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 1;
-  align-items: flex-end;
-  flex-shrink: 0;
-  margin: 0;
-  padding: 0;
-}
-footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: inherit;
-  pointer-events: none;
-  z-index: -1;
-}
-footer .content {
-  display: flex;
-  justify-content: space-between;
-  padding: 30px 135px 0 135px;
-  width: 100%;
-  overflow: hidden;
-}
-footer .content img {
-  margin-top: 70px;
-  margin-right: 5%;
-  display: block;
-  width: 300px;
-  min-width: 300px;
-  mix-blend-mode: exclusion;
-}
-footer .content .left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-footer .content .left small {
-  color: #6c5387;
-  margin-left: 60px;
-}
-footer .content .left .link {
-  display: flex;
-  flex-direction: row;
-}
-footer .content .left .link li {
-  margin-top: 40px;
-  margin-left: 60px;
-}
-footer .content .left .link li a {
-  color: #ffffff;
-  font-family: "Noto Sans TC";
-  font-weight: 300;
-  font-size: 1rem;
-  letter-spacing: 0.05rem;
-  line-height: 1.8;
-}
-footer .content .left .link li a:hover {
-  color: #B595FF;
-}
-
 /* 動畫效果 */
 @keyframes slide-in-buttom {
   0% {
@@ -2421,6 +2462,15 @@ footer .content .left .link li a:hover {
 }
 /* Story */
 .Story {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background-image: url("../images/noise.jpg");
+  background-repeat: repeat;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
   background-color: rgb(26, 26, 26);
   /* 精選文章 那些年一起追我們的女孩 */
   /* 讓文字內容保持在背景圖範圍內 */
@@ -2449,22 +2499,6 @@ footer .content .left .link li a:hover {
   /* 文字標題 */
   /* 文章段落 */
   /* RWD */
-}
-.Story body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  /* 保持高度佔滿視窗 */
-  overflow-y: auto;
-  /* 垂直滾動，只在需要時顯示 */
-  overflow-x: hidden;
-  /* 禁止水平滾動 */
-  background-image: url("../images/noise.jpg");
-  background-repeat: repeat;
-  overflow: hidden;
-  opacity: 80%;
-  position: relative;
-  z-index: -99;
 }
 .Story html {
   overflow: hidden;
@@ -2626,12 +2660,14 @@ footer .content .left .link li a:hover {
   /* 讓內容垂直對齊底部 */
   align-items: center;
   /* 讓內容水平居中 */
-  margin-bottom: 15%;
+  margin-bottom: 55%;
   padding: 10px;
   width: 24px;
+  overflow: hidden;
 }
 .Story .share-link figure {
   margin: 0;
+  overflow: hidden;
   /* 去除 figure 的預設外邊距 */
 }
 .Story .share-icon {
@@ -2643,6 +2679,10 @@ footer .content .left .link li a:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
+}
+.Story .share-icon li {
+  overflow: hidden;
 }
 .Story .share-icon img {
   width: 24px;
@@ -2658,6 +2698,9 @@ footer .content .left .link li a:hover {
   /* 鼠標懸停時放大圖片 */
 }
 .Story .countryside-story {
+  position: absolute;
+  top: -30px;
+  left: 0;
   height: 100vh;
   width: 100%;
   max-width: 100%;
@@ -2673,9 +2716,8 @@ footer .content .left .link li a:hover {
   z-index: 3;
 }
 .Story .flying-papersblack {
-  width: 100%;
-  max-width: 1920px;
   position: absolute;
+  width: 100%;
   top: -50%;
   left: 0;
   height: auto;
@@ -2695,7 +2737,7 @@ footer .content .left .link li a:hover {
 }
 .Story .taiwan-stories {
   position: relative;
-  padding-bottom: 300px;
+  padding-bottom: 60px;
   overflow: hidden;
 }
 .Story .story-grid {
@@ -2804,7 +2846,7 @@ footer .content .left .link li a:hover {
   /* 背景圖片自動調整大小以覆蓋容器 */
   background-repeat: no-repeat;
   /* 防止背景圖片重複 */
-  height: 100vh;
+  height: 115vh;
   /* 設定容器高度為視窗高度 */
   display: flex;
   align-items: center;
@@ -2812,7 +2854,7 @@ footer .content .left .link li a:hover {
   padding: 20px;
   box-sizing: border-box;
   /* 讓 padding 不影響容器的實際大小 */
-  overflow: hidden;
+  overflow: visible;
 }
 .Story .yellow-peter-pan-container {
   background-image: url("../images/Story/old-torn-paper-inksplash-2.png");
@@ -3640,4 +3682,63 @@ footer .content .left .link li a:hover {
 .contact-body .faq-contact .contact-section .contact-content .contact-form button:hover {
   background-color: #FFFFFF;
   color: #2A2A2A;
+}
+
+footer {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 350px;
+  background: url("./images/footer-paper.png");
+  isolation: isolate;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 99;
+  align-items: flex-end;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+footer .content {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 135px 0 135px;
+  width: 100%;
+  overflow: hidden;
+}
+footer .content img {
+  margin-top: 70px;
+  margin-right: 5%;
+  display: block;
+  width: 300px;
+  min-width: 300px;
+  mix-blend-mode: exclusion;
+}
+footer .content .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+footer .content .left small {
+  color: #6c5387;
+  margin-left: 60px;
+}
+footer .content .left .link {
+  display: flex;
+  flex-direction: row;
+}
+footer .content .left .link li {
+  margin-top: 40px;
+  margin-left: 60px;
+}
+footer .content .left .link li a {
+  color: #ffffff;
+  font-family: "Noto Sans TC";
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  line-height: 1.8;
+}
+footer .content .left .link li a:hover {
+  color: #B595FF;
 }/*# sourceMappingURL=style.css.map */
