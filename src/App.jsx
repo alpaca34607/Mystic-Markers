@@ -19,6 +19,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GotoTop from "./components/GotoTop";
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
