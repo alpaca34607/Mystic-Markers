@@ -2489,7 +2489,7 @@ a {
   position: fixed;
   width: 60px;
   height: 60px;
-  background: url("./images/cursor.svg") no-repeat center/contain;
+  background: url("/images/cursor.svg") no-repeat center/contain;
   pointer-events: none;
   z-index: 99999;
   mix-blend-mode: normal;
