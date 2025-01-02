@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "../../css/carousel.css";
 
 const images = [
-  { src: "/images/storyintro1.jpg", alt: "黃色小飛俠", link: "#Story" },
-  { src: "/images/storyintro2.jpg", alt: "山羊人", link: "#Story" },
-  { src: "/images/storyintro3.jpg", alt: "紅衣小女孩", link: "#Story" },
-  { src: "/images/storyintro4.jpg", alt: "每月精選文章", link: "#Story" },
-  { src: "/images/storyintro5.jpg", alt: "宮燈姊姊", link: "#Story" },
+  { src: "images/storyintro1.jpg", alt: "黃色小飛俠", link: "#Story" },
+  { src: "images/storyintro2.jpg", alt: "山羊人", link: "#Story" },
+  { src: "images/storyintro3.jpg", alt: "紅衣小女孩", link: "#Story" },
+  { src: "images/storyintro4.jpg", alt: "每月精選文章", link: "#Story" },
+  { src: "images/storyintro5.jpg", alt: "宮燈姊姊", link: "#Story" },
 
 ];
 
