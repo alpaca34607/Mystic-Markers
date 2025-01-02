@@ -26,13 +26,13 @@ import axios from 'axios';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { LogIn } from "lucide-react";
 import { presetComments } from '../components/presetComments';
-const DEFAULT_COVER_PHOTO = '/images/default-location.jpg';
-const DEFAULT_AVATAR = '/images/Avatars/avatar (1).jpg';
+const DEFAULT_COVER_PHOTO = 'images/default-location.jpg';
+const DEFAULT_AVATAR = 'images/Avatars/avatar (1).jpg';
 
 
 // 預設搜尋結果標記
 const searchResultIcon = L.icon({
-  iconUrl: '/images/Map/mark_purple.svg',
+  iconUrl: 'images/Map/mark_purple.svg',
   iconSize: [32, 32],
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
@@ -42,14 +42,14 @@ const searchResultIcon = L.icon({
 
 // 預設與被點擊的圖示
 const normalIcon = L.icon({
-  iconUrl: '/images/Map/mark_green.svg',
+  iconUrl: 'images/Map/mark_green.svg',
   iconSize: [32, 32],
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
 });
 
 const activeIcon = L.icon({
-  iconUrl: '/images/Map/mark_purple.svg',
+  iconUrl: 'images/Map/mark_purple.svg',
   iconSize: [38, 38],
   iconAnchor: [16, 32],
   popupAnchor: [0, -38],
@@ -88,7 +88,7 @@ const CustomAlert = ({ message, onClose }) => (
 );
 
 let DefaultIcon = L.icon({
-  iconUrl: '/images/Map/mark_green.svg',
+  iconUrl: 'images/Map/mark_green.svg',
   shadowUrl: iconShadow,
   iconSize: [25, 41],
   iconAnchor: [12, 41]
@@ -936,14 +936,14 @@ export default function Map() {
               </div>
               <section className="top-markers">
                 <div className="heading">
-                  <img src="/images/Map/TOP-MARKERS.svg" alt="TOP-MARKERS" className="TOP-MARKERS" />
-                  <img src="/images/Map/everyone-search.svg" alt="everyone-search" className="everyone-search" />
+                  <img src="images/Map/TOP-MARKERS.svg" alt="TOP-MARKERS" className="TOP-MARKERS" />
+                  <img src="images/Map/everyone-search.svg" alt="everyone-search" className="everyone-search" />
                 </div>
                 <div className="top-list">
                   <div className="row">
                     <div className="top-item">
                       <div className="img-wrapper">
-                        <img src="/images/Map/thumb1.jpg" alt="民雄鬼屋縮圖" />
+                        <img src="images/Map/thumb1.jpg" alt="民雄鬼屋縮圖" />
                       </div>
                       <div className="top-discription">
                         <h2><Link to="/page/1">民雄鬼屋</Link></h2>
@@ -953,7 +953,7 @@ export default function Map() {
                     </div>
                     <div className="top-item">
                       <div className="img-wrapper">
-                        <img src="/images/Map/thumb2.jpg" alt="辛亥隧道縮圖" />
+                        <img src="images/Map/thumb2.jpg" alt="辛亥隧道縮圖" />
                       </div>
                       <div className="top-discription">
                         <h2><Link to="/page/2">辛亥隧道</Link></h2>
@@ -964,7 +964,7 @@ export default function Map() {
                   <div className="row">
                     <div className="top-item">
                       <div className="img-wrapper">
-                        <img src="/images/Map/thumb3.jpg" alt="林開郡洋樓縮圖" />
+                        <img src="images/Map/thumb3.jpg" alt="林開郡洋樓縮圖" />
                       </div>
                       <div className="top-discription">
                         <h2><Link to="/page/3">林開郡洋樓</Link></h2>
@@ -973,7 +973,7 @@ export default function Map() {
                     </div>
                     <div className="top-item">
                       <div className="img-wrapper">
-                        <img src="/images/Map/thumb4.jpg" alt="西寧國宅縮圖" />
+                        <img src="images/Map/thumb4.jpg" alt="西寧國宅縮圖" />
                       </div>
                       <div className="top-discription">
                         <h2><Link to="/page/4">西寧國宅</Link></h2>
@@ -1002,7 +1002,7 @@ export default function Map() {
                     </ul>
                     <small>&copy; 2024 Mystic Markers. All Rights Reserved.</small>
                   </div>
-                  <img src="/images/LOGO_footer.svg" alt="神秘座標" />
+                  <img src="images/LOGO_footer.svg" alt="神秘座標" />
                 </div>
               </footer>
 

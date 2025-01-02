@@ -106,9 +106,9 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* 聯絡我們 */}
+          {/* 解謎之門 */}
           <div className="contact-section">
-            <h1>聯絡我們</h1>
+            <h1>解謎之門</h1>
             <div className="contact-content">
               <div className="contact-right">
                 <div className="contact-bubble">

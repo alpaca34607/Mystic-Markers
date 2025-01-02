@@ -309,7 +309,7 @@ const App = () => {
                         <Link to="/Forum">鬼影探索</Link>
                       </li>
                       <li>
-                        <Link to="/Contact">聯絡我們</Link>
+                        <Link to="/Contact">解謎之門</Link>
                       </li>
                     </ul>
                     <small>

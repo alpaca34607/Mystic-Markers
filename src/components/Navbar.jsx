@@ -149,7 +149,7 @@ function Navbar() {
                 <Link to="/Forum">靈異論壇</Link>
               </li>
               <li>
-                <Link to="/Contact">聯絡我們</Link>
+                <Link to="/Contact">解謎之門</Link>
               </li>
             </ul>
           </nav>

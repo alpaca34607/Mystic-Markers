@@ -17,7 +17,7 @@ const PostModal = ({ isOpen, onClose }) => {
 
         {/* 帳號與頭像 */}
         <div className="user-info">
-          <img src="../images/Forum/carbon_user-avatar-filled.svg" alt="頭像" class="avatar"/>
+          <img src="images/Forum/carbon_user-avatar-filled.svg" alt="頭像" class="avatar"/>
           <span id="userName">您的帳號名稱</span>
         </div>
 

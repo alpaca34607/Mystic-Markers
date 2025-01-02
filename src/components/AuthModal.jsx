@@ -113,7 +113,7 @@ const AuthModal = ({ isOpen, onClose, initialView }) => {
             <div className="title-login">
               <img
                 className="login-LOGO"
-                src="../../images/LOGO.svg"
+                src="images/LOGO.svg"
                 alt="LOGO"
               ></img>
               <h1>Mystic Markers</h1>
@@ -152,7 +152,7 @@ const AuthModal = ({ isOpen, onClose, initialView }) => {
             <div className="title-login">
               <img
                 className="login-LOGO"
-                src="../../images/LOGO.svg"
+                src="images/LOGO.svg"
                 alt="LOGO"
               ></img>
               <h1>Mystic Markers</h1>
@@ -197,7 +197,7 @@ const AuthModal = ({ isOpen, onClose, initialView }) => {
             <div className="title-login">
               <img
                 className="login-LOGO"
-                src="../../images/LOGO.svg"
+                src="images/LOGO.svg"
                 alt="LOGO"
               ></img>
               <h1>Mystic Markers</h1>

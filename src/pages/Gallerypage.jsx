@@ -49,7 +49,7 @@ function GalleryPage() {
     if (!config) return [];
     return Array.from(
       { length: config.count },
-      (_, index) => `/images/${config.folder}/image${index + 1}.jpg`
+      (_, index) => `images/${config.folder}/image${index + 1}.jpg`
     );
   };
 
