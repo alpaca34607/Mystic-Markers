@@ -1081,7 +1081,7 @@ a {
           }
           ::-webkit-scrollbar-thumb {
             background-color: $primary-purple;
-            border-radius: 10px;
+            border-radius: 99px;
           }
 
           .comments-area {
@@ -1519,11 +1519,13 @@ a {
 
                 .star-inarrow {
                   display: inline-flex;
+                 
 
                   .star-size {
                     height: 20px;
                     width: 20px;
                     color: $primary-purple;
+                      margin: 3px;
                   }
                 }
               }

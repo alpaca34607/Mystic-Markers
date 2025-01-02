@@ -876,7 +876,9 @@ export default function Map() {
                               {favorites.length > 0 ? (
                                 favorites.map(marker => (
                                   <li onClick={(e) => handleMarkerClick(marker, e)} className="marker-list-item">
+                                    <div className="adress">
                                     <BsBookmarkFill className="bookmark-icon" /> {marker.title} - {marker.city}{marker.district}
+                                    </div>
                                     <hr />
                                   </li>
                                 ))

@@ -1139,7 +1139,7 @@ a {
 }
 .map .map-content .map-wrapper .leaflet-container .location-info ::-webkit-scrollbar-thumb {
   background-color: #B595FF;
-  border-radius: 10px;
+  border-radius: 99px;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area {
   width: 100%;
@@ -1518,6 +1518,7 @@ a {
   height: 20px;
   width: 20px;
   color: #B595FF;
+  margin: 3px;
 }
 .map .list-panel .marker-list .list-area .list-section .marker-list-item .marker-list-rating .comments-count {
   display: none;
