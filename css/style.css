@@ -1802,6 +1802,9 @@ a {
   border-radius: 4px;
   color: #2A2A2A;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
 }
 .gallery-page .comments-area .commentform .alert-message button {
   position: absolute;

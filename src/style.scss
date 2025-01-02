@@ -1860,6 +1860,9 @@ a {
         border-radius: 4px;
         color: $deep;
         position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        align-items: center;
         ;
 
         button {

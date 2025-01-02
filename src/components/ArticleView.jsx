@@ -17,7 +17,7 @@ const ArticleView = () => {
     "好奇寶寶",
     "探險家",
   ];
-  const defaultAvatar = "images/Forum/Message avatar.jpg"; // 預設頭像
+  const defaultAvatar = "/images/Forum/Message-avatar.jpg"; // 預設頭像
   const [isFavorite, setIsFavorite] = useState(false); // 初始化 isFavorite
 
   useEffect(() => {
@@ -43,12 +43,12 @@ const ArticleView = () => {
       prevInteractions.map((interaction, idx) =>
         idx === interactionIndex
           ? {
-              ...interaction,
-              isLiked: !interaction.isLiked,
-              count: interaction.isLiked
-                ? interaction.count - 1 // 若已按讚，數字減 1
-                : interaction.count + 1, // 若未按讚，數字加 1
-            }
+            ...interaction,
+            isLiked: !interaction.isLiked,
+            count: interaction.isLiked
+              ? interaction.count - 1 // 若已按讚，數字減 1
+              : interaction.count + 1, // 若未按讚，數字加 1
+          }
           : interaction
       )
     );
@@ -105,10 +105,10 @@ const ArticleView = () => {
       prevComments.map((comment, idx) =>
         idx === index
           ? {
-              ...comment,
-              likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1,
-              isLiked: !comment.isLiked,
-            }
+            ...comment,
+            likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1,
+            isLiked: !comment.isLiked,
+          }
           : comment
       )
     );
@@ -145,7 +145,7 @@ const ArticleView = () => {
             <h1 className="article-title">{article.title}</h1>
             <div className="meta-info">
               <img
-                src={article.authorAvatar}
+                src={`/${article.authorAvatar}`}
                 alt="作者頭像"
                 className="author-avatar"
               />
@@ -159,7 +159,7 @@ const ArticleView = () => {
       <div className="article-content">
         <p className="article-text">{article.preview}</p>
         <img
-          src={article.articleImage}
+          src={`/${article.articleImage}`}
           alt="文章圖片"
           className="article-image"
         />
@@ -187,11 +187,10 @@ const ArticleView = () => {
                 }}
               >
                 <img
-                  src={
-                    interaction.isLiked
-                      ? interaction.filledIcon
-                      : interaction.icon
-                  }
+                  src={`/${interaction.isLiked
+                    ? interaction.filledIcon
+                    : interaction.icon
+                    }`}
                   alt={interaction.altText}
                 />
                 <span>{interaction.count}</span>
@@ -208,11 +207,11 @@ const ArticleView = () => {
               }}
             >
               <img
-                src={
-                  isFavorite
-                    ? article.interactions[2].filledIcon // 使用 interactions[2] 的已收藏圖案
-                    : article.interactions[2].icon // 使用 interactions[2] 的未收藏圖案
-                }
+                src={`/${isFavorite
+                  ? article.interactions[2].filledIcon // 使用 interactions[2] 的已收藏圖案
+                  : article.interactions[2].icon // 使用 interactions[2] 的未收藏圖案
+                  }`}
+
                 alt={isFavorite ? "已收藏" : "收藏"}
               />
             </a>
@@ -241,7 +240,7 @@ const ArticleView = () => {
           }}
         >
           <img
-            src="images/Forum/ic_outline-share.png"
+            src={`/${"images/Forum/ic_outline-share.png"}`}
             alt="分享"
             className="share-icon"
           />
@@ -270,11 +269,10 @@ const ArticleView = () => {
                   onClick={() => handleLikeComment(index)}
                 >
                   <img
-                    src={
-                      comment.isLiked
+                    src={`/${comment.isLiked
                         ? "images/Forum/solar_ghost-outline.svg"
                         : "images/Forum/Forum_ghost.svg"
-                    }
+                      }`}
                     alt="like"
                   />
                   <span>{comment.likes}</span>
