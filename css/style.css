@@ -1134,11 +1134,18 @@ a {
   font-weight: 400;
   font-size: 0.8125rem;
 }
+.map .map-content .map-wrapper .leaflet-container .location-info ::-webkit-scrollbar {
+  border-right: #B595FF 1px solid;
+}
+.map .map-content .map-wrapper .leaflet-container .location-info ::-webkit-scrollbar-thumb {
+  background-color: #B595FF;
+  border-radius: 10px;
+}
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area {
   width: 100%;
   padding: 10px 20px;
   box-sizing: border-box;
-  max-height: 497px;
+  max-height: 207px;
   overflow: auto;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform {

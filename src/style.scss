@@ -1076,14 +1076,21 @@ a {
               }
             }
           }
+          ::-webkit-scrollbar{
+            border-right: $primary-purple 1px solid;
+          }
+          ::-webkit-scrollbar-thumb {
+            background-color: $primary-purple;
+            border-radius: 10px;
+          }
 
           .comments-area {
             width: 100%;
             padding: 10px 20px;
             box-sizing: border-box;
-            max-height: calc(500px - 3px);
+            max-height: 207px;
             overflow: auto;
-
+         
 
             .commentform {
               width: 100%;
