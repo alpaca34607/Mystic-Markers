@@ -31,7 +31,7 @@ export default function Story() {
         el,
         { opacity: 0, x: 0 },
         {
-          opacity: 1,
+          opacity: 0.8,
           x: 0,
           duration: 1.5,
           ease: "power2.out",
