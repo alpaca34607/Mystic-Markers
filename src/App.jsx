@@ -164,8 +164,8 @@ const App = () => {
                   className="logoXL"
                 >
                   <Link to="/">
-                    <img id="mark" src="/images/LOGO.svg" alt="神秘座標" />
-                    <img id="logoB" src="/images/logo_XL.svg" alt="神秘座標" />
+                    <img id="mark" src="images/LOGO.svg" alt="神秘座標" />
+                    <img id="logoB" src="images/logo_XL.svg" alt="神秘座標" />
                     <div className="p">
                       <GlowingText text="MYSTIC MARKERS" />
                     </div>
@@ -178,7 +178,7 @@ const App = () => {
                     <figure>
                       {" "}
                       <img
-                        src="/images/door.png"
+                        src="images/door.png"
                         ref={(el) => slideRightRefs.current.push(el)}
                         alt="未知之門"
                       />
@@ -188,7 +188,7 @@ const App = () => {
                       ref={(el) => slideLeftRefs.current.push(el)}
                     >
                       <img
-                        src="/images/intro_Q.svg"
+                        src="images/intro_Q.svg"
                         alt="準備好要探索未知了嗎?"
                       />
                       <p>
@@ -206,13 +206,13 @@ const App = () => {
                     </div>
                   </div>
                   <img
-                    src="/images/intro1_purplefog.png"
+                    src="images/intro1_purplefog.png"
                     className="intro1fog-P"
                     ref={(el) => fadeInRefs.current.push(el)}
                     alt="紫色裝飾霧"
                   />
                   <img
-                    src="/images/intro1_greenfog.png"
+                    src="images/intro1_greenfog.png"
                     className="intro1fog-G"
                     ref={(el) => fadeInRefs.current.push(el)}
                     alt="綠色裝飾霧"
@@ -234,7 +234,7 @@ const App = () => {
                   </div>
                 </div>
                 <div id="intro3">
-                  <img src="/images/intro3_purplefog.png" alt="" ref={(el) => fadeInRefs.current.push(el)} className="intro3fog-P" />
+                  <img src="images/intro3_purplefog.png" alt="" ref={(el) => fadeInRefs.current.push(el)} className="intro3fog-P" />
                   <div
                     className="title"
                     ref={(el) => slideTopRefs.current.push(el)}
@@ -248,7 +248,7 @@ const App = () => {
 
                   <div className="map-area">
                     <img
-                      src="/images/map_intro.png"
+                      src="images/map_intro.png"
                       ref={(el) => slideRightRefs.current.push(el)}
                       alt="地圖頁介紹"
                     />
@@ -315,7 +315,7 @@ const App = () => {
                       &copy; 2024 Mystic Markers. All Rights Reserved.
                     </small>
                   </div>
-                  <img src="/images/LOGO_footer.svg" alt="神秘座標" />
+                  <img src="images/LOGO_footer.svg" alt="神秘座標" />
                 </div>
               </footer>
             </main>
