@@ -53,7 +53,7 @@ function Navbar() {
         {/* LOGO 圖標 */}
         <Link to="/">
           <div className="logo">
-            <img src="/images/LOGO.svg" alt="神秘座標LOGO" />
+            <img src="images/LOGO.svg" alt="神秘座標LOGO" />
             <h3 className="logoText">Mystic Markers</h3>
           </div>
         </Link>
@@ -97,14 +97,14 @@ function Navbar() {
       {/* 通知/會員管理/MENU */}
       <nav className="nav-wrapper">
         <a href="#news">
-          <img id="news" src="/images/news.svg" alt="news" />
+          <img id="news" src="images/news.svg" alt="news" />
         </a>
         {/* 僅在未登入時顯示 Group 按鈕 */}
         {!isLoggedIn && (
           <a href="#Group">
             <img
               id="Group"
-              src="/images/Group.svg"
+              src="images/Group.svg"
               alt="Group"
               onClick={() => setIsAuthOpen(true)}
             />
@@ -116,7 +116,7 @@ function Navbar() {
             <button onClick={() => setIsAuthOpen(true)} className="auth-btn">
               <img
                 id="Group"
-                src="/images/Group.svg"
+                src="images/Group.svg"
                 alt="Group"
               />
             </button>
