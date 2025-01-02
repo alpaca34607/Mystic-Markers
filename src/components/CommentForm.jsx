@@ -60,7 +60,7 @@ function CommentForm({ onSubmit, existingComment, isEditing, onCancelEdit, comme
       timestamp: new Date(),
       userId: 'user123',
       userName: '訪客',
-      userAvatar: '/images/Avatars/avatar%20(1).jpg',
+      userAvatar: 'images/Avatars/avatar%20(1).jpg',
       isEdited: isEditing
     });
 
