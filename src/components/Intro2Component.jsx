@@ -92,13 +92,13 @@ const Intro2Component = () => {
                     ref={targetRef}
                     className="paper1 laya-please layer-3"
                     data-speed="2"
-                    src="/images/paper_1.jpg"
+                    src="images/paper_1.jpg"
                     alt="paper1"
                 />
                 <img
                     className="paper2 laya-please layer-4"
                     data-speed="1"
-                    src="/images/paper_2.jpg"
+                    src="images/paper_2.jpg"
                     alt="paper2"
                 />
             </div>
