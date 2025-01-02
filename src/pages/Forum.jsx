@@ -1,64 +1,91 @@
-import React, { useState,  useEffect } from "react";
-import Navbar from "../components/Navbar"; //Navbar
+import React, { useState, useMemo,useEffect } from "react";
+import { useParams } from "react-router-dom"; // 確保引入 useParamsnpm 
 import "../style.scss";
 import ArticleList from "../components/ArticleList"; // 文章列表
+import ArticleView from "../components/ArticleView";
 import articlesData from "../js/articlesData"; // 原始文章資料
 import PostModal from "../components/PostModal"; // 發文彈窗組件
-import { Link, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+
+import Contact from "./Contact";
 import Story from "./Story";
 import Map from "./Map";
-import Contact from "./Contact";
-import App from "../App";
 
 const Forum = () => {
-  useEffect(() => {
-      // 當路由變更時，將頁面滾動到頂部
-      window.scrollTo(0, 0);
-    }, [location]);
-
+   const { category } = useParams(); // 接收首頁路由中的分類名稱
   const [articles, setArticles] = useState(articlesData); // 狀態：所有文章
-  const [sortedArticles, setSortedArticles] = useState(articles); // 排序後的文章
+  const [searchValue, setSearchValue] = useState(""); // 搜尋欄位
+  const [ascending, setAscending] = useState(true); // 排序狀態
   const [currentCategory, setCurrentCategory] = useState("所有看板"); // 狀態：當前分類
   const [isModalOpen, setModalOpen] = useState(false); // 狀態：發文彈窗是否開啟
+  const [searchTriggered, setSearchTriggered] = useState(false); // 記錄是否已觸發搜尋
 
-  // 熱門排序指令
-  const sortArticlesByPopularity = () => {
-    const sorted = [...articles].sort((a, b) => {
+  // 首頁路由器更新用
+  useEffect(() => {
+    if (category) {
+      setCurrentCategory(decodeURIComponent(category)); // 動態更新分類
+    }
+  }, [category]);
+  
+  // [搜尋]過濾功能，只有在按下搜尋按鈕後才觸發
+  const filteredArticles_search = useMemo(() => {
+    if (searchTriggered) {
+      return articles.filter(
+        (article) =>
+          article.title.toLowerCase().includes(searchValue.toLowerCase()) // 根據標題搜尋
+      );
+    }
+    return articles; // 沒有觸發搜尋時，顯示所有文章
+  }, [searchValue, articles, searchTriggered]);
+
+  // [分類]篩選文章
+  const filteredArticles_category = useMemo(() => {
+    return filteredArticles_search.filter((article) => {
+      if (currentCategory === "所有看板") return true; // 顯示所有文章
+      if (currentCategory === "我的收藏") return article.isFavorite; // 顯示收藏文章
+      return article.category === currentCategory; // 根據分類篩選文章
+    });
+  }, [filteredArticles_search, currentCategory]);
+
+  // [熱門]根據按讚數進行排序
+  const sortedArticles = useMemo(() => {
+    
+    return filteredArticles_category.sort((a, b) => {
       const aLikes = a.interactions.find((i) => i.altText === "like").count;
       const bLikes = b.interactions.find((i) => i.altText === "like").count;
-      return bLikes - aLikes;
+      return ascending ? aLikes - bLikes : bLikes - aLikes; // 升冪或降冪排序
     });
-    setSortedArticles(sorted);
+  }, [filteredArticles_category, ascending, searchTriggered]);
+
+  // [搜尋]輸入變化
+  const handleSearch = (e) => {
+    setSearchValue(e.target.value);
   };
 
-  // 最新排序
-  const sortArticlesByDate = () => {
-    const sorted = [...articles].sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
-    setSortedArticles(sorted);
+  // [熱門]觸發排序方式的切換
+  const toggleSortOrder = () => {
+    setAscending((prevState) => !prevState); // 切換升冪和降冪
   };
 
-  // 發文規則按鈕
+   // [搜尋]按鈕觸發搜尋和排序
+   const handleSearchButtonClick = () => {
+    setSearchTriggered(true); // 觸發搜尋
+    toggleSortOrder(); // 切換排序
+  };
+
+  // [發文規則]按鈕
   const showPostingRules = () => {
     alert(
       "發文規則：\n1. 請保持友善與尊重。\n2. 禁止發表不當內容。\n3. 內容需與分類相關。"
     );
   };
 
-  // 根據分類篩選文章
-  const filteredArticles = articles.filter((article) => {
-    if (currentCategory === "所有看板") return true; // 顯示所有文章
-    if (currentCategory === "我的收藏") return article.isFavorite; // 顯示收藏文章
-    return article.category === currentCategory; // 根據分類篩選文章
-  });
-
-  // 點擊分類按鈕時更改當前分類 (切換分類)
+  // [分類]點擊分類按鈕時更改當前分類 
   const handleCategoryClick = (category) => {
     setCurrentCategory(category);
   };
 
-  // 點擊收藏按鈕時切換收藏狀態
+  // [分類]點擊收藏按鈕時切換收藏狀態
   const handleArticleFavorite = (id) => {
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
@@ -69,53 +96,14 @@ const Forum = () => {
     );
   };
 
-  // 提交新文章時添加到文章列表
+  // [撰寫新文章]提交新文章時添加到文章列表
   const handleNewArticle = (newArticle) => {
     setArticles([newArticle, ...articles]); // 新文章加到最上面
     setModalOpen(false); // 關閉彈窗
   };
 
-  // 搜尋相關邏輯
-  const [searchValue, setSearchValue] = useState("");
-  const [filteredResults, setFilteredResults] = useState([]);
-  const dummyData = [
-    { title: "民雄鬼屋" },
-    { title: "荒廢城堡" },
-    { title: "恐怖噩夢" },
-    { title: "SCP-173" },
-    { title: "民雄的傳說" },
-    { title: "民雄的傳說" },
-  ];
-  // 搜尋函式
-  const handleSearch = (value) => {
-    const searchQuery = value.trim().toLowerCase();
-    if (searchQuery === "") {
-      setFilteredResults([]); // 搜尋欄清空時，不顯示任何結果
-    } else {
-      const results = dummyData.filter((item) =>
-        item.title.toLowerCase().includes(searchQuery)
-      );
-      setFilteredResults(results);
-    }
-  };
-
-  // 即時處理搜尋輸入
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setSearchValue(value);
-    handleSearch(value); // 即時搜尋
-  };
-
-  // 按下 Enter 時觸發搜尋
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSearch(searchValue);
-    }
-  };
-
   return (
     <>
-      <Navbar />
       <Routes>
         <Route
           path="/*"
@@ -123,7 +111,7 @@ const Forum = () => {
             <main className="forum-body">
               <div className="forum-container">
                 <div className="forum-layout">
-                  {/* 側邊分類欄位 */}
+                  {/* 側邊分類欄位、篩選、廣告區 */}
                   <aside className="sidebar">
                     <div className="sidebar-content">
                       <nav className="category-board">
@@ -140,14 +128,18 @@ const Forum = () => {
                             <li
                               key={category.label}
                               className={`category-item ${
-                                currentCategory === category ? "active" : ""
+                                currentCategory === category.label
+                                  ? "active"
+                                  : ""
                               }`}
                               role="listitem"
-                              onClick={() => handleCategoryClick(category.label)}
+                              onClick={() =>
+                                handleCategoryClick(category.label)
+                              }
                             >
                               <div>
                                 <img
-                                  src={`../images/Forum/${category.icon}.svg`}
+                                  src={`images/Forum/${category.icon}.svg`}
                                   alt={category.label}
                                 />
                                 <p>{category.label}</p>
@@ -163,7 +155,7 @@ const Forum = () => {
                       >
                         <img
                           className="ad-text"
-                          src="../public/images/Forum/HORRO.svg"
+                          src="images/Forum/HORRO.svg"
                           alt="廣告"
                         />
                       </div>
@@ -179,12 +171,12 @@ const Forum = () => {
                           {
                             icon: "mingcute_fire-fill",
                             label: "熱門",
-                            onClick: sortArticlesByPopularity,
+                            onClick:toggleSortOrder,
                           },
                           {
                             icon: "emojione-monotone_new-button",
                             label: "最新",
-                            onClick: sortArticlesByDate,
+                            //onClick: sortArticlesByDate,
                           },
                           {
                             icon: "ooui_notice",
@@ -194,7 +186,7 @@ const Forum = () => {
                         ].map((item, index) => (
                           <div key={index} className="nav-button-container">
                             <img
-                              src={`../public/images/Forum/${item.icon}.svg`}
+                              src={`images/Forum/${item.icon}.svg`}
                               alt={item.label}
                               className="nav-button-icon"
                             />
@@ -214,41 +206,28 @@ const Forum = () => {
                         <div className="search-bar-container">
                           <div className="search-bar">
                             <input
-                              type="text"
+                              type="search"
                               className="search-input"
-                              placeholder="搜尋 民雄鬼屋"
+                              placeholder="搜尋文章"
                               value={searchValue}
-                              onChange={handleInputChange}
-                              onKeyDown={handleKeyDown}
+                              onChange={handleSearch}
                             />
                             <button
                               className="search-button"
-                              onClick={() => handleSearch(searchValue)}
+                              onClick={handleSearchButtonClick}
                             >
                               <img
-                                src="../public/images/Forum/iconamoon_search.svg"
+                                src="images/Forum/iconamoon_search.svg"
                                 alt="搜尋"
                               />
                             </button>
-                          </div>
-                          {/* 搜尋結果 */}
-                          <div className="search-results">
-                            {filteredResults.length > 0 ? (
-                              <ul>
-                                {filteredResults.map((item, index) => (
-                                  <li key={index}>{item.title}</li>
-                                ))}
-                              </ul>
-                            ) : (
-                              searchValue && <p>沒有找到相關結果。</p> // 若無結果且搜尋欄不為空
-                            )}
                           </div>
                         </div>
 
                         {/* 發表文章按鈕 */}
                         <div className="PostModal-bar">
                           <img
-                            src="../../images/Forum/jam_write.png"
+                            src="images/Forum/jam_write.png"
                             alt="撰寫文章"
                             style={{ cursor: "pointer", width: "50px" }}
                             onClick={() => setModalOpen(true)}
@@ -263,7 +242,7 @@ const Forum = () => {
 
                     {/* 文章列表 */}
                     <ArticleList
-                      articles={filteredArticles} //文章資料
+                      articles={sortedArticles} // 排序並篩選後的文章資料
                       onFavorite={handleArticleFavorite} //傳遞收藏功能
                     />
 
@@ -281,6 +260,7 @@ const Forum = () => {
             </main>
           }
         />
+        <Route path="/article/:articleId" element={<ArticleView />} />
         <Route path="/Story" element={<Story />} />
         <Route path="/Map" element={<Map />} />
         <Route path="/Contact" element={<Contact />} />

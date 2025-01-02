@@ -3586,138 +3586,405 @@ button:hover #custom-cursor::after {
   margin: 0 115px;
   padding: 20px;
   font-weight: 600;
-  cursor: none;
 
   .forum-container {
     padding: 20px 0;
-  }
 
-  .forum-layout {
-    width: 100%;
-    display: flex;
-    gap: 20px;
-
-    /* 網格間隙*/
-  }
-
-  .sidebar {
-    width: 20%;
-
-    .sidebar-content {
+    .forum-layout {
+      width: 100%;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+      gap: 20px;
 
-    .category-board {
-      border: 1.5px solid $grey;
-      border-radius: 5px;
-      padding: 44px; // 調整內邊距
-    }
+      /* 網格間隙*/
 
-    .category-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+      .sidebar {
+        width: 20%;
 
-    .category-item {
-      padding: 8px 15px; // 調整padding
-      margin: 5px 0;
-      color: $primary-green;
-      cursor: none;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      border-radius: 8px; // 圓角
+        .sidebar-content {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
 
-      div {
-        display: flex;
-        justify-content: center;
+          .category-board {
+            border: 1.5px solid $grey;
+            border-radius: 5px;
+            padding: 44px; // 調整內邊距
 
-        img {
-          width: 24px; // 統一圖片大小
-          height: 24px;
-        }
+            // 分類列表
+            .category-list {
+              list-style: none;
+              padding: 0;
+              margin: 0;
 
-        p {
-          margin-left: 12px;
-          font-size: 18px; // 調整文字大小
-        }
-      }
+              .category-item {
+                padding: 8px 15px; // 調整padding
+                margin: 5px 0;
+                color: $primary-green;
+                cursor: pointer;
+                transition: background-color 0.3s ease, color 0.3s ease;
+                border-radius: 8px; // 圓角
 
-      &:hover {
-        background-color: $primary-purple; // hover 背景
-        color: $primary-green;
-      }
-    }
-  }
+                div {
+                  display: flex;
+                  justify-content: center;
 
+                  img {
+                    width: 24px; // 統一圖片大小
+                    height: 24px;
+                  }
 
+                  p {
+                    margin-left: 12px;
+                    font-size: 18px; // 調整文字大小
+                  }
+                }
 
-  .ad-section {
-    aspect-ratio: 1/2;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+                &:hover {
+                  background-color: $primary-purple; // hover 背景
+                  color: $primary-green;
+                }
+              }
+            }
+          }
 
-  .main-content {
-    width: 80%;
-    border: 1.5px solid $grey;
-    border-radius: 5px;
-    padding: 20px;
-  }
+          .ad-section {
+            aspect-ratio: 1/2;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
 
-  .top-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 30px;
-  }
-
-  .nav-buttons {
-
-    display: flex;
-    align-items: center;
-    gap: 15px; // 控制按鈕間距
-
-    div {
-      display: flex;
-      align-items: center; // 圖示與文字垂直對齊
-      padding: 5px 10px; // 增加按鈕區塊的內邊距
-      border-radius: 5px; // 圓角設計
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover {
-        background-color: $primary-purple; // 滑鼠懸停時的背景效果
-
-        p {
-          color: $deep;
         }
       }
 
-      &.active {
-        background-color: #d8b4f8; // 選中按鈕的背景顏色
-      }
+      .main-content {
+        width: 80%;
+        border: 1.5px solid $grey;
+        border-radius: 5px;
+        padding: 20px;
 
-      img {
-        width: 24px; // 控制圖示大小
-        height: 24px;
-        margin-right: 8px; // 圖示與文字的間距
-      }
+        .top-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 30px;
 
-      .nav-button {
-        color: $primary-green; // 文字顏色
-        font-size: 18px;
-        border: none;
-        background: none;
-        letter-spacing: 2.7px;
+          .nav-buttons {
+
+            display: flex;
+            align-items: center;
+            gap: 15px; // 控制按鈕間距
+
+            div {
+              display: flex;
+              align-items: center; // 圖示與文字垂直對齊
+              padding: 5px 10px; // 增加按鈕區塊的內邊距
+              border-radius: 5px; // 圓角設計
+              cursor: pointer;
+              transition: all 0.3s ease;
+
+              &:hover {
+                background-color: $primary-purple; // 滑鼠懸停時的背景效果
+
+                p {
+                  color: $deep;
+                }
+              }
+
+              &.active {
+                background-color: #d8b4f8; // 選中按鈕的背景顏色
+              }
+
+              img {
+                width: 24px; // 控制圖示大小
+                height: 24px;
+                margin-right: 8px; // 圖示與文字的間距
+              }
+
+              .nav-button {
+                color: #acff6c; // 文字顏色
+                font-size: 18px;
+                border: none;
+                background: none;
+                letter-spacing: 2.7px;
+
+              }
+            }
+          }
+
+          .right-bar {
+            display: flex;
+
+            .search-bar {
+              display: flex;
+              align-items: center;
+              border: 2px solid $primary-green;
+              border-radius: 8px; // 圓角
+              overflow: hidden; // 避免子元素超出邊界
+              height: 40px; // 固定高度，確保子元素一致
+
+              .search-input {
+                flex: 1; // 填滿剩餘空間
+                padding: 0 12px;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                color: $deep;
+                height: 100%; // 高度與父容器一致
+                box-sizing: border-box; // 包含內邊距和邊框在內
+
+                &::placeholder {
+                  color: #a0a0a0; // placeholder 顏色
+                }
+              }
+
+              .search-button {
+                background-color: $primary-green;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px; // 固定寬度
+                height: 100%; // 高度與父容器一致
+                padding: 0 8px;
+                cursor: pointer;
+
+                .search-icon {
+                  width: 20px; // 適當縮小 icon
+                  height: 20px;
+                }
+
+                &:hover {
+                  background-color: #9fe75e; // 滑鼠懸停時的顏色變化
+                }
+              }
+            }
+
+
+          }
+
+        }
+
+        // 文章顯示頁面
+        .article-list {
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+
+          .article-card {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border-bottom: 1px solid $grey;
+
+            .article-content {
+              flex: 1;
+
+              .article-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+
+                .author-info {
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+
+                  // 作者圖片外形狀
+                  .author-avatar {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                  }
+                }
+              }
+
+              .article-Graphics-text {
+                display: flex;
+                justify-content: space-between; // 左右兩邊間隔
+                align-items: center; // 垂直對齊
+
+                .left {
+                  flex: 1; //left 區塊佔用剩餘空間
+                  padding-right: 20px; //讓內容與右邊距離不要太近
+
+                  .article-title {
+                    color: $primary-green;
+                    font-size: 20px;
+                    margin: 10px 0;
+                  }
+
+                  .article-preview {
+                    color: $grey;
+                    font-size: 14px;
+                    line-height: 1.5;
+                    margin-bottom: 15px;
+
+                    display: -webkit-box; // 讓容器變為多行文本容器
+                    -webkit-line-clamp: 1; // 限制顯示一行
+                    -webkit-box-orient: vertical; // 設定文本顯示方向為垂直
+                    overflow: hidden; // 超出部分隱藏
+                    text-overflow: ellipsis; // 超出部分顯示省略號
+                    white-space: normal; // 確保文本換行
+                  }
+
+                  .interaction-bar {
+                    display: flex;
+                    gap: 20px;
+
+                    .interaction-item {
+                      display: flex;
+                      align-items: center;
+                      gap: 5px;
+                      color: $light;
+                    }
+                  }
+                }
+
+                .right {
+                  flex-shrink: 0; // 防止 .right 區塊縮小，保持圖片大小
+                  width: 85px; // 可以根據需要設置圖片的寬度
+
+                  .article-image {
+                    width: 100%; //圖片佔滿 .right 區塊寬度
+                    border-radius: 5px;
+                    object-fit: cover;
+                  }
+                }
+
+
+
+
+              }
+            }
+          }
+        }
+
+        /* 撰寫文章  */
+        #postModal {
+          display: none; // 預設隱藏
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.6);
+          display: flex; // 修正顯示時要用 flex 排版
+          justify-content: center;
+          align-items: center;
+
+          .modal-content {
+            background: $deep;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+
+            .close-btn {
+              position: absolute;
+              top: 10px;
+              right: 15px;
+              font-size: 24px;
+              color: #aaa;
+              cursor: pointer;
+
+              &:hover {
+                color: #000;
+              }
+            }
+
+            .user-info {
+              display: flex;
+              align-items: center;
+              margin-bottom: 15px;
+
+              .avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 10px;
+              }
+
+              #userName {
+                font-size: 16px;
+                font-weight: bold;
+              }
+            }
+
+            #board-bar {
+              display: flex;
+
+              #boardSelect {
+                width: 100%;
+                padding: 5px;
+                margin-bottom: 15px;
+                font-size: 14px;
+              }
+
+            }
+
+
+
+            #postTitle,
+            #postContent {
+              width: 100%;
+              margin-bottom: 15px;
+              padding: 8px;
+              font-size: 14px;
+              box-sizing: border-box;
+
+              &#postContent {
+                height: 120px;
+                resize: none;
+              }
+            }
+
+            .media-buttons {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 15px;
+
+              button {
+                padding: 8px 12px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &:hover {
+                  background-color: #0056b3;
+                }
+              }
+            }
+
+            .action-buttons {
+              display: flex;
+              justify-content: space-between;
+
+              button {
+                padding: 8px 12px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &:hover {
+                  background-color: #0056b3;
+                }
+              }
+            }
+          }
+        }
 
       }
     }
   }
-
 }
 
 

@@ -1,5 +1,4 @@
-import React, { useState ,useEffect} from "react";
-import Navbar from "../components/Navbar";
+import React, { useState } from "react";
 import Story from "./Story";
 import Map from "./Map";
 import Forum from "./Forum";
@@ -68,10 +67,6 @@ const Contact = () => {
       },
     ],
   };
-  useEffect(() => {
-      // 當路由變更時，將頁面滾動到頂部
-      window.scrollTo(0, 0);
-    }, [location]);
 
   return (
     <>
@@ -96,7 +91,7 @@ const Contact = () => {
                     <summary>
                       {/* 問題 */}
                       {item.question}
-                      <img src="../images/Contact/arrow2.svg" alt="下拉符號" />
+                      <img src="images/Contact/arrow2.svg" alt="下拉符號" />
                     </summary>
                     {/* 答案 */}
                     <p>{item.answer}</p>
@@ -106,13 +101,13 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* 解謎之門 */}
+          {/* 聯絡我們 */}
           <div className="contact-section">
-            <h1>解謎之門</h1>
+            <h1>聯絡我們</h1>
             <div className="contact-content">
               <div className="contact-right">
                 <div className="contact-bubble">
-                  <img src="../images/Contact/Union.svg" alt="人物圖片" />
+                  <img src="images/Contact/Union.svg" alt="人物圖片" />
                   <div className="bubble-text">
                     <p>
                       <strong>E-mail:</strong> mystiocmarkers@google.com
@@ -127,7 +122,7 @@ const Contact = () => {
                 </div>
                 <img
                   className="person-image"
-                  src="../images/Contact/Frame71.png"
+                  src="images/Contact/Frame71.png"
                   alt="人物圖片"
                 />
               </div>
@@ -167,7 +162,7 @@ const Contact = () => {
               </ul>
               <small>&copy; 2024 Mystic Markers. All Rights Reserved.</small>
             </div>
-            <img src="/images/LOGO_footer.svg" alt="神秘座標" />
+            <img src="images/LOGO_footer.svg" alt="神秘座標" />
           </div>
         </footer>
         </main>
