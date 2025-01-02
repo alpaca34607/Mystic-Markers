@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import Navbar from "../components/Navbar";
 import Story from "./Story";
 import Map from "./Map";
@@ -68,6 +68,10 @@ const Contact = () => {
       },
     ],
   };
+  useEffect(() => {
+      // 當路由變更時，將頁面滾動到頂部
+      window.scrollTo(0, 0);
+    }, [location]);
 
   return (
     <>

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar"; //Navbar
 import "../style.scss";
-import { Routes, Route } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 import Contact from "./Contact";
 import Forum from "./Forum";
 import Map from "./Map";
@@ -9,13 +9,16 @@ import App from "../App";
 
 export default function Story() {
 
-
+    useEffect(() => {
+        // 當路由變更時，將頁面滾動到頂部
+        window.scrollTo(0, 0);
+    }, [location]);
     return (
         <>
-          
+
             <Routes>
                 <Route
-                    path="/*"
+                    path="/"
                     element={
                         <main className="Story">
 
@@ -152,11 +155,35 @@ export default function Story() {
                                     </section>
                                 </div>
                             </div>
+
+                            {/* 頁尾區 */}
+                            <footer>
+                                <div className="content">
+                                    <div className="left">
+                                        <ul className="link">
+                                            <li>
+                                                <Link to="/">首頁</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/Story">怪奇博物館</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/Map">靈異導航</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/Forum">鬼影探索</Link>
+                                            </li>
+                                        </ul>
+                                        <small>&copy; 2024 Mystic Markers. All Rights Reserved.</small>
+                                    </div>
+                                    <img src="/images/LOGO_footer.svg" alt="神秘座標" />
+                                </div>
+                            </footer>
                         </main>
                     }
                 />
+                <Route path="/" element={<App />} />
                 <Route path="/Forum" element={<Forum />} />
-                <Route path="/Story" element={<Story />} />
                 <Route path="/Map" element={<Map />} />
                 <Route path="/Contact" element={<Contact />} />
             </Routes>

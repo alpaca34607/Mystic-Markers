@@ -1,6 +1,7 @@
 import "../style.scss";
 import Navbar from "../components/Navbar";
 import { Link, Route, Routes } from "react-router-dom";
+import App from "../App";
 import Gallerypage from "./Gallerypage";
 import Story from "./Story";
 import Contact from "./Contact";
@@ -1009,11 +1010,12 @@ export default function Map() {
             </main>
           }
         />
+
         <Route path="/page/:pageId" element={<Gallerypage />} />
         <Route path="/Story" element={<Story />} />
         <Route path="/Forum" element={<Forum />} />
         <Route path="/Contact" element={<Contact />} />
-        <Route path="/login" element={<LogIn />} />
+        <Route path="/" element={<App />} />
       </Routes>
     </>
   );

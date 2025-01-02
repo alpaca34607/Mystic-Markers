@@ -22,16 +22,19 @@ import GotoTop from "./components/GotoTop";
 gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
-  const slideTopRefs = useRef([]);
-  const slideTopSRefs = useRef([]);
-  const slideRightRefs = useRef([]);
-  const slideLeftRefs = useRef([]);
-  const fadeInRefs = useRef([]);
+
   useEffect(() => {
     // 當路由變更時，將頁面滾動到頂部
     window.scrollTo(0, 0);
   }, [location]);
   // 淡入動畫
+
+  const slideTopRefs = useRef([]);
+  const slideTopSRefs = useRef([]);
+  const slideRightRefs = useRef([]);
+  const slideLeftRefs = useRef([]);
+  const fadeInRefs = useRef([]);
+  
   useEffect(() => {
     // 只有淡入
     fadeInRefs.current.forEach((el) => {

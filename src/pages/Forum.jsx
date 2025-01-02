@@ -4,7 +4,7 @@ import "../style.scss";
 import ArticleList from "../components/ArticleList"; // 文章列表
 import articlesData from "../js/articlesData"; // 原始文章資料
 import PostModal from "../components/PostModal"; // 發文彈窗組件
-import { Routes, Route } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 import Story from "./Story";
 import Map from "./Map";
 import Contact from "./Contact";
