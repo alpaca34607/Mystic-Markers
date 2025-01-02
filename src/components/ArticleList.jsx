@@ -1,45 +1,58 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../style.scss";
 
 // ArticleList 組件
 const ArticleList = ({ articles, onFavorite }) => {
-
   const [interactions, setInteractions] = useState([]);
-  
+
   // 追蹤每個 interaction 的狀態
- // 當 articles 改變時重新初始化 interactions
+  // 當 articles 改變時重新初始化 interactions
   useEffect(() => {
     setInteractions(
-      articles.map((article) =>
-        (article.interactions || []).map((interaction) => ({
-          ...interaction,
-          isLiked: false, // 初始按讚狀態
-        }))
+      articles.map(
+        (article) =>
+          (article.interactions || [])
+            .map((interaction) => ({
+              ...interaction,
+              count:
+                interaction.altText === "message"
+                  ? article.commentCount // 使用 commentCount 更新
+                  : interaction.count, // 更新留言數
+              isLiked: false, // 初始按讚狀態
+            }))
+            .filter((interaction) => interaction.altText !== "label") // 過濾掉收藏項目
       )
     );
   }, [articles]);
+
+  // 獲取留言數方法
+const getCommentCountFromArticleView = (articleId) => {
+  const articleInView = articles.find((a) => a.id === articleId);
+  if (articleInView && articleInView.commentCount) {
+    return articleInView.commentCount;
+  }
+  return 0; // 預設值
+};
 
   const handleInteractionClick = (articleIndex, interactionIndex) => {
     setInteractions((prevInteractions) =>
       prevInteractions.map((articleInteractions, idx) =>
         idx === articleIndex
           ? articleInteractions.map((interaction, i) =>
-            i === interactionIndex
-              ? {
-                ...interaction,
-                isLiked: !interaction.isLiked, // 切換按讚狀態
-                count: interaction.isLiked
-                  ? interaction.count - 1 // 若已按讚，數字減 1
-                  : interaction.count + 1, // 若未按讚，數字加 1
-              }
-              : interaction
-          )
+              i === interactionIndex
+                ? {
+                    ...interaction,
+                    isLiked: !interaction.isLiked, // 切換按讚狀態
+                    count: interaction.isLiked
+                      ? interaction.count - 1 // 若已按讚，數字減 1
+                      : interaction.count + 1, // 若未按讚，數字加 1
+                  }
+                : interaction
+            )
           : articleInteractions
       )
     );
   };
-
-  
 
   return (
     <div className="article-list">
@@ -56,7 +69,8 @@ const ArticleList = ({ articles, onFavorite }) => {
                 />
                 <span className="author-name">{article.authorName}</span>
               </div>
-              <button type="button" aria-label="更多選項">
+              {/* 更多選項(待更新) */}
+              {/* <button type="button" aria-label="更多選項">
                 <svg
                   width={24}
                   height={24}
@@ -65,20 +79,25 @@ const ArticleList = ({ articles, onFavorite }) => {
                 >
                   <path d="M6 12c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm12 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm12 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" />
                 </svg>
-              </button>
+              </button> */}
             </div>
             {/* 文章內容 */}
             <div className="article-Graphics-text">
-              <a href={`/article/${article.id}`} className="styled-article-link">
+              <a
+                href={`/article/${article.id}`}
+                className="styled-article-link"
+              >
                 <div className="left">
                   {/* 顯示文章標題和摘要 */}
                   <h2 className="article-title">{article.title}</h2>
                   <p className="article-preview">{article.preview}</p>
                   {/* Icon 列表 */}
                   <div className="interaction-bar">
-                     {interactions[index]?.map((interaction, idx) => (
-                  
-                      <div className="interaction-item" key={`${article.id}-${interaction.altText}`}>
+                    {interactions[index]?.map((interaction, idx) => (
+                      <div
+                        className="interaction-item"
+                        key={`${interaction.altText}`}
+                      >
                         <a
                           href="#"
                           onClick={(e) => {
@@ -112,15 +131,14 @@ const ArticleList = ({ articles, onFavorite }) => {
                         <img
                           src={
                             article.isFavorite
-                            ? article.interactions[2].filledIcon // 使用 interactions[2] 的已收藏圖案
-                            : article.interactions[2].icon // 使用 interactions[2] 的未收藏圖案
+                              ? article.interactions[2].filledIcon // 使用 interactions[2] 的已收藏圖案
+                              : article.interactions[2].icon // 使用 interactions[2] 的未收藏圖案
                           }
                           alt={article.isFavorite ? "已收藏" : "收藏"}
                         />
                       </a>
                       <span>{article.isFavorite ? "已收藏" : "收藏"}</span>
                     </div>
-
                   </div>
                 </div>
               </a>

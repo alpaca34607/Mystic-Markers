@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {  useRef,useState, useEffect } from "react";
 import Navbar from "../components/Navbar"; //Navbar
 import "../style.scss";
 import { Link, Routes, Route } from "react-router-dom";
@@ -6,13 +6,125 @@ import Contact from "./Contact";
 import Forum from "./Forum";
 import Map from "./Map";
 import App from "../App";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Story() {
-
+    
     useEffect(() => {
         // 當路由變更時，將頁面滾動到頂部
         window.scrollTo(0, 0);
     }, [location]);
+    // 淡入動畫
+
+  const slideTopRefs = useRef([]);
+  const slideTopSRefs = useRef([]);
+  const slideRightRefs = useRef([]);
+  const slideLeftRefs = useRef([]);
+  const fadeInRefs = useRef([]);
+  
+  useEffect(() => {
+    // 只有淡入
+    fadeInRefs.current.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, x: 0 },
+        {
+          opacity: 0.6,
+          x: 0,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%",
+            end: "top 30%",
+            scrub: false,
+          },
+        }
+      );
+    });
+    // 往上淡入(慢)
+    slideTopSRefs.current.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 100 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 2.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%",
+            end: "top 30%",
+            scrub: false,
+          },
+        }
+      );
+    });
+    // 往上淡入
+    slideTopRefs.current.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 100 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            end: "top 40%",
+            scrub: false,
+          },
+        }
+      );
+    });
+
+
+    // 往右淡入
+    slideRightRefs.current.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, x: -200 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%",
+            end: "top 30%",
+            scrub: false,
+          },
+        }
+      );
+    });
+
+    // 往左淡入
+    slideLeftRefs.current.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, x: 200 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%",
+            end: "top 30%",
+            scrub: false,
+          },
+        }
+      );
+    });
+  }, []);
+
+
     return (
         <>
 
@@ -30,8 +142,8 @@ export default function Story() {
                                 </div>
                                 <div className="feature-story-container">
                                     <div className="story-title">
-                                        <img src="images/Story/Mark_blue.svg" className="blue-mark" alt="本月精選文章" />
-                                        <img src="images/Story/title-featured-story.png" className="text-title" alt="本月精選文章" />
+                                        <img src="images/Story/Mark_blue.svg" className="blue-mark" alt="本月精選文章" ref={(el) => slideTopSRefs.current.push(el)} />
+                                        <img src="images/Story/title-featured-story.png" className="text-title" alt="本月精選文章"  ref={(el) => slideRightRefs.current.push(el)} />
                                     </div>
 
                                     <div className="story-box">

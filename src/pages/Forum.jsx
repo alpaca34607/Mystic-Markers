@@ -1,5 +1,6 @@
 import React, { useState, useMemo,useEffect } from "react";
-import { useParams } from "react-router-dom"; // 確保引入 useParamsnpm 
+import { useParams } from "react-router-dom"; // 確保引入 useParams
+import Navbar from "../components/Navbar"; //Navbar
 import "../style.scss";
 import ArticleList from "../components/ArticleList"; // 文章列表
 import ArticleView from "../components/ArticleView";

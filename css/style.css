@@ -3334,84 +3334,84 @@ button:hover #custom-cursor::after {
   margin: 0 115px;
   padding: 20px;
   font-weight: 600;
-  cursor: none;
 }
 .forum-body .forum-container {
   padding: 20px 0;
 }
-.forum-body .forum-layout {
+.forum-body .forum-container .forum-layout {
   width: 100%;
   display: flex;
   gap: 20px;
   /* 網格間隙*/
 }
-.forum-body .sidebar {
+.forum-body .forum-container .forum-layout .sidebar {
   width: 20%;
 }
-.forum-body .sidebar .sidebar-content {
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.forum-body .sidebar .category-board {
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board {
   border: 1.5px solid #B3B3B3;
   border-radius: 5px;
   padding: 44px;
 }
-.forum-body .sidebar .category-list {
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.forum-body .sidebar .category-item {
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item {
   padding: 8px 15px;
   margin: 5px 0;
   color: #acff6c;
-  cursor: none;
+  cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
   border-radius: 8px;
 }
-.forum-body .sidebar .category-item div {
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item div {
   display: flex;
   justify-content: center;
 }
-.forum-body .sidebar .category-item div img {
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item div img {
   width: 24px;
   height: 24px;
 }
-.forum-body .sidebar .category-item div p {
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item div p {
   margin-left: 12px;
   font-size: 18px;
 }
-.forum-body .sidebar .category-item:hover {
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item:hover {
   background-color: #B595FF;
   color: #acff6c;
 }
-.forum-body .ad-section {
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .ad-section {
   aspect-ratio: 1/2;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.forum-body .main-content {
+.forum-body .forum-container .forum-layout .main-content {
   width: 80%;
   border: 1.5px solid #B3B3B3;
   border-radius: 5px;
   padding: 20px;
+  /* 撰寫文章  */
 }
-.forum-body .top-bar {
+.forum-body .forum-container .forum-layout .main-content .top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 30px;
 }
-.forum-body .nav-buttons {
+.forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons {
   display: flex;
   align-items: center;
   gap: 15px;
 }
-.forum-body .nav-buttons div {
+.forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons div {
   display: flex;
   align-items: center;
   padding: 5px 10px;
@@ -3419,32 +3419,31 @@ button:hover #custom-cursor::after {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.forum-body .nav-buttons div:hover {
+.forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons div:hover {
   background-color: #B595FF;
 }
-.forum-body .nav-buttons div:hover p {
+.forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons div:hover p {
   color: #2A2A2A;
 }
-.forum-body .nav-buttons div.active {
+.forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons div.active {
   background-color: #d8b4f8;
 }
-.forum-body .nav-buttons div img {
+.forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons div img {
   width: 24px;
   height: 24px;
   margin-right: 8px;
 }
-.forum-body .nav-buttons div .nav-button {
+.forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons div .nav-button {
   color: #acff6c;
   font-size: 18px;
   border: none;
   background: none;
   letter-spacing: 2.7px;
 }
-
-.right-bar {
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
   display: flex;
 }
-.right-bar .search-bar {
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar {
   display: flex;
   align-items: center;
   border: 2px solid #acff6c;
@@ -3452,7 +3451,7 @@ button:hover #custom-cursor::after {
   overflow: hidden;
   height: 40px;
 }
-.right-bar .search-bar .search-input {
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar .search-input {
   flex: 1;
   padding: 0 12px;
   border: none;
@@ -3462,10 +3461,10 @@ button:hover #custom-cursor::after {
   height: 100%;
   box-sizing: border-box;
 }
-.right-bar .search-bar .search-input::placeholder {
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar .search-input::placeholder {
   color: #a0a0a0;
 }
-.right-bar .search-bar .search-button {
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar .search-button {
   background-color: #acff6c;
   border: none;
   display: flex;
@@ -3476,57 +3475,58 @@ button:hover #custom-cursor::after {
   padding: 0 8px;
   cursor: pointer;
 }
-.right-bar .search-bar .search-button .search-icon {
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar .search-button .search-icon {
   width: 20px;
   height: 20px;
 }
-.right-bar .search-bar .search-button:hover {
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar .search-button:hover {
   background-color: #9fe75e;
 }
-
-.article-list {
+.forum-body .forum-container .forum-layout .main-content .article-list {
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
-
-.article-card {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card {
   display: flex;
   gap: 20px;
   padding: 20px;
   border-bottom: 1px solid #B3B3B3;
 }
-
-.article-content {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content {
   flex: 1;
 }
-
-.article-header {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
-
-.author-info {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header .author-info {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
-.author-avatar {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header .author-info .author-avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
 }
-
-.article-title {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left {
+  flex: 1;
+  padding-right: 20px;
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .article-title {
   color: #acff6c;
   font-size: 20px;
   margin: 10px 0;
 }
-
-.article-preview {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .article-preview {
   color: #B3B3B3;
   font-size: 14px;
   line-height: 1.5;
@@ -3538,38 +3538,392 @@ button:hover #custom-cursor::after {
   text-overflow: ellipsis;
   white-space: normal;
 }
-
-.interaction-bar {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .interaction-bar {
   display: flex;
   gap: 20px;
 }
-
-.interaction-item {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .interaction-bar .interaction-item {
   display: flex;
   align-items: center;
   gap: 5px;
   color: #FFFFFF;
 }
-
-.article-Graphics-text {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.article-Graphics-text .left {
-  flex: 1;
-  padding-right: 20px;
-}
-.article-Graphics-text .right {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .right {
   flex-shrink: 0;
   width: 85px;
 }
-.article-Graphics-text .article-image {
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .right .article-image {
   width: 100%;
   border-radius: 5px;
   object-fit: cover;
 }
+.forum-body .forum-container .forum-layout .main-content #postModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content {
+  background: #2A2A2A;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  color: #aaa;
+  cursor: pointer;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .close-btn:hover {
+  color: #000;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .user-info .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .user-info #userName {
+  font-size: 16px;
+  font-weight: bold;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #board-bar {
+  display: flex;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #board-bar #boardSelect {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #postTitle,
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #postContent {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #postTitle#postContent,
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #postContent#postContent {
+  height: 120px;
+  resize: none;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .media-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .media-buttons button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .media-buttons button:hover {
+  background-color: #0056b3;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .action-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .action-buttons button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .action-buttons button:hover {
+  background-color: #0056b3;
+}
 
+.article-view {
+  margin: 0 115px;
+  padding: 2rem;
+  color: #ffffff;
+  background-color: #2A2A2A;
+}
+.article-view .article-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 文字靠左對齊 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+.article-view .article-header .category-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* 區塊填滿寬度 */
+  align-items: center !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.article-view .article-header .category-nav .category {
+  font-size: 1rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+.article-view .article-header .category-nav .category::before {
+  content: "🗂 ";
+  margin-right: 0.5rem;
+}
+.article-view .article-header .category-nav .back-link {
+  color: #acff6c;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.article-view .article-header .category-nav .back-link::before {
+  content: "←";
+  margin-right: 0.5rem;
+}
+.article-view .article-header .category-nav .back-link:hover {
+  text-decoration: underline;
+}
+.article-view .article-header .author-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.article-view .article-header .author-info .author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+.article-view .article-header .author-info .author-details {
+  display: flex;
+  flex-direction: column;
+}
+.article-view .article-header .author-info .author-details .article-title {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: #acff6c;
+  font-weight: 600;
+}
+.article-view .article-header .author-info .author-details .meta-info {
+  display: flex;
+  gap: 1rem;
+  color: #808080;
+  font-size: 0.9rem;
+}
+.article-view .article-header .author-info .author-details .meta-info .author-name {
+  font-weight: 500;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+.article-view .article-header .author-info .author-details .meta-info .post-date {
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+}
+.article-view .article-content {
+  margin-bottom: 2rem;
+}
+.article-view .article-content .article-text {
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  white-space: pre-line;
+  color: #e0e0e0;
+}
+.article-view .article-content .article-image {
+  margin: 1rem 0;
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.article-view .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.article-view .tags .tag {
+  color: #B595FF;
+  padding: 0.5rem 0.5rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  border: 1px solid #B595FF;
+}
+.article-view .tags .tag:hover {
+  background-color: rgba(69, 41, 95, 0.4);
+}
+.article-view .interaction-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem; /* 控制每個圖標之間的間距 */
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+.article-view .interaction-bar .interaction-items {
+  display: flex;
+  gap: 1rem;
+}
+.article-view .interaction-bar .interaction-items a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* 圖標和數字的間距 */
+}
+.article-view .interaction-bar .interaction-item img {
+  width: 24px; /* 圖標大小 */
+  height: 24px; /* 圖標大小 */
+}
+.article-view .interaction-bar .interaction-item span {
+  font-size: 16px; /* 調整文字大小 */
+  color: #ffffff;
+}
+.article-view .comments-section {
+  margin-bottom: 100px;
+}
+.article-view .comments-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #acff6c;
+}
+.article-view .comments-section .comment-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+.article-view .comments-section .comment-item .comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.article-view .comments-section .comment-item .comment-content {
+  flex: 1;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  color: #808080;
+  font-size: 0.9rem;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-user {
+  font-weight: 500;
+  color: #ffffff;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-floor {
+  color: #acff6c;
+}
+.article-view .comments-section .comment-item .comment-content .comment-text {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+.article-view .comments-section .comment-item .comment-content .comment-actions .like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #808080;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+.article-view .comments-section .comment-item .comment-content .comment-actions .like-button img {
+  width: 20px;
+  height: 20px;
+}
+.article-view .comments-section .comment-item .comment-content .comment-actions .like-button.liked {
+  color: #acff6c;
+}
+.article-view .comments-section .comment-item .comment-content .comment-actions .like-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.article-view .comment-input {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1a1a1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+.article-view .comment-input.expanded {
+  padding: 1.5rem;
+}
+.article-view .comment-input .input-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+}
+.article-view .comment-input .input-container input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+.article-view .comment-input .input-container input:focus {
+  outline: none;
+  border-color: #acff6c;
+}
+.article-view .comment-input .input-container button {
+  background-color: #acff6c;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.article-view .comment-input .input-container button:hover {
+  background-color: #acff6c;
+}
+
+@media (max-width: 768px) {
+  .article-view {
+    padding: 1rem;
+  }
+  .article-view .article-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .article-view .article-header .article-title {
+    font-size: 1.5rem;
+  }
+  .article-view .interaction-bar {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .article-view .interaction-bar .share-button {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
 @media (max-width: 991px) {
   .forum-layout {
     flex-direction: column;
@@ -3590,113 +3944,11 @@ button:hover #custom-cursor::after {
     height: auto;
   }
 }
-/* 撰寫文章  */
-#postModal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#postModal .modal-content {
-  background: #2A2A2A;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: left;
-}
-#postModal .modal-content .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  color: #aaa;
-  cursor: pointer;
-}
-#postModal .modal-content .close-btn:hover {
-  color: #000;
-}
-#postModal .modal-content .user-info {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-#postModal .modal-content .user-info .avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-#postModal .modal-content .user-info #userName {
-  font-size: 16px;
-  font-weight: bold;
-}
-#postModal .modal-content #board-bar {
-  display: flex;
-}
-#postModal .modal-content #board-bar #boardSelect {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 15px;
-  font-size: 14px;
-}
-#postModal .modal-content #postTitle,
-#postModal .modal-content #postContent {
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 8px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-#postModal .modal-content #postTitle#postContent,
-#postModal .modal-content #postContent#postContent {
-  height: 120px;
-  resize: none;
-}
-#postModal .modal-content .media-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-#postModal .modal-content .media-buttons button {
-  padding: 8px 12px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-#postModal .modal-content .media-buttons button:hover {
-  background-color: #0056b3;
-}
-#postModal .modal-content .action-buttons {
-  display: flex;
-  justify-content: space-between;
-}
-#postModal .modal-content .action-buttons button {
-  padding: 8px 12px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-#postModal .modal-content .action-buttons button:hover {
-  background-color: #0056b3;
-}
-
 /* 常見問題 */
 .contact-body {
   position: relative;
   z-index: 0;
-  background: url("/images/noise.jpg") repeat;
+  background: url("images/Contact/Noise3.png") repeat;
 }
 .contact-body .faq-contact {
   padding: 40px 20px;
@@ -3860,6 +4112,272 @@ button:hover #custom-cursor::after {
   color: #2A2A2A;
 }
 
+.article-view {
+  margin: 0 115px;
+  padding: 2rem;
+  color: #ffffff;
+  background-color: #2A2A2A;
+}
+.article-view .article-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 文字靠左對齊 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+.article-view .article-header .category-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* 區塊填滿寬度 */
+  align-items: center !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.article-view .article-header .category-nav .category {
+  font-size: 1rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+.article-view .article-header .category-nav .category::before {
+  content: "🗂 ";
+  margin-right: 0.5rem;
+}
+.article-view .article-header .category-nav .back-link {
+  color: #acff6c;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.article-view .article-header .category-nav .back-link::before {
+  content: "←";
+  margin-right: 0.5rem;
+}
+.article-view .article-header .category-nav .back-link:hover {
+  text-decoration: underline;
+}
+.article-view .article-header .author-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.article-view .article-header .author-info .author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+.article-view .article-header .author-info .author-details {
+  display: flex;
+  flex-direction: column;
+}
+.article-view .article-header .author-info .author-details .article-title {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: #acff6c;
+  font-weight: 600;
+}
+.article-view .article-header .author-info .author-details .meta-info {
+  display: flex;
+  gap: 1rem;
+  color: #808080;
+  font-size: 0.9rem;
+}
+.article-view .article-header .author-info .author-details .meta-info .author-name {
+  font-weight: 500;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+.article-view .article-header .author-info .author-details .meta-info .post-date {
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+}
+.article-view .article-content {
+  margin-bottom: 2rem;
+}
+.article-view .article-content .article-text {
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  white-space: pre-line;
+  color: #e0e0e0;
+}
+.article-view .article-content .article-image {
+  margin: 1rem 0;
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.article-view .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.article-view .tags .tag {
+  color: #B595FF;
+  padding: 0.5rem 0.5rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  border: 1px solid #B595FF;
+}
+.article-view .tags .tag:hover {
+  background-color: rgba(69, 41, 95, 0.4);
+}
+.article-view .interaction-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem; /* 控制每個圖標之間的間距 */
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+.article-view .interaction-bar .interaction-items {
+  display: flex;
+  gap: 1rem;
+}
+.article-view .interaction-bar .interaction-items a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* 圖標和數字的間距 */
+}
+.article-view .interaction-bar .interaction-item img {
+  width: 24px; /* 圖標大小 */
+  height: 24px; /* 圖標大小 */
+}
+.article-view .interaction-bar .interaction-item span {
+  font-size: 16px; /* 調整文字大小 */
+  color: #ffffff;
+}
+.article-view .comments-section {
+  margin-bottom: 100px;
+}
+.article-view .comments-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #acff6c;
+}
+.article-view .comments-section .comment-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+.article-view .comments-section .comment-item .comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.article-view .comments-section .comment-item .comment-content {
+  flex: 1;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  color: #808080;
+  font-size: 0.9rem;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-user {
+  font-weight: 500;
+  color: #ffffff;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-floor {
+  color: #acff6c;
+}
+.article-view .comments-section .comment-item .comment-content .comment-text {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+.article-view .comments-section .comment-item .comment-content .comment-actions .like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #808080;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+.article-view .comments-section .comment-item .comment-content .comment-actions .like-button img {
+  width: 20px;
+  height: 20px;
+}
+.article-view .comments-section .comment-item .comment-content .comment-actions .like-button.liked {
+  color: #acff6c;
+}
+.article-view .comments-section .comment-item .comment-content .comment-actions .like-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.article-view .comment-input {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1a1a1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+.article-view .comment-input.expanded {
+  padding: 1.5rem;
+}
+.article-view .comment-input .input-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+}
+.article-view .comment-input .input-container input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+.article-view .comment-input .input-container input:focus {
+  outline: none;
+  border-color: #acff6c;
+}
+.article-view .comment-input .input-container button {
+  background-color: #acff6c;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.article-view .comment-input .input-container button:hover {
+  background-color: #acff6c;
+}
+
+@media (max-width: 768px) {
+  .article-view {
+    padding: 1rem;
+  }
+  .article-view .article-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .article-view .article-header .article-title {
+    font-size: 1.5rem;
+  }
+  .article-view .interaction-bar {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .article-view .interaction-bar .share-button {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
 footer {
   position: relative;
   display: inline-block;

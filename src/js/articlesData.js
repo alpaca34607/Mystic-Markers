@@ -173,7 +173,7 @@ const articles = [
     authorAvatar: "images/Forum/Night-Explorer.svg",
     title: "親身經歷！那晚在荒廢的工廠聽見奇怪的低語聲",
     preview: "第一次發文，想跟大家分享我上週在嘉義一間廢棄工廠探險的恐怖經歷...",
-    articleImage: "images/Forum/Night-Explorer-Articles",
+    articleImage: "images/Forum/Night-Explorer-Articles.svg",
     interactions: [
       { icon: "images/Forum/Forum_ghost.svg", 
         filledIcon: "images/Forum/solar_ghost-outline.svg",

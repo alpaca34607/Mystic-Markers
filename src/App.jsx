@@ -18,7 +18,7 @@ import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GotoTop from "./components/GotoTop";
-
+import ArticleView from "./components/ArticleView"; //文章瀏覽頁
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -328,6 +328,7 @@ const App = () => {
         <Route path="/page/:pageId" element={<Gallerypage />} />
         <Route path="/Forum" element={<Forum />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/article/:articleId" element={<ArticleView />} />
 
       </Routes>
     </>
