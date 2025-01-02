@@ -26,19 +26,19 @@ export default function Story() {
                             <section className="feature-story">
 
                                 <div>
-                                    <img src="/images/Story/tornpaper.png" alt="裝飾紙張" className="paper" />
+                                    <img src="images/Story/tornpaper.png" alt="裝飾紙張" className="paper" />
                                 </div>
                                 <div className="feature-story-container">
                                     <div className="story-title">
-                                        <img src="/images/Story/Mark_blue.svg" className="blue-mark" alt="本月精選文章" />
-                                        <img src="/images/Story/title-featured-story.png" className="text-title" alt="本月精選文章" />
+                                        <img src="images/Story/Mark_blue.svg" className="blue-mark" alt="本月精選文章" />
+                                        <img src="images/Story/title-featured-story.png" className="text-title" alt="本月精選文章" />
                                     </div>
 
                                     <div className="story-box">
                                         <div className="story">
                                             <div className="user">
                                                 <p>韭把刀 <br />2024.11.05 </p>
-                                                <figure className="user-img"><img src="/images/Story/Polygon 1.png" alt="使用者頭像" /></figure>
+                                                <figure className="user-img"><img src="images/Story/Polygon 1.png" alt="使用者頭像" /></figure>
                                             </div>
                                             <h2>那些年，一起追我們的女孩</h2>
                                             <div className="story-content">
@@ -60,12 +60,12 @@ export default function Story() {
                                             <a href="">繼續閱讀</a>
                                         </div>
                                         <div className="share-link">
-                                            <figure><img src="/images/Story/feature-story-line.png" alt="裝飾線條" /></figure>
+                                            <figure><img src="images/Story/feature-story-line.png" alt="裝飾線條" /></figure>
                                             <ul className="share-icon">
-                                                <li><a href="#"><img src="/images/Story/icon-sharelink.png" alt="Share Link" /></a></li>
-                                                <li><a href="#"><img src="/images/Story/icon-twitter.png" alt="Twitter" /></a></li>
-                                                <li><a href="#"><img src="/images/Story/icon-fb.png" alt="Facebook" /></a></li>
-                                                <li><a href="#"><img src="/images/Story/icon-line.png" alt="Line" /></a></li>
+                                                <li><a href="#"><img src="images/Story/icon-sharelink.png" alt="Share Link" /></a></li>
+                                                <li><a href="#"><img src="images/Story/icon-twitter.png" alt="Twitter" /></a></li>
+                                                <li><a href="#"><img src="images/Story/icon-fb.png" alt="Facebook" /></a></li>
+                                                <li><a href="#"><img src="images/Story/icon-line.png" alt="Line" /></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -76,9 +76,9 @@ export default function Story() {
 
                                 {/* 鄉野奇談 */}
                                 <section className="countryside-story">
-                                    <div className="countryside-story-title"><img src="/images/Story/title-countryside-story.png" alt="鄉野奇談" /></div>
-                                    <div className="flying-papersblack"><img src="/images/Story/flyingpapersblack1920-2.png" alt="飛散紙張" /></div>
-                                    <div className="tree"><img src="/images/Story/branches.png" alt="樹枝背景" /></div>
+                                    <div className="countryside-story-title"><img src="images/Story/title-countryside-story.png" alt="鄉野奇談" /></div>
+                                    <div className="flying-papersblack"><img src="images/Story/flyingpapersblack1920-2.png" alt="飛散紙張" /></div>
+                                    <div className="tree"><img src="images/Story/branches.png" alt="樹枝背景" /></div>
                                 </section>
                                 <div className="taiwan-stories">
                                     {/* 故事集 */}
@@ -176,7 +176,7 @@ export default function Story() {
                                         </ul>
                                         <small>&copy; 2024 Mystic Markers. All Rights Reserved.</small>
                                     </div>
-                                    <img src="/images/LOGO_footer.svg" alt="神秘座標" />
+                                    <img src="images/LOGO_footer.svg" alt="神秘座標" />
                                 </div>
                             </footer>
                         </main>

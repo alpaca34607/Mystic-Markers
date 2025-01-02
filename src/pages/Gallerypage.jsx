@@ -8,6 +8,8 @@ import CommentList from "../components/CommentList";
 import { presetComments, generateComments } from "../components/presetComments";
 import "../style.scss";
 
+
+const REPO_NAME = '/Mystic-Markers'
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
@@ -47,9 +49,14 @@ function GalleryPage() {
   const generateImagePaths = (pageId) => {
     const config = imageConfig[pageId];
     if (!config) return [];
+
+    // 在開發環境使用原始路徑，在生產環境添加倉庫名稱
+    const basePath = process.env.NODE_ENV === 'production'
+      ? `${REPO_NAME}/images`
+      : '/images';
     return Array.from(
       { length: config.count },
-      (_, index) => `images/${config.folder}/image${index + 1}.jpg`
+      (_, index) => `${basePath}/${config.folder}/image${index + 1}.jpg`
     );
   };
 
@@ -92,7 +99,7 @@ function GalleryPage() {
           : comment
       );
       setComments(updatedComments);
-  
+
       // 清除編輯狀態
       setIsEditing(false);
       setEditingComment(null);
@@ -103,7 +110,7 @@ function GalleryPage() {
         alert('每個用戶只能發表一則評論，請編輯現有評論');
         return;
       }
-  
+
       const newComment = {
         id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`, // 唯一 ID
         ...commentData,
@@ -112,9 +119,9 @@ function GalleryPage() {
       console.log(commentData)
     }
   };
-  
-  
-  
+
+
+
   // 處理評論編輯
   const handleEditComment = (comment) => {
     if (comment && comment.id) {
@@ -130,8 +137,8 @@ function GalleryPage() {
     setIsEditing(editing);
     setEditingComment(editing ? editingComment : null);
   };
-  
-  
+
+
 
   return (
     <div className="gallery-page">
@@ -156,7 +163,7 @@ function GalleryPage() {
           </div>
           <hr />
           <div className="comments-area">
-            <CommentForm 
+            <CommentForm
               onSubmit={handleSubmitComment}
               existingComment={editingComment}
               isEditing={isEditing}
@@ -165,8 +172,8 @@ function GalleryPage() {
               onEditComment={handleEditComment}
               rows={6}
             />
-            <CommentList 
-              comments={comments} 
+            <CommentList
+              comments={comments}
               onEditComment={handleEditComment}
             />
           </div>
