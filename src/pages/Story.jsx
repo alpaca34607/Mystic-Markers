@@ -22,6 +22,7 @@ export default function Story() {
   const slideRightRefs = useRef([]);
   const slideLeftRefs = useRef([]);
   const fadeInRefs = useRef([]);
+  const slideBottomRefs = useRef([]);
   
   useEffect(() => {
     // 只有淡入
@@ -30,7 +31,7 @@ export default function Story() {
         el,
         { opacity: 0, x: 0 },
         {
-          opacity: 0.6,
+          opacity: 1,
           x: 0,
           duration: 1.5,
           ease: "power2.out",
@@ -47,9 +48,9 @@ export default function Story() {
     slideTopSRefs.current.forEach((el) => {
       gsap.fromTo(
         el,
-        { opacity: 0, y: 100 },
+        { opacity: 0, y: 500 },
         {
-          opacity: 1,
+          opacity: 0.7,
           y: 0,
           duration: 2.5,
           ease: "power2.out",
@@ -82,16 +83,36 @@ export default function Story() {
       );
     });
 
+    // 往下淡入
+    slideBottomRefs.current.forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: -100 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 2.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 80%",
+              end: "top 30%",
+              scrub: false,
+            },
+          }
+        );
+      });
+
 
     // 往右淡入
     slideRightRefs.current.forEach((el) => {
       gsap.fromTo(
         el,
-        { opacity: 0, x: -200 },
+        { opacity: 0, x: -100 },
         {
           opacity: 1,
           x: 0,
-          duration: 1.5,
+          duration: 2.5,
           ease: "power2.out",
           scrollTrigger: {
             trigger: el,
@@ -107,11 +128,11 @@ export default function Story() {
     slideLeftRefs.current.forEach((el) => {
       gsap.fromTo(
         el,
-        { opacity: 0, x: 200 },
+        { opacity: 0, x: 100 },
         {
           opacity: 1,
           x: 0,
-          duration: 1.5,
+          duration: 2.5,
           ease: "power2.out",
           scrollTrigger: {
             trigger: el,
@@ -138,21 +159,21 @@ export default function Story() {
                             <section className="feature-story">
 
                                 <div>
-                                    <img src="images/Story/tornpaper.png" alt="裝飾紙張" className="paper" />
+                                    <img src="images/Story/tornpaper.png" alt="裝飾紙張" className="paper"  />
                                 </div>
-                                <div className="feature-story-container">
+                                <div ref={(el) =>  fadeInRefs.current.push(el)} className="feature-story-container">
                                     <div className="story-title">
-                                        <img src="images/Story/Mark_blue.svg" className="blue-mark" alt="本月精選文章" ref={(el) => slideTopSRefs.current.push(el)} />
+                                        <img src="images/Story/Mark_blue.svg" className="blue-mark" alt="本月精選文章" ref={(el) => slideBottomRefs.current.push(el)} />
                                         <img src="images/Story/title-featured-story.png" className="text-title" alt="本月精選文章"  ref={(el) => slideRightRefs.current.push(el)} />
                                     </div>
 
                                     <div className="story-box">
                                         <div className="story">
                                             <div className="user">
-                                                <p>韭把刀 <br />2024.11.05 </p>
-                                                <figure className="user-img"><img src="images/Story/Polygon 1.png" alt="使用者頭像" /></figure>
+                                                <p ref={(el) =>  fadeInRefs.current.push(el)}>韭把刀 <br />2024.11.05 </p>
+                                                <figure className="user-img" ref={(el) => slideLeftRefs.current.push(el)}><img src="images/Story/Polygon 1.png" alt="使用者頭像" /></figure>
                                             </div>
-                                            <h2>那些年，一起追我們的女孩</h2>
+                                            <h2 ref={(el) =>  fadeInRefs.current.push(el)}>那些年，一起追我們的女孩</h2>
                                             <div className="story-content">
                                                 <p className="story1">
                                                     我們高中時期那片校園，有著綠意盎然的操場、隨風搖曳的櫻花道、破舊的教室樓，和一片漆黑的後山小徑。說是漆黑，並非真的因為陰暗，實際上那裡的路燈早已壞掉，但總有人說，即使是白晝，那片小徑也讓人不寒而慄。
@@ -171,7 +192,7 @@ export default function Story() {
                                             </div>
                                             <a href="">繼續閱讀</a>
                                         </div>
-                                        <div className="share-link">
+                                        <div ref={(el) => slideTopRefs.current.push(el)} className="share-link">
                                             <figure><img src="images/Story/feature-story-line.png" alt="裝飾線條" /></figure>
                                             <ul className="share-icon">
                                                 <li><a href="#"><img src="images/Story/icon-sharelink.png" alt="Share Link" /></a></li>
@@ -188,17 +209,17 @@ export default function Story() {
 
                                 {/* 鄉野奇談 */}
                                 <section className="countryside-story">
-                                    <div className="countryside-story-title"><img src="images/Story/title-countryside-story.png" alt="鄉野奇談" /></div>
-                                    <div className="flying-papersblack"><img src="images/Story/flyingpapersblack1920-2.png" alt="飛散紙張" /></div>
-                                    <div className="tree"><img src="images/Story/branches.png" alt="樹枝背景" /></div>
+                                    <div ref={(el) => slideTopRefs.current.push(el)}className="countryside-story-title"><img src="images/Story/title-countryside-story.png" alt="鄉野奇談" /></div>
+                                    <div className="flying-papersblack"><img src="images/Story/flyingpapersblack1920-2.png" alt="飛散紙張" ref={(el) => slideTopSRefs.current.push(el)}/></div>
+                                    <div ref={(el) =>  fadeInRefs.current.push(el)} className="tree"><img src="images/Story/branches.png" alt="樹枝背景" /></div>
                                 </section>
                                 <div className="taiwan-stories">
                                     {/* 故事集 */}
                                     <section className="story-grid">
 
                                         {/* 紅衣小女孩 */}
-                                        <article className="story-item">
-                                            <div className="red-girl-container">
+                                        <article className="story-item" ref={(el) =>  fadeInRefs.current.push(el)}>
+                                            <div className="red-girl-container"ref={(el) => slideRightRefs.current.push(el)}>
                                                 <div className="red-girl-text">
                                                     <div className="red-girl-title">
                                                         <h3>紅<span>衣小女孩</span></h3>
@@ -216,8 +237,8 @@ export default function Story() {
 
                                     {/*   黃色小飛俠 */}
                                     <section className="story-grid">
-                                        <article className="story-item2">
-                                            <div className="yellow-peter-pan-container">
+                                        <article className="story-item2" ref={(el) =>  fadeInRefs.current.push(el)}>
+                                            <div className="yellow-peter-pan-container"ref={(el) => slideLeftRefs.current.push(el)}>
                                                 <div className="yellow-peter-pan">
                                                     <div className="yellow-peter-pan-title">
                                                         <h3>黃<span>色小飛俠</span></h3>
@@ -235,8 +256,8 @@ export default function Story() {
 
                                     {/* 宮燈姐姐  */}
                                     <section className="story-grid">
-                                        <article className="story-item3">
-                                            <div className="lantern-sister-container">
+                                        <article className="story-item3" ref={(el) =>  fadeInRefs.current.push(el)}>
+                                            <div className="lantern-sister-container"ref={(el) => slideRightRefs.current.push(el)}>
                                                 <div className="lantern-sister">
                                                     <div className="lantern-sister-title">
                                                         <h3>宮<span>燈姐姐</span> </h3>
@@ -252,8 +273,8 @@ export default function Story() {
 
                                     {/* 山羊人 */}
                                     <section className="story-grid">
-                                        <article className="story-item4">
-                                            <div className="goat-man-container">
+                                        <article className="story-item4" ref={(el) =>  fadeInRefs.current.push(el)}>
+                                            <div className="goat-man-container"ref={(el) => slideLeftRefs.current.push(el)}>
                                                 <div className="goat-man-title">
                                                     <h3>山<span>羊人</span> </h3>
                                                     <div className="goat-man-text">

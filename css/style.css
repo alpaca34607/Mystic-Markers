@@ -1473,7 +1473,9 @@ a {
   background-color: #B595FF;
   color: #2A2A2A;
 }
-.map .list-panel .marker-list .list-area .list-section .marker-list-item:hover .star-size, .map .list-panel .marker-list .list-area .list-section .marker-list-item:hover path, .map .list-panel .marker-list .list-area .list-section .marker-list-item:hover svg {
+.map .list-panel .marker-list .list-area .list-section .marker-list-item:hover .star-size,
+.map .list-panel .marker-list .list-area .list-section .marker-list-item:hover path,
+.map .list-panel .marker-list .list-area .list-section .marker-list-item:hover svg {
   color: #2A2A2A;
   filter: brightness(0);
 }
@@ -3335,7 +3337,7 @@ button:hover #custom-cursor::after {
   background-color: #2A2A2A;
   color: #FFFFFF;
   margin: 0 115px;
-  padding: 20px;
+  padding: 180px 110px;
   font-weight: 600;
 }
 .forum-body .forum-container {
@@ -3388,6 +3390,16 @@ button:hover #custom-cursor::after {
 .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item:hover {
   background-color: #B595FF;
   color: #acff6c;
+}
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item:hover img {
+  filter: brightness(0);
+}
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item.active {
+  background-color: #B595FF;
+  color: #2A2A2A;
+}
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item.active img {
+  filter: brightness(0);
 }
 .forum-body .forum-container .forum-layout .sidebar .sidebar-content .ad-section {
   aspect-ratio: 1/2;
@@ -3670,14 +3682,16 @@ button:hover #custom-cursor::after {
 .article-view .article-header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 文字靠左對齊 */
+  align-items: flex-start;
+  /* 文字靠左對齊 */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 1rem;
 }
 .article-view .article-header .category-nav {
   display: flex;
   justify-content: space-between;
-  width: 100%; /* 區塊填滿寬度 */
+  width: 100%;
+  /* 區塊填滿寬度 */
   align-items: center !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -3778,7 +3792,8 @@ button:hover #custom-cursor::after {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 1rem; /* 控制每個圖標之間的間距 */
+  gap: 1rem;
+  /* 控制每個圖標之間的間距 */
   padding: 1rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 1rem;
@@ -3790,14 +3805,18 @@ button:hover #custom-cursor::after {
 .article-view .interaction-bar .interaction-items a {
   display: flex;
   align-items: center;
-  gap: 0.6rem; /* 圖標和數字的間距 */
+  gap: 0.6rem;
+  /* 圖標和數字的間距 */
 }
 .article-view .interaction-bar .interaction-item img {
-  width: 24px; /* 圖標大小 */
-  height: 24px; /* 圖標大小 */
+  width: 24px;
+  /* 圖標大小 */
+  height: 24px;
+  /* 圖標大小 */
 }
 .article-view .interaction-bar .interaction-item span {
-  font-size: 16px; /* 調整文字大小 */
+  font-size: 16px;
+  /* 調整文字大小 */
   color: #ffffff;
 }
 .article-view .comments-section {
@@ -3949,12 +3968,14 @@ button:hover #custom-cursor::after {
 }
 /* 常見問題 */
 .contact-body {
+  padding-top: 180px;
   position: relative;
   z-index: 0;
   background: url("images/Contact/Noise3.png") repeat;
+  overflow: hidden;
 }
 .contact-body .faq-contact {
-  padding: 40px 20px;
+  padding: 100px 20px;
   /* FAQ Section */
   /* 聯絡我們 */
 }
@@ -4024,10 +4045,11 @@ button:hover #custom-cursor::after {
 }
 .contact-body .faq-contact .contact-section {
   position: relative;
+  margin-top: 100px;
+  bottom: 0%;
   padding: 50px 15px;
-  overflow: hidden;
+  overflow: visible;
   /* 防止元素影響滾動條 */
-  min-height: 100vh;
   /* 確保佔滿可視區高度 */
   display: flex;
   flex-direction: column;
@@ -4043,7 +4065,7 @@ button:hover #custom-cursor::after {
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-bubble {
   position: absolute;
-  top: 50px;
+  top: 145px;
   left: 200px;
   /* 微調位置 */
   z-index: 3;
@@ -4073,7 +4095,7 @@ button:hover #custom-cursor::after {
 .contact-body .faq-contact .contact-section .contact-content .person-image {
   position: absolute;
   /* 絕對定位 */
-  bottom: -90px;
+  bottom: -80%;
   /* 設定到 footer 下方一層 */
   left: 0%;
   z-index: 1;
@@ -4084,7 +4106,10 @@ button:hover #custom-cursor::after {
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-form {
   flex: 1;
-  max-width: 50%;
+  padding: 0 30px;
+  max-width: 40%;
+  justify-content: center;
+  align-items: center;
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-form p {
   margin-bottom: 5px;
@@ -4094,7 +4119,7 @@ button:hover #custom-cursor::after {
 .contact-body .faq-contact .contact-section .contact-content .contact-form textarea {
   width: 100%;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 10px 0;
   background-color: #2A2A2A;
   color: #FFFFFF;
   border: 1px solid #acff6c;
@@ -4102,6 +4127,7 @@ button:hover #custom-cursor::after {
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-form button {
   width: 100%;
+  margin-top: 40px;
   padding: 10px;
   background-color: #acff6c;
   color: #2A2A2A;
@@ -4124,14 +4150,16 @@ button:hover #custom-cursor::after {
 .article-view .article-header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 文字靠左對齊 */
+  align-items: flex-start;
+  /* 文字靠左對齊 */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 1rem;
 }
 .article-view .article-header .category-nav {
   display: flex;
   justify-content: space-between;
-  width: 100%; /* 區塊填滿寬度 */
+  width: 100%;
+  /* 區塊填滿寬度 */
   align-items: center !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -4232,7 +4260,8 @@ button:hover #custom-cursor::after {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 1rem; /* 控制每個圖標之間的間距 */
+  gap: 1rem;
+  /* 控制每個圖標之間的間距 */
   padding: 1rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 1rem;
@@ -4244,14 +4273,18 @@ button:hover #custom-cursor::after {
 .article-view .interaction-bar .interaction-items a {
   display: flex;
   align-items: center;
-  gap: 0.6rem; /* 圖標和數字的間距 */
+  gap: 0.6rem;
+  /* 圖標和數字的間距 */
 }
 .article-view .interaction-bar .interaction-item img {
-  width: 24px; /* 圖標大小 */
-  height: 24px; /* 圖標大小 */
+  width: 24px;
+  /* 圖標大小 */
+  height: 24px;
+  /* 圖標大小 */
 }
 .article-view .interaction-bar .interaction-item span {
-  font-size: 16px; /* 調整文字大小 */
+  font-size: 16px;
+  /* 調整文字大小 */
   color: #ffffff;
 }
 .article-view .comments-section {

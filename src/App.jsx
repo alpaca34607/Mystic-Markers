@@ -35,9 +35,32 @@ const App = () => {
   const slideRightRefs = useRef([]);
   const slideLeftRefs = useRef([]);
   const fadeInRefs = useRef([]);
+  const fadeInaRefs = useRef([]);
+
+  
   
   useEffect(() => {
-    // 只有淡入
+
+     // 只有淡入
+     fadeInaRefs.current.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, x: 0 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%",
+            end: "top 30%",
+            scrub: false,
+          },
+        }
+      );
+    });
+    // 半透明淡入
     fadeInRefs.current.forEach((el) => {
       gsap.fromTo(
         el,
@@ -147,7 +170,7 @@ const App = () => {
           path="/"
           element={
             <main className="home">
-              <section className="banner">
+              <section ref={(el) =>  fadeInaRefs.current.push(el)} className="banner">
                 <div className="fog-area-p">
                   <Fog className="purpleFog" />
                 </div>

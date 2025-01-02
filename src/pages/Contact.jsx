@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import Story from "./Story";
 import Map from "./Map";
 import Forum from "./Forum";
@@ -7,6 +7,12 @@ import "../style.scss";
 import App from "../App";
 
 const Contact = () => {
+   
+      useEffect(() => {
+          // 當路由變更時，將頁面滾動到頂部
+          window.scrollTo(0, 0);
+      }, [location]);
+      // 淡入動畫
   const [currentTab, setCurrentTab] = useState("account");
 
   const faqContent = {
