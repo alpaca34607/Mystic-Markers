@@ -46,7 +46,7 @@ function StarRating({ rating, onRatingChange = null }) {
           star = <FaRegStarHalfStroke fill="#B595FF" strokeWidth={0} className="star-size" />;
         } else {
           // 空心星星
-          star = <Star strokeWidth={1} className="star-size emty-star" />;
+          star = <Star strokeWidth={1} fill="none" className="star-size empty-star" />;
         }
 
         return (

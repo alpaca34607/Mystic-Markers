@@ -1,10 +1,18 @@
 import { generateComments } from './presetComments';
+import { presetComments } from './presetComments';
 
 // 為每個預設標記生成隨機評論和平均評分
 const generateMarkerData = (markerId, baseMarker) => {
-  // 生成 5-15 個隨機評論
-  const commentCount = Math.floor(Math.random() * 11) + 5;
-  const comments = generateComments(markerId, commentCount);
+  // 如果有 pageId，使用對應的預設評論
+  let comments;
+  if (baseMarker.pageId) {
+    const pageKey = `page${baseMarker.pageId}`;
+    comments = presetComments[pageKey] || [];
+  } else {
+    // 如果沒有 pageId，則生成隨機評論
+    const commentCount = Math.floor(Math.random() * 11) + 5;
+    comments = generateComments(markerId, commentCount);
+  }
 
   // 計算平均評分
   const averageRating = comments.length > 0
@@ -17,7 +25,6 @@ const generateMarkerData = (markerId, baseMarker) => {
     rating: averageRating
   };
 };
-
 // 預設標記點資料
 const defaultMarkers = [
 
@@ -32,10 +39,12 @@ const defaultMarkers = [
     userId: "system",
     userName: "風花七月",
     userAvatar: "/images/Avatars/avatar (20).jpg",
+    pageId: '1', // 對應到 gallery page 的 ID
+   
   }),
   generateMarkerData("xinhai-tunnel", {
     id: "xinhai-tunnel",
-    position: [25.004379, 121.541615],
+    position: [25.011614093392986, 121.55546043277306],
     title: "辛亥隧道",
     city: "台北市",
     district: "大安區",
@@ -44,22 +53,25 @@ const defaultMarkers = [
     userId: "system",
     userName: "王招弟",
     userAvatar: "/images/Avatars/avatar (43).jpg",
+    pageId: '2', // 對應到 gallery page 的 ID
   }),
   generateMarkerData("lin-kai-jun-mansion", {
     id: "lin-kai-jun-mansion",
-    position: [22.627278, 120.301435],
+    position: [25.130059311815405, 121.74211446952336],
     title: "林開郡洋樓",
-    city: "高雄市",
-    district: "鳳山區",
+    city: "基隆市",
+    district: "仁愛區",
     coverPhoto: "/images/default-location.jpg",
     description: "古老的日治時期建築，據說晚上常有異象出現。",
     userId: "system",
     userName: "路奇雅",
     userAvatar: "/images/Avatars/avatar (36).jpg",
+    pageId: '3',
+  
   }),
   generateMarkerData("xining-residential-complex", {
     id: "xining-residential-complex",
-    position: [25.048019, 121.506609],
+    position: [25.048141988825822, 121.50671607830216],
     title: "西寧國宅",
     city: "台北市",
     district: "萬華區",
@@ -68,6 +80,8 @@ const defaultMarkers = [
     userId: "system",
     userName: "迷糊小道士",
     userAvatar: "/images/Avatars/avatar (3).jpg",
+    pageId: '4',
+   
   }),
   generateMarkerData("keelung-haunted-hospital", {
     id: "keelung-haunted-hospital",
@@ -80,6 +94,8 @@ const defaultMarkers = [
     userId: "system",
     userName: "雨哥講鬼話",
     userAvatar: "/images/Avatars/avatar (5).jpg",
+    pageId: '4',
+   
   }),
   generateMarkerData("ntou-dorm", {
     id: "ntou-dorm",
@@ -192,7 +208,7 @@ const defaultMarkers = [
     }),
     generateMarkerData("kaohsiung-haunted-ktv", {
       id: "kaohsiung-haunted-ktv",
-      position: [22.627278, 120.301435],
+      position: [22.632683676918454, 120.29478030250726],
       title: "高雄鬧鬼KTV",
       city: "高雄市",
       district: "前金區",

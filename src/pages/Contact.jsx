@@ -74,7 +74,6 @@ const Contact = () => {
       <Routes>
         <Route path="/" element={
         <main className="contact-body">
-        <Navbar />
         <div className="faq-contact">
           {/* FAQ Section */}
           <div className="faq-section">

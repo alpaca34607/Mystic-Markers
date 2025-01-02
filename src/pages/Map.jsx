@@ -24,6 +24,7 @@ import taiwanRegions from "../components/taiwanRegions";
 import axios from 'axios';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { LogIn } from "lucide-react";
+import { presetComments } from '../components/presetComments';
 const DEFAULT_COVER_PHOTO = '/images/default-location.jpg';
 const DEFAULT_AVATAR = '/images/Avatars/avatar (1).jpg';
 
@@ -138,12 +139,30 @@ export default function Map() {
   const mapboxAccessToken = 'pk.eyJ1IjoiYWxpc29uMzQ2MDciLCJhIjoiY201ODlqM2U5M2o2MDJscHpiMWF6NzczdSJ9.D76vzn6QIzDViT9R7nVPVA';
   const mapboxStyleURL = `https://api.mapbox.com/styles/v1/alison34607/cm589twvs00nz01sp790tayrs/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`;
   const [isAddingLocation, setIsAddingLocation] = useState(false);
-  
+
   useEffect(() => {
     // 當路由變更時，將頁面滾動到頂部
     window.scrollTo(0, 0);
   }, [location]);
 
+
+
+  useEffect(() => {
+    // 初始化標記時加載評論
+    const markersWithComments = defaultMarkers.map(marker => {
+      const pageComments = presetComments[`page${marker.pageId}`] || [];
+      return {
+        ...marker,
+        comments: pageComments
+      };
+    });
+    
+    setMarkers(markersWithComments);
+    setDisplayedMarkers(markersWithComments);
+  }, []);
+
+
+  
 
   const SearchControl = () => {
     const map = useMap();
@@ -503,6 +522,12 @@ export default function Map() {
     };
   }, [isAddingLocation]);
 
+
+  // 新增圖片檔案名稱
+
+  const [fileName, setFileName] = useState("未選擇文件");
+
+
   // 處理縣市選擇
   const handleCityChange = (e) => {
     const city = e.target.value;
@@ -566,10 +591,22 @@ export default function Map() {
     console.log('showFavorites changed:', showFavorites);
   }, [showFavorites]);
 
+  
+  const [currentTheme, setCurrentTheme] = useState('default');
+  const handleThemeToggle = (theme) => {
+    setCurrentTheme(theme);
+    if (theme === 'default') {
+      setMarkers(defaultMarkers);
+      setDisplayedMarkers(defaultMarkers);
+    } else {
+      setMarkers(templeMarkers);
+      setDisplayedMarkers(templetMarkers);
+    }
+  };
   return (
     <>
       <Cursor isAddingLocation={isAddingLocation} />
-      <Navbar />
+     
       {showAlert && (
         <CustomAlert
           message={alertMessage}
@@ -640,18 +677,34 @@ export default function Map() {
                                   });
                                 }}
                               />
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => {
-                                  if (e.target.files[0]) {
-                                    setEditingMarker({
-                                      ...editingMarker,
-                                      coverPhoto: URL.createObjectURL(e.target.files[0])
-                                    });
-                                  }
-                                }}
-                              />
+                              <div className="file-upload">
+                                <input
+                                  id="file-upload"
+                                  type="file"
+                                  accept="image/*"
+                                  style={{ display: 'none' }}
+                                  onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                      // 更新檔案名稱狀態
+                                      setFileName(file.name);
+                                      // 更新編輯標記的封面照片
+                                      setEditingMarker({
+                                        ...editingMarker,
+                                        coverPhoto: URL.createObjectURL(file),
+                                      });
+                                    } else {
+                                      // 如果未選擇檔案，重置檔案名稱
+                                      setFileName('未選擇檔案');
+                                    }
+                                  }}
+                                />
+                                <label htmlFor="file-upload" className="upload-button">
+                                  上傳圖片
+                                </label>
+                                {/* 顯示所選檔案的名稱 */}
+                                <p>{fileName}</p>
+                              </div>
                               <div className="button-group">
                                 <button onClick={() => handleMarkerSubmit(marker.id)}>
                                   新增標記
@@ -846,15 +899,27 @@ export default function Map() {
                                   onClick={(e) => handleMarkerClick(marker, e)}
                                   className="marker-list-item"
                                 >
-                                  <div className="adress"> {isFavorite(marker.id) ? (
-                                    <BsBookmarkFill
-                                      className="bookmark-icon"
-                                      onClick={(e) => handleRemoveFavorite(e, marker)}
-                                    />
-                                  ) : (
-                                    <FaLocationDot className="location-icon" />
-                                  )}
-                                    {marker.title} - {marker.city}{marker.district}</div>
+                                  <div className="adress-group">
+                                    <div className="adress"> {isFavorite(marker.id) ? (
+                                      <BsBookmarkFill
+                                        className="bookmark-icon"
+                                        onClick={(e) => handleRemoveFavorite(e, marker)}
+                                      />
+                                    ) : (
+                                      <FaLocationDot className="location-icon" />
+                                    )}
+                                      {marker.title} - {marker.city}{marker.district}
+                                    </div>
+                                    <div className="marker-list-rating">
+                                      <StarRating
+                                        rating={
+                                          marker.comments.reduce((acc, comment) => acc + comment.rating, 0) /
+                                          marker.comments.length
+                                        }
+                                      />
+                                      <span className="comments-count">({marker.comments?.length || 0})</span>
+                                    </div>
+                                  </div>
 
                                   <hr />
                                 </li>
@@ -917,28 +982,28 @@ export default function Map() {
                   </div>
                 </div>
               </section>
-                 <footer>
-                        <div className="content">
-                          <div className="left">
-                            <ul className="link">
-                              <li>
-                                <Link to="/">首頁</Link>
-                              </li>
-                              <li>
-                                <Link to="/Story">怪奇博物館</Link>
-                              </li>
-                              <li>
-                                <Link to="/Map">靈異導航</Link>
-                              </li>
-                              <li>
-                                <Link to="/Forum">鬼影探索</Link>
-                              </li>
-                            </ul>
-                            <small>&copy; 2024 Mystic Markers. All Rights Reserved.</small>
-                          </div>
-                          <img src="/images/LOGO_footer.svg" alt="神秘座標" />
-                        </div>
-                      </footer>
+              <footer>
+                <div className="content">
+                  <div className="left">
+                    <ul className="link">
+                      <li>
+                        <Link to="/">首頁</Link>
+                      </li>
+                      <li>
+                        <Link to="/Story">怪奇博物館</Link>
+                      </li>
+                      <li>
+                        <Link to="/Map">靈異導航</Link>
+                      </li>
+                      <li>
+                        <Link to="/Forum">鬼影探索</Link>
+                      </li>
+                    </ul>
+                    <small>&copy; 2024 Mystic Markers. All Rights Reserved.</small>
+                  </div>
+                  <img src="/images/LOGO_footer.svg" alt="神秘座標" />
+                </div>
+              </footer>
 
 
             </main>

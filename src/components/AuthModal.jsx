@@ -47,6 +47,11 @@ const AuthModal = ({ isOpen, onClose, initialView }) => {
   };
   // 登入
   const handleLogin = () => {
+    if (!formData.email.trim() || !formData.password.trim()) {
+      alert("請輸入帳號和密碼！");
+      return;
+    }
+  
     const storedData = JSON.parse(localStorage.getItem("registeredData"));
     if (
       storedData &&

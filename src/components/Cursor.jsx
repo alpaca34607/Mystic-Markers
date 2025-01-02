@@ -6,12 +6,19 @@ const Cursor = ({ isAddingLocation }) => {
   const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
+    // 根據 isAddingLocation 狀態控制原始游標的顯示
+    if (isAddingLocation) {
+      document.body.style.cursor = 'none';
+    } else {
+      document.body.style.cursor = 'default';
+    }
+
     const handleMouseMove = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });
     };
 
     const handleMouseEnter = () => {
-      if (!isAddingLocation) {  // 只在非新增位置模式時改變游標
+      if (!isAddingLocation) {
         setHovering(true);
       }
     };
@@ -36,6 +43,8 @@ const Cursor = ({ isAddingLocation }) => {
         element.removeEventListener('mouseenter', handleMouseEnter);
         element.removeEventListener('mouseleave', handleMouseLeave);
       });
+      // 清理時恢復原始游標
+      document.body.style.cursor = 'default';
     };
   }, [isAddingLocation]); 
 
@@ -44,8 +53,8 @@ const Cursor = ({ isAddingLocation }) => {
       id="custom-cursor"
       className={`cursor ${hovering ? 'hovered' : ''} ${isAddingLocation ? 'adding-location' : ''}`}
       style={{ 
-        left: `${(position.x)+(0)}px`, 
-        top: `${(position.y)+(0)}px`,
+        left: `${position.x + (isAddingLocation ? -20 : 0)}px`,
+        top: `${position.y + (isAddingLocation ? -20 : 0)}px`,
       }}
     ></div>
   );
