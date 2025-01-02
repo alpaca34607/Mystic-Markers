@@ -18,15 +18,12 @@ import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GotoTop from "./components/GotoTop";
-import config from './config';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
-  const getImagePath = (path) => {
-    return `${config.baseUrl}/images/${path}`;
-  };
-  
+
   useEffect(() => {
     // 當路由變更時，將頁面滾動到頂部
     window.scrollTo(0, 0);
@@ -168,8 +165,8 @@ const App = () => {
                   className="logoXL"
                 >
                   <Link to="/">
-                    <img id="mark" src={getImagePath('LOGO.svg')} alt="神秘座標" />
-                    <img id="logoB" src={getImagePath('logo_XL.svg')} alt="神秘座標" />
+                    <img id="mark" src="images/LOGO.svg" alt="神秘座標" />
+                    <img id="logoB" src="images/logo_XL.svg" alt="神秘座標" />
                     <div className="p">
                       <GlowingText text="MYSTIC MARKERS" />
                     </div>
@@ -182,7 +179,7 @@ const App = () => {
                     <figure>
                       {" "}
                       <img
-                        src={getImagePath('door.png')}
+                        src="images/door.png"
                         ref={(el) => slideRightRefs.current.push(el)}
                         alt="未知之門"
                       />
@@ -192,7 +189,7 @@ const App = () => {
                       ref={(el) => slideLeftRefs.current.push(el)}
                     >
                       <img
-                        src={getImagePath('intro_Q.svg')}
+                        src="images/intro_Q.svg"
                         alt="準備好要探索未知了嗎?"
                       />
                       <p>
@@ -210,13 +207,13 @@ const App = () => {
                     </div>
                   </div>
                   <img
-                    src={getImagePath('intro1_purplefog.png')}
+                    src="images/intro1_purplefog.png"
                     className="intro1fog-P"
                     ref={(el) => fadeInRefs.current.push(el)}
                     alt="紫色裝飾霧"
                   />
                   <img
-                    src={getImagePath('intro1_greenfog.png')}
+                    src="images/intro1_greenfog.png"
                     className="intro1fog-G"
                     ref={(el) => fadeInRefs.current.push(el)}
                     alt="綠色裝飾霧"
@@ -312,7 +309,7 @@ const App = () => {
                         <Link to="/Forum">鬼影探索</Link>
                       </li>
                       <li>
-                        <Link to="/Contact">解謎之門</Link>
+                        <Link to="/Contact">聯絡我們</Link>
                       </li>
                     </ul>
                     <small>
