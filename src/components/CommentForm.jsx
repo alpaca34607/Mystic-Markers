@@ -53,14 +53,16 @@ function CommentForm({ onSubmit, existingComment, isEditing, onCancelEdit, comme
       setShowAlert(true);
       return;
     }
-
+    const basePath = process.env.NODE_ENV === 'production' 
+    ? '/Mystic-Markers' // GitHub Pages 專案的路徑
+    : ''; // 本地環境根路徑
     onSubmit({
       rating,
       text: comment,
       timestamp: new Date(),
       userId: 'user123',
       userName: '訪客',
-      userAvatar: 'images/Avatars/avatar%20(1).jpg',
+      userAvatar: `${basePath}/images/Avatars/avatar%20(1).jpg`,
       isEdited: isEditing
     });
 
