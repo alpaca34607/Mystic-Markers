@@ -2111,7 +2111,7 @@ a {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("./images/noise.jpg") repeat;
+  background: url("/images/noise.jpg") repeat;
   background-size: auto;
   background-blend-mode: normal;
   z-index: 6;
@@ -2120,7 +2120,7 @@ a {
 
   .banner {
     position: relative;
-    background: url("./images/home_banner.png");
+    background: url("/images/home_banner.png");
     background-size: cover;
     background-position: right top;
     background-repeat: no-repeat;
@@ -2152,13 +2152,13 @@ a {
       z-index: 0;
       pointer-events: none;
       /* 使用遮罩限制霧的區域 */
-      mask-image: url("./images/fog-mask1.png");
+      mask-image: url("/images/fog-mask1.png");
       mask-repeat: no-repeat;
       mask-size: 100% auto;
       mask-position: top 0;
 
       /* Webkit 瀏覽器支持 */
-      -webkit-mask-image: url("./images/fog-mask1.png");
+      -webkit-mask-image: url("/images/fog-mask1.png");
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-size: cover;
 
@@ -2196,13 +2196,13 @@ a {
       z-index: -1;
       pointer-events: none;
       /* 使用遮罩限制霧的區域 */
-      mask-image: url("./images/fog-mask2.png");
+      mask-image: url("/images/fog-mask2.png");
       mask-repeat: no-repeat;
       mask-size: auto;
       mask-position: top 0;
 
       /* Webkit 瀏覽器支持 */
-      -webkit-mask-image: url("./images/fog-mask2.png");
+      -webkit-mask-image: url("/images/fog-mask2.png");
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-size: cover;
       -webkit-mask-position: top 0;
@@ -2626,7 +2626,7 @@ a {
     width: 32px;
     height: 32px;
     border: none; // 移除原有的邊框
-    background-image: url('./images/Vector.png');
+    background-image: url('/images/Vector.png');
     background-size: contain;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%);
