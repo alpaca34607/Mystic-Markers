@@ -29,6 +29,7 @@ import { presetComments } from '../components/presetComments';
 const DEFAULT_COVER_PHOTO = 'images/default-location.jpg';
 const DEFAULT_AVATAR = 'images/Avatars/avatar (1).jpg';
 import templeMarkers from "../components/templeMarkers";
+import Notice from '../components/Notice';
 
 
 // 預設搜尋結果標記
@@ -209,18 +210,7 @@ export default function Map() {
   // 鼠標狀態管理
   const handleToggleLocation = (e) => {
     e.stopPropagation();
-
-    // 切換新增標記狀態
-    const newIsAddingLocation = !isAddingLocation;
-    setIsAddingLocation(newIsAddingLocation);
-
-    // 根據新狀態同步顯示或關閉提示
-    if (newIsAddingLocation) {
-      setAlertMessage('請於地圖範圍內雙擊新增標記');
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
+    setIsAddingLocation(!isAddingLocation);
   };
   // 點擊地圖外區域時關閉新增模式和提示
   useEffect(() => {
@@ -708,12 +698,9 @@ export default function Map() {
           element={
             <main className="map">
               <Cursor isAddingLocation={isAddingLocation} />
-              {showAlert && (
-                <CustomAlert
-                  message={alertMessage}
-                  onClose={() => setShowAlert(false)}
-                />
-              )}
+
+
+
               <div className="map-content">
                 <div className="map-left">
                   <div className="btn-group">
@@ -928,6 +915,12 @@ export default function Map() {
 
                 <div className="list-panel" >
                   <div className="control-panel">
+                    <div className="message">
+                      <Notice
+                        isVisible={isAddingLocation}
+                        message="在地圖內雙擊即可新增座標"
+                      />
+                    </div>
                     <div className="icon-btn">
                       <button
                         onClick={(e) => {

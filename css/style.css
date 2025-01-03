@@ -730,18 +730,18 @@ a {
   cursor: url("/images/Map/Vector.png"), auto !important;
 }
 .map .map-content {
-  display: flex;
+  display: inline-flex;
   padding: 2.5% 0;
   justify-content: center;
+  padding-top: 160px;
   width: 100%;
   cursor: none;
-  gap: 20px;
+  gap: 80px;
 }
 .map .map-content .map-left {
   width: 50%;
   display: flex;
   flex-direction: row;
-  margin: 100px 30px 0 0;
 }
 .map .map-content .map-left .btn-group {
   display: flex;
@@ -841,7 +841,7 @@ a {
 .map .map-content .map-left .map-wrapper .leaflet-container .leaflet-geosearch-bar {
   position: absolute;
   top: 20px !important;
-  left: 20% !important;
+  left: 50% !important;
   transform: translateX(-50%);
   width: 300px;
   z-index: 500;
@@ -1464,7 +1464,6 @@ a {
 .map .list-panel {
   display: flex;
   flex-direction: column;
-  margin: 100px 0 0 30px;
   width: 30%;
   height: 78vh;
   overflow: hidden;
@@ -1473,13 +1472,48 @@ a {
 .map .list-panel .control-panel {
   width: 100%;
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   flex-direction: row;
-  justify-content: flex-end;
+  height: 45px;
+}
+.map .list-panel .control-panel .message {
+  width: calc(100% - 220px);
+}
+.map .list-panel .control-panel .message .notice {
+  display: inline-flex;
+  width: 100%;
+  background-color: #acff6c;
+  border-radius: 5px;
+  align-items: center;
+  padding: 6px 8px;
+  width: max-content;
+}
+.map .list-panel .control-panel .message .notice p {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  color: #2A2A2A;
+}
+.map .list-panel .control-panel .message .notice .notice-icon {
+  display: inline-flex;
+}
+.map .list-panel .control-panel .message .notice .notice-icon svg {
+  margin-right: 8px;
+  color: #2A2A2A;
+  width: 24px;
+  height: 24px;
 }
 .map .list-panel .control-panel .icon-btn {
-  display: flex;
+  margin-left: 8px;
+  display: inline-flex;
+  align-self: flex-end;
+  text-align: center;
 }
 .map .list-panel .control-panel .icon-btn .toggle-favorites svg {
+  margin-right: 3px;
   font-size: 20px;
   stroke-width: 0.8px;
 }
@@ -1491,11 +1525,16 @@ a {
   stroke-width: 0;
 }
 .map .list-panel .control-panel .icon-btn button {
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
   padding: 0 8px;
+  height: 24px;
   overflow: hidden;
   color: #B595FF;
   background: none;

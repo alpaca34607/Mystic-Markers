@@ -1,6 +1,6 @@
 @use "reset";
-@use "variables" as *;
-@use "function" as *;
+@use "variables"as *;
+@use "function"as *;
 @use "keyframes";
 
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Handjet:wght@100..900&family=Mina&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Zen+Maru+Gothic&display=swap");
@@ -573,6 +573,7 @@ a {
     cursor: pointer;
   }
 }
+
 .map {
   width: 100%;
   overflow: hidden;
@@ -610,19 +611,20 @@ a {
 
 
   .map-content {
-    display: flex;
+    display: inline-flex;
     padding: 2.5% 0;
     justify-content: center;
+    padding-top: 160px;
     width: 100%;
     cursor: none;
-    gap: 20px;
+    gap: 80px;
 
 
     .map-left {
       width: 50%;
       display: flex;
       flex-direction: row;
-      margin: 100px 30px 0 0;
+
 
       .btn-group {
         display: flex;
@@ -730,7 +732,7 @@ a {
           .leaflet-geosearch-bar {
             position: absolute;
             top: 20px !important;
-            left: 20% !important;
+            left: 50% !important;
             transform: translateX(-50%);
             width: 300px;
             z-index: 500;
@@ -807,6 +809,7 @@ a {
               overflow: hidden;
               box-sizing: border-box;
               background-color: $light;
+
               .alert-message {
                 box-sizing: border-box;
                 @include font-style($font-medium-14);
@@ -820,7 +823,7 @@ a {
                 padding: 8px 20px;
                 width: 262px;
                 align-self: center;
-              
+
                 button {
                   position: absolute;
                   right: 3px;
@@ -831,6 +834,7 @@ a {
                   cursor: pointer;
                 }
               }
+
               .marker-form {
                 display: flex;
                 flex-direction: column;
@@ -1429,7 +1433,6 @@ a {
   .list-panel {
     display: flex;
     flex-direction: column;
-    margin: 100px 0 0 30px;
     width: 30%;
     height: 78vh;
     overflow: hidden;
@@ -1438,14 +1441,53 @@ a {
     .control-panel {
       width: 100%;
       display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
       flex-direction: row;
-      justify-content: flex-end;
+      height: 45px;
+
+      .message {
+        width: calc(100% - 220px);
+
+        .notice {
+
+          display: inline-flex;
+          width: 100% ;
+          background-color: $primary-green;
+          border-radius: 5px;
+          align-items: center;
+          padding: 6px 8px;
+          width: max-content;
+
+          p {
+            @include font-style($font-medium-14);
+            font-weight: 600;
+            color: $deep;
+          }
+
+          .notice-icon {
+            display: inline-flex;
+
+            svg {
+              margin-right: 8px;
+              color:$deep;
+              width: 24px;
+              height: 24px;
+            }
+          }
+        }
+
+      }
 
       .icon-btn {
-        display: flex;
+        margin-left: 8px;
+        display: inline-flex;
+        align-self: flex-end;
+        text-align: center;
 
         .toggle-favorites {
           svg {
+            margin-right: 3px;
             font-size: 20px;
             stroke-width: 0.8px;
 
@@ -1454,7 +1496,7 @@ a {
         }
 
         .toggle-add-location {
-          position:relative;
+          position: relative;
 
           svg {
             font-size: 24px;
@@ -1462,13 +1504,15 @@ a {
           }
 
         }
-  
+
         button {
+          @include font-style($font-medium-14);
           display: flex;
           text-align: center;
           justify-content: center;
           align-items: center;
           padding: 0 8px;
+          height: 24px;
           overflow: hidden;
           color: $primary-purple;
           background: none;
@@ -1564,20 +1608,22 @@ a {
           cursor: none;
           border-radius: 30px;
         }
+
         ::-webkit-scrollbar-thumb {
           //卷軸手柄
           width: 9px;
           background: $grey;
           border-radius: 30px;
-          border: 1px solid $primary-purple ;
+          border: 1px solid $primary-purple;
           cursor: default;
-        
+
         }
+
         .list-section {
           margin-top: 8px;
           max-height: calc(78vh - 150px);
           overflow: auto;
-      
+
 
 
           .marker-list-item {
