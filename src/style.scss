@@ -1,6 +1,6 @@
 @use "reset";
-@use "variables"as *;
-@use "function"as *;
+@use "variables" as *;
+@use "function" as *;
 @use "keyframes";
 
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Handjet:wght@100..900&family=Mina&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Zen+Maru+Gothic&display=swap");
@@ -1078,9 +1078,11 @@ a {
               }
             }
           }
-          ::-webkit-scrollbar{
+
+          ::-webkit-scrollbar {
             border-right: $primary-purple 1px solid;
           }
+
           ::-webkit-scrollbar-thumb {
             background-color: $primary-purple;
             border-radius: 99px;
@@ -1092,7 +1094,7 @@ a {
             box-sizing: border-box;
             max-height: 180px;
             overflow: auto;
-         
+
 
             .commentform {
               width: 100%;
@@ -1104,7 +1106,8 @@ a {
                 margin-bottom: 3px;
 
                 h2 {
-                  @include font-style($font-regular-16);
+                  @include font-style($font-medium-16);
+                  color: $grey;
                 }
 
                 .rating {
@@ -1230,8 +1233,8 @@ a {
                     width: auto;
 
                     .avatar {
-                      width: 24px;
-                      height: 24px;
+                      width: 20px;
+                      height: 20px;
                       border-radius: 50%;
                       border: #ffffff 3px solid;
                       overflow: hidden;
@@ -1243,7 +1246,7 @@ a {
                     }
 
                     .user-name {
-                      @include font-style($font-medium-16);
+                      @include font-style($font-medium-14);
                       margin-left: 8px;
                       color: $deep;
                     }
@@ -1302,8 +1305,8 @@ a {
                 }
 
                 .comment-text {
-                  margin: 8px 0 0 45px;
-                  @include font-style($font-regular-16);
+                  margin: 8px 0 0 0;
+                  @include font-style($font-regular-14);
                 }
 
                 .comment-footer {
@@ -1520,13 +1523,13 @@ a {
 
                 .star-inarrow {
                   display: inline-flex;
-                 
+
 
                   .star-size {
                     height: 20px;
                     width: 20px;
                     color: $primary-purple;
-                      margin: 3px;
+                    margin: 3px;
                   }
                 }
               }
@@ -1653,16 +1656,17 @@ a {
 }
 
 .alert-message {
+  box-sizing: border-box;
+  @include font-style($font-medium-14);
   position: relative;
   display: inline-flex;
-  padding: 1rem;
   margin-bottom: 1rem;
   background-color: #95e05c !important;
   border: none;
   border-radius: 4px;
   color: $deep;
   padding: 0 20px;
-  width: 250px;
+  width: 100%;
   align-self: center;
 
   button {
@@ -1854,7 +1858,8 @@ a {
         margin-bottom: 8px;
 
         h2 {
-          @include font-style($font-regular-16);
+          @include font-style($font-medium-16);
+          color: $grey;
         }
 
         .rating {
@@ -2919,17 +2924,17 @@ button:hover #custom-cursor::after {
     display: flex;
 
     /* margin: 10% 50%; */
-.story{
-  display: flex;
-  flex-direction: column;
-  text-align: right;
+    .story {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
 
-  a{
-    width: 100%;
-    text-align: left;
-    margin-left: 1.5rem;
-  }
-}
+      a {
+        width: 100%;
+        text-align: left;
+        margin-left: 1.5rem;
+      }
+    }
 
   }
 
@@ -3637,8 +3642,8 @@ button:hover #custom-cursor::after {
           display: flex;
           flex-direction: column;
           gap: 24px;
-          
-          
+
+
 
           .category-board {
             border: 1.5px solid $grey;
@@ -4550,12 +4555,12 @@ button:hover #custom-cursor::after {
           width: 400px;
           /* 圖片大小 */
           opacity: 0.9;
-         
+
         }
 
         .contact-form {
           flex: 1;
-          padding:0 30px;
+          padding: 0 30px;
           max-width: 40%;
           justify-content: center;
           align-items: center;

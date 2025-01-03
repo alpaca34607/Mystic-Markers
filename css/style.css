@@ -1161,10 +1161,9 @@ a {
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-title h2 {
   font-family: "Noto Sans TC";
-  font-weight: 300;
+  font-weight: 500;
   font-size: 1rem;
-  letter-spacing: 0.05rem;
-  line-height: 1.8;
+  color: #B3B3B3;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-title .rating {
   display: flex;
@@ -1277,8 +1276,8 @@ a {
   width: auto;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .preuser-data .preuser-info .avatar {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: #ffffff 3px solid;
   overflow: hidden;
@@ -1290,7 +1289,8 @@ a {
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .preuser-data .preuser-info .user-name {
   font-family: "Noto Sans TC";
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
   margin-left: 8px;
   color: #2A2A2A;
 }
@@ -1339,12 +1339,11 @@ a {
   color: #B595FF;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .comment-text {
-  margin: 8px 0 0 45px;
+  margin: 8px 0 0 0;
   font-family: "Noto Sans TC";
   font-weight: 300;
-  font-size: 1rem;
-  letter-spacing: 0.05rem;
-  line-height: 1.8;
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .comment-footer {
   display: flex;
@@ -1621,16 +1620,20 @@ a {
 }
 
 .alert-message {
+  box-sizing: border-box;
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
   position: relative;
   display: inline-flex;
-  padding: 1rem;
   margin-bottom: 1rem;
   background-color: #95e05c !important;
   border: none;
   border-radius: 4px;
   color: #2A2A2A;
   padding: 0 20px;
-  width: 250px;
+  width: 100%;
   align-self: center;
 }
 .alert-message button {
@@ -1795,10 +1798,9 @@ a {
 }
 .gallery-page .comments-area .commentform .comment-title h2 {
   font-family: "Noto Sans TC";
-  font-weight: 300;
+  font-weight: 500;
   font-size: 1rem;
-  letter-spacing: 0.05rem;
-  line-height: 1.8;
+  color: #B3B3B3;
 }
 .gallery-page .comments-area .commentform .comment-title .rating {
   display: flex;
