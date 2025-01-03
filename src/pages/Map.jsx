@@ -569,49 +569,67 @@ export default function Map() {
   // 跳轉到指定標記
   const handleMarkerClick = (marker, e) => {
     const map = mapRef.current;
-    if (map) {
-      // 避免重複觸發
-      if (activeMarkerId === marker.id) {
-        return;
-      }
+    if (!map) return;
   
-      // 計算地圖中心點偏移
-      const targetLat = marker.position[0];
-      const targetLng = marker.position[1];
-      
-      // 獲取當前地圖的邊界
-      const bounds = map.getBounds();
-      const latDiff = bounds._northEast.lat - bounds._southWest.lat;
-      const offsetLat = targetLat + (latDiff * 0.4); // 向上偏移以使標記位於下方
+    // 避免重複觸發
+    if (activeMarkerId === marker.id) return;
   
-      // 將地圖移動到新的中心點
-      map.flyTo(
-        [offsetLat, targetLng],
-        16,
-      );
-      
-      // 設置 activeMarkerId
-      setActiveMarkerId(marker.id);
+    // 先關閉當前打開的 popup
+    map.closePopup();
   
-      // 延遲打開 popup
-      setTimeout(() => {
-        const allMarkers = [];
-        map.eachLayer((layer) => {
-          if (layer instanceof L.Marker) {
-            allMarkers.push(layer);
-          }
-        });
+    // 計算地圖中心點偏移
+    const targetLat = marker.position[0];
+    const targetLng = marker.position[1];
+    
+    // 獲取當前地圖的邊界
+    const bounds = map.getBounds();
+    const latDiff = bounds._northEast.lat - bounds._southWest.lat;
+    
+    // 計算新的中心點，將標記位置設在視圖下方 40% 的位置
+    const offsetLat = targetLat + (latDiff * 0.4);
   
-        const targetMarker = allMarkers.find(m => {
-          const pos = m.getLatLng();
-          return pos.lat === marker.position[0] && pos.lng === marker.position[1];
-        });
+    // 更新 activeMarkerId
+    setActiveMarkerId(marker.id);
   
+    // 分兩步進行：先移動地圖，等地圖穩定後再打開 popup
+    map.once('moveend', () => {
+      // 地圖移動完成後，確保找到正確的標記
+      const findAndOpenMarker = () => {
+        const targetMarker = findMarkerByLatLng(map, marker.position[0], marker.position[1]);
         if (targetMarker) {
           targetMarker.openPopup();
         }
-      }, 500);
-    }
+      };
+  
+      // 給系統一點時間確保標記已經完全加載
+      setTimeout(findAndOpenMarker, 500);
+    });
+  
+    // 開始地圖移動
+    map.flyTo(
+      [offsetLat, targetLng],
+      16,
+    );
+  };
+  
+  // 輔助通過經緯度找到對應的標記
+  const findMarkerByLatLng = (map, lat, lng) => {
+    let targetMarker = null;
+    const threshold = 0.0000001; // 容許的誤差範圍
+  
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        const pos = layer.getLatLng();
+        if (
+          Math.abs(pos.lat - lat) < threshold && 
+          Math.abs(pos.lng - lng) < threshold
+        ) {
+          targetMarker = layer;
+        }
+      }
+    });
+  
+    return targetMarker;
   };
   // 關閉標記卡片
   const handlePopupClose = () => {
