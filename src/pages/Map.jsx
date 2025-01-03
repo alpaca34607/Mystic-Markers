@@ -28,6 +28,7 @@ import { LogIn } from "lucide-react";
 import { presetComments } from '../components/presetComments';
 const DEFAULT_COVER_PHOTO = 'images/default-location.jpg';
 const DEFAULT_AVATAR = 'images/Avatars/avatar (1).jpg';
+import templeMarkers from "../components/templeMarkers";
 
 
 // 預設搜尋結果標記
@@ -141,6 +142,7 @@ export default function Map() {
   const mapboxStyleURL = `https://api.mapbox.com/styles/v1/alison34607/cm589twvs00nz01sp790tayrs/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`;
   const [isAddingLocation, setIsAddingLocation] = useState(false);
 
+
   useEffect(() => {
     // 當路由變更時，將頁面滾動到頂部
     window.scrollTo(0, 0);
@@ -157,13 +159,13 @@ export default function Map() {
         comments: pageComments
       };
     });
-    
+
     setMarkers(markersWithComments);
     setDisplayedMarkers(markersWithComments);
   }, []);
 
 
-  
+
 
   const SearchControl = () => {
     const map = useMap();
@@ -202,6 +204,40 @@ export default function Map() {
 
     return null;
   };
+
+
+  // 鼠標狀態管理
+  const handleToggleLocation = (e) => {
+    e.stopPropagation();
+
+    // 切換新增標記狀態
+    const newIsAddingLocation = !isAddingLocation;
+    setIsAddingLocation(newIsAddingLocation);
+
+    // 根據新狀態同步顯示或關閉提示
+    if (newIsAddingLocation) {
+      setAlertMessage('請於地圖範圍內雙擊新增標記');
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+    }
+  };
+  // 點擊地圖外區域時關閉新增模式和提示
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const mapContainer = document.querySelector('.map-wrapper');
+      if (mapContainer && !mapContainer.contains(e.target) && isAddingLocation) {
+        setIsAddingLocation(false);
+        setShowAlert(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isAddingLocation]);
+
 
 
   // 收藏
@@ -524,6 +560,9 @@ export default function Map() {
   }, [isAddingLocation]);
 
 
+
+
+
   // 新增圖片檔案名稱
 
   const [fileName, setFileName] = useState("未選擇文件");
@@ -544,12 +583,12 @@ export default function Map() {
     filterMarkers(city, "");
   };
 
-  // 處理區域選擇
-  const handleDistrictChange = (e) => {
-    const district = e.target.value;
-    setSelectedDistrict(district);
-    filterMarkers(selectedCity, district);
-  };
+  // // 處理區域選擇
+  // const handleDistrictChange = (e) => {
+  //   const district = e.target.value;
+  //   setSelectedDistrict(district);
+  //   filterMarkers(selectedCity, district);
+  // };
 
   // 篩選標記
   const filterMarkers = (city, district, markersList = markers) => {
@@ -569,12 +608,68 @@ export default function Map() {
   // 跳轉到指定標記
   const handleMarkerClick = (marker, e) => {
     const map = mapRef.current;
-    if (map) {
-      map.flyTo(marker.position, 16);
-    }
+    if (!map) return;
+
+    // 避免重複觸發
+    if (activeMarkerId === marker.id) return;
+
+    // 先關閉當前打開的 popup
+    map.closePopup();
+
+    // 計算地圖中心點偏移
+    const targetLat = marker.position[0];
+    const targetLng = marker.position[1];
+
+    // 獲取當前地圖的邊界
+    const bounds = map.getBounds();
+    const latDiff = bounds._northEast.lat - bounds._southWest.lat;
+
+    // 計算新的中心點，將標記位置設在視圖下方 40% 的位置
+    const offsetLat = targetLat + (latDiff * 0.4);
+
+    // 更新 activeMarkerId
     setActiveMarkerId(marker.id);
+
+    // 分兩步進行：先移動地圖，等地圖穩定後再打開 popup
+    map.once('moveend', () => {
+      // 地圖移動完成後，確保找到正確的標記
+      const findAndOpenMarker = () => {
+        const targetMarker = findMarkerByLatLng(map, marker.position[0], marker.position[1]);
+        if (targetMarker) {
+          targetMarker.openPopup();
+        }
+      };
+
+      // 給系統一點時間確保標記已經完全加載
+      setTimeout(findAndOpenMarker, 500);
+    });
+
+    // 開始地圖移動
+    map.flyTo(
+      [offsetLat, targetLng],
+      16,
+    );
   };
 
+  // 輔助通過經緯度找到對應的標記
+  const findMarkerByLatLng = (map, lat, lng) => {
+    let targetMarker = null;
+    const threshold = 0.0000001; // 容許的誤差範圍
+
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        const pos = layer.getLatLng();
+        if (
+          Math.abs(pos.lat - lat) < threshold &&
+          Math.abs(pos.lng - lng) < threshold
+        ) {
+          targetMarker = layer;
+        }
+      }
+    });
+
+    return targetMarker;
+  };
   // 關閉標記卡片
   const handlePopupClose = () => {
     setActiveMarkerId(null);
@@ -592,214 +687,243 @@ export default function Map() {
     console.log('showFavorites changed:', showFavorites);
   }, [showFavorites]);
 
-  
+
   const [currentTheme, setCurrentTheme] = useState('default');
   const handleThemeToggle = (theme) => {
     setCurrentTheme(theme);
     if (theme === 'default') {
-      setMarkers(defaultMarkers);
+      setMarkers(defaultMarkers); // 使用 defaultMarkers
       setDisplayedMarkers(defaultMarkers);
-    } else {
-      setMarkers(templeMarkers);
-      setDisplayedMarkers(templetMarkers);
+    } else if (theme === 'temple') {
+      setMarkers(templeMarkers); // 使用 templeMarkers
+      setDisplayedMarkers(templeMarkers);
     }
   };
   return (
     <>
-      <Cursor isAddingLocation={isAddingLocation} />
-     
-      {showAlert && (
-        <CustomAlert
-          message={alertMessage}
-          onClose={() => setShowAlert(false)}
-        />
-      )}
+
       <Routes>
         <Route
           path="/"
           element={
             <main className="map">
+              <Cursor isAddingLocation={isAddingLocation} />
+              {showAlert && (
+                <CustomAlert
+                  message={alertMessage}
+                  onClose={() => setShowAlert(false)}
+                />
+              )}
               <div className="map-content">
-                <div className="map-wrapper">
-                  <MapContainer
-                    center={[23.5, 121]}
-                    zoom={8}
-                    style={{ height: "100%", width: "100%" }}
-                    maxBounds={taiwanBounds}
-                    minZoom={7}
-                    maxBoundsViscosity={1.0}
-                    markers={displayedMarkers}
-                    onMarkerClick={handleMarkerClick}
-                    ref={mapRef}
+                <div className="map-left">
+                  <div className="btn-group">
+                    <button
+                      onClick={() => handleThemeToggle('default')}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg ${currentTheme === 'default'
+                        ? 'theme-active'
+                        : 'theme-unactive'
+                        }`}
+                    >
+                      找飄點
+                    </button>
+                    <button
+                      onClick={() => handleThemeToggle('temple')}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg ${currentTheme === 'temple'
+                        ? 'theme-active'
+                        : 'theme-unactive'
+                        }`}
+                    >
+                      找宮廟
+                    </button>
+                  </div>
+                  <div className="map-wrapper">
+                    <MapContainer
+                      center={[23.5, 121]}
+                      zoom={8}
+                      style={{ height: "100%", width: "100%" }}
+                      maxBounds={taiwanBounds}
+                      minZoom={7}
+                      maxBoundsViscosity={1.0}
+                      markers={displayedMarkers}
+                      onMarkerClick={handleMarkerClick}
+                      ref={mapRef}
 
-                  >
-                    <TileLayer
-                      url={mapboxStyleURL}
-                      maxZoom={22}
-                      attribution='&copy; <a href="https://www.mapbox.com/">Mapbox</a>'
-                    />
-                    <SearchControl />
-                    <AddMarker />
-                    {markers.map(marker => (
-                      <Marker
-                        key={marker.id}
-                        position={marker.position}
-                        icon={marker.id === activeMarkerId ? activeIcon : normalIcon}
-                        eventHandlers={{
-                          click: (e) => handleMarkerClick(marker, e),
-                          popupopen: () => setActiveMarkerId(marker.id),
-                          popupclose: handlePopupClose,
-                        }}
-                      >
-                        <Popup
-                          className="custom-popup"
-                          onOpen={() => handlePopupOpen(marker.id)}
-                          onClose={handlePopupClose}
+                    >
+                      <TileLayer
+                        url={mapboxStyleURL}
+                        maxZoom={22}
+                        attribution='&copy; <a href="https://www.mapbox.com/">Mapbox</a>'
+                      />
+                      <SearchControl />
+                      <AddMarker />
+                      {markers.map(marker => (
+                        <Marker
+                          key={marker.id}
+                          position={marker.position}
+                          icon={marker.id === activeMarkerId ? activeIcon : normalIcon}
+                          eventHandlers={{
+                            click: (e) => {
+                              e.originalEvent?.stopPropagation();
+                              setActiveMarkerId(marker.id);
+                            },
+                            popupclose: () => {
+                              setActiveMarkerId(null);
+                            }
+                          }}
                         >
-                          {editingMarker?.id === marker.id ? (
-                            <div className="marker-form">
-                              <div className="user-info">
-                                <div className="user-avatar">
-                                  <img
-                                    src={marker.userAvatar}
-                                    alt={marker.userName}
-                                  />
+                          <Popup
+                            className="custom-popup"
+                            onOpen={() => setActiveMarkerId(marker.id)}
+                            onClose={() => setActiveMarkerId(null)}
+                          >
+                            {editingMarker?.id === marker.id ? (
+                              <div className="marker-form">
+                                <div className="user-info">
+                                  <div className="user-avatar">
+                                    <img
+                                      src={marker.userAvatar}
+                                      alt={marker.userName}
+                                    />
+                                  </div>
+                                  <span className="user-name">{marker.userName}</span>
                                 </div>
-                                <span className="user-name">{marker.userName}</span>
-                              </div>
-                              <input
-                                type="text"
-                                placeholder="輸入地點名稱 *"
-                                value={editingMarker.title || ''}
-                                onChange={(e) => {
-                                  setEditingMarker({
-                                    ...editingMarker,
-                                    title: e.target.value
-                                  });
-                                }}
-                              />
-                              <div className="file-upload">
                                 <input
-                                  id="file-upload"
-                                  type="file"
-                                  accept="image/*"
-                                  style={{ display: 'none' }}
+                                  type="text"
+                                  placeholder="輸入地點名稱 *"
+                                  value={editingMarker.title || ''}
                                   onChange={(e) => {
-                                    const file = e.target.files[0];
-                                    if (file) {
-                                      // 更新檔案名稱狀態
-                                      setFileName(file.name);
-                                      // 更新編輯標記的封面照片
-                                      setEditingMarker({
-                                        ...editingMarker,
-                                        coverPhoto: URL.createObjectURL(file),
-                                      });
-                                    } else {
-                                      // 如果未選擇檔案，重置檔案名稱
-                                      setFileName('未選擇檔案');
-                                    }
+                                    setEditingMarker({
+                                      ...editingMarker,
+                                      title: e.target.value
+                                    });
                                   }}
                                 />
-                                <label htmlFor="file-upload" className="upload-button">
-                                  上傳圖片
-                                </label>
-                                {/* 顯示所選檔案的名稱 */}
-                                <p>{fileName}</p>
-                              </div>
-                              <div className="button-group">
-                                <button onClick={() => handleMarkerSubmit(marker.id)}>
-                                  新增標記
-                                </button>
-                                <button
-                                  onClick={() => handleCancelMarkerEdit(marker.id)}
-                                  className="cancel-button"
-                                >
-                                  取消
-                                </button>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="marker-display">
-                              <div className="location-info">
-                                <div className="marker-header">
-                                  <div className="user-info">
-                                    <div className="user-avatar">
-                                      <img
-                                        src={marker.userAvatar}
-                                        alt={marker.userName}
-                                      />
-                                    </div>
-                                    <span className="user-name">{marker.userName}</span>
-                                    <p>投稿</p>
-                                  </div>
-                                  <button
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      toggleFavorite(marker);
-                                    }}
-                                    className={`favorite-button ${isFavorite(marker.id) ? 'active' : ''}`}
-                                  >
-                                    {isFavorite(marker.id) ? <BsBookmarkFill /> : <BsBookmark />}
-                                  </button>
-                                  {marker.userId === 'user123' && (
-                                    <div className="button-group">
-                                      <button onClick={() => setEditingMarker(marker)}>
-                                        編輯
-                                      </button>
-                                      <p>|</p>
-                                      <button
-                                        onClick={() => handleDeleteMarker(marker.id)}
-                                        className="delete-button"
-                                      >
-                                        刪除
-                                      </button>
-                                    </div>
-                                  )}
-                                </div>
-                                <img
-                                  src={marker.coverPhoto || DEFAULT_COVER_PHOTO}
-                                  alt={marker.title}
-                                  className="marker-image"
-                                />
-                                <h3>{marker.title}</h3>
-
-                                <div className="user-rating">
-                                  <div className="average-rating">
-                                    <StarRating
-                                      rating={
-                                        marker.comments?.length > 0
-                                          ? marker.comments.reduce((acc, comment) => acc + comment.rating, 0) / marker.comments.length
-                                          : 0
+                                <div className="file-upload">
+                                  <input
+                                    id="file-upload"
+                                    type="file"
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                    onChange={(e) => {
+                                      const file = e.target.files[0];
+                                      if (file) {
+                                        // 更新檔案名稱狀態
+                                        setFileName(file.name);
+                                        // 更新編輯標記的封面照片
+                                        setEditingMarker({
+                                          ...editingMarker,
+                                          coverPhoto: URL.createObjectURL(file),
+                                        });
+                                      } else {
+                                        // 如果未選擇檔案，重置檔案名稱
+                                        setFileName('未選擇檔案');
                                       }
-                                    />
-                                    <span className="comments-num">
-                                      {marker.comments?.length || 0} 則評論
-                                    </span>
-                                  </div>
+                                    }}
+                                  />
+                                  <label htmlFor="file-upload" className="upload-button">
+                                    上傳圖片
+                                  </label>
+                                  {/* 顯示所選檔案的名稱 */}
+                                  <p>{fileName}</p>
                                 </div>
-                                <hr />
-                                <div className="comments-area">
-                                  <CommentForm
-                                    onSubmit={(commentData) => handleSubmitComment(marker.id, commentData)}
-                                    existingComment={editingComment}
-                                    isEditing={isEditing}
-                                    onCancelEdit={handleCancelEdit}
-                                    comments={marker.comments || []}
-                                    onEditComment={(comment) => handleEditComment(marker.id, comment)}
-                                    rows={3}
-                                  />
-                                  <CommentList
-                                    comments={marker.comments || []}
-                                    onEditComment={(comment) => handleEditComment(marker.id, comment)}
-                                  />
+                                <div className="button-group">
+                                  <button
+                                    onClick={handleToggleLocation}
+                                    className="toggle-add-location"
+                                  >
+                                    {isAddingLocation ? <BiSolidLocationPlus /> : <BiLocationPlus />} 新增座標
+                                  </button>
+                                  <button
+                                    onClick={() => handleCancelMarkerEdit(marker.id)}
+                                    className="cancel-button"
+                                  >
+                                    取消
+                                  </button>
                                 </div>
                               </div>
-                            </div>
-                          )}
-                        </Popup>
-                      </Marker>
-                    ))}
-                  </MapContainer>
+                            ) : (
+                              <div className="marker-display">
+                                <div className="location-info">
+                                  <div className="marker-header">
+                                    <div className="user-info">
+                                      <div className="user-avatar">
+                                        <img
+                                          src={marker.userAvatar}
+                                          alt={marker.userName}
+                                        />
+                                      </div>
+                                      <span className="user-name">{marker.userName}</span>
+                                      <p>投稿</p>
+                                    </div>
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        toggleFavorite(marker);
+                                      }}
+                                      className={`favorite-button ${isFavorite(marker.id) ? 'active' : ''}`}
+                                    >
+                                      {isFavorite(marker.id) ? <BsBookmarkFill /> : <BsBookmark />}
+                                    </button>
+                                    {marker.userId === 'user123' && (
+                                      <div className="button-group">
+                                        <button onClick={() => setEditingMarker(marker)}>
+                                          編輯
+                                        </button>
+                                        <p>|</p>
+                                        <button
+                                          onClick={() => handleDeleteMarker(marker.id)}
+                                          className="delete-button"
+                                        >
+                                          刪除
+                                        </button>
+                                      </div>
+                                    )}
+                                  </div>
+                                  <img
+                                    src={marker.coverPhoto || DEFAULT_COVER_PHOTO}
+                                    alt={marker.title}
+                                    className="marker-image"
+                                  />
+                                  <h3>{marker.title}</h3>
+
+                                  <div className="user-rating">
+                                    <div className="average-rating">
+                                      <StarRating
+                                        rating={
+                                          marker.comments?.length > 0
+                                            ? marker.comments.reduce((acc, comment) => acc + comment.rating, 0) / marker.comments.length
+                                            : 0
+                                        }
+                                      />
+                                      <span className="comments-num">
+                                        {marker.comments?.length || 0} 則評論
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <hr />
+                                  <div className="comments-area">
+                                    <CommentForm
+                                      onSubmit={(commentData) => handleSubmitComment(marker.id, commentData)}
+                                      existingComment={editingComment}
+                                      isEditing={isEditing}
+                                      onCancelEdit={handleCancelEdit}
+                                      comments={marker.comments || []}
+                                      onEditComment={(comment) => handleEditComment(marker.id, comment)}
+                                      rows={3}
+                                    />
+                                    <CommentList
+                                      comments={marker.comments || []}
+                                      onEditComment={(comment) => handleEditComment(marker.id, comment)}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </Popup>
+                        </Marker>
+                      ))}
+                    </MapContainer>
+                  </div>
                 </div>
 
                 <div className="list-panel" >
@@ -877,7 +1001,7 @@ export default function Map() {
                                 favorites.map(marker => (
                                   <li onClick={(e) => handleMarkerClick(marker, e)} className="marker-list-item">
                                     <div className="adress">
-                                    <BsBookmarkFill className="bookmark-icon" /> {marker.title} - {marker.city}{marker.district}
+                                      <BsBookmarkFill className="bookmark-icon" /> {marker.title} - {marker.city}{marker.district}
                                     </div>
                                     <hr />
                                   </li>
