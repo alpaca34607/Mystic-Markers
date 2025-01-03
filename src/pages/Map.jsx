@@ -206,6 +206,40 @@ export default function Map() {
   };
 
 
+  // 鼠標狀態管理
+  const handleToggleLocation = (e) => {
+    e.stopPropagation();
+
+    // 切換新增標記狀態
+    const newIsAddingLocation = !isAddingLocation;
+    setIsAddingLocation(newIsAddingLocation);
+
+    // 根據新狀態同步顯示或關閉提示
+    if (newIsAddingLocation) {
+      setAlertMessage('請於地圖範圍內雙擊新增標記');
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+    }
+  };
+  // 點擊地圖外區域時關閉新增模式和提示
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const mapContainer = document.querySelector('.map-wrapper');
+      if (mapContainer && !mapContainer.contains(e.target) && isAddingLocation) {
+        setIsAddingLocation(false);
+        setShowAlert(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isAddingLocation]);
+
+
+
   // 收藏
   const [favorites, setFavorites] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
@@ -526,44 +560,7 @@ export default function Map() {
   }, [isAddingLocation]);
 
 
-  // 鼠標狀態
-  const handleToggleLocation = (e) => {
-    e.stopPropagation();
-    const newIsAddingLocation = !isAddingLocation;
-    setIsAddingLocation(newIsAddingLocation);
 
-    if (newIsAddingLocation) {
-      // 開啟新增標記模式時顯示提示
-      setAlertMessage("請於地圖範圍內雙擊新增標記");
-      setShowAlert(true);
-    } else {
-      // 關閉新增標記模式時關閉提示
-      setShowAlert(false);
-    }
-  };
-
-  // 監聽新增標記狀態的變化
-  useEffect(() => {
-    if (!isAddingLocation) {
-      setShowAlert(false);
-    }
-  }, [isAddingLocation]);
-
-  // 點擊地圖外區域時關閉新增模式和提示
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      const mapContainer = document.querySelector('.map-wrapper');
-      if (mapContainer && !mapContainer.contains(e.target) && isAddingLocation) {
-        setIsAddingLocation(false);
-        setShowAlert(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [isAddingLocation]);
 
 
   // 新增圖片檔案名稱
@@ -586,12 +583,12 @@ export default function Map() {
     filterMarkers(city, "");
   };
 
-  // 處理區域選擇
-  const handleDistrictChange = (e) => {
-    const district = e.target.value;
-    setSelectedDistrict(district);
-    filterMarkers(selectedCity, district);
-  };
+  // // 處理區域選擇
+  // const handleDistrictChange = (e) => {
+  //   const district = e.target.value;
+  //   setSelectedDistrict(district);
+  //   filterMarkers(selectedCity, district);
+  // };
 
   // 篩選標記
   const filterMarkers = (city, district, markersList = markers) => {
@@ -704,23 +701,19 @@ export default function Map() {
   };
   return (
     <>
-      {showAlert && (
-        <CustomAlert
-          message={alertMessage}
-          onClose={() => {
-            // 只有在不是新增標記模式時才允許手動關閉提示
-            if (!isAddingLocation) {
-              setShowAlert(false);
-            }
-          }}
-        />
-      )}
+
       <Routes>
         <Route
           path="/"
           element={
             <main className="map">
               <Cursor isAddingLocation={isAddingLocation} />
+              {showAlert && (
+                <CustomAlert
+                  message={alertMessage}
+                  onClose={() => setShowAlert(false)}
+                />
+              )}
               <div className="map-content">
                 <div className="map-left">
                   <div className="btn-group">
