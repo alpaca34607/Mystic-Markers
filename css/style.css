@@ -834,8 +834,8 @@ a {
 }
 .map .map-content .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content {
   margin: 0;
-  width: 350px !important;
-  max-height: 550px !important;
+  width: 300px !important;
+  max-height: 450px !important;
   overflow: hidden;
   box-sizing: border-box;
   background-color: #FFFFFF;
@@ -929,7 +929,7 @@ a {
   cursor: none;
 }
 .map .map-content .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content .marker-form .button-group button {
-  border: #B595FF 1px solid;
+  border: #B595FF 1.5px solid;
   border-radius: 10px;
   background-color: #B595FF;
   padding: 3px 5px;
@@ -1072,7 +1072,7 @@ a {
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .marker-image {
   width: 100%;
-  height: 200px;
+  height: 150px;
   object-fit: cover;
   overflow: hidden;
   padding: 0;
@@ -1093,6 +1093,7 @@ a {
 .map .map-content .map-wrapper .leaflet-container .location-info hr {
   width: 100%;
   background-color: #95e05c;
+  padding-bottom: 0.5px;
   border: none;
   height: 1px;
   margin-bottom: 0px;
@@ -1146,7 +1147,7 @@ a {
   width: 100%;
   padding: 10px 20px;
   box-sizing: border-box;
-  max-height: 207px;
+  max-height: 180px;
   overflow: auto;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform {
@@ -1180,7 +1181,7 @@ a {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
-  border: #B595FF 1.5px solid;
+  border: #B595FF 2px solid;
   background-color: rgba(255, 255, 255, 0.1450980392);
   color: #2A2A2A;
   font-family: "Noto Sans TC";
@@ -1215,11 +1216,11 @@ a {
   padding: 5px;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-bottom button {
-  background-color: transparent;
-  border: #B595FF 1px solid;
+  background-color: #B595FF;
+  border: #B595FF 1.5px solid;
   border-radius: 8px;
-  padding: 5px 8px;
-  color: #B595FF;
+  padding: 3px 5px;
+  color: #FFFFFF;
   margin: 3px 3px;
   font-family: "Noto Sans TC";
   font-weight: 300;
@@ -1228,11 +1229,11 @@ a {
   cursor: none;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-bottom button:hover {
-  border: #acff6c 1px solid;
-  color: #acff6c;
+  border: #acff6c 1.5px solid;
+  background-color: #acff6c;
 }
 .map .map-content .map-wrapper .leaflet-container .location-info .comments-area .commentform .comment-bottom button:active {
-  border: #FFFFFF 1px solid;
+  border: #FFFFFF 1.5px solid;
   color: #FFFFFF;
   transform: translateY(2px);
 }
@@ -1832,7 +1833,7 @@ a {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
-  border: #B595FF 1.5px solid;
+  border: #B595FF 2px solid;
   background-color: rgba(255, 255, 255, 0.1450980392);
   color: #FFFFFF;
   font-family: "Noto Sans TC";
@@ -1868,7 +1869,7 @@ a {
 }
 .gallery-page .comments-area .commentform .comment-bottom button {
   background-color: transparent;
-  border: #B595FF 1px solid;
+  border: #B595FF 1.5px solid;
   border-radius: 8px;
   padding: 5px 8px;
   color: #B595FF;
@@ -1880,11 +1881,11 @@ a {
   cursor: none;
 }
 .gallery-page .comments-area .commentform .comment-bottom button:hover {
-  border: #acff6c 1px solid;
+  border: #acff6c 1.5px solid;
   color: #acff6c;
 }
 .gallery-page .comments-area .commentform .comment-bottom button:active {
-  border: #FFFFFF 1px solid;
+  border: #FFFFFF 1.5px solid;
   color: #FFFFFF;
   transform: translateY(2px);
 }

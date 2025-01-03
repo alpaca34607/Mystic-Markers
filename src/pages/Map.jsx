@@ -157,13 +157,13 @@ export default function Map() {
         comments: pageComments
       };
     });
-    
+
     setMarkers(markersWithComments);
     setDisplayedMarkers(markersWithComments);
   }, []);
 
 
-  
+
 
   const SearchControl = () => {
     const map = useMap();
@@ -570,11 +570,49 @@ export default function Map() {
   const handleMarkerClick = (marker, e) => {
     const map = mapRef.current;
     if (map) {
-      map.flyTo(marker.position, 16);
+      // 避免重複觸發
+      if (activeMarkerId === marker.id) {
+        return;
+      }
+  
+      // 計算地圖中心點偏移
+      const targetLat = marker.position[0];
+      const targetLng = marker.position[1];
+      
+      // 獲取當前地圖的邊界
+      const bounds = map.getBounds();
+      const latDiff = bounds._northEast.lat - bounds._southWest.lat;
+      const offsetLat = targetLat + (latDiff * 0.4); // 向上偏移以使標記位於下方
+  
+      // 將地圖移動到新的中心點
+      map.flyTo(
+        [offsetLat, targetLng],
+        16,
+      );
+      
+      // 設置 activeMarkerId
+      setActiveMarkerId(marker.id);
+  
+      // 延遲打開 popup
+      setTimeout(() => {
+        const allMarkers = [];
+        map.eachLayer((layer) => {
+          if (layer instanceof L.Marker) {
+            allMarkers.push(layer);
+          }
+        });
+  
+        const targetMarker = allMarkers.find(m => {
+          const pos = m.getLatLng();
+          return pos.lat === marker.position[0] && pos.lng === marker.position[1];
+        });
+  
+        if (targetMarker) {
+          targetMarker.openPopup();
+        }
+      }, 500);
     }
-    setActiveMarkerId(marker.id);
   };
-
   // 關閉標記卡片
   const handlePopupClose = () => {
     setActiveMarkerId(null);
@@ -592,7 +630,7 @@ export default function Map() {
     console.log('showFavorites changed:', showFavorites);
   }, [showFavorites]);
 
-  
+
   const [currentTheme, setCurrentTheme] = useState('default');
   const handleThemeToggle = (theme) => {
     setCurrentTheme(theme);
@@ -607,7 +645,7 @@ export default function Map() {
   return (
     <>
       <Cursor isAddingLocation={isAddingLocation} />
-     
+
       {showAlert && (
         <CustomAlert
           message={alertMessage}
@@ -646,15 +684,19 @@ export default function Map() {
                         position={marker.position}
                         icon={marker.id === activeMarkerId ? activeIcon : normalIcon}
                         eventHandlers={{
-                          click: (e) => handleMarkerClick(marker, e),
-                          popupopen: () => setActiveMarkerId(marker.id),
-                          popupclose: handlePopupClose,
+                          click: (e) => {
+                            e.originalEvent?.stopPropagation();
+                            setActiveMarkerId(marker.id);
+                          },
+                          popupclose: () => {
+                            setActiveMarkerId(null);
+                          }
                         }}
                       >
                         <Popup
                           className="custom-popup"
-                          onOpen={() => handlePopupOpen(marker.id)}
-                          onClose={handlePopupClose}
+                          onOpen={() => setActiveMarkerId(marker.id)}
+                          onClose={() => setActiveMarkerId(null)}
                         >
                           {editingMarker?.id === marker.id ? (
                             <div className="marker-form">
@@ -877,7 +919,7 @@ export default function Map() {
                                 favorites.map(marker => (
                                   <li onClick={(e) => handleMarkerClick(marker, e)} className="marker-list-item">
                                     <div className="adress">
-                                    <BsBookmarkFill className="bookmark-icon" /> {marker.title} - {marker.city}{marker.district}
+                                      <BsBookmarkFill className="bookmark-icon" /> {marker.title} - {marker.city}{marker.district}
                                     </div>
                                     <hr />
                                   </li>
