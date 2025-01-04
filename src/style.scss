@@ -75,7 +75,7 @@ a {
   width: 100%;
   height: auto;
   display: flex;
-  padding: 35px 0 110px 0;
+  padding: 25px 0 110px 0;
   align-items: flex-start;
   justify-content: space-between;
   overflow: visible;
@@ -637,12 +637,13 @@ a {
           text-align: center;
           border-radius: 5px 0 0 5px;
           border: $primary-green 1.5px solid;
-          padding: 16px 8px;
+          padding: 16px 6px 16px 10px;
           @include font-style($font-regular-14);
           color: $light;
           background: none;
           writing-mode: vertical-lr;
           border-right: none;
+          cursor:none;
 
 
         }
@@ -1457,7 +1458,7 @@ a {
           border-radius: 5px;
           align-items: center;
           padding: 6px 8px;
-          width: max-content;
+          width: 100%;
 
           p {
             @include font-style($font-medium-14);
@@ -1481,6 +1482,7 @@ a {
 
       .icon-btn {
         margin-left: 8px;
+        margin-bottom: 8px;
         display: inline-flex;
         align-self: flex-end;
         text-align: center;

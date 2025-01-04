@@ -263,7 +263,7 @@ a {
   width: 100%;
   height: auto;
   display: flex;
-  padding: 35px 0 110px 0;
+  padding: 25px 0 110px 0;
   align-items: flex-start;
   justify-content: space-between;
   overflow: visible;
@@ -754,7 +754,7 @@ a {
   text-align: center;
   border-radius: 5px 0 0 5px;
   border: #acff6c 1.5px solid;
-  padding: 16px 8px;
+  padding: 16px 6px 16px 10px;
   font-family: "Noto Sans TC";
   font-weight: 300;
   font-size: 0.875rem;
@@ -763,6 +763,7 @@ a {
   background: none;
   writing-mode: vertical-lr;
   border-right: none;
+  cursor: none;
 }
 .map .map-content .map-left .btn-group .theme-active {
   border: #B595FF 1.5px solid;
@@ -1487,7 +1488,7 @@ a {
   border-radius: 5px;
   align-items: center;
   padding: 6px 8px;
-  width: max-content;
+  width: 100%;
 }
 .map .list-panel .control-panel .message .notice p {
   font-family: "Noto Sans TC";
@@ -1508,6 +1509,7 @@ a {
 }
 .map .list-panel .control-panel .icon-btn {
   margin-left: 8px;
+  margin-bottom: 8px;
   display: inline-flex;
   align-self: flex-end;
   text-align: center;
