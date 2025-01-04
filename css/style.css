@@ -996,9 +996,8 @@ a {
 .map .map-content .map-left .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content .marker-form .file-upload p {
   font-family: "Noto Sans TC";
   font-weight: 300;
-  font-size: 1rem;
-  letter-spacing: 0.05rem;
-  line-height: 1.8;
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
   color: #2A2A2A;
 }
 .map .map-content .map-left .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content .marker-form .file-upload .upload-button {

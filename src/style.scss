@@ -656,7 +656,7 @@ a {
         }
 
       }
-      
+
       .map-wrapper {
         position: relative;
         cursor: default;
@@ -894,7 +894,7 @@ a {
                   margin: 0;
 
                   p {
-                    @include font-style($font-regular-16);
+                    @include font-style($font-regular-14);
                     color: $deep
                   }
 
