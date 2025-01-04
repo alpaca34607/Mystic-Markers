@@ -98,37 +98,6 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const SearchControl = () => {
-  const map = useMap();
-
-  useEffect(() => {
-    const provider = new OpenStreetMapProvider({
-      params: {
-        'accept-language': 'zh',
-        countrycodes: 'tw'
-      },
-    });
-
-    const searchControl = new GeoSearchControl({
-      provider,
-      style: 'bar',
-      showMarker: true,
-      showPopup: false,
-      maxMarkers: 1,
-      retainZoomLevel: false,
-      animateZoom: true,
-      autoClose: true,
-      searchLabel: '搜尋地點...',
-      keepResult: true
-    });
-
-    map.addControl(searchControl);
-    return () => map.removeControl(searchControl);
-  }, [map]);
-
-  return null;
-};
-
 
 
 
@@ -180,6 +149,7 @@ export default function Map() {
           countrycodes: 'tw'
         },
       });
+      
       // 自定搜尋結果的標記
       const searchControl = new GeoSearchControl({
         provider,
@@ -190,7 +160,7 @@ export default function Map() {
         retainZoomLevel: false,
         animateZoom: true,
         autoClose: true,
-        searchLabel: '搜尋地點...',
+        searchLabel: '搜尋地址...',
         keepResult: true,
         marker: {
 
@@ -207,11 +177,7 @@ export default function Map() {
   };
 
 
-  // 鼠標狀態管理
-  const handleToggleLocation = (e) => {
-    e.stopPropagation();
-    setIsAddingLocation(!isAddingLocation);
-  };
+
   // 點擊地圖外區域時關閉新增模式和提示
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -288,6 +254,7 @@ export default function Map() {
       updateDisplayedMarkers(updatedMarkers);
     }
   };
+
   const validateMarker = (markerData) => {
     if (!markerData.title || markerData.title.trim() === '') {
       setAlertMessage('請輸入地點名稱');
@@ -698,7 +665,12 @@ export default function Map() {
           element={
             <main className="map">
               <Cursor isAddingLocation={isAddingLocation} />
-
+              {showAlert && (
+                <CustomAlert
+                  message={alertMessage}
+                  onClose={() => setShowAlert(false)}
+                />
+              )}
 
 
               <div className="map-content">
@@ -815,7 +787,7 @@ export default function Map() {
                                 </div>
                                 <div className="button-group">
                                   <button
-                                    onClick={handleToggleLocation}
+                                    button onClick={() => handleMarkerSubmit(marker.id)}
                                     className="toggle-add-location"
                                   >
                                     {isAddingLocation ? <BiSolidLocationPlus /> : <BiLocationPlus />} 新增座標

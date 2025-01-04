@@ -30,7 +30,7 @@ const defaultMarkers = [
 
   generateMarkerData("minxiong-ghost-house", {
     id: "minxiong-ghost-house",
-    position: [23.554235, 120.434558],
+    position: [23.53049980511441, 120.4266064784499],
     title: "民雄鬼屋",
     city: "嘉義縣",
     district: "民雄鄉",
