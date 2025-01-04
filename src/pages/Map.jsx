@@ -162,7 +162,7 @@ export default function Map() {
         autoClose: true,
         searchLabel: '搜尋地址...',
         keepResult: true,
-        marker: { 
+        marker: {
 
           icon: searchResultIcon,
           draggable: false,
