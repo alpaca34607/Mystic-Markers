@@ -1,17 +1,11 @@
-import { generateComments } from './presetComments';
+import { generateTempleComments } from './themeComments';
 import { presetComments } from './presetComments';
 
 // 為每個預設標記生成隨機評論和平均評分
 const generateMarkerData = (markerId, baseMarker) => {
-    // 如果有 pageId，使用對應的預設評論
     let comments;
-    if (baseMarker.pageId) {
-        const pageKey = `page${baseMarker.pageId}`;
-        comments = presetComments[pageKey] || [];
-    } else {
-        // 如果沒有 pageId，則生成隨機評論
-        const commentCount = Math.floor(Math.random() * 11) + 5;
-        comments = generateComments(markerId, commentCount);
+    { const commentCount = Math.floor(Math.random() * 11) + 5;
+        comments = generateTempleComments(markerId, commentCount);
     }
 
     // 計算平均評分

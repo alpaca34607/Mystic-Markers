@@ -26,6 +26,7 @@ import axios from 'axios';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { LogIn } from "lucide-react";
 import { presetComments } from '../components/presetComments';
+import { templeMarkersComments } from '../components/themeComments';
 const DEFAULT_COVER_PHOTO = 'images/default-location.jpg';
 const DEFAULT_AVATAR = 'images/Avatars/avatar (1).jpg';
 import templeMarkers from "../components/templeMarkers";
