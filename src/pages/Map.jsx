@@ -242,7 +242,7 @@ export default function Map() {
     [25.3, 122.0]
   ];
 
-
+ 
   const handleCancelEdit = () => {
     setIsEditing(false);
     setEditingComment(null);
