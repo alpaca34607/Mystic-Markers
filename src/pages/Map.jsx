@@ -24,13 +24,12 @@ import defaultMarkers from "../components/defaultMarkers";
 import taiwanRegions from "../components/taiwanRegions";
 import axios from 'axios';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
-import { LogIn } from "lucide-react";
 import { presetComments } from '../components/presetComments';
-import { templeMarkersComments } from '../components/themeComments';
 const DEFAULT_COVER_PHOTO = 'images/default-location.jpg';
 const DEFAULT_AVATAR = 'images/Avatars/avatar (1).jpg';
 import templeMarkers from "../components/templeMarkers";
 import Notice from '../components/Notice';
+
 
 
 // 預設搜尋結果標記
@@ -150,7 +149,7 @@ export default function Map() {
           countrycodes: 'tw'
         },
       });
-      
+
       // 自定搜尋結果的標記
       const searchControl = new GeoSearchControl({
         provider,
@@ -242,7 +241,7 @@ export default function Map() {
     [25.3, 122.0]
   ];
 
- 
+
   const handleCancelEdit = () => {
     setIsEditing(false);
     setEditingComment(null);
@@ -673,7 +672,7 @@ export default function Map() {
                 />
               )}
 
-
+            
               <div className="map-content">
                 <div className="map-left">
                   <div className="btn-group">
@@ -697,6 +696,7 @@ export default function Map() {
                     </button>
                   </div>
                   <div className="map-wrapper">
+
                     <MapContainer
                       center={[23.5, 121]}
                       zoom={8}
@@ -1074,6 +1074,7 @@ export default function Map() {
                     </div>
                   </div>
                 </div>
+                {/* <img src="../assets/Map/product-SoftzillaS-thumb.jpg" alt="" style={{width:"100px",height:"100px"}}/> */}
               </section>
               <footer>
                 <div className="content">
