@@ -156,9 +156,10 @@ function GalleryPage() {
                 <StarRating rating={averageRating} />
                 <span className="average-starnum">{averageRating.toFixed(1)}</span>
               </div>
-              <span className="comments-num">
-                {comments.length} 則<br />評論
-              </span>
+              <div className="comments-num">
+              <p>  {comments.length} 則</p>
+              <p>評論</p>
+              </div>
             </div>
           </div>
           <hr />
@@ -181,7 +182,7 @@ function GalleryPage() {
       </div>
 
       <div className="gallery-area">
-        <ResponsiveMasonry columnsCountBreakPoints={{ 600: 1, 900: 2, 1440: 3 }}>
+        <ResponsiveMasonry columnsCountBreakPoints={{ 786:2, 900: 2, 1440: 3 }}>
           <Masonry gutter="1rem">
             {images.map((src, index) => (
               <div key={index} className="image-wrapper">

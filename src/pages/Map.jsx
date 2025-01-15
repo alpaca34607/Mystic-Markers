@@ -678,7 +678,7 @@ export default function Map() {
                   <div className="btn-group">
                     <button
                       onClick={() => handleThemeToggle('default')}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-lg ${currentTheme === 'default'
+                      className={`${currentTheme === 'default'
                         ? 'theme-active'
                         : 'theme-unactive'
                         }`}
@@ -687,7 +687,7 @@ export default function Map() {
                     </button>
                     <button
                       onClick={() => handleThemeToggle('temple')}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-lg ${currentTheme === 'temple'
+                      className={`${currentTheme === 'temple'
                         ? 'theme-active'
                         : 'theme-unactive'
                         }`}
@@ -700,7 +700,7 @@ export default function Map() {
                     <MapContainer
                       center={[23.5, 121]}
                       zoom={8}
-                      style={{ height: "100%", width: "100%" }}
+                      // style={{ height: "100%", width: "100%" }}
                       maxBounds={taiwanBounds}
                       minZoom={7}
                       maxBoundsViscosity={1.0}

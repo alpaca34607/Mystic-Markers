@@ -462,6 +462,26 @@ a {
 .Topbar .welcome-container span {
   color: white;
 }
+@media (max-width: 768px) {
+  .Topbar .nav-wrapper {
+    margin-right: 15px;
+  }
+  .Topbar .Topbar-right {
+    margin-left: 15px;
+  }
+  .Topbar .Topbar-right .member {
+    display: none;
+  }
+  .Topbar .Topbar-right .logo {
+    width: auto;
+  }
+  .Topbar .Topbar-right .logo img {
+    margin: 0;
+  }
+  .Topbar .Topbar-right h3 {
+    display: none;
+  }
+}
 
 .member {
   display: flex;
@@ -743,6 +763,11 @@ a {
   display: flex;
   flex-direction: row;
 }
+@media (max-width: 1440px) {
+  .map .map-content .map-left {
+    height: 60%;
+  }
+}
 .map .map-content .map-left .btn-group {
   display: flex;
   flex-direction: column;
@@ -856,6 +881,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
 }
 .map .map-content .map-left .map-wrapper .leaflet-container .leaflet-control-geosearch form .glass,
 .map .map-content .map-left .map-wrapper .leaflet-container .leaflet-geosearch-bar form .glass {
@@ -878,6 +905,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
 }
 .map .map-content .map-left .map-wrapper .leaflet-container .leaflet-control-geosearch form .results div,
 .map .map-content .map-left .map-wrapper .leaflet-container .leaflet-geosearch-bar form .results div {
@@ -1090,9 +1119,21 @@ a {
 .map .map-content .map-left .map-wrapper .leaflet-container .location-info .comments-num {
   font-family: "Noto Sans TC";
   font-weight: 400;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
   color: #B3B3B3;
   text-align: right;
+}
+.map .map-content .map-left .map-wrapper .leaflet-container .location-info .comments-num p {
+  font-family: "Noto Sans TC";
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
+  display: flex;
 }
 .map .map-content .map-left .map-wrapper .leaflet-container .location-info .marker-header {
   display: flex;
@@ -1235,6 +1276,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
 }
 .map .map-content .map-left .map-wrapper .leaflet-container .location-info ::-webkit-scrollbar {
   border-right: #B595FF 1px solid;
@@ -1295,6 +1338,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
 }
 .map .map-content .map-left .map-wrapper .leaflet-container .location-info .comments-area .commentform textarea:focus {
   border: #95e05c 2px solid;
@@ -1406,6 +1451,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
   cursor: pointer;
 }
 .map .map-content .map-left .map-wrapper .leaflet-container .location-info .comments-area .commentlist .solocomment .preuser-data .preuser-info button:hover {
@@ -1460,6 +1507,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
 }
 .map .list-panel {
   display: flex;
@@ -1583,6 +1632,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
   border-radius: 5px;
   width: 100%;
   height: 100%;
@@ -1681,6 +1732,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
   color: #B3B3B3;
 }
 .map .list-panel .marker-list .list-area .list-section .marker-list-item hr {
@@ -1700,6 +1753,11 @@ a {
 }
 .map .list-panel .marker-list .list-area .list-section .marker-list-item .all-list {
   margin-top: 0;
+}
+@media (max-width: 1440px) {
+  .map .list-panel {
+    width: 30%;
+  }
 }
 .map .top-markers {
   margin: 110px 10%;
@@ -1772,6 +1830,66 @@ a {
   letter-spacing: 0.05rem;
   line-height: 1.8;
   color: #B3B3B3;
+}
+@media (max-width: 1439px) {
+  .map {
+    display: flex;
+    flex-direction: column;
+  }
+  .map .map-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding-top: 10%;
+  }
+  .map .map-content .map-left {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+  }
+  .map .map-content .map-left .btn-group {
+    flex-direction: row;
+    margin: 0 0 20px 0;
+    box-sizing: border-box;
+  }
+  .map .map-content .map-left .btn-group button {
+    writing-mode: horizontal-tb;
+    border-radius: 5px 5px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+  }
+  .map .map-content .map-left .map-wrapper {
+    width: 80%;
+    height: 65vh;
+    min-width: 375px;
+    max-width: 80%;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .map .map-content .map-left .map-wrapper .leaflet-container {
+    width: 100%;
+    height: 100%;
+  }
+  .map .map-content .map-left .map-wrapper .leaflet-geosearch-bar {
+    display: none;
+  }
+  .map .map-content .map-left .map-wrapper .leaflet-container {
+    width: 100% !important; /* 使用 !important 來確保覆蓋其他樣式 */
+    height: 100% !important;
+    margin: 0 auto; /* 讓地圖置中 */
+  }
+  .map .map-content .list-panel {
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    height: auto;
+    max-width: 80%;
+  }
 }
 
 .gallery-page {
@@ -1896,16 +2014,26 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
+  overflow: hidden;
 }
 .gallery-page .location-info .info-area .info-text .comments-num {
   display: flex;
+  flex-direction: column;
+  color: #B3B3B3;
+}
+.gallery-page .location-info .info-area .info-text .comments-num p {
+  display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  text-align: right;
-  color: #B3B3B3;
   font-family: "Noto Sans TC";
   font-weight: 400;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
+  overflow: hidden;
+  text-align: right;
 }
 .gallery-page .comments-area {
   width: 100%;
@@ -1976,6 +2104,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
 }
 .gallery-page .comments-area .commentform textarea:focus {
   border-color: #acff6c;
@@ -2086,6 +2216,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
   cursor: pointer;
 }
 .gallery-page .comments-area .commentlist .solocomment .preuser-data .preuser-info button:hover {
@@ -2133,6 +2265,8 @@ a {
   font-family: "Noto Sans TC";
   font-weight: 400;
   font-size: 0.8125rem;
+  letter-spacing: 0rem;
+  line-height: 1.5;
 }
 .gallery-page .gallery-area {
   width: 880px;
@@ -2157,6 +2291,57 @@ a {
 .gallery-page .gallery-area .image-wrapper img:hover {
   transform: scale(1.05);
   filter: brightness(0.5);
+}
+@media (max-width: 768px) {
+  .gallery-page {
+    padding: 5%;
+    flex-direction: column;
+  }
+  .gallery-page .location-info {
+    width: 100%;
+    min-width: 100%;
+  }
+  .gallery-page .location-info .cover-image {
+    width: 100%;
+    height: 50%;
+    padding: 0;
+  }
+  .gallery-page .location-info .info-area {
+    width: 100%;
+    height: 60vh;
+  }
+  .gallery-page .location-info .info-area .info-text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 8px 0;
+  }
+  .gallery-page .location-info .info-area .info-text h1 {
+    overflow: hidden;
+    margin: 8px 0;
+    font-family: "Noto Sans TC";
+    font-weight: 500;
+    font-size: 1.6rem;
+  }
+  .gallery-page .location-info .info-area .info-text .user-rating {
+    overflow: hidden;
+    margin-bottom: 20px 0;
+  }
+  .gallery-page .location-info .info-area .info-text .user-rating .comments-num {
+    flex-direction: row;
+  }
+  .gallery-page .location-info .info-area .comments-area {
+    padding: 20px;
+    height: calc(60vh - 100px);
+  }
+  .gallery-page .location-info .info-area .commentlist {
+    width: 100%;
+  }
+  .gallery-page .gallery-area {
+    width: 100%;
+    margin: 0;
+    margin: 20px 0;
+  }
 }
 
 /*HOME  */

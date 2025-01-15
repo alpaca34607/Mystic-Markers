@@ -8,10 +8,19 @@ $EN : 'Playfair Display';
 $font-w-bold: 600;
 
 // 字體樣式變數
+$font-regular-12: (
+  font-family: $Chinese,
+  font-weight: 400,
+  font-size: 0.75rem,
+  letter-spacing: 0rem,
+  line-height:1.5,
+);
 $font-regular-13: (
   font-family: $Chinese,
   font-weight: 400,
-  font-size: 0.8125rem // 13px
+  font-size: 0.8125rem, // 13px
+  letter-spacing: 0rem,
+  line-height:1.5,
 );
 
 $font-medium-14: (
