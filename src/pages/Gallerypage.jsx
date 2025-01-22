@@ -5,6 +5,7 @@ import { imageConfig } from "../components/imageConfig";
 import StarRating from "../components/StarRating";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
+import { Link } from "react-router-dom";
 import { presetComments, generateComments } from "../components/presetComments";
 import "../style.scss";
 
@@ -140,8 +141,11 @@ function GalleryPage() {
 
 
 
-  return (
+  return (  
+   
     <div className="gallery-page">
+       <Link to="/Map" ><div className="backto-map"><img src="images/Mapgallery/go-back.svg" alt="回到地圖按鈕" /><span>回到地圖</span></div></Link>
+       <div className="page-container">
       <div className="location-info">
         {images.length > 0 && (
           <div className="cover-image">
@@ -150,16 +154,17 @@ function GalleryPage() {
         )}
         <div className="info-area">
           <div className="info-text">
-            <h1>{location}</h1>
+          <h1 className={location.length > 4 ? 'long-title' : ''}>
+    {location}
+  </h1>
             <div className="user-rating">
               <div className="average-rating">
                 <StarRating rating={averageRating} />
                 <span className="average-starnum">{averageRating.toFixed(1)}</span>
               </div>
-              <div className="comments-num">
-              <p>  {comments.length} 則</p>
-              <p>評論</p>
-              </div>
+              <span className="comments-num">
+                {comments.length} 則<br />評論
+              </span>
             </div>
           </div>
           <hr />
@@ -182,7 +187,7 @@ function GalleryPage() {
       </div>
 
       <div className="gallery-area">
-        <ResponsiveMasonry columnsCountBreakPoints={{ 786:2, 900: 2, 1440: 3 }}>
+        <ResponsiveMasonry columnsCountBreakPoints={{ 600: 1, 900: 2, 1440: 3 }}>
           <Masonry gutter="1rem">
             {images.map((src, index) => (
               <div key={index} className="image-wrapper">
@@ -192,6 +197,7 @@ function GalleryPage() {
           </Masonry>
         </ResponsiveMasonry>
       </div>
+    </div>
     </div>
   );
 }

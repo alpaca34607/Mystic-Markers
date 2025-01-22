@@ -272,15 +272,12 @@ a {
   cursor: none;
   pointer-events: none;
   /* 整體視窗背景遮罩 */
+  /* 容器來包住 modal 和關閉按鈕 */
   /* 主視窗 */
   /* 關閉按鈕 (叉叉) */
-  /* 表單容器 */
-  /* 輸入框 */
-  /* 按鈕樣式 */
-  /* 登入按鈕 */
-  /* 註冊按鈕 */
-  /* 訊息文字 */
-  /* 密碼顯示文字 */
+  /* 成功訊息樣式 */
+  /* 錯誤提示樣式 */
+  /* 電子郵件提示區域 */
 }
 .Topbar .Topbar-right,
 .Topbar .nav-wrapper {
@@ -323,120 +320,166 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  /* 半透明深色背景 */
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
+.Topbar .modal-container {
+  position: relative;
+  width: 400px;
+}
 .Topbar .modal {
   background: #2a2a2a;
-  /* 深灰色背景 */
-  border-radius: 12px;
-  width: 350px;
-  padding: 60px 80px;
+  border-radius: 20px;
+  width: 300px;
+  padding: 30px 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   position: relative;
   text-align: center;
-  font-family: "Arial", sans-serif;
 }
 .Topbar .close-btn {
   position: absolute;
-  top: 0px;
-  right: -220px;
-  background: transparent;
+  top: 15px;
+  left: 295px;
+  background: rgba(42, 42, 42, 0.8);
   border: none;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
   color: #acff6c;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  z-index: 1001;
 }
 .Topbar .close-btn:hover {
-  color: #b595ff;
-  /* 懸停時變紫色 */
+  color: #B595FF;
+  background: rgb(42, 42, 42);
 }
 .Topbar .title-login {
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* LOGO 圖片  */
-  /* 標題 */
+  margin-bottom: 20px;
 }
 .Topbar .title-login .login-LOGO {
   width: 25%;
+  height: auto;
+  margin-bottom: 10px;
 }
 .Topbar .title-login h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 20px;
   color: #acff6c;
-  /* 螢光綠主色 */
+  margin: 0;
 }
 .Topbar .form-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  /* 所有按鈕的基本樣式 */
+  /* 登入按鈕特定樣式 */
+  /* 註冊按鈕特定樣式 */
+}
+.Topbar .form-container label {
+  align-self: flex-start;
+  color: #FFFFFF;
+  margin-bottom: 5px;
+  font-size: 14px;
 }
 .Topbar .form-container input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #b595ff;
-  /* 淡紫色邊框 */
-  border-radius: 6px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #FFFFFF;
   font-size: 14px;
   box-sizing: border-box;
-  background-color: #ffffff;
-  /* 白色背景 */
-  color: #2a2a2a;
-  /* 深灰色文字 */
 }
-.Topbar .form-container input:focus {
-  outline: none;
-  border-color: #acff6c;
-  /* 聚焦時變綠色 */
+.Topbar .form-container input::placeholder {
+  color: #999;
 }
-.Topbar button {
+.Topbar .form-container .login-btn,
+.Topbar .form-container .register-btn {
   width: 100%;
-  padding: 12px;
+  max-width: 280px;
+  /* 限制最大寬度 */
+  height: 40px;
+  /* 固定高度 */
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  background-color: none;
-}
-.Topbar .login-btn {
-  background-color: #acff6c;
-  color: #2a2a2a;
-}
-.Topbar .login-btn:hover {
-  background-color: #95e05c;
-}
-.Topbar .register-btn {
-  background-color: #b595ff;
-  color: #ffffff;
-}
-.Topbar .register-btn:hover {
-  background-color: #9c7fdd;
-}
-.Topbar p {
   font-size: 14px;
-  color: #ffffff;
-  /* 白色文字 */
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-.Topbar p:hover {
-  color: #b595ff;
-  /* 紫色 */
-}
-.Topbar .password-display {
-  font-size: 16px;
-  color: #acff6c;
+  /* 減小字體大小 */
+  padding: 0;
+  /* 移除內邊距 */
+  margin: 8px 0;
+  /* 統一外邊距 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
+}
+.Topbar .form-container .login-btn {
+  background-color: #acff6c;
+  color: #2A2A2A;
+}
+.Topbar .form-container .login-btn:hover {
+  opacity: 0.9;
+}
+.Topbar .form-container .login-btn.google {
+  background-color: #B3B3B3;
+}
+.Topbar .form-container .register-btn {
+  background-color: #B595FF;
+  color: #2A2A2A;
+}
+.Topbar .form-container .register-btn:hover {
+  opacity: 0.9;
+}
+.Topbar .register-forgot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 5px;
+}
+.Topbar .register-forgot-container p {
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 0;
+}
+.Topbar .register-forgot-container p:hover {
+  color: #acff6c;
+}
+.Topbar .register-forgot-container span {
+  color: #FFFFFF;
+}
+.Topbar .success-message {
+  color: #acff6c;
+  font-size: 16px;
+  margin: 20px 0;
+}
+.Topbar .error-message {
+  color: #B595FF;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.Topbar .email-hint {
+  font-size: 12px;
+  color: #B3B3B3;
+  margin-top: 10px;
+  text-align: center;
 }
 .Topbar .welcome-container {
   display: flex;
@@ -463,8 +506,15 @@ a {
   color: white;
 }
 @media (max-width: 768px) {
+  .Topbar {
+    padding: 25px 0 50px 0;
+  }
   .Topbar .nav-wrapper {
     margin-right: 15px;
+  }
+  .Topbar .nav-wrapper #news,
+  .Topbar .nav-wrapper #Group {
+    margin-right: 8px;
   }
   .Topbar .Topbar-right {
     margin-left: 15px;
@@ -665,13 +715,14 @@ a {
 .totop {
   position: fixed;
   transition: "bottom 0.3s ease";
-  right: 50px;
-  width: 50px;
-  height: 50px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
   background: url("/images/gototop.svg");
   background-repeat: no-repeat;
-  background-size: 60px;
-  padding: 60px;
+  background-size: cover;
+  background-position: center;
+  margin: 60px;
   border: none;
   z-index: 999;
   box-shadow: rgba(0, 0, 0, 0.5);
@@ -685,6 +736,19 @@ a {
   transform: translateY(2px);
   filter: hue-rotate(150deg) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
   cursor: none;
+}
+@media (max-width: 1440px) {
+  .totop {
+    right: 0px;
+    margin: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .totop {
+    width: 0px;
+    height: 0px;
+    padding: 0;
+  }
 }
 
 /* 地圖照片頁 */
@@ -1754,11 +1818,6 @@ a {
 .map .list-panel .marker-list .list-area .list-section .marker-list-item .all-list {
   margin-top: 0;
 }
-@media (max-width: 1440px) {
-  .map .list-panel {
-    width: 30%;
-  }
-}
 .map .top-markers {
   margin: 110px 10%;
 }
@@ -1791,13 +1850,15 @@ a {
   width: 200px;
 }
 .map .top-markers .top-list .row .top-item .img-wrapper {
-  display: inline-block;
-  width: 120px;
+  position: relative;
   height: 120px;
-  overflow: hidden;
+  width: 120px;
 }
 .map .top-markers .top-list .row .top-item .img-wrapper img {
-  width: 120px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 10px;
 }
 .map .top-markers .top-list .row .top-item .top-discription {
@@ -1816,9 +1877,6 @@ a {
   overflow: hidden;
   margin-bottom: 16px;
 }
-.map .top-markers .top-list .row .top-item .top-discription a:hover {
-  color: #B595FF;
-}
 .map .top-markers .top-list .row .top-item .top-discription a:active {
   color: #FFFFFF;
   transform: translateY(2px);
@@ -1830,6 +1888,19 @@ a {
   letter-spacing: 0.05rem;
   line-height: 1.8;
   color: #B3B3B3;
+}
+@media (max-width: 1024px) {
+  .map .top-markers .top-list .row .top-item {
+    flex-direction: column;
+    align-items: center;
+  }
+  .map .top-markers .top-list .row .top-item .img-wrapper {
+    width: 100%;
+  }
+  .map .top-markers .top-list .row .top-item .top-discription {
+    width: auto;
+    margin: 16px 0;
+  }
 }
 @media (max-width: 1439px) {
   .map {
@@ -1879,9 +1950,11 @@ a {
     display: none;
   }
   .map .map-content .map-left .map-wrapper .leaflet-container {
-    width: 100% !important; /* 使用 !important 來確保覆蓋其他樣式 */
+    width: 100% !important;
+    /* 使用 !important 來確保覆蓋其他樣式 */
     height: 100% !important;
-    margin: 0 auto; /* 讓地圖置中 */
+    margin: 0 auto;
+    /* 讓地圖置中 */
   }
   .map .map-content .list-panel {
     width: 100%;
@@ -1891,16 +1964,81 @@ a {
     max-width: 80%;
   }
 }
+@media (max-width: 768px) {
+  .map .map-content {
+    padding-top: 15%;
+  }
+  .map .top-markers .top-list .row {
+    gap: 10% 30px;
+  }
+  .map .top-markers .top-list .row .top-item {
+    flex-direction: column;
+    align-items: center;
+  }
+  .map .top-markers .top-list .row .top-item .top-discription {
+    width: auto;
+    margin: 16px 0;
+  }
+  .map .top-markers .top-list .row .top-item .top-discription p {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .map .map-content .map-left .map-wrapper .leaflet-container .leaflet-left a {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .map .map-content {
+    padding-top: 20%;
+  }
+  .map .map-content .map-left .map-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+  .map .top-markers .heading .everyone-search {
+    display: none;
+  }
+}
 
 .gallery-page {
   display: flex;
-  justify-content: space-around;
-  padding: 110px 240px;
+  flex-direction: column;
   margin-top: 110px;
+  padding: 110px 15%;
   cursor: none;
 }
-.gallery-page div,
-.gallery-page span {
+.gallery-page .backto-map {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  padding: 2% 0;
+}
+.gallery-page .backto-map img {
+  height: 24px;
+  width: 24px;
+}
+.gallery-page .backto-map span {
+  color: #acff6c;
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+}
+.gallery-page .backto-map:hover {
+  filter: invert(42%) saturate(1352%) hue-rotate(140deg) brightness(120%) contrast(119%);
+}
+.gallery-page .backto-map:active {
+  transform: translateY(2px);
+  filter: brightness(4);
+}
+.gallery-page .page-container {
+  display: flex;
+  justify-content: space-around;
+}
+.gallery-page .page-container div,
+.gallery-page .page-container span {
   margin: 0;
   padding: 0;
   border: 0;
@@ -1908,18 +2046,18 @@ a {
   line-height: 1.5;
   overflow-x: hidden;
 }
-.gallery-page .star-size {
+.gallery-page .page-container .star-size {
   width: 24px;
   height: 24px;
   cursor: none;
 }
-.gallery-page .star-inarrow {
+.gallery-page .page-container .star-inarrow {
   width: auto;
   height: auto;
   display: inline-flex;
   cursor: none;
 }
-.gallery-page .location-info {
+.gallery-page .page-container .location-info {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1930,20 +2068,20 @@ a {
   border-radius: 5px;
   border: #B595FF 1.5px solid;
 }
-.gallery-page .location-info .cover-image {
+.gallery-page .page-container .location-info .cover-image {
   width: calc(100% - 48px);
   height: 285px;
   object-fit: cover;
   overflow: hidden;
   padding: 24px;
 }
-.gallery-page .location-info .cover-image img {
+.gallery-page .page-container .location-info .cover-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   overflow: hidden;
 }
-.gallery-page .location-info .info-area {
+.gallery-page .page-container .location-info .info-area {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1951,21 +2089,21 @@ a {
   box-sizing: border-box;
   max-height: 100vh;
 }
-.gallery-page .location-info .info-area ::-webkit-scrollbar {
+.gallery-page .page-container .location-info .info-area ::-webkit-scrollbar {
   width: 12px;
   border-bottom: none;
   border-top: none;
   border-right: none;
   cursor: none;
 }
-.gallery-page .location-info .info-area hr {
+.gallery-page .page-container .location-info .info-area hr {
   width: 100%;
   background-color: #95e05c;
   border: none;
   height: 1.5px;
   margin-bottom: 0px;
 }
-.gallery-page .location-info .info-area .info-text {
+.gallery-page .page-container .location-info .info-area .info-text {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -1974,40 +2112,44 @@ a {
   align-items: center;
   overflow: hidden;
 }
-.gallery-page .location-info .info-area .info-text h1 {
+.gallery-page .page-container .location-info .info-area .info-text h1 {
   text-align: center;
   font-family: "Noto Sans TC";
   font-weight: 500;
   font-size: 2.25rem;
   color: #FFFFFF;
 }
-.gallery-page .location-info .info-area .info-text .user-rating {
+.gallery-page .page-container .location-info .info-area .info-text h1.long-title {
+  font-size: 30px;
+  letter-spacing: 0.1rem;
+}
+.gallery-page .page-container .location-info .info-area .info-text .user-rating {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
 }
-.gallery-page .location-info .info-area .info-text .user-rating .average-rating {
+.gallery-page .page-container .location-info .info-area .info-text .user-rating .average-rating {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.gallery-page .location-info .info-area .info-text .user-rating .average-rating .rating {
+.gallery-page .page-container .location-info .info-area .info-text .user-rating .average-rating .rating {
   display: flex;
   justify-content: center;
   margin-right: 8px;
 }
-.gallery-page .location-info .info-area .info-text .user-rating .average-rating .rating .star-size {
+.gallery-page .page-container .location-info .info-area .info-text .user-rating .average-rating .rating .star-size {
   height: 28px;
   width: 28px;
   color: #acff6c;
   fill: #acff6c;
 }
-.gallery-page .location-info .info-area .info-text .user-rating .average-rating .rating .empty-star {
+.gallery-page .page-container .location-info .info-area .info-text .user-rating .average-rating .rating .empty-star {
   fill: none;
 }
-.gallery-page .location-info .info-area .info-text .user-rating .average-rating .average-starnum {
+.gallery-page .page-container .location-info .info-area .info-text .user-rating .average-rating .average-starnum {
   color: #B3B3B3;
   margin-top: 0px;
   margin-right: 20px;
@@ -2018,12 +2160,12 @@ a {
   line-height: 1.5;
   overflow: hidden;
 }
-.gallery-page .location-info .info-area .info-text .comments-num {
+.gallery-page .page-container .location-info .info-area .info-text .comments-num {
   display: flex;
   flex-direction: column;
   color: #B3B3B3;
 }
-.gallery-page .location-info .info-area .info-text .comments-num p {
+.gallery-page .page-container .location-info .info-area .info-text .comments-num p {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -2035,34 +2177,34 @@ a {
   overflow: hidden;
   text-align: right;
 }
-.gallery-page .comments-area {
+.gallery-page .page-container .comments-area {
   width: 100%;
   padding: 30px 40px;
   box-sizing: border-box;
   height: 100vh;
 }
-.gallery-page .comments-area .commentform {
+.gallery-page .page-container .comments-area .commentform {
   width: 100%;
   padding: 0;
 }
-.gallery-page .comments-area .commentform .comment-title {
+.gallery-page .page-container .comments-area .commentform .comment-title {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
 }
-.gallery-page .comments-area .commentform .comment-title h2 {
+.gallery-page .page-container .comments-area .commentform .comment-title h2 {
   font-family: "Noto Sans TC";
   font-weight: 500;
   font-size: 1rem;
   color: #B3B3B3;
 }
-.gallery-page .comments-area .commentform .comment-title .rating {
+.gallery-page .page-container .comments-area .commentform .comment-title .rating {
   display: flex;
   align-items: center;
   margin-left: 8px;
   cursor: none;
 }
-.gallery-page .comments-area .commentform .alert-message {
+.gallery-page .page-container .comments-area .commentform .alert-message {
   padding: 1rem;
   margin-bottom: 1rem;
   background-color: #acff6c;
@@ -2074,7 +2216,7 @@ a {
   box-sizing: border-box;
   align-items: center;
 }
-.gallery-page .comments-area .commentform .alert-message button {
+.gallery-page .page-container .comments-area .commentform .alert-message button {
   position: absolute;
   right: 3px;
   top: 0;
@@ -2085,7 +2227,7 @@ a {
   font-size: 1rem;
   cursor: pointer;
 }
-.gallery-page .comments-area .commentform textarea {
+.gallery-page .page-container .comments-area .commentform textarea {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
@@ -2099,7 +2241,7 @@ a {
   cursor: text;
   border-radius: 10px;
 }
-.gallery-page .comments-area .commentform textarea::placeholder {
+.gallery-page .page-container .comments-area .commentform textarea::placeholder {
   color: #949494;
   font-family: "Noto Sans TC";
   font-weight: 400;
@@ -2107,25 +2249,25 @@ a {
   letter-spacing: 0rem;
   line-height: 1.5;
 }
-.gallery-page .comments-area .commentform textarea:focus {
+.gallery-page .page-container .comments-area .commentform textarea:focus {
   border-color: #acff6c;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   outline: none;
   cursor: text;
 }
-.gallery-page .comments-area .commentform textarea:disabled {
+.gallery-page .page-container .comments-area .commentform textarea:disabled {
   cursor: not-allowed;
   color: #949494;
   border-color: #B3B3B3;
 }
-.gallery-page .comments-area .commentform .comment-bottom {
+.gallery-page .page-container .comments-area .commentform .comment-bottom {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   box-sizing: border-box;
   padding: 5px;
 }
-.gallery-page .comments-area .commentform .comment-bottom button {
+.gallery-page .page-container .comments-area .commentform .comment-bottom button {
   background-color: transparent;
   border: #B595FF 1.5px solid;
   border-radius: 8px;
@@ -2138,16 +2280,16 @@ a {
   letter-spacing: 0.1rem;
   cursor: none;
 }
-.gallery-page .comments-area .commentform .comment-bottom button:hover {
+.gallery-page .page-container .comments-area .commentform .comment-bottom button:hover {
   border: #acff6c 1.5px solid;
   color: #acff6c;
 }
-.gallery-page .comments-area .commentform .comment-bottom button:active {
+.gallery-page .page-container .comments-area .commentform .comment-bottom button:active {
   border: #FFFFFF 1.5px solid;
   color: #FFFFFF;
   transform: translateY(2px);
 }
-.gallery-page .comments-area .commentform .comment-bottom .comment-length {
+.gallery-page .page-container .comments-area .commentform .comment-bottom .comment-length {
   margin-right: 8px;
   font-family: "Noto Sans TC";
   font-weight: 300;
@@ -2155,56 +2297,56 @@ a {
   letter-spacing: 0.1rem;
   color: #B3B3B3;
 }
-.gallery-page .comments-area .no-comments {
+.gallery-page .page-container .comments-area .no-comments {
   font-family: "Noto Sans TC";
   font-weight: 500;
   font-size: 1rem;
 }
-.gallery-page .comments-area .commentlist .solocomment {
+.gallery-page .page-container .comments-area .commentlist .solocomment {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   margin: 24px auto;
 }
-.gallery-page .comments-area .commentlist .solocomment hr {
+.gallery-page .page-container .comments-area .commentlist .solocomment hr {
   width: 100%;
   margin-top: 0px;
   background-color: #B595FF;
   height: 1.5px;
   border: none;
 }
-.gallery-page .comments-area .commentlist .solocomment .preuser-data {
+.gallery-page .page-container .comments-area .commentlist .solocomment .preuser-data {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
-.gallery-page .comments-area .commentlist .solocomment .preuser-data .preuser-info {
+.gallery-page .page-container .comments-area .commentlist .solocomment .preuser-data .preuser-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: auto;
 }
-.gallery-page .comments-area .commentlist .solocomment .preuser-data .preuser-info .avatar {
+.gallery-page .page-container .comments-area .commentlist .solocomment .preuser-data .preuser-info .avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   border: #ffffff 3px solid;
   overflow: hidden;
 }
-.gallery-page .comments-area .commentlist .solocomment .preuser-data .preuser-info .avatar img {
+.gallery-page .page-container .comments-area .commentlist .solocomment .preuser-data .preuser-info .avatar img {
   display: block;
   width: 100%;
 }
-.gallery-page .comments-area .commentlist .solocomment .preuser-data .preuser-info .user-name {
+.gallery-page .page-container .comments-area .commentlist .solocomment .preuser-data .preuser-info .user-name {
   font-family: "Noto Sans TC";
   font-weight: 500;
   font-size: 1rem;
   margin-left: 8px;
   color: #FFFFFF;
 }
-.gallery-page .comments-area .commentlist .solocomment .preuser-data .preuser-info button {
+.gallery-page .page-container .comments-area .commentlist .solocomment .preuser-data .preuser-info button {
   background-color: transparent;
   border: none;
   text-align: center;
@@ -2220,21 +2362,21 @@ a {
   line-height: 1.5;
   cursor: pointer;
 }
-.gallery-page .comments-area .commentlist .solocomment .preuser-data .preuser-info button:hover {
+.gallery-page .page-container .comments-area .commentlist .solocomment .preuser-data .preuser-info button:hover {
   color: #acff6c;
 }
-.gallery-page .comments-area .commentlist .solocomment .preuser-data .preuser-info button:active {
+.gallery-page .page-container .comments-area .commentlist .solocomment .preuser-data .preuser-info button:active {
   color: #FFFFFF;
   transform: translateY(2px);
 }
-.gallery-page .comments-area .commentlist .solocomment .preuser-data .preuser-rating {
+.gallery-page .page-container .comments-area .commentlist .solocomment .preuser-data .preuser-rating {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-left: 16px;
   cursor: none;
 }
-.gallery-page .comments-area .commentlist .solocomment .preuser-data .rating {
+.gallery-page .page-container .comments-area .commentlist .solocomment .preuser-data .rating {
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
@@ -2242,7 +2384,7 @@ a {
   gap: 1px;
   cursor: none;
 }
-.gallery-page .comments-area .commentlist .solocomment .comment-text {
+.gallery-page .page-container .comments-area .commentlist .solocomment .comment-text {
   margin: 24px 0 0 45px;
   font-family: "Noto Sans TC";
   font-weight: 300;
@@ -2250,13 +2392,13 @@ a {
   letter-spacing: 0.05rem;
   line-height: 1.8;
 }
-.gallery-page .comments-area .commentlist .solocomment .comment-footer {
+.gallery-page .page-container .comments-area .commentlist .solocomment .comment-footer {
   display: flex;
   justify-content: flex-end;
   align-items: baseline;
   width: 100%;
 }
-.gallery-page .comments-area .commentlist .solocomment .comment-footer .comment-date {
+.gallery-page .page-container .comments-area .commentlist .solocomment .comment-footer .comment-date {
   margin-top: 24px;
   display: flex;
   flex-direction: row;
@@ -2268,33 +2410,41 @@ a {
   letter-spacing: 0rem;
   line-height: 1.5;
 }
-.gallery-page .gallery-area {
+.gallery-page .page-container .gallery-area {
   width: 880px;
   margin-left: 40px;
   max-height: calc(100vh + 333px);
   overflow: auto;
   scrollbar-width: none;
 }
-.gallery-page .gallery-area ::-webkit-scrollbar {
+.gallery-page .page-container .gallery-area ::-webkit-scrollbar {
   display: none;
   cursor: none;
 }
-.gallery-page .gallery-area .image-wrapper {
+.gallery-page .page-container .gallery-area .image-wrapper {
   overflow: hidden;
 }
-.gallery-page .gallery-area .image-wrapper img {
+.gallery-page .page-container .gallery-area .image-wrapper img {
   width: 100%;
   height: auto;
   display: block;
   transition: transform 0.3s ease;
 }
-.gallery-page .gallery-area .image-wrapper img:hover {
+.gallery-page .page-container .gallery-area .image-wrapper img:hover {
   transform: scale(1.05);
   filter: brightness(0.5);
 }
+@media (max-width: 1440px) {
+  .gallery-page {
+    padding: 5% 10%;
+  }
+  .gallery-page .gallery-area {
+    height: 90vh;
+  }
+}
 @media (max-width: 768px) {
   .gallery-page {
-    padding: 5%;
+    padding: 5% 15%;
     flex-direction: column;
   }
   .gallery-page .location-info {
@@ -2338,9 +2488,19 @@ a {
     width: 100%;
   }
   .gallery-page .gallery-area {
+    align-items: center;
     width: 100%;
-    margin: 0;
-    margin: 20px 0;
+    margin: 30px 0;
+    border: #B595FF 1.5px solid;
+    border-radius: 5px;
+  }
+}
+@media (max-width: 600px) {
+  .gallery-page {
+    padding: 5% 5%;
+  }
+  .gallery-page .gallery-area {
+    width: 100%;
   }
 }
 
@@ -2348,12 +2508,14 @@ a {
 .home {
   position: relative;
   width: 100%;
+  max-width: 100%;
   height: 100%;
   background: url("/images/noise.jpg") repeat;
   background-size: auto;
   background-blend-mode: normal;
   z-index: 6;
   isolation: isolate;
+  overflow-x: hidden;
   cursor: none;
 }
 .home .banner {
@@ -2489,6 +2651,7 @@ a {
   left: 0px;
   margin-bottom: 24px;
   z-index: 10;
+  padding: 0 30px;
 }
 .home .intro .title h2 {
   font-family: "Noto Sans TC";
@@ -2797,11 +2960,6 @@ a {
   font-size: 1rem;
   letter-spacing: 0.05rem;
   line-height: 1.8;
-  font-family: "Noto Sans TC";
-  font-weight: 300;
-  font-size: 1rem;
-  letter-spacing: 0.05rem;
-  line-height: 1.8;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -2810,6 +2968,271 @@ a {
   left: 50%;
   transform: translate(-50%, -50%);
   text-decoration: none;
+}
+@media (max-width: 1200px) {
+  .home .banner {
+    height: 100vh;
+  }
+  .home .banner .fog-area-p,
+  .home .banner .fog-masked-g {
+    display: none;
+  }
+  .home .intro .title {
+    max-width: 100%;
+    align-self: center;
+    padding: 0 60px;
+  }
+  .home .intro #intro1 {
+    margin-top: 60px;
+  }
+  .home .intro #intro1 .intro1fog-G {
+    display: none;
+  }
+  .home .intro #intro1 .door figure {
+    left: 0;
+  }
+  .home .intro #intro1 .door #intro_Q {
+    right: 10%;
+  }
+  .home .intro #intro1 .door #intro_Q img {
+    width: 80%;
+  }
+  .home .intro #intro3 .map-area {
+    width: 100%;
+  }
+  .home .intro #intro3 .map-area img {
+    margin-left: 80px;
+  }
+  .home .intro #intro3 .map-area .map-intro {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .home .intro #intro3 .map-area .map-intro div {
+    margin: 20px;
+  }
+  .home .intro #intro3 .map-area .map-intro div p {
+    margin-bottom: 0px;
+  }
+  .home .intro #intro3 .intro3fog-P {
+    display: none;
+  }
+  .home .intro #intro4 div {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .home .intro #intro4 .title {
+    padding: 30px;
+    width: 80%;
+  }
+  .home .intro #intro4 .forum-gallery {
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding: 5px 30px;
+    gap: 30px;
+  }
+  .home .intro #intro4 .forum-gallery #Legends,
+  .home .intro #intro4 .forum-gallery #Horror,
+  .home .intro #intro4 .forum-gallery #Exorcism,
+  .home .intro #intro4 .forum-gallery #Creeps,
+  .home .intro #intro4 .forum-gallery #Ruins {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 50%;
+    margin: 0;
+    left: 0;
+  }
+  .home .intro #intro4 .forum-gallery #Legends .image-link,
+  .home .intro #intro4 .forum-gallery #Horror .image-link,
+  .home .intro #intro4 .forum-gallery #Exorcism .image-link,
+  .home .intro #intro4 .forum-gallery #Creeps .image-link,
+  .home .intro #intro4 .forum-gallery #Ruins .image-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  .home .intro #intro4 .forum-gallery #Legends .image-link img,
+  .home .intro #intro4 .forum-gallery #Horror .image-link img,
+  .home .intro #intro4 .forum-gallery #Exorcism .image-link img,
+  .home .intro #intro4 .forum-gallery #Creeps .image-link img,
+  .home .intro #intro4 .forum-gallery #Ruins .image-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(5px);
+  }
+  .home .intro #intro4 .forum-gallery #Legends .image-link .text-link,
+  .home .intro #intro4 .forum-gallery #Horror .image-link .text-link,
+  .home .intro #intro4 .forum-gallery #Exorcism .image-link .text-link,
+  .home .intro #intro4 .forum-gallery #Creeps .image-link .text-link,
+  .home .intro #intro4 .forum-gallery #Ruins .image-link .text-link {
+    -webkit-writing-mode: vertical-lr;
+    writing-mode: vertical-lr;
+    letter-spacing: 0.5rem;
+  }
+  .home .intro #intro4 .forum-gallery #Legends .image-link:hover img,
+  .home .intro #intro4 .forum-gallery #Horror .image-link:hover img,
+  .home .intro #intro4 .forum-gallery #Exorcism .image-link:hover img,
+  .home .intro #intro4 .forum-gallery #Creeps .image-link:hover img,
+  .home .intro #intro4 .forum-gallery #Ruins .image-link:hover img {
+    filter: blur(0px);
+  }
+  .home .intro #intro4 .forum-gallery #Legends .image-link:hover .text-link,
+  .home .intro #intro4 .forum-gallery #Horror .image-link:hover .text-link,
+  .home .intro #intro4 .forum-gallery #Exorcism .image-link:hover .text-link,
+  .home .intro #intro4 .forum-gallery #Creeps .image-link:hover .text-link,
+  .home .intro #intro4 .forum-gallery #Ruins .image-link:hover .text-link {
+    font-family: "Noto Sans TC";
+    font-weight: 500;
+    font-size: 1rem;
+  }
+}
+@media (max-width: 768px) {
+  .home .intro #intro3 .map-area img {
+    min-width: 95%;
+  }
+}
+@media (max-width: 500px) {
+  .home .intro .title h2 {
+    font-family: "Noto Sans TC";
+    font-weight: 500;
+    font-size: 2rem;
+    padding: 0;
+  }
+  .home .intro .title h3 {
+    font-family: "Noto Sans TC";
+    font-weight: 500;
+    font-size: 1.125rem;
+    letter-spacing: 0.18rem;
+    line-height: 1.5;
+  }
+  .home .banner .logoXL {
+    margin: 60px;
+  }
+  .home .intro #intro1 {
+    min-height: 10vh;
+    height: 100vh;
+  }
+  .home .intro #intro1 .door figure {
+    width: 100%;
+    left: -10%;
+    top: 20%;
+  }
+  .home .intro #intro1 .door #intro_Q {
+    top: -20%;
+    right: 0;
+    left: 50px;
+    width: 80%;
+    margin: 0;
+  }
+  .home .intro #intro1 .door #intro_Q p {
+    font-family: "Noto Sans TC";
+    font-weight: 300;
+    font-size: 1.125rem;
+    letter-spacing: 0.18rem;
+    line-height: 1.8;
+    width: 100%;
+  }
+  .home .intro #intro2 {
+    margin: 0;
+  }
+  .home .intro #intro2 .paper {
+    display: none;
+  }
+  .home .intro #intro3 .map-area .map-intro div {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    margin: 20px 0 0 0;
+    gap: 8px;
+  }
+  .home .intro #intro3 .map-area .map-intro div h4 {
+    width: auto;
+    text-align: center;
+    margin-bottom: 8px;
+    font-family: "Playfair Display";
+    font-weight: 500;
+    font-size: 2rem;
+    font-optical-sizing: auto;
+    font-style: italic;
+  }
+  .home .intro #intro3 .map-area .map-intro div p {
+    margin: 0px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .home .intro #intro4 {
+    margin: 100px 0;
+  }
+  .home .intro #intro4 .title {
+    padding: 0 30px;
+  }
+  .home .intro #intro4 .forum-gallery {
+    flex-wrap: wrap;
+  }
+  .home .intro #intro4 .forum-gallery #Legends,
+  .home .intro #intro4 .forum-gallery #Horror,
+  .home .intro #intro4 .forum-gallery #Exorcism,
+  .home .intro #intro4 .forum-gallery #Creeps,
+  .home .intro #intro4 .forum-gallery #Ruins {
+    padding-bottom: 0;
+    height: 100px;
+    gap: 10px;
+  }
+  .home .intro #intro4 .forum-gallery #Legends .image-link,
+  .home .intro #intro4 .forum-gallery #Horror .image-link,
+  .home .intro #intro4 .forum-gallery #Exorcism .image-link,
+  .home .intro #intro4 .forum-gallery #Creeps .image-link,
+  .home .intro #intro4 .forum-gallery #Ruins .image-link {
+    height: 100%;
+  }
+  .home .intro #intro4 .forum-gallery #Legends .image-link .text-link,
+  .home .intro #intro4 .forum-gallery #Horror .image-link .text-link,
+  .home .intro #intro4 .forum-gallery #Exorcism .image-link .text-link,
+  .home .intro #intro4 .forum-gallery #Creeps .image-link .text-link,
+  .home .intro #intro4 .forum-gallery #Ruins .image-link .text-link {
+    -webkit-writing-mode: horizontal-tb;
+    writing-mode: horizontal-tb;
+    letter-spacing: 0.2rem;
+  }
+  .home .intro #intro4 .forum-gallery #Legends .image-link img,
+  .home .intro #intro4 .forum-gallery #Horror .image-link img,
+  .home .intro #intro4 .forum-gallery #Exorcism .image-link img,
+  .home .intro #intro4 .forum-gallery #Creeps .image-link img,
+  .home .intro #intro4 .forum-gallery #Ruins .image-link img {
+    filter: blur(0px);
+  }
+  .home #carousel .next,
+  .home #carousel .prev,
+  .home #carousel .prevLeftSecond,
+  .home #carousel .nextRightSecond,
+  .home #carousel .prev {
+    display: none;
+  }
+  .home .buttons {
+    display: flex;
+    top: 450px;
+    flex-direction: row;
+    gap: 32px;
+  }
+  .home .buttons .icon-btn {
+    padding: 0;
+  }
+  .home .buttons .icon-btn .icon-img {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+  }
 }
 
 /* 滑鼠 */
@@ -3093,11 +3516,37 @@ button:hover #custom-cursor::after {
   text-align: left;
   margin-left: 1.5rem;
 }
+@media (max-width: 480px) {
+  .Story .story-box .story {
+    margin-top: 10%;
+    width: 90%;
+  }
+}
+@media (max-width: 1439px) {
+  .Story .story-box {
+    width: 100%;
+    justify-content: flex-end;
+    flex: 8;
+  }
+}
+@media (max-width: 480px) {
+  .Story .story-box {
+    margin-top: 10%;
+    width: 100%;
+  }
+}
 .Story .user {
   display: flex;
   justify-content: flex-end;
   text-align: right;
   color: #acff6c;
+}
+@media (max-width: 480px) {
+  .Story .user {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
 }
 .Story .user-img {
   width: 32px;
@@ -3109,10 +3558,28 @@ button:hover #custom-cursor::after {
   margin: 5px 5px;
   font-size: 24px;
   color: #B595FF;
+  overflow: hidden;
+}
+@media (max-width: 375px) {
+  .Story .story h2 {
+    font-size: 20px;
+  }
 }
 .Story .story-title {
   position: relative;
   width: 20%;
+}
+@media (max-width: 1439px) {
+  .Story .story-title {
+    width: 40%;
+    height: auto;
+    flex: 2;
+  }
+}
+@media (max-width: 480px) {
+  .Story .story-title {
+    width: 60%;
+  }
 }
 .Story .text-title {
   position: absolute;
@@ -3140,12 +3607,63 @@ button:hover #custom-cursor::after {
   -webkit-line-clamp: 15;
   width: 32rem;
   height: 26.8rem;
+  pointer-events: none;
 }
 .Story .story-content p {
   font-family: "Noto Sans TC";
   font-weight: 300;
   font-size: 1rem;
   color: #FFFFFF;
+}
+@media (max-width: 1439px) {
+  .Story .story-content {
+    width: 31.5rem;
+    height: 30rem;
+    padding: 2rem;
+  }
+  .Story .story-content p {
+    width: 100%;
+    height: auto;
+    line-height: 2rem;
+    word-wrap: break-word;
+    white-space: normal;
+    padding: 0 1rem;
+    max-height: 22.5em;
+  }
+}
+@media (max-width: 480px) {
+  .Story .story-content {
+    width: 80%;
+    height: 25.5rem;
+    padding: 2rem;
+  }
+  .Story .story-content p {
+    width: 100%;
+    height: auto;
+    line-height: 2rem;
+    word-wrap: break-word;
+    white-space: normal;
+    padding: 0 1rem;
+    max-height: 22.5em;
+    overflow: hidden;
+  }
+}
+@media (max-height: 768px) {
+  .Story .story-content {
+    width: 80%;
+    height: 18rem;
+    padding: 2rem;
+  }
+  .Story .story-content p {
+    width: 100%;
+    height: auto;
+    line-height: 2rem;
+    word-wrap: break-word;
+    white-space: normal;
+    padding: 0 1rem;
+    max-height: 22.5em;
+    overflow: hidden;
+  }
 }
 .Story .story1 {
   text-indent: 2em;
@@ -3159,6 +3677,7 @@ button:hover #custom-cursor::after {
   text-decoration: none;
   /* 移除預設的下劃線 */
   color: #acff6c;
+  overflow: hidden;
   /* 設置顏色顏色 */
   font-family: "Noto Sans TC";
   font-weight: 300;
@@ -3166,49 +3685,67 @@ button:hover #custom-cursor::after {
   letter-spacing: 0.05rem;
   line-height: 1.8;
 }
+.Story .story a:hover {
+  filter: brightness(1.2);
+}
 .Story .share-link {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  /* 讓內容垂直對齊底部 */
-  align-items: center;
-  /* 讓內容水平居中 */
-  margin-bottom: 40%;
-  padding: 10px;
-  width: 24px;
+  max-width: 100%;
   overflow: hidden;
 }
-.Story .share-link figure {
-  margin: 0;
-  overflow: hidden;
-  /* 去除 figure 的預設外邊距 */
+.Story .share-link figure img {
+  max-height: 400px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
 }
-.Story .share-icon {
-  /* 去掉 ul 和 li 的預設樣式 */
-  list-style-type: none;
-  /* 去掉圓點符號 */
+.Story .share-link .share-icon {
+  list-style: none;
   padding: 0;
-  /* 去掉內邊距 */
+  margin: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   overflow: hidden;
+  max-height: 100%;
 }
-.Story .share-icon li {
+.Story .share-link .share-icon li {
+  margin: 0;
+  padding: 4px;
+}
+.Story .share-link .share-icon img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.Story .share-link .share-icon a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
   overflow: hidden;
+  transition: transform 0.2s ease;
 }
-.Story .share-icon img {
-  width: 24px;
-  /* 設置圖標大小 */
-  height: 24px;
-  /* 保持圖片為正方形 */
-  margin-top: 5px;
-  transition: transform 0.3s ease;
-  /* 為圖標添加懸停效果 */
+.Story .share-link .share-icon a:hover {
+  filter: brightness(1.5);
+  transform: none;
 }
-.Story .share-icon img:hover {
-  transform: scale(1.5);
-  /* 鼠標懸停時放大圖片 */
+@media (max-width: 1439px) {
+  .Story .share-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 60px;
+  }
+}
+@media (max-width: 480px) {
+  .Story .share-link {
+    height: 80%;
+    padding-top: 20%;
+    width: 48px;
+  }
 }
 .Story .countryside-story {
   position: absolute;
@@ -3221,12 +3758,29 @@ button:hover #custom-cursor::after {
   overflow: visible;
   opacity: 0.6;
 }
+@media (max-width: 1439px) {
+  .Story .countryside-story {
+    height: 30vh;
+  }
+}
+@media (max-width: 480px) {
+  .Story .countryside-story {
+    height: 50vh;
+  }
+}
 .Story .countryside-story-title {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
+  overflow: hidden;
+}
+@media (max-width: 480px) {
+  .Story .countryside-story-title {
+    top: 10%;
+    left: 40%;
+  }
 }
 .Story .flying-papersblack {
   position: absolute;
@@ -3237,6 +3791,7 @@ button:hover #custom-cursor::after {
   object-fit: cover;
   z-index: 2;
   opacity: 40%;
+  pointer-events: none;
 }
 .Story .tree {
   position: absolute;
@@ -3279,6 +3834,23 @@ button:hover #custom-cursor::after {
   box-sizing: border-box;
   /* 讓 padding 不影響容器的實際大小 */
 }
+@media (max-width: 1439px) {
+  .Story .story-item {
+    background-position: 85% 0%;
+  }
+}
+@media (max-width: 480px) {
+  .Story .story-item {
+    background-position: 82% 0%;
+    background-size: 500%;
+  }
+}
+@media (max-width: 375px) {
+  .Story .story-item {
+    background-position: 82% 0%;
+    background-size: 300%;
+  }
+}
 .Story .red-girl-container {
   background-image: url("/images/Story/old-torn-paper-inksplash-2.png");
   background-size: contain;
@@ -3303,6 +3875,25 @@ button:hover #custom-cursor::after {
   /* 確保 padding 不會影響總尺寸 */
   margin-left: 10%;
   /* 確保容器靠左 */
+}
+@media (max-width: 1440px) {
+  .Story .red-girl-container {
+    width: 45%;
+  }
+}
+@media (max-width: 1439px) {
+  .Story .red-girl-container {
+    padding: 0;
+    width: 60%;
+    margin-left: 5%;
+    background: radial-gradient(#000000, rgba(0, 0, 0, 0));
+  }
+}
+@media (max-width: 480px) {
+  .Story .red-girl-container {
+    width: 80%;
+    margin: 0;
+  }
 }
 .Story .red-girl-text {
   display: flex;
@@ -3369,6 +3960,23 @@ button:hover #custom-cursor::after {
   /* 讓 padding 不影響容器的實際大小 */
   overflow: visible;
 }
+@media (max-width: 1439px) {
+  .Story .story-item2 {
+    background-position: 50% 0%;
+  }
+}
+@media (max-width: 480px) {
+  .Story .story-item2 {
+    background-position: 45% 90%;
+    background-size: 500%;
+  }
+}
+@media (max-width: 375px) {
+  .Story .story-item2 {
+    background-position: 30% 0%;
+    background-size: 300%;
+  }
+}
 .Story .yellow-peter-pan-container {
   background-image: url("/images/Story/old-torn-paper-inksplash-2.png");
   background-size: contain;
@@ -3394,6 +4002,25 @@ button:hover #custom-cursor::after {
   /* 自動將容器推到右邊 */
   margin-right: 10%;
   /* 控制容器與右邊界的距離 */
+}
+@media (max-width: 1440px) {
+  .Story .yellow-peter-pan-container {
+    width: 45%;
+  }
+}
+@media (max-width: 1439px) {
+  .Story .yellow-peter-pan-container {
+    padding: 0;
+    margin-right: 5%;
+    width: 60%;
+    background: radial-gradient(#000000, rgba(0, 0, 0, 0));
+  }
+}
+@media (max-width: 480px) {
+  .Story .yellow-peter-pan-container {
+    width: 80%;
+    margin-right: 0;
+  }
 }
 .Story .yellow-peter-pan {
   display: flex;
@@ -3460,6 +4087,11 @@ button:hover #custom-cursor::after {
   box-sizing: border-box;
   /* 讓 padding 不影響容器的實際大小 */
 }
+@media (max-width: 1439px) {
+  .Story .story-item3 {
+    background-position: 65% 0%;
+  }
+}
 .Story .lantern-sister-container {
   background-image: url("/images/Story/old-torn-paper-inksplash-2.png");
   background-size: contain;
@@ -3484,6 +4116,25 @@ button:hover #custom-cursor::after {
   /* 確保 padding 不會影響總尺寸 */
   margin-left: 10%;
   /* 確保容器靠左 */
+}
+@media (max-width: 1440px) {
+  .Story .lantern-sister-container {
+    width: 45%;
+  }
+}
+@media (max-width: 1439px) {
+  .Story .lantern-sister-container {
+    padding: 0;
+    margin-left: 5%;
+    width: 60%;
+    background: radial-gradient(#000000, rgba(0, 0, 0, 0));
+  }
+}
+@media (max-width: 480px) {
+  .Story .lantern-sister-container {
+    width: 80%;
+    margin: 0;
+  }
 }
 .Story .lantern-sister-text {
   display: flex;
@@ -3552,6 +4203,11 @@ button:hover #custom-cursor::after {
   /* 讓 padding 不影響容器的實際大小 */
   margin-bottom: 20%;
 }
+@media (max-width: 1439px) {
+  .Story .story-item4 {
+    background-position: 15% 0%;
+  }
+}
 .Story .goat-man-container {
   background-image: url("/images/Story/old-torn-paper-inksplash-2.png");
   background-size: contain;
@@ -3577,6 +4233,25 @@ button:hover #custom-cursor::after {
   /* 自動將容器推到右邊 */
   margin-right: 10%;
   /* 控制容器與右邊界的距離 */
+}
+@media (max-width: 1440px) {
+  .Story .goat-man-container {
+    width: 45%;
+  }
+}
+@media (max-width: 1439px) {
+  .Story .goat-man-container {
+    padding: 0;
+    margin-right: 5%;
+    width: 60%;
+    background: radial-gradient(#000000, rgba(0, 0, 0, 0));
+  }
+}
+@media (max-width: 480px) {
+  .Story .goat-man-container {
+    width: 80%;
+    margin-right: 0;
+  }
 }
 .Story .goat-man-title {
   display: flex;
@@ -3628,37 +4303,31 @@ button:hover #custom-cursor::after {
   word-wrap: break-word;
   /* 當文字長度過長時換行 */
 }
-@media screen and (max-width: 1200px) {
-  .Story .feature-story-container {
-    padding: 20px;
-    /* 減少邊距，適應較小視窗 */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .Story .feature-story-container p {
-    font-size: 18px;
-    /* 減小文字大小 */
-  }
-}
-@media screen and (max-width: 768px) {
-  .Story .feature-story-container {
-    padding: 15px;
-    /* 調整小視窗的邊距 */
+@media screen and (max-width: 1439px) {
+  .Story .feature-story .feature-story-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10% 5%;
   }
   .Story .feature-story-container p {
     font-size: 16px;
-    /* 進一步縮小文字 */
   }
 }
 @media screen and (max-width: 480px) {
-  .Story .feature-story-container {
-    padding: 10px;
-    /* 進一步調整小設備 */
-    background-size: contain;
-    /* 背景圖適應較小的裝置 */
+  .Story .feature-story .feature-story-container {
+    padding: 20% 5%;
   }
-  .Story .feature-story-container p {
+  .Story .feature-story .feature-story-container p {
+    font-size: 14px;
+    /* 手機視窗下文字更小 */
+  }
+}
+@media screen and (max-height: 758px) {
+  .Story .feature-story .feature-story-container {
+    padding: 20% 5%;
+    overflow: hidden;
+  }
+  .Story .feature-story .feature-story-container p {
     font-size: 14px;
     /* 手機視窗下文字更小 */
   }
@@ -3749,7 +4418,6 @@ button:hover #custom-cursor::after {
   border: 1.5px solid #B3B3B3;
   border-radius: 5px;
   padding: 20px;
-  /* 撰寫文章  */
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar {
   display: flex;
@@ -3769,12 +4437,14 @@ button:hover #custom-cursor::after {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-weight: 600;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons div:hover {
   background-color: #B595FF;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons div:hover p {
   color: #2A2A2A;
+  font-weight: 600;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons div.active {
   background-color: #d8b4f8;
@@ -3792,15 +4462,21 @@ button:hover #custom-cursor::after {
   letter-spacing: 2.7px;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
-  display: flex;
+  display: inline-flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container {
+  width: 350px;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar {
   display: flex;
   align-items: center;
   border: 2px solid #acff6c;
-  border-radius: 8px;
+  border-radius: 5px;
   overflow: hidden;
-  height: 40px;
+  height: 30px;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar .search-input {
   flex: 1;
@@ -3808,7 +4484,8 @@ button:hover #custom-cursor::after {
   border: none;
   outline: none;
   font-size: 16px;
-  color: #2A2A2A;
+  color: #FFFFFF;
+  background-color: #2A2A2A;
   height: 100%;
   box-sizing: border-box;
 }
@@ -3833,6 +4510,22 @@ button:hover #custom-cursor::after {
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar .search-button:hover {
   background-color: #9fe75e;
 }
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .PostModal-bar {
+  display: flex;
+  /* 使子元素水平排列 */
+  align-items: center;
+  /* 垂直置中 */
+  justify-content: flex-end;
+  /* 將按鈕向右對齊（可根據需求調整） */
+  gap: 1rem;
+  /* 控制子元素之間的間距 */
+  width: 35px;
+  height: 35px;
+}
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .PostModal-bar img {
+  padding: 0;
+  display: block;
+}
 .forum-body .forum-container .forum-layout .main-content .article-list {
   display: flex;
   flex-direction: column;
@@ -3843,6 +4536,11 @@ button:hover #custom-cursor::after {
   gap: 20px;
   padding: 20px;
   border-bottom: 1px solid #B3B3B3;
+}
+@media (max-width: 480px) {
+  .forum-body .forum-container .forum-layout .main-content .article-list .article-card {
+    padding: 20px 0;
+  }
 }
 .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content {
   flex: 1;
@@ -3862,6 +4560,47 @@ button:hover #custom-cursor::after {
   width: 32px;
   height: 32px;
   border-radius: 50%;
+}
+@media (max-width: 480px) {
+  .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header .author-info .author-avatar {
+    width: 24px;
+    height: 24px;
+  }
+  .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header span {
+    font-size: 14px;
+    margin: 0;
+  }
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header .delete-date-wrapper {
+  display: flex;
+  align-items: center;
+  /* 確保刪除按鈕與日期垂直居中 */
+  gap: 10px;
+  /* 控制按鈕和日期之間的距離 */
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header .delete-date-wrapper .delete-button {
+  background-color: #B3B3B3;
+  border: none;
+  color: white;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header .delete-date-wrapper .delete-button:hover {
+  background-color: #a3e635;
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header .delete-date-wrapper .article-date {
+  font-size: 14px;
+  color: #999;
+  text-align: right;
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header .article-header .delete-button {
+  display: inline-block;
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-header .article-header .delete-button[hidden] {
+  display: none;
 }
 .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text {
   display: flex;
@@ -3889,6 +4628,18 @@ button:hover #custom-cursor::after {
   text-overflow: ellipsis;
   white-space: normal;
 }
+@media (max-width: 480px) {
+  .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left {
+    padding-right: 8px;
+  }
+  .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .article-title {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .article-preview {
+    font-size: 12px;
+  }
+}
 .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .interaction-bar {
   display: flex;
   gap: 20px;
@@ -3908,112 +4659,275 @@ button:hover #custom-cursor::after {
   border-radius: 5px;
   object-fit: cover;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal {
-  display: none;
+@media (max-width: 480px) {
+  .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .right {
+    width: 60px;
+  }
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content span {
+  display: block;
+  /* 每行獨占一行 */
+  margin-bottom: 0.5rem;
+  /* 增加段落之間的間距 */
+  line-height: 1.6;
+  /* 行距 */
+}
+@media (max-width: 480px) {
+  .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content span {
+    margin-bottom: 0;
+  }
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal {
   position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  overflow: hidden;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .overlay {
+  position: fixed;
+  /* 固定位置，覆蓋整個視窗 */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  /* 半透明黑色背景 */
+  z-index: 980;
+  /* 確保在 modal-content 下方 */
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content {
-  background: #2A2A2A;
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content {
+  position: relative;
   padding: 20px;
   border-radius: 8px;
-  width: 400px;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: left;
+  z-index: 991;
+  /* 確保在 overlay 上方 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  overflow-y: auto;
+  /* 防止內容過多超出視窗 */
+  background-color: #2A2A2A;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .close-btn {
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .close-btn {
   position: absolute;
   top: 10px;
-  right: 15px;
-  font-size: 24px;
-  color: #aaa;
+  right: 10px;
+  color: #fff;
+  font-size: 20px;
   cursor: pointer;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .close-btn:hover {
-  color: #000;
-}
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .user-info {
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-header {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .user-info .avatar {
-  width: 40px;
-  height: 40px;
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-header .avatar {
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin-right: 10px;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .user-info #userName {
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-header .author-name {
+  background: transparent;
+  border: none;
+  color: #fff;
   font-size: 16px;
+  outline: none;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  /* 確保表單寬度一致 */
+  margin-bottom: 20px;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group label {
+  display: block;
+  margin-bottom: 8px;
   font-weight: bold;
+  color: #ccc;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #board-bar {
-  display: flex;
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group input,
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group textarea {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #444;
+  background-color: #FFFFFF;
+  color: #000;
+  border-radius: 5px;
+  outline: none;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #board-bar #boardSelect {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 15px;
-  font-size: 14px;
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group select {
+  width: 92%;
+  padding: 10px;
+  border: 1px solid #444;
+  background-color: #FFFFFF;
+  color: #000;
+  border-radius: 5px;
+  outline: none;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #postTitle,
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #postContent {
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 8px;
-  font-size: 14px;
-  box-sizing: border-box;
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group textarea {
+  height: 100px;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #postTitle#postContent,
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content #postContent#postContent {
-  height: 120px;
-  resize: none;
-}
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .media-buttons {
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group .image-upload-group {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
+  gap: 10px;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .media-buttons button {
-  padding: 8px 12px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group .image-upload-group div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .media-buttons button:hover {
-  background-color: #0056b3;
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group .image-upload-group div input[type=file] {
+  width: 100%;
+  max-width: 120px;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .action-buttons {
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group .image-upload-group div .preview-image {
+  margin-top: 5px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group .image-upload-group div span {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #ccc;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-actions {
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .action-buttons button {
-  padding: 8px 12px;
-  background-color: #007bff;
-  color: #fff;
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-actions button {
+  padding: 10px 20px;
+  font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
 }
-.forum-body .forum-container .forum-layout .main-content #postModal .modal-content .action-buttons button:hover {
-  background-color: #0056b3;
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-actions button:first-child {
+  background-color: #6c757d;
+  color: white;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-actions button:last-child {
+  background-color: #acff6c;
+  color: #1a1a1a;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-actions button:hover {
+  opacity: 0.9;
+}
+@media (max-width: 1439px) {
+  .forum-body .forum-container .forum-layout .main-content {
+    width: calc(100% - 45px);
+    max-width: 100%;
+  }
 }
 
+@media screen and (max-width: 1439px) {
+  .forum-body {
+    padding: 10% 2%;
+    margin: 0;
+  }
+  .forum-body .forum-container .forum-layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .forum-body .forum-container .forum-layout .sidebar {
+    width: 100%;
+    flex: 0 0 auto;
+    margin-bottom: 20px;
+  }
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content {
+    flex-direction: row;
+    gap: 0;
+  }
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board {
+    width: 100%;
+  }
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .forum-container .forum-layout .sidebar .sidebar-content .ad-section {
+    width: 0;
+  }
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .top-bar .search-bar {
+    width: 100%;
+  }
+  .article-list .article-card {
+    flex: 1 1 calc(50% - 10px);
+    /* 每行兩列 */
+  }
+}
+@media screen and (max-width: 480px) {
+  .forum-container {
+    flex-direction: column;
+  }
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .forum-body .forum-container {
+    padding: 5px 5px;
+    width: 100%;
+  }
+  .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons {
+    width: 100%;
+  }
+  .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons .nav-button-container {
+    padding: 0;
+  }
+  .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons .nav-button-container p {
+    font-size: 14px;
+  }
+  .top-bar {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container {
+    width: 260px;
+  }
+  .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container .search-bar {
+    height: 30px;
+  }
+  .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container .search-bar .search-button {
+    width: 40px;
+    border: 2px solid #acff6c;
+    box-shadow: none;
+    outline: none;
+  }
+  .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .PostModal-bar {
+    padding: 10px;
+  }
+  .article-list .article-card {
+    flex: 1 1 100%;
+    /* 每行一列 */
+  }
+}
 .article-view {
   margin: 0 115px;
+  padding-top: 100px;
   padding: 2rem;
   color: #ffffff;
   background-color: #2A2A2A;
+  padding-top: 130px !important;
 }
 .article-view .article-header {
   display: flex;
@@ -4031,15 +4945,22 @@ button:hover #custom-cursor::after {
   align-items: center !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.article-view .article-header .category-nav .category {
+.article-view .article-header .category-nav .category-c {
+  display: flex;
+}
+.article-view .article-header .category-nav .category-c .category-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+  border-radius: 50%;
+  object-fit: contain;
+}
+.article-view .article-header .category-nav .category-c .category {
   font-size: 1rem;
   color: #ffffff;
   display: flex;
   align-items: center;
-}
-.article-view .article-header .category-nav .category::before {
-  content: "🗂 ";
-  margin-right: 0.5rem;
 }
 .article-view .article-header .category-nav .back-link {
   color: #acff6c;
@@ -4048,12 +4969,21 @@ button:hover #custom-cursor::after {
   align-items: center;
   font-size: 0.9rem;
 }
-.article-view .article-header .category-nav .back-link::before {
-  content: "←";
-  margin-right: 0.5rem;
+.article-view .article-header .category-nav .back-link img {
+  width: 20px;
+  height: auto;
+  margin: 8px;
 }
 .article-view .article-header .category-nav .back-link:hover {
   text-decoration: underline;
+}
+.article-view .article-header .category-nav .back-link::before {
+  content: none !important;
+  /* 移除可能的全局箭頭符號 */
+}
+.article-view .article-header .category-nav .back-link::after {
+  content: none !important;
+  /* 移除可能的全局箭頭符號 */
 }
 .article-view .article-header .author-info {
   display: flex;
@@ -4061,8 +4991,8 @@ button:hover #custom-cursor::after {
   gap: 1.5rem;
 }
 .article-view .article-header .author-info .author-avatar {
-  width: 48px;
-  height: 48px;
+  width: 32px !important;
+  height: 32px !important;
   border-radius: 50%;
 }
 .article-view .article-header .author-info .author-details {
@@ -4071,7 +5001,7 @@ button:hover #custom-cursor::after {
 }
 .article-view .article-header .author-info .author-details .article-title {
   font-size: 1.75rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   color: #acff6c;
   font-weight: 600;
 }
@@ -4094,6 +5024,7 @@ button:hover #custom-cursor::after {
 }
 .article-view .article-content {
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 .article-view .article-content .article-text {
   line-height: 1.8;
@@ -4101,12 +5032,17 @@ button:hover #custom-cursor::after {
   white-space: pre-line;
   color: #e0e0e0;
 }
+.article-view .article-content span {
+  padding: 4px 0;
+  display: inline-block;
+}
 .article-view .article-content .article-image {
-  margin: 1rem 0;
-  width: 100%;
-  max-height: 500px;
-  object-fit: cover;
+  margin: 2rem auto;
+  max-width: 50%;
+  height: auto;
   border-radius: 8px;
+  display: block;
+  object-fit: contain;
 }
 .article-view .tags {
   display: flex;
@@ -4127,33 +5063,57 @@ button:hover #custom-cursor::after {
 .article-view .interaction-bar {
   display: flex;
   align-items: center;
+  /* 垂直居中對齊 */
   justify-content: flex-start;
-  gap: 1rem;
-  /* 控制每個圖標之間的間距 */
+  /* 從左到右排列 */
+  gap: 1.5rem;
+  /* 控制圖標組之間的間距 */
   padding: 1rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  /* 底部分隔線 */
   margin-bottom: 1rem;
 }
 .article-view .interaction-bar .interaction-items {
   display: flex;
+  align-items: center;
+  /* 確保圖標和文字垂直居中 */
   gap: 1rem;
+  /* 每個互動項目之間的間距 */
 }
-.article-view .interaction-bar .interaction-items a {
+.article-view .interaction-bar .interaction-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  /* 圖標和數字的間距 */
+  /* 圖標和文字垂直居中 */
+  gap: 0.5rem;
+  /* 圖標與文字之間的距離 */
 }
 .article-view .interaction-bar .interaction-item img {
   width: 24px;
-  /* 圖標大小 */
   height: 24px;
-  /* 圖標大小 */
 }
 .article-view .interaction-bar .interaction-item span {
   font-size: 16px;
-  /* 調整文字大小 */
   color: #ffffff;
+  white-space: nowrap;
+  /* 防止文字換行 */
+  line-height: 20px;
+}
+.article-view .interaction-bar .interaction-item a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  gap: 0.5rem;
+  /* 圖標與文字間距 */
+}
+.article-view .interaction-bar .share-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.article-view .interaction-bar .share-button img {
+  width: 24px;
+  height: 24px;
 }
 .article-view .comments-section {
   margin-bottom: 100px;
@@ -4181,10 +5141,24 @@ button:hover #custom-cursor::after {
 }
 .article-view .comments-section .comment-item .comment-content .comment-header {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  /* 垂直居中 */
+  gap: 5px;
+  /* 元素之間的間距 */
   margin-bottom: 0.5rem;
   color: #808080;
   font-size: 0.9rem;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-user,
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-floor,
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-time {
+  display: inline-block;
+  /* 保持水平排列 */
+  font-size: 14px;
+  /* 可根據需要調整字體大小 */
+  color: #ffffff;
+  /* 文字顏色，可調整 */
 }
 .article-view .comments-section .comment-item .comment-content .comment-header .comment-user {
   font-weight: 500;
@@ -4193,126 +5167,242 @@ button:hover #custom-cursor::after {
 .article-view .comments-section .comment-item .comment-content .comment-header .comment-floor {
   color: #acff6c;
 }
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-time {
+  color: #B3B3B3;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-actions {
+  margin-left: auto;
+  /* 推到最右邊 */
+  display: flex;
+  /* 若有多個子元素，啟用 Flexbox */
+  align-items: center;
+  /* 垂直居中 */
+  gap: 5px;
+  /* 圖片與文字間距 */
+}
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-actions .like-button {
+  margin-left: auto;
+  /* 將按鈕推到最右邊 */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  /* 圖片與文字之間的間距 */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-actions .like-button img {
+  width: 20px;
+  height: 20px;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-actions .like-button:hover {
+  opacity: 0.8;
+  /* 增加懸停效果 */
+}
 .article-view .comments-section .comment-item .comment-content .comment-text {
   margin-bottom: 0.75rem;
   line-height: 1.5;
   color: #e0e0e0;
 }
-.article-view .comments-section .comment-item .comment-content .comment-actions .like-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #808080;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-}
-.article-view .comments-section .comment-item .comment-content .comment-actions .like-button img {
-  width: 20px;
-  height: 20px;
-}
-.article-view .comments-section .comment-item .comment-content .comment-actions .like-button.liked {
-  color: #acff6c;
-}
-.article-view .comments-section .comment-item .comment-content .comment-actions .like-button:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
 .article-view .comment-input {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #1a1a1a;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  transition: all 0.3s ease;
-}
-.article-view .comment-input.expanded {
-  padding: 1.5rem;
+  background: #333;
+  /* 背景色 */
+  border-radius: 5px;
+  display: flex;
+  align-items: stretch;
+  /* 子元素高度一致 */
+  margin: 0;
+  /* 移除外部間隔 */
+  padding: 0;
+  /* 移除內部間隔 */
+  width: 100%;
+  /* 確保寬度占滿容器 */
 }
 .article-view .comment-input .input-container {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
-  gap: 1rem;
+  align-items: stretch;
+  /* 子元素高度一致 */
+  flex: 1;
+  /* 讓輸入框和按鈕可以自適應寬度 */
+  margin: 0;
+  /* 移除外部間隔 */
+  padding: 0;
+  /* 移除內部間隔 */
+  gap: 0;
+  /* 移除子項目間距 */
+}
+.article-view .comment-input .input-container .user-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #acff6c;
+  /* 頭像區背景色 */
+  /* 固定寬度讓區塊更大 */
+  padding: 0 1rem;
+  /* 左右填充 */
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  margin: 0;
+  /* 移除外邊距 */
+}
+.article-view .comment-input .input-container .user-info .user-avatar {
+  width: 30px;
+  /* 頭像大小 */
+  height: 30px;
+  border-radius: 50%;
+  /* 圓形頭像 */
+  margin-right: 0.5rem;
+}
+.article-view .comment-input .input-container .user-info .user-name {
+  color: #000;
+  /* 名稱文字顏色 */
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  /* 確保名稱文字無外邊距 */
 }
 .article-view .comment-input .input-container input {
   flex: 1;
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  background-color: #2a2a2a;
+  /* 占滿剩餘空間 */
+  padding: 1rem;
+  font-size: 16px;
+  border: none;
+  /* 移除邊框 */
+  border-radius: 0;
+  /* 去掉圓角 */
   color: #ffffff;
-}
-.article-view .comment-input .input-container input:focus {
-  outline: none;
-  border-color: #acff6c;
+  /* 輸入文字顏色 */
+  background: #444;
+  /* 輸入框背景色 */
+  margin: 0;
+  /* 移除間隔 */
+  border: none;
+  /* 移除邊框 */
 }
 .article-view .comment-input .input-container button {
   background-color: #acff6c;
-  color: white;
+  /* 送出按鈕背景色 */
+  color: #000;
+  /* 按鈕文字顏色 */
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
+  padding: 0 2rem;
+  /* 左右填充 */
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
-}
-.article-view .comment-input .input-container button:hover {
-  background-color: #acff6c;
+  margin: 0;
+  /* 移除間隔 */
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .article-view {
-    padding: 1rem;
+    padding: 10px;
   }
-  .article-view .article-header {
+  .article-view .article-header .category-nav .back-link {
+    margin-top: 10px;
+  }
+  .article-view .article-header .author-info {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .article-view .article-header .author-info .author-details {
+    flex-direction: column-reverse;
+  }
+  .article-view .article-header .author-info .author-details .meta-info {
     flex-direction: column;
-    gap: 1rem;
+    align-items: center;
+    justify-content: center;
   }
-  .article-view .article-header .article-title {
-    font-size: 1.5rem;
+  .article-view .article-header .author-info .author-details .meta-info .post-date {
+    margin: 0;
+  }
+  .article-view .tags {
+    justify-content: center;
   }
   .article-view .interaction-bar {
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 10px;
   }
-  .article-view .interaction-bar .share-button {
-    width: 100%;
-    margin-top: 1rem;
+  .comments-section .comment-item {
+    flex-direction: column;
+  }
+  .comments-section .comment-item .comment-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .comments-section .comment-input .input-container {
+    flex-direction: column;
+  }
+  .comments-section .comment-input .input-container button {
+    align-self: center;
   }
 }
-@media (max-width: 991px) {
-  .forum-layout {
-    flex-direction: column;
+@media screen and (max-width: 480px) {
+  .article-view {
+    margin: 5%;
   }
-  .sidebar,
-  .main-content {
+  .article-view .article-header .author-info .author-details .article-title {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  .article-view .interaction-bar {
+    display: flex;
+    justify-content: center;
     width: 100%;
   }
-  .search-bar {
-    width: 100%;
-    max-width: 300px;
+  .article-view .interaction-bar .interaction-items {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
   }
-  .article-card {
-    flex-direction: column;
+  .article-view .comments-section h2 {
+    font-size: 18px;
   }
-  .article-image {
-    width: 100%;
-    height: auto;
+  .article-view .comments-section .comment-item .comment-avatar {
+    width: 30px;
+    height: 30px;
+  }
+  .article-view .comment-input .input-container {
+    width: 50%;
+  }
+  .article-view .comment-input .input-container .user-info {
+    padding: 0.5rem 0;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+  .article-view .comment-input .input-container .user-info .user-name {
+    display: none;
+  }
+  .article-view .comment-input .input-container .user-info .user-avatar {
+    width: 24px;
+    height: 24px;
+  }
+  .article-view .comment-input .input-container input {
+    font-size: 12px;
+    /* 減小字體大小 */
+    padding: 8px;
+  }
+  .article-view .comment-input .input-container button {
+    font-size: 12px;
+    /* 按鈕字體縮小 */
+    padding: 8px 16px;
   }
 }
 /* 常見問題 */
 .contact-body {
-  padding-top: 180px;
+  padding-top: 80px;
   position: relative;
   z-index: 0;
-  background: url("images/Contact/Noise3.png") repeat;
+  background: url("images/noise.jpg") repeat;
   overflow: hidden;
 }
 .contact-body .faq-contact {
   padding: 100px 20px;
-  /* FAQ Section */
   /* 聯絡我們 */
 }
 .contact-body .faq-contact .faq-section,
@@ -4357,11 +5447,11 @@ button:hover #custom-cursor::after {
   flex-direction: column;
   gap: 10px;
 }
-.contact-body .faq-contact .faq-section .faq-items .faq-item details {
+.contact-body .faq-contact .faq-section .faq-items details {
   border-bottom: 1px solid #acff6c;
   padding: 10px;
 }
-.contact-body .faq-contact .faq-section .faq-items .faq-item details summary {
+.contact-body .faq-contact .faq-section .faq-items details summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -4369,11 +5459,12 @@ button:hover #custom-cursor::after {
   color: white;
   cursor: pointer;
 }
-.contact-body .faq-contact .faq-section .faq-items .faq-item details summary img {
-  width: 20px;
+.contact-body .faq-contact .faq-section .faq-items details summary img {
+  width: 30px !important;
+  /* 增大圖片大小 */
   margin-left: 10px;
 }
-.contact-body .faq-contact .faq-section .faq-items .faq-item details p {
+.contact-body .faq-contact .faq-section .faq-items details p {
   margin-top: 10px;
   padding: 10px;
   color: white;
@@ -4381,7 +5472,7 @@ button:hover #custom-cursor::after {
 }
 .contact-body .faq-contact .contact-section {
   position: relative;
-  margin-top: 100px;
+  margin-top: 70px;
   bottom: 0%;
   padding: 50px 15px;
   overflow: visible;
@@ -4393,42 +5484,56 @@ button:hover #custom-cursor::after {
 }
 .contact-body .faq-contact .contact-section .contact-content {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start;
   gap: 20px;
+}
+.contact-body .faq-contact .contact-section .contact-content .contact-right {
+  display: flex;
+  flex: 1;
+  margin-right: 20px;
+  /* 增加與表單的間距，避免擠壓 */
+  flex-direction: column;
+  /* 垂直排列 */
+  align-items: center;
+  /* 置中內容 */
   /* 人物圖片 */
 }
-.contact-body .faq-contact .contact-section .contact-content .contact-bubble {
-  position: absolute;
-  top: 145px;
-  left: 200px;
-  /* 微調位置 */
-  z-index: 3;
-  overflow: visible;
-  flex: 1 1 300px;
-  width: 300px;
-}
-.contact-body .faq-contact .contact-section .contact-content .contact-bubble img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* 確保圖片居中 */
-  z-index: 1;
-  opacity: 0.9;
-  width: 100%;
-  margin: 0 auto 10px;
-}
-.contact-body .faq-contact .contact-section .contact-content .contact-bubble .bubble-text {
+.contact-body .faq-contact .contact-section .contact-content .contact-right .contact-bubble {
   position: relative;
-  /* 設置文字區塊為相對定位 */
-  z-index: 2;
-  /* 設置文字區塊層級高於圖片 */
-  padding: 20px;
+  /* 設定為相對定位，方便內部絕對定位 */
+  left: 20%;
   border-radius: 15px;
-  color: white;
+  /* 圓角效果 */
+  width: 100%;
+  /* 根據需求調整寬度 */
+  padding: 20px;
+  margin-bottom: 20px;
+  /* 與下方元素的間距 */
 }
-.contact-body .faq-contact .contact-section .contact-content .person-image {
+.contact-body .faq-contact .contact-section .contact-content .contact-right .contact-bubble .contact-info {
+  position: absolute;
+  /* 絕對定位，壓在泡泡上 */
+  top: 15%;
+  /* 距離上方 20% */
+  left: 20%;
+  /* 距離左側 10% */
+  color: #fff;
+  /* 白色文字 */
+  font-size: 14px;
+  /* 調整文字大小 */
+  line-height: 1.5;
+  /* 行高 */
+}
+.contact-body .faq-contact .contact-section .contact-content .contact-right .contact-bubble .contact-info p {
+  text-align: left;
+}
+.contact-body .faq-contact .contact-section .contact-content .contact-right .contact-bubble .contact-info strong {
+  font-size: 18px;
+  text-align: left;
+  display: block;
+  color: #A3E635;
+}
+.contact-body .faq-contact .contact-section .contact-content .contact-right .person-image {
   position: absolute;
   /* 絕對定位 */
   bottom: -80%;
@@ -4436,318 +5541,166 @@ button:hover #custom-cursor::after {
   left: 0%;
   z-index: 1;
   /* 層級設置低於 footer */
-  width: 400px;
+  width: 500px;
   /* 圖片大小 */
   opacity: 0.9;
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-form {
   flex: 1;
-  padding: 0 30px;
-  max-width: 40%;
-  justify-content: center;
-  align-items: center;
+  padding: 20px 40px;
+  /* 增加內部填充，讓表單看起來更大氣 */
+  max-width: 50%;
+  /* 放寬表單的最大寬度 */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* 靠左對齊 */
+  margin-left: 80px;
+  /* 將整個區塊向右移動 */
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-form p {
-  margin-bottom: 5px;
-  color: white;
+  margin-bottom: 8px;
+  /* 調整文字與輸入框的距離 */
+  color: #FFFFFF;
+  /* 使用綠色文字作為標籤顏色 */
+  font-size: 14px;
+  /* 增加標籤字體大小 */
+  font-weight: bold;
+  /* 突出顯示標籤文字 */
+  text-align: left;
+  /* 標籤靠左對齊 */
+  width: 100%;
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-form input,
 .contact-body .faq-contact .contact-section .contact-content .contact-form textarea {
   width: 100%;
-  margin-bottom: 10px;
-  padding: 10px 0;
-  background-color: #2A2A2A;
+  margin-bottom: 15px;
+  /* 增加輸入框與下一個元素的距離 */
+  padding: 12px 15px;
+  /* 增加內部間距 */
+  background-color: rgba(252, 251, 251, 0.7);
+  /* 增加透明背景 */
   color: #FFFFFF;
-  border: 1px solid #acff6c;
-  border-radius: 20px;
+  /* 白色字體 */
+  border: none;
+  border-radius: 15px;
+  /* 圓角效果 */
+  font-size: 14px;
+  /* 增大字體大小 */
+  outline: none;
+  /* 移除聚焦時的外框 */
+  transition: all 0.3s;
+}
+.contact-body .faq-contact .contact-section .contact-content .contact-form input:focus,
+.contact-body .faq-contact .contact-section .contact-content .contact-form textarea:focus {
+  background-color: rgba(252, 251, 251, 0.9);
+  /* 聚焦時背景稍微變亮 */
+  border-color: #fff;
+  /* 聚焦時邊框變白 */
+}
+.contact-body .faq-contact .contact-section .contact-content .contact-form textarea {
+  height: 150px;
+  /* 增加 textarea 的高度 */
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-form button {
-  width: 100%;
-  margin-top: 40px;
-  padding: 10px;
-  background-color: #acff6c;
-  color: #2A2A2A;
+  width: 40%;
+  margin: 30px auto 0;
+  /* 按鈕置中 */
+  /* 調整按鈕與內容的間距 */
+  padding: 12px;
+  background-color: #B595FF;
+  color: #acff6c;
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
+  /* 圓角效果 */
+  font-size: 16px;
+  /* 增大按鈕文字 */
+  font-weight: bold;
+  /* 突出按鈕文字 */
   cursor: pointer;
   transition: all 0.3s;
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-form button:hover {
-  background-color: #FFFFFF;
-  color: #2A2A2A;
+  background-color: rgba(165, 118, 228, 0.8);
+  /* 增加透明效果 */
+  color: #acff6c;
+  /* 改變字體顏色為白色 */
 }
 
-.article-view {
-  margin: 0 115px;
-  padding: 2rem;
-  color: #ffffff;
-  background-color: #2A2A2A;
-}
-.article-view .article-header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  /* 文字靠左對齊 */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 1rem;
-}
-.article-view .article-header .category-nav {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  /* 區塊填滿寬度 */
-  align-items: center !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-.article-view .article-header .category-nav .category {
-  font-size: 1rem;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-}
-.article-view .article-header .category-nav .category::before {
-  content: "🗂 ";
-  margin-right: 0.5rem;
-}
-.article-view .article-header .category-nav .back-link {
-  color: #acff6c;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
-}
-.article-view .article-header .category-nav .back-link::before {
-  content: "←";
-  margin-right: 0.5rem;
-}
-.article-view .article-header .category-nav .back-link:hover {
-  text-decoration: underline;
-}
-.article-view .article-header .author-info {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-.article-view .article-header .author-info .author-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-}
-.article-view .article-header .author-info .author-details {
-  display: flex;
-  flex-direction: column;
-}
-.article-view .article-header .author-info .author-details .article-title {
-  font-size: 1.75rem;
-  margin-bottom: 0.5rem;
-  color: #acff6c;
-  font-weight: 600;
-}
-.article-view .article-header .author-info .author-details .meta-info {
-  display: flex;
-  gap: 1rem;
-  color: #808080;
-  font-size: 0.9rem;
-}
-.article-view .article-header .author-info .author-details .meta-info .author-name {
-  font-weight: 500;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-}
-.article-view .article-header .author-info .author-details .meta-info .post-date {
-  margin-left: 15px;
-  display: flex;
-  align-items: center;
-}
-.article-view .article-content {
-  margin-bottom: 2rem;
-}
-.article-view .article-content .article-text {
-  line-height: 1.8;
-  margin-bottom: 2rem;
-  white-space: pre-line;
-  color: #e0e0e0;
-}
-.article-view .article-content .article-image {
-  margin: 1rem 0;
-  width: 100%;
-  max-height: 500px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-.article-view .tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-}
-.article-view .tags .tag {
-  color: #B595FF;
-  padding: 0.5rem 0.5rem;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  border: 1px solid #B595FF;
-}
-.article-view .tags .tag:hover {
-  background-color: rgba(69, 41, 95, 0.4);
-}
-.article-view .interaction-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1rem;
-  /* 控制每個圖標之間的間距 */
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 1rem;
-}
-.article-view .interaction-bar .interaction-items {
-  display: flex;
-  gap: 1rem;
-}
-.article-view .interaction-bar .interaction-items a {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  /* 圖標和數字的間距 */
-}
-.article-view .interaction-bar .interaction-item img {
-  width: 24px;
-  /* 圖標大小 */
-  height: 24px;
-  /* 圖標大小 */
-}
-.article-view .interaction-bar .interaction-item span {
-  font-size: 16px;
-  /* 調整文字大小 */
-  color: #ffffff;
-}
-.article-view .comments-section {
-  margin-bottom: 100px;
-}
-.article-view .comments-section h2 {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  color: #acff6c;
-}
-.article-view .comments-section .comment-item {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-}
-.article-view .comments-section .comment-item .comment-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-.article-view .comments-section .comment-item .comment-content {
-  flex: 1;
-}
-.article-view .comments-section .comment-item .comment-content .comment-header {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-  color: #808080;
-  font-size: 0.9rem;
-}
-.article-view .comments-section .comment-item .comment-content .comment-header .comment-user {
-  font-weight: 500;
-  color: #ffffff;
-}
-.article-view .comments-section .comment-item .comment-content .comment-header .comment-floor {
-  color: #acff6c;
-}
-.article-view .comments-section .comment-item .comment-content .comment-text {
-  margin-bottom: 0.75rem;
-  line-height: 1.5;
-  color: #e0e0e0;
-}
-.article-view .comments-section .comment-item .comment-content .comment-actions .like-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #808080;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-}
-.article-view .comments-section .comment-item .comment-content .comment-actions .like-button img {
-  width: 20px;
-  height: 20px;
-}
-.article-view .comments-section .comment-item .comment-content .comment-actions .like-button.liked {
-  color: #acff6c;
-}
-.article-view .comments-section .comment-item .comment-content .comment-actions .like-button:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-.article-view .comment-input {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #1a1a1a;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  transition: all 0.3s ease;
-}
-.article-view .comment-input.expanded {
-  padding: 1.5rem;
-}
-.article-view .comment-input .input-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  gap: 1rem;
-}
-.article-view .comment-input .input-container input {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  background-color: #2a2a2a;
-  color: #ffffff;
-}
-.article-view .comment-input .input-container input:focus {
-  outline: none;
-  border-color: #acff6c;
-}
-.article-view .comment-input .input-container button {
-  background-color: #acff6c;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.article-view .comment-input .input-container button:hover {
-  background-color: #acff6c;
-}
-
-@media (max-width: 768px) {
-  .article-view {
-    padding: 1rem;
+/* 常見問題 RWD */
+@media screen and (max-width: 768px) {
+  .contact-body {
+    padding: 10px;
   }
-  .article-view .article-header {
+  .contact-body .faq-buttons {
     flex-direction: column;
-    gap: 1rem;
+    align-items: center;
   }
-  .article-view .article-header .article-title {
-    font-size: 1.5rem;
-  }
-  .article-view .interaction-bar {
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .article-view .interaction-bar .share-button {
+  .contact-body .faq-buttons button {
     width: 100%;
-    margin-top: 1rem;
+    /* 撐滿螢幕寬度 */
+  }
+  .contact-body .contact-content {
+    flex-direction: column;
+    /* 垂直排列 */
+    align-items: center;
+  }
+  .contact-body .contact-content .contact-right,
+  .contact-body .contact-content .contact-form {
+    width: 100%;
+    /* 撐滿螢幕寬度 */
+  }
+  .contact-body .contact-content .contact-bubble {
+    width: 100%;
+    /* 撐滿寬度 */
+    text-align: center;
+  }
+  .contact-body .contact-content .person-image {
+    max-width: 100px;
+    margin: 10px auto;
+    /* 居中顯示 */
+  }
+  .contact-body .contact-content .contact-form button {
+    width: 100%;
+    /* 按鈕撐滿寬度 */
+  }
+}
+@media screen and (max-width: 480px) {
+  .contact-body .faq-section h1,
+  .contact-body .contact-section h1 {
+    font-size: 20px;
+    /* 縮小標題字體 */
+    text-align: center;
+  }
+  .contact-body .faq-buttons button {
+    font-size: 14px;
+    padding: 8px 10px;
+    /* 減小按鈕內邊距 */
+  }
+  .contact-body .contact-content {
+    gap: 10px;
+    /* 減少區塊之間的距離 */
+  }
+  .contact-body .contact-content .contact-right .contact-bubble {
+    padding: 15px;
+    /* 縮小內邊距 */
+  }
+  .contact-body .contact-content .person-image {
+    max-width: 80px;
+  }
+  .contact-body .contact-content .contact-form p {
+    font-size: 14px;
+    /* 縮小標籤字體 */
+  }
+  .contact-body .contact-content .contact-form input,
+  .contact-body .contact-content .contact-form textarea {
+    font-size: 14px;
+    /* 調整輸入框字體 */
+    padding: 8px;
+  }
+  .contact-body .contact-content .contact-form button {
+    font-size: 14px;
+    padding: 8px 10px;
   }
 }
 footer {
@@ -4807,4 +5760,24 @@ footer .content .left .link li a {
 }
 footer .content .left .link li a:hover {
   color: #B595FF;
+}
+@media (max-width: 768px) {
+  footer .content {
+    padding: 30px 35px 0 35px;
+    flex-direction: column;
+  }
+  footer .content .left {
+    width: 100%;
+  }
+  footer .content .left small {
+    display: none;
+  }
+  footer .content img {
+    margin-top: 0px;
+  }
+}
+@media (max-width: 600px) {
+  footer {
+    display: none;
+  }
 }/*# sourceMappingURL=style.css.map */

@@ -1,6 +1,6 @@
 {
   "name": "home",
-  "homepage": "https://alpaca34607.github.io/Mystic-Markers",
+  "homepage": "https://chocofantasy.github.io/Mystic-Markers",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -47,7 +47,7 @@
     "eslint-plugin-react": "^7.34.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "sass": "^1.82.0",
+    "sass": "^1.83.1",
     "vite": "^5.1.6"
   },
   "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",

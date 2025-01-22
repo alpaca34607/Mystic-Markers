@@ -247,7 +247,7 @@ const App = () => {
                     className="title"
                     ref={(el) => slideTopRefs.current.push(el)}
                   >
-                    <SectionTitle originalText="怪奇博物館" className="title" />
+                    <SectionTitle originalText="怪談博物館" className="title" />
                     <h3>
                       精選靈異故事、都市傳說，帶你進入未知世界，享受身歷其境的驚悚與神秘氛圍。
                     </h3>
@@ -323,7 +323,7 @@ const App = () => {
                   <div className="left">
                     <ul className="link">
                       <li>
-                        <Link to="/Story">怪奇博物館</Link>
+                        <Link to="/Story">怪談博物館</Link>
                       </li>
                       <li>
                         <Link to="/Map">靈異導航</Link>
@@ -332,11 +332,11 @@ const App = () => {
                         <Link to="/Forum">鬼影探索</Link>
                       </li>
                       <li>
-                        <Link to="/Contact">聯絡我們</Link>
+                        <Link to="/Contact">解謎之門</Link>
                       </li>
                     </ul>
                     <small>
-                      &copy; 2024 Mystic Markers. All Rights Reserved.
+                      &copy; 2024 Mystic Markers. All Rights Reserved.  此網站設計學生練習作品，無任何商業營利用途。
                     </small>
                   </div>
                   <img src="images/LOGO_footer.svg" alt="神秘座標" />
@@ -346,12 +346,12 @@ const App = () => {
           }
         />
 
-        <Route path="/Story" element={<Story />} />
+        <Route path="/Story/*" element={<Story />} />
         <Route path="/Map" element={<Map />} />
         <Route path="/page/:pageId" element={<Gallerypage />} />
         <Route path="/Forum" element={<Forum />} />
         <Route path="/Contact" element={<Contact />} />
-        <Route path="/article/:articleId" element={<ArticleView />} />
+        <Route path="/Forum/article/:articleId/*" element={<ArticleView />} />
 
       </Routes>
     </>

@@ -1,9 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../style.scss";
 
 // ArticleList 組件
-const ArticleList = ({ articles, onFavorite }) => {
+const ArticleList = ({ articles, onFavorite, onDelete }) => {
   const [interactions, setInteractions] = useState([]);
+  const storedArticles = JSON.parse(localStorage.getItem("articlesData")) || []; //獲取文章資料
+  const allArticles = [...articles, ...storedArticles]; // 合併靜態與動態文章資料
+
+  useEffect(() => {
+    // 初始化文章的留言數據和內容
+    articles.forEach((article) => {
+      const storedComments = JSON.parse(
+        localStorage.getItem(`comments-${article.id}`)
+      );
+      if (storedComments) {
+        article.commentCount = storedComments.length; // 同步留言數
+        article.comments = storedComments; // 同步留言內容
+      }
+    });
+  }, [articles]);
 
   // 追蹤每個 interaction 的狀態
   // 當 articles 改變時重新初始化 interactions
@@ -16,7 +32,7 @@ const ArticleList = ({ articles, onFavorite }) => {
               ...interaction,
               count:
                 interaction.altText === "message"
-                  ? article.commentCount // 使用 commentCount 更新
+                  ? article.commentCount // 更新為最新的留言數
                   : interaction.count, // 更新留言數
               isLiked: false, // 初始按讚狀態
             }))
@@ -25,14 +41,6 @@ const ArticleList = ({ articles, onFavorite }) => {
     );
   }, [articles]);
 
-  // 獲取留言數方法
-const getCommentCountFromArticleView = (articleId) => {
-  const articleInView = articles.find((a) => a.id === articleId);
-  if (articleInView && articleInView.commentCount) {
-    return articleInView.commentCount;
-  }
-  return 0; // 預設值
-};
 
   const handleInteractionClick = (articleIndex, interactionIndex) => {
     setInteractions((prevInteractions) =>
@@ -53,6 +61,23 @@ const getCommentCountFromArticleView = (articleId) => {
       )
     );
   };
+  // 時間處理邏輯
+  const getRelativeTime = (createdAt) => {
+    const today = new Date();
+    const createdDate = new Date(createdAt);
+
+    const diffTime = today - createdDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) return "今天";
+    if (diffDays === 1) return "昨天";
+    if (diffDays === 2) return "前天";
+
+    // 顯示簡短日期，月份和日期補零
+    const month = (createdDate.getMonth() + 1).toString().padStart(2, "0");
+    const day = createdDate.getDate().toString().padStart(2, "0");
+    return `${month}/${day}`;
+  };
 
   return (
     <div className="article-list">
@@ -63,28 +88,33 @@ const getCommentCountFromArticleView = (articleId) => {
             <div className="article-header">
               <div className="author-info">
                 <img
-                  src={article.authorAvatar}
+                  src={article.authorAvatar || "images/Forum/default-avatar.svg"}
                   alt="Author Avatar"
                   className="author-avatar"
                 />
                 <span className="author-name">{article.authorName}</span>
               </div>
-              {/* 更多選項(待更新) */}
-              {/* <button type="button" aria-label="更多選項">
-                <svg
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="$primary-purple"
-                >
-                  <path d="M6 12c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm12 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm12 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" />
-                </svg>
-              </button> */}
+              <div className="delete-date-wrapper">
+                  {/* 僅顯示用戶新增文章的刪除按鈕 */}
+                  {article.isUserCreated && (
+                  <button
+                    className="delete-button"
+                    onClick={() => onDelete(article.id)}
+                  >
+                    刪除
+                  </button>
+                )}
+                {/* 簡短 PO 文時間 */}
+                <p className="article-date">
+                  {getRelativeTime(article.createdAt)}
+                </p>
+              
+              </div>
             </div>
             {/* 文章內容 */}
             <div className="article-Graphics-text">
-              <a
-                href={`/article/${article.id}`}
+              <Link
+                to={`article/${article.id}`}
                 className="styled-article-link"
               >
                 <div className="left">
@@ -98,8 +128,8 @@ const getCommentCountFromArticleView = (articleId) => {
                         className="interaction-item"
                         key={`${interaction.altText}`}
                       >
-                        <a
-                          href="#"
+                        <Link
+                          to="#"
                           onClick={(e) => {
                             e.preventDefault(); // 防止頁面跳轉
                             if (interaction.altText === "like") {
@@ -115,7 +145,7 @@ const getCommentCountFromArticleView = (articleId) => {
                             }
                             alt={interaction.altText}
                           />
-                        </a>
+                        </Link>
                         <span>{interaction.count}</span>
                       </div>
                     ))}
@@ -141,7 +171,7 @@ const getCommentCountFromArticleView = (articleId) => {
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
 
               <div className="right">
                 <img

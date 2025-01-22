@@ -7,10 +7,10 @@
     border: $width dashed $color;
 }
 @mixin font-style($style) {
-    font-family: map-get($style, font-family);
-    font-weight: map-get($style, font-weight);
-    font-size: map-get($style, font-size);
-  
+  font-family: map-get($style, font-family);
+  font-weight: map-get($style, font-weight);
+  font-size: map-get($style, font-size);
+
     // 可選：如果變數中有字距或行高，則應用
     @if map-has-key($style, letter-spacing) {
       letter-spacing: map-get($style, letter-spacing);

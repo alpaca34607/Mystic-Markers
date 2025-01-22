@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Story from "./Story";
 import Map from "./Map";
 import Forum from "./Forum";
@@ -7,12 +7,12 @@ import "../style.scss";
 import App from "../App";
 
 const Contact = () => {
-   
-      useEffect(() => {
-          // 當路由變更時，將頁面滾動到頂部
-          window.scrollTo(0, 0);
-      }, [location]);
-      // 淡入動畫
+
+  useEffect(() => {
+    // 當路由變更時，將頁面滾動到頂部
+    window.scrollTo(0, 0);
+  }, [location]);
+  // 淡入動畫
   const [currentTab, setCurrentTab] = useState("account");
 
   const faqContent = {
@@ -78,102 +78,107 @@ const Contact = () => {
     <>
       <Routes>
         <Route path="/" element={
-        <main className="contact-body">
-        <div className="faq-contact">
-          {/* FAQ Section */}
-          <div className="faq-section">
-            <h1>常見問題</h1>
-            <div className="faq-buttons">
-              <button onClick={() => setCurrentTab("account")}>帳號相關</button>
-              <button onClick={() => setCurrentTab("content")}>內容發布</button>
-              <button onClick={() => setCurrentTab("safety")}>
-                規範與安全
-              </button>
-            </div>
-            <div className="faq-items">
-              {faqContent[currentTab].map((item, index) => (
-                <div className="faq-item" key={index}>
-                  <details>
-                    <summary>
-                      {/* 問題 */}
-                      {item.question}
-                      <img src="images/Contact/arrow2.svg" alt="下拉符號" />
-                    </summary>
-                    {/* 答案 */}
-                    <p>{item.answer}</p>
-                  </details>
+          <main className="contact-body">
+            <div className="faq-contact">
+              {/* FAQ Section */}
+              <div className="faq-section">
+                <h1>常見問題</h1>
+                <div className="faq-buttons">
+                  <button onClick={() => setCurrentTab("account")}>帳號相關</button>
+                  <button onClick={() => setCurrentTab("content")}>內容發布</button>
+                  <button onClick={() => setCurrentTab("safety")}>
+                    規範與安全
+                  </button>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 聯絡我們 */}
-          <div className="contact-section">
-            <h1>聯絡我們</h1>
-            <div className="contact-content">
-              <div className="contact-right">
-                <div className="contact-bubble">
-                  <img src="images/Contact/Union.svg" alt="人物圖片" />
-                  <div className="bubble-text">
-                    <p>
-                      <strong>E-mail:</strong> mystiocmarkers@google.com
-                    </p>
-                    <p>
-                      <strong>電話:</strong> 02-412-8869
-                    </p>
-                    <p>
-                      <strong>聯絡時間:</strong> 週一至週日 09:30 - 18:30
-                    </p>
-                  </div>
+                <div className="faq-items">
+                  {faqContent[currentTab].map((item, index) => (
+                    <div className="faq-item" key={index}>
+                      <details>
+                        <summary>
+                          {/* 問題 */}
+                          {item.question}
+                          <img src="images/Contact/arrow-2.svg" alt="下拉符號" />
+                        </summary>
+                        {/* 答案 */}
+                        <p>{item.answer}</p>
+                      </details>
+                    </div>
+                  ))}
                 </div>
-                <img
-                  className="person-image"
-                  src="images/Contact/Frame71.png"
-                  alt="人物圖片"
-                />
               </div>
 
-              <form className="contact-form">
-                <p>姓名:</p>
-                <input type="text" placeholder="您的姓名" />
-                <p>E-mail:</p>
-                <input type="email" placeholder="您的電子郵件" />
-                <p>主旨:</p>
-                <input type="text" placeholder="標題" />
-                <p>內容:</p>
-                <textarea placeholder="您的訊息"></textarea>
-                <button type="submit">送出</button>
-              </form>
-            </div>
-          </div>
-        </div>
+              {/* 聯絡我們 */}
+              <div className="contact-section">
+                <h1>聯絡我們</h1>
+                <div className="contact-content">
+                  <div className="contact-right">
 
-        {/* 頁尾區 */}
-        <footer>
-          <div className="content">
-            <div className="left">
-              <ul className="link">
-                <li>
-                  <Link to="/">首頁</Link>
-                </li>
-                <li>
-                  <Link to="/Story">怪奇博物館</Link>
-                </li>
-                <li>
-                  <Link to="/Map">靈異導航</Link>
-                </li>
-                <li>
-                  <Link to="/Forum">鬼影探索</Link>
-                </li>
-              </ul>
-              <small>&copy; 2024 Mystic Markers. All Rights Reserved.</small>
+                    <div className="contact-bubble">
+                    <div className="contact-info">
+                      <p>
+                        <strong>E-mail</strong> mystiocmarkers@google.com
+                      </p>
+                      <p>客服信箱將於48小時內進行回覆，謝謝你的等待。</p>
+                      <br />
+                      <p>
+                        <strong>電話專線</strong> 02-412-8869
+                      </p>
+                      <p>如果需要快速解決方案，請查看我們的常見問題。</p>
+                      <br />
+                      <p>
+                        <strong>服務時間</strong> 週一至週日 09:30 - 18:30
+                      </p>
+                    </div>
+                      <img src="images/Contact/Union.svg" alt="泡泡圖案" />
+                    </div>
+                    <img
+                      className="person-image"
+                      src="images/Contact/Frame71.png"
+                      alt="人物圖片"
+                    />
+                  </div>
+
+                  <form className="contact-form">
+                    <p>姓名:</p>
+                    <input type="text" placeholder="您的姓名" />
+                    <p>E-mail:</p>
+                    <input type="email" placeholder="您的電子郵件" />
+                    <p>主旨:</p>
+                    <input type="text" placeholder="標題" />
+                    <p>內容:</p>
+                    <textarea placeholder="您的訊息"></textarea>
+                    <button type="submit">送出</button>
+                  </form>
+                </div>
+              </div>
             </div>
-            <img src="images/LOGO_footer.svg" alt="神秘座標" />
-          </div>
-        </footer>
-        </main>
-      }
-      />
+
+            {/* 頁尾區 */}
+            <footer>
+              <div className="content">
+                <div className="left">
+                  <ul className="link">
+                    <li>
+                      <Link to="/">首頁</Link>
+                    </li>
+                    <li>
+                      <Link to="/Story">怪談博物館</Link>
+                    </li>
+                    <li>
+                      <Link to="/Map">靈異導航</Link>
+                    </li>
+                    <li>
+                      <Link to="/Forum">鬼影探索</Link>
+                    </li>
+                  </ul>
+                  <small>&copy; 2024 Mystic Markers. All Rights Reserved.  此網站設計學生練習作品，無任何商業營利用途。</small>
+                </div>
+                <img src="images/LOGO_footer.svg" alt="神秘座標" />
+              </div>
+            </footer>
+          </main>
+        }
+        />
         <Route path="/" element={<App />} />
         <Route path="/Story" element={<Story />} />
         <Route path="/Map" element={<Map />} />

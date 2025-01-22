@@ -7,4 +7,12 @@ export default defineConfig({
   base:'./',
 
   plugins: [react()],
+
+  css: {
+    preprocessorOptions: {
+      scss: {
+        quietDeps: true, // 忽略來自依賴的 Sass 警告
+      },
+    },
+  }
 })

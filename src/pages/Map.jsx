@@ -678,7 +678,7 @@ export default function Map() {
                   <div className="btn-group">
                     <button
                       onClick={() => handleThemeToggle('default')}
-                      className={`${currentTheme === 'default'
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg ${currentTheme === 'default'
                         ? 'theme-active'
                         : 'theme-unactive'
                         }`}
@@ -687,7 +687,7 @@ export default function Map() {
                     </button>
                     <button
                       onClick={() => handleThemeToggle('temple')}
-                      className={`${currentTheme === 'temple'
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg ${currentTheme === 'temple'
                         ? 'theme-active'
                         : 'theme-unactive'
                         }`}
@@ -700,7 +700,7 @@ export default function Map() {
                     <MapContainer
                       center={[23.5, 121]}
                       zoom={8}
-                      // style={{ height: "100%", width: "100%" }}
+                      style={{ height: "100%", width: "100%" }}
                       maxBounds={taiwanBounds}
                       minZoom={7}
                       maxBoundsViscosity={1.0}
@@ -1084,16 +1084,16 @@ export default function Map() {
                         <Link to="/">首頁</Link>
                       </li>
                       <li>
-                        <Link to="/Story">怪奇博物館</Link>
-                      </li>
-                      <li>
-                        <Link to="/Map">靈異導航</Link>
+                        <Link to="/Story">怪談博物館</Link>
                       </li>
                       <li>
                         <Link to="/Forum">鬼影探索</Link>
                       </li>
+                      <li>
+                        <Link to="/Contact">解謎之門</Link>
+                      </li>
                     </ul>
-                    <small>&copy; 2024 Mystic Markers. All Rights Reserved.</small>
+                    <small>&copy; 2024 Mystic Markers. All Rights Reserved.  此網站設計學生練習作品，無任何商業營利用途。</small>
                   </div>
                   <img src="images/LOGO_footer.svg" alt="神秘座標" />
                 </div>
