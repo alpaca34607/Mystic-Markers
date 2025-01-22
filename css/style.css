@@ -342,6 +342,7 @@ a {
 .Topbar .modal-container {
   position: relative;
   width: 400px;
+  cursor: none;
 }
 .Topbar .modal {
   background: #2a2a2a;
@@ -369,6 +370,7 @@ a {
   justify-content: center;
   border-radius: 50%;
   z-index: 1001;
+  cursor: none;
 }
 .Topbar .close-btn:hover {
   color: #B595FF;
@@ -4471,6 +4473,7 @@ button:hover #custom-cursor::after {
   gap: 1rem;
   width: 35px;
   height: 35px;
+  cursor: none;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .PostModal-bar img {
   padding: 0;
