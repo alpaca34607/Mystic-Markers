@@ -102,19 +102,19 @@ function Navbar() {
       </nav>
       {/* 通知/會員管理/MENU */}
       <nav className="nav-wrapper">
-        <a href="#news">
+        {/* <a href=""> */}
           <img id="news" src="images/news.svg" alt="news" />
-        </a>
+        {/* </a> */}
         {/* 僅在未登入時顯示 Group 按鈕 */}
         {!isLoggedIn && (
-          <a href="#Group">
+          // <a href="">
             <img
               id="Group"
               src="images/Group.svg"
               alt="Group"
-              onClick={() => setIsAuthOpen(true)}
+              // onClick={() => setIsAuthOpen(true)}
             />
-          </a>
+          // </a>
         )}
         {/* 登入後顯示會員管理按鈕 */}
         {isLoggedIn && (

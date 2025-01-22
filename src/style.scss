@@ -1,6 +1,6 @@
 @use "reset";
-@use "variables" as *;
-@use "function" as *;
+@use "variables"as *;
+@use "function"as *;
 @use "keyframes";
 
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Handjet:wght@100..900&family=Mina&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Zen+Maru+Gothic&display=swap");
@@ -89,11 +89,21 @@ a {
   .nav-wrapper {
     pointer-events: auto;
   }
-
+  .success-btn{
+    margin-top: 20px;
+    pointer-events: auto;
+    border: none;
+    color:$light;
+    background-color: $primary-purple;
+    @include font-style($font-medium-16);
+    padding: 10px 20px;
+    border-radius: 20px;
+  }
   button {
     background: none;
     color: $primary-purple;
     pointer-events: auto;
+    border: none;
   }
 
   .logo {
@@ -168,7 +178,6 @@ a {
     font-size: 24px;
     font-weight: bold;
     color: $primary-green;
-    cursor: pointer;
     transition: all 0.3s ease;
     width: 32px;
     height: 32px;
@@ -238,18 +247,12 @@ a {
     .register-btn {
       width: 100%;
       max-width: 280px;
-      /* 限制最大寬度 */
       height: 40px;
-      /* 固定高度 */
       border: none;
       border-radius: 8px;
-      cursor: pointer;
       font-size: 14px;
-      /* 減小字體大小 */
       padding: 0;
-      /* 移除內邊距 */
       margin: 8px 0;
-      /* 統一外邊距 */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -291,7 +294,6 @@ a {
     p {
       color: $light;
       font-size: 14px;
-      cursor: pointer;
       margin: 0;
 
       &:hover {
@@ -342,6 +344,7 @@ a {
       border-radius: 5px;
       border-left: transparent 1px solid;
       border-right: transparent 1px solid;
+      border: none;
 
       &:hover {
         border-left: $primary-purple 1px solid;
@@ -363,6 +366,7 @@ a {
       #news,
       #Group {
         margin-right: 8px;
+       
       }
 
     }
@@ -435,10 +439,13 @@ a {
   #Group {
     margin-right: 20px;
     width: 26px;
+    cursor: not-allowed;
 
     .group-info {
+      display: flex;
+      align-items: center;
       position: absolute;
-      top: 50px; // 根據實際 Navbar 調整
+      top: 50px; 
       padding: 10px;
       border-radius: 5px;
 
@@ -452,7 +459,6 @@ a {
         background: none;
         padding: 5px 10px;
         border: none;
-        cursor: pointer;
 
         &:hover {
           filter: brightness(200%)
@@ -464,6 +470,12 @@ a {
   #news {
     margin-right: 20px;
     width: 24px;
+    cursor: not-allowed;
+  }
+  .group-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .navbar {
@@ -474,6 +486,7 @@ a {
     overflow: visible;
     z-index: 997;
     height: fit-content;
+    
 
     .hamburger {
       position: relative;
@@ -527,12 +540,12 @@ a {
       transform-origin: top right;
       opacity: 0;
       transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
-      pointer-events: none; // 暫時關閉滑鼠事件
+      pointer-events: none; 
 
       &.show {
         transform: scale(1);
         opacity: 1;
-        pointer-events: auto; // 恢復互動
+        pointer-events: auto;
       }
 
       .menu {
@@ -552,7 +565,7 @@ a {
           margin-bottom: 20px;
           display: flex;
           align-items: center;
-          padding-left: 30px; // 為圓點預留固定空間
+          padding-left: 30px;
 
           a {
             text-decoration: none;
@@ -561,14 +574,12 @@ a {
             position: relative;
             display: inline-block;
             padding: 0px 30px;
-
-            // 重要：新增一個容器來確保矩形的顯示範圍
             &::before {
               content: "";
               position: absolute;
               top: 42%;
-              left: 0; // 與 li 的 padding-left 對應
-              background: $primary-green; // 用於測試範圍
+              left: 0; 
+              background: $primary-green; 
               z-index: 998;
               width: 6px;
               height: 6px;
@@ -1984,10 +1995,9 @@ a {
 
           .leaflet-container {
             width: 100% !important;
-            /* 使用 !important 來確保覆蓋其他樣式 */
+            /* 使用 !important 確保覆蓋其他樣式 */
             height: 100% !important;
             margin: 0 auto;
-            /* 讓地圖置中 */
           }
 
 
@@ -2056,6 +2066,53 @@ a {
       display: none;
     }
   }
+
+  @media(max-width: 480px) {
+    .map-content {
+      padding-top: 25%;
+
+      .map-left .map-wrapper {
+        max-width: 85%;
+        min-width: 320px;
+        height: 75vh;
+
+        .leaflet-container .custom-popup .leaflet-popup-content {
+          width: 280px !important;
+          height: 400px !important;
+
+          .location-info .marker-header .user-info .user-name {
+            font-size: 14px;
+          }
+
+          .comments-area {
+            .comment-title h2 {
+              font-size: 14px;
+            }
+
+            max-height: 150px;
+            padding: 10px 8px;
+          }
+        }
+
+      }
+    }
+
+    .list-panel .marker-list .list-area .list-section .marker-list-item {
+      .adress-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        .marker-list-rating {
+          margin-left: 32px;
+          margin-right: 0px;
+        }
+      }
+    }
+
+
+  }
+
 }
 
 
@@ -2688,13 +2745,11 @@ a {
       height: 100%;
       z-index: 0;
       pointer-events: none;
-      /* 使用遮罩限制霧的區域 */
+      /* 遮罩限制霧的區域 */
       mask-image: url("/images/fog-mask1.png");
       mask-repeat: no-repeat;
       mask-size: 100% auto;
       mask-position: top 0;
-
-      /* Webkit 瀏覽器支持 */
       -webkit-mask-image: url("/images/fog-mask1.png");
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-size: cover;
@@ -2732,13 +2787,11 @@ a {
       height: 100%;
       z-index: -1;
       pointer-events: none;
-      /* 使用遮罩限制霧的區域 */
+      /* 遮罩限制霧的區域 */
       mask-image: url("/images/fog-mask2.png");
       mask-repeat: no-repeat;
       mask-size: auto;
       mask-position: top 0;
-
-      /* Webkit 瀏覽器支持 */
       -webkit-mask-image: url("/images/fog-mask2.png");
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-size: cover;
@@ -2790,8 +2843,6 @@ a {
 
   .intro {
     position: relative;
-    // transform-style: preserve-3d;
-    // perspective-origin: center;
     width: 100%;
     overflow: hidden;
     height: auto;
@@ -3455,7 +3506,7 @@ a {
   &.adding-location {
     width: 32px;
     height: 32px;
-    border: none; // 移除原有的邊框
+    border: none;
     background-image: url('/images/Vector.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -3471,6 +3522,10 @@ a {
       width: 32px;
       height: 32px;
     }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 }
 
@@ -3540,7 +3595,7 @@ button:hover #custom-cursor::after {
   }
 }
 
-/* glowEffect 5s linear infinite(發光效果放入css) */
+
 @keyframes glowEffect-W {
   0% {
     filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #ffffff54);
@@ -3582,7 +3637,7 @@ button:hover #custom-cursor::after {
     colorChange 2s ease-in-out infinite;
 }
 
-/* animation:  rotateY 6s ease-in-out infinitee(旋轉效果放入css) */
+
 @keyframes rotateY {
   0% {
     transform: rotateY(0deg);
@@ -3623,16 +3678,13 @@ button:hover #custom-cursor::after {
   background-image: url('/images/noise.jpg');
   background-repeat: repeat;
   overflow: hidden;
-  // opacity: 80%;
   position: relative;
   z-index: 0;
   cursor: none;
 
   html {
     overflow: hidden;
-    /* 禁止 html 顯示滾輪 */
     height: 100%;
-    /* 保持高度佔滿視窗 */
   }
 
   background-color:rgb(26, 26, 26);
@@ -3659,7 +3711,6 @@ button:hover #custom-cursor::after {
     height: 105vh;
     background-blend-mode: lighten;
     background-size: cover;
-    /* 背景圖片自動填滿容器 */
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
@@ -3675,16 +3726,11 @@ button:hover #custom-cursor::after {
       justify-content: space-between;
       padding: 8.5% 12% 0 12%;
       box-sizing: border-box;
-      /* 確保 padding 不會增加總高度 */
       max-width: 100%;
-      /* 限制內容最大寬度 */
       max-height: 100%;
-      /* 限制內容最大高度 */
       overflow: visible;
       margin: 0 auto;
-      /* 置中顯示 */
       background-size: cover;
-      /* 背景圖填滿容器 */
       box-sizing: border-box;
 
 
@@ -3705,16 +3751,11 @@ button:hover #custom-cursor::after {
   .feature-story-container p {
     margin: 0;
     padding: 10px;
-    /* 給文字內邊距，避免靠近容器邊緣 */
     color: #fff;
-    /* 設置文字顏色，確保可讀性 */
     line-height: 1.5;
-    /* 行距設置 */
     word-wrap: break-word;
-    /* 避免單詞超出範圍 */
   }
 
-  /* 裝飾紙張 */
   .paper {
     position: absolute;
     z-index: 10;
@@ -3722,7 +3763,6 @@ button:hover #custom-cursor::after {
     right: 0;
     width: auto;
     transform: translate(10%, -10%);
-    /* border: 2px solid #6cc9ff; */
   }
 
 
@@ -3730,8 +3770,6 @@ button:hover #custom-cursor::after {
   /* 精選文章 內容 */
   .story-box {
     display: flex;
-
-    /* margin: 10% 50%; */
     .story {
       display: flex;
       flex-direction: column;
@@ -3848,7 +3886,7 @@ button:hover #custom-cursor::after {
     p {
       font-family: 'Noto Sans TC';
       font-weight: 300;
-      font-size: 1rem; // 16px
+      font-size: 1rem; 
       color: $light;
     }
 
@@ -3914,14 +3952,10 @@ button:hover #custom-cursor::after {
     display: inline-block;
     /* 保證a元素行為像塊元素 */
     margin-top: 20px;
-    /* 給繼續閱讀加上一個向上的間距 */
     text-decoration: none;
-    /* 移除預設的下劃線 */
     color: $primary-green;
     overflow: hidden;
-    /* 設置顏色顏色 */
     @include font-style($font-regular-16)
-    /* 調整字體大小 */
   }
 
   .story a:hover {
@@ -3940,44 +3974,44 @@ button:hover #custom-cursor::after {
     }
 
     .share-icon {
-      list-style: none; // 移除列表樣式
+      list-style: none;
       padding: 0;
       margin: 0;
       display: flex;
-      flex-direction: column; // 垂直排列
-      align-items: center; // 居中
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      overflow: hidden; // 隱藏滾動
-      max-height: 100%; // 限制最大高度
+      overflow: hidden; 
+      max-height: 100%;
     }
 
     .share-icon li {
-      margin: 0; // 確保沒有額外間距
+      margin: 0; 
       padding: 4px;
 
 
     }
 
     .share-icon img {
-      display: block; // 強制圖片成為塊級元素
-      width: 100%; // 確保圖片寬度不超出
-      height: auto; // 自適應高度
+      display: block;
+      width: 100%; 
+      height: auto; 
     }
 
     .share-icon a {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%; // 保持和 li 一致
+      width: 100%; 
       height: 100%;
       text-decoration: none;
-      overflow: hidden; // 防止內容溢出
-      transition: transform 0.2s ease; // 平滑過渡效果
+      overflow: hidden;
+      transition: transform 0.2s ease; 
     }
 
     .share-icon a:hover {
       filter: brightness(1.5);
-      transform: none; // 禁止放大
+      transform: none;
     }
 
     @media (max-width:1439px) {
@@ -4080,9 +4114,7 @@ button:hover #custom-cursor::after {
 
   h3 {
     margin-top: 5px;
-    /* 自定義上邊距 */
     margin-bottom: 5px;
-    /* 自定義下邊距 */
   }
 
 
@@ -4091,18 +4123,13 @@ button:hover #custom-cursor::after {
     background-image: url('/images/Story/redgirl.png');
     background-position: right;
     background-size: cover;
-    /* 背景圖片自動調整大小以覆蓋容器 */
     background-repeat: no-repeat;
-    /* 防止背景圖片重複 */
     height: 100vh;
-    /* 設定容器高度為視窗高度 */
     display: flex;
     align-items: center;
-    /* 垂直居中 */
     padding: 20px;
     box-sizing: border-box;
 
-    /* 讓 padding 不影響容器的實際大小 */
     @media (max-width:1439px) {
       background-position: 85% 0%;
 
@@ -4124,28 +4151,17 @@ button:hover #custom-cursor::after {
   .red-girl-container {
     background-image: url('/images/Story/old-torn-paper-inksplash-2.png');
     background-size: contain;
-    /* 確保圖片完全顯示且不被裁切 */
     background-repeat: no-repeat;
-    /* 防止背景圖片重複 */
     background-position: left center;
-    /* 圖片靠左並垂直居中 */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* 文字垂直居中 */
     align-items: center;
-    /* 文字水平居中 */
     width: 40%;
-    /* 根據視窗大小調整寬度 */
     height: 600px;
-    /* 自動調整高度 */
-
     padding: 100px 50px;
-    /* 內邊距，讓內容與背景保持距離 */
     box-sizing: border-box;
-    /* 確保 padding 不會影響總尺寸 */
     margin-left: 10%;
-    /* 確保容器靠左 */
 
     @media(max-width:1440px) {
       width: 45%;
@@ -4169,10 +4185,8 @@ button:hover #custom-cursor::after {
   .red-girl-text {
     display: flex;
     flex-direction: column;
-    /* margin-top: 20px; */
     margin-left: 10px;
     width: 95%;
-    /* 撐滿容器 */
     box-sizing: border-box;
   }
 
@@ -4195,7 +4209,7 @@ button:hover #custom-cursor::after {
   }
 
   .red-girl-title h3::after {
-    /* 在 <h3> 元素後插入一個伪元素 */
+    /* 在 <h3> 元素後插入一個偽元素 */
     content: "";
     position: absolute;
     top: 0px;
@@ -4223,17 +4237,12 @@ button:hover #custom-cursor::after {
   .story-item2 {
     background-image: url('/images/Story/yellowman.png');
     background-size: cover;
-    /* 背景圖片自動調整大小以覆蓋容器 */
     background-repeat: no-repeat;
-    /* 防止背景圖片重複 */
     height: 115vh;
-    /* 設定容器高度為視窗高度 */
     display: flex;
     align-items: center;
-    /* 垂直居中 */
     padding: 20px;
     box-sizing: border-box;
-    /* 讓 padding 不影響容器的實際大小 */
     overflow: visible;
 
     @media (max-width:1439px) {
@@ -4247,7 +4256,7 @@ button:hover #custom-cursor::after {
 
     }
 
-    @media (max-width:375px) {
+    @media (max-width:390px) {
       background-position: 30% 0%;
       background-size: 300%;
 
@@ -4258,32 +4267,19 @@ button:hover #custom-cursor::after {
   .yellow-peter-pan-container {
     background-image: url('/images/Story/old-torn-paper-inksplash-2.png');
     background-size: contain;
-    /* 確保圖片完全顯示且不被裁切 */
     background-repeat: no-repeat;
-    /* 防止背景圖片重複 */
     background-position: right center;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* 文字垂直居中 */
     align-items: center;
-    /* 文字水平居中 */
     width: 40%;
-    /* 根據視窗大小調整寬度 */
     height: 600px;
-    /* 自動調整高度 */
-
     padding: 100px 50px;
-    /* 內邊距，讓內容與背景保持距離 */
     box-sizing: border-box;
-    /* 確保 padding 不會影響總尺寸 */
-
     margin-left: auto;
-    /* 自動將容器推到右邊 */
     margin-right: 10%;
 
-    /* 控制容器與右邊界的距離 */
     @media(max-width:1440px) {
       width: 45%;
     }
@@ -4308,14 +4304,11 @@ button:hover #custom-cursor::after {
   .yellow-peter-pan {
     display: flex;
     flex-direction: column;
-    /* margin-top: 20px; */
     margin-left: 10px;
     width: 95%;
-    /* 撐滿容器 */
     box-sizing: border-box;
   }
 
-  /* 文字標題 */
   .yellow-peter-pan h3 {
     @include font-style($font-medium-32);
     color: $light;
@@ -4334,7 +4327,6 @@ button:hover #custom-cursor::after {
   }
 
   .yellow-peter-pan h3::after {
-    /* 在 <h3> 元素後插入一個伪元素 */
     content: "";
     position: absolute;
     top: 0px;
@@ -4353,7 +4345,6 @@ button:hover #custom-cursor::after {
     line-height: 1.8;
     margin-bottom: 10px;
     word-wrap: break-word;
-    /* 當文字長度過長時換行 */
   }
 
 
@@ -4362,18 +4353,13 @@ button:hover #custom-cursor::after {
     background-image: url('/images/Story/lightsis.png');
     background-position: right;
     background-size: cover;
-    /* 背景圖片自動調整大小以覆蓋容器 */
     background-repeat: no-repeat;
-    /* 防止背景圖片重複 */
     height: 100vh;
-    /* 設定容器高度為視窗高度 */
     display: flex;
     align-items: center;
-    /* 垂直居中 */
     padding: 20px;
     box-sizing: border-box;
 
-    /* 讓 padding 不影響容器的實際大小 */
     @media (max-width:1439px) {
       background-position: 65% 0%;
 
@@ -4384,29 +4370,18 @@ button:hover #custom-cursor::after {
   .lantern-sister-container {
     background-image: url('/images/Story/old-torn-paper-inksplash-2.png');
     background-size: contain;
-    /* 確保圖片完全顯示且不被裁切 */
     background-repeat: no-repeat;
-    /* 防止背景圖片重複 */
     background-position: left center;
-    /* 圖片靠左並垂直居中 */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* 文字垂直居中 */
     align-items: center;
-    /* 文字水平居中 */
     width: 40%;
-    /* 根據視窗大小調整寬度 */
     height: 600px;
-    /* 自動調整高度 */
-
     padding: 100px 50px;
-    /* 內邊距，讓內容與背景保持距離 */
     box-sizing: border-box;
-    /* 確保 padding 不會影響總尺寸 */
     margin-left: 10%;
 
-    /* 確保容器靠左 */
     @media(max-width:1440px) {
       width: 45%;
     }
@@ -4428,10 +4403,8 @@ button:hover #custom-cursor::after {
   .lantern-sister-text {
     display: flex;
     flex-direction: column;
-    /* margin-top: 20px; */
     margin-left: 10px;
     width: 95%;
-    /* 撐滿容器 */
     box-sizing: border-box;
   }
 
@@ -4482,18 +4455,13 @@ button:hover #custom-cursor::after {
   .story-item4 {
     background-image: url('/images/Story/goatman.png');
     background-size: cover;
-    /* 背景圖片自動調整大小以覆蓋容器 */
     background-repeat: no-repeat;
-    /* 防止背景圖片重複 */
     height: 100vh;
-    /* 設定容器高度為視窗高度 */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* 垂直居中 */
     padding: 20px;
     box-sizing: border-box;
-    /* 讓 padding 不影響容器的實際大小 */
     margin-bottom: 20%;
 
     @media (max-width:1439px) {
@@ -4507,32 +4475,29 @@ button:hover #custom-cursor::after {
   .goat-man-container {
     background-image: url('/images/Story/old-torn-paper-inksplash-2.png');
     background-size: contain;
-    /* 確保圖片完全顯示且不被裁切 */
     background-repeat: no-repeat;
-    /* 防止背景圖片重複 */
+
     background-position: right center;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* 文字垂直居中 */
+
     align-items: center;
-    /* 文字水平居中 */
+
     width: 40%;
-    /* 根據視窗大小調整寬度 */
+
     height: 600px;
-    /* 自動調整高度 */
+  
 
     padding: 100px 50px;
-    /* 內邊距，讓內容與背景保持距離 */
+ 
     box-sizing: border-box;
-    /* 確保 padding 不會影響總尺寸 */
+ 
 
     margin-left: auto;
-    /* 自動將容器推到右邊 */
-    margin-right: 10%;
 
-    /* 控制容器與右邊界的距離 */
+    margin-right: 10%;
     @media(max-width:1440px) {
       width: 45%;
     }
@@ -4558,7 +4523,6 @@ button:hover #custom-cursor::after {
     margin-top: 10px;
     margin-left: 10px;
     width: 95%;
-    /* 撐滿容器 */
     box-sizing: border-box;
   }
 
@@ -4584,7 +4548,7 @@ button:hover #custom-cursor::after {
   }
 
   .goat-man-title h3::after {
-    /* 在 <h3> 元素後插入一個伪元素 */
+    /* 在 <h3> 元素後插入一個偽元素 */
     content: "";
     position: absolute;
     top: 0px;
@@ -4631,7 +4595,7 @@ button:hover #custom-cursor::after {
 
     .feature-story .feature-story-container p {
       font-size: 14px;
-      /* 手機視窗下文字更小 */
+
     }
   }
 
@@ -4644,7 +4608,7 @@ button:hover #custom-cursor::after {
 
     .feature-story .feature-story-container p {
       font-size: 14px;
-      /* 手機視窗下文字更小 */
+
     }
   }
 }
@@ -4662,6 +4626,7 @@ button:hover #custom-cursor::after {
   padding: 180px 80px;
   font-weight: 600;
   justify-content: center;
+  cursor: none;
 
   .forum-container {
     padding: 20px 0;
@@ -4687,7 +4652,7 @@ button:hover #custom-cursor::after {
           .category-board {
             border: 1.5px solid $grey;
             border-radius: 5px;
-            padding: 44px; // 調整內邊距
+            padding: 44px; 
 
             // 分類列表
             .category-list {
@@ -4696,30 +4661,29 @@ button:hover #custom-cursor::after {
               margin: 0;
 
               .category-item {
-                padding: 8px 15px; // 調整padding
+                padding: 8px 15px;
                 margin: 5px 0;
                 color: $primary-green;
-                cursor: pointer;
                 transition: background-color 0.3s ease, color 0.3s ease;
-                border-radius: 8px; // 圓角
+                border-radius: 8px; 
 
                 div {
                   display: flex;
                   justify-content: center;
 
                   img {
-                    width: 24px; // 統一圖片大小
+                    width: 24px; 
                     height: 24px;
                   }
 
                   p {
                     margin-left: 12px;
-                    font-size: 18px; // 調整文字大小
+                    font-size: 18px;
                   }
                 }
 
                 &:hover {
-                  background-color: $primary-purple; // hover 背景
+                  background-color: $primary-purple;
                   color: $primary-green;
 
                   img {
@@ -4728,7 +4692,7 @@ button:hover #custom-cursor::after {
                 }
 
                 &.active {
-                  background-color: $primary-purple; // 選中背景
+                  background-color: $primary-purple; 
                   color: $deep;
 
                   img {
@@ -4762,24 +4726,24 @@ button:hover #custom-cursor::after {
           align-items: center;
           justify-content: space-between;
           margin-bottom: 30px;
+          cursor: none;
 
           .nav-buttons {
 
             display: flex;
             align-items: center;
-            gap: 15px; // 控制按鈕間距
+            gap: 15px;
 
             div {
               display: flex;
-              align-items: center; // 圖示與文字垂直對齊
-              padding: 5px 10px; // 增加按鈕區塊的內邊距
-              border-radius: 5px; // 圓角設計
-              cursor: pointer;
+              align-items: center; 
+              padding: 5px 10px;
+              border-radius: 5px; 
               transition: all 0.3s ease;
               font-weight: 600;
 
               &:hover {
-                background-color: $primary-purple; // 滑鼠懸停時的背景效果
+                background-color: $primary-purple; 
 
                 p {
                   color: $deep;
@@ -4788,17 +4752,17 @@ button:hover #custom-cursor::after {
               }
 
               &.active {
-                background-color: #d8b4f8; // 選中按鈕的背景顏色
+                background-color: #d8b4f8;
               }
 
               img {
-                width: 24px; // 控制圖示大小
+                width: 24px; 
                 height: 24px;
-                margin-right: 8px; // 圖示與文字的間距
+                margin-right: 8px; 
               }
 
               .nav-button {
-                color: #acff6c; // 文字顏色
+                color: #acff6c; 
                 font-size: 18px;
                 border: none;
                 background: none;
@@ -4822,24 +4786,24 @@ button:hover #custom-cursor::after {
               display: flex;
               align-items: center;
               border: 2px solid $primary-green;
-              border-radius: 5px; // 圓角
-              overflow: hidden; // 避免子元素超出邊界
-              height: 30px; // 固定高度，確保子元素一致
+              border-radius: 5px; 
+              overflow: hidden;
+              height: 30px; 
 
               .search-input {
-                flex: 1; // 填滿剩餘空間
+                flex: 1;
                 padding: 0 12px;
                 border: none;
                 outline: none;
                 font-size: 16px;
                 color: $light;
                 background-color: $deep;
-                height: 100%; // 高度與父容器一致
-                box-sizing: border-box; // 包含內邊距和邊框在內
+                height: 100%; 
+                box-sizing: border-box;
 
 
                 &::placeholder {
-                  color: #a0a0a0; // placeholder 顏色
+                  color: #a0a0a0;
                 }
               }
 
@@ -4849,31 +4813,26 @@ button:hover #custom-cursor::after {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 40px; // 固定寬度
-                height: 100%; // 高度與父容器一致
+                width: 40px;
+                height: 100%;
                 padding: 0 8px;
-                cursor: pointer;
 
                 .search-icon {
-                  width: 20px; // 適當縮小 icon
+                  width: 20px;
                   height: 20px;
                 }
 
                 &:hover {
-                  background-color: #9fe75e; // 滑鼠懸停時的顏色變化
+                  background-color: #9fe75e; 
                 }
               }
             }
 
             .PostModal-bar {
               display: flex;
-              /* 使子元素水平排列 */
               align-items: center;
-              /* 垂直置中 */
               justify-content: flex-end;
-              /* 將按鈕向右對齊（可根據需求調整） */
               gap: 1rem;
-              /* 控制子元素之間的間距 */
               width: 35px;
               height: 35px;
 
@@ -4898,9 +4857,10 @@ button:hover #custom-cursor::after {
             gap: 20px;
             padding: 20px;
             border-bottom: 1px solid $grey;
+
             @media (max-width:480px) {
               padding: 20px 0;
-              
+
             }
 
 
@@ -4928,12 +4888,13 @@ button:hover #custom-cursor::after {
                 }
 
                 @media (max-width:480px) {
-                  .author-info .author-avatar{
+                  .author-info .author-avatar {
                     width: 24px;
                     height: 24px;
                   }
+
                   span {
-              
+
                     font-size: 14px;
                     margin: 0;
                   }
@@ -4944,10 +4905,7 @@ button:hover #custom-cursor::after {
                 .delete-date-wrapper {
                   display: flex;
                   align-items: center;
-                  /* 確保刪除按鈕與日期垂直居中 */
                   gap: 10px;
-                  /* 控制按鈕和日期之間的距離 */
-
                   .delete-button {
                     background-color: $grey;
                     border: none;
@@ -4955,7 +4913,6 @@ button:hover #custom-cursor::after {
                     font-size: 14px;
                     padding: 5px 10px;
                     border-radius: 5px;
-                    cursor: pointer;
                     transition: background-color 0.3s;
 
                     &:hover {
@@ -4982,12 +4939,12 @@ button:hover #custom-cursor::after {
 
               .article-Graphics-text {
                 display: flex;
-                justify-content: space-between; // 左右兩邊間隔
-                align-items: center; // 垂直對齊
+                justify-content: space-between; 
+                align-items: center; 
 
                 .left {
-                  flex: 1; //left 區塊佔用剩餘空間
-                  padding-right: 20px; //讓內容與右邊距離不要太近
+                  flex: 1;
+                  padding-right: 20px; 
 
                   .article-title {
                     color: $primary-green;
@@ -5041,10 +4998,10 @@ button:hover #custom-cursor::after {
 
                 .right {
                   flex-shrink: 0; // 防止 .right 區塊縮小，保持圖片大小
-                  width: 85px; // 可以根據需要設置圖片的寬度
+                  width: 85px; 
 
                   .article-image {
-                    width: 100%; //圖片佔滿 .right 區塊寬度
+                    width: 100%; 
                     border-radius: 5px;
                     object-fit: cover;
                   }
@@ -5058,14 +5015,12 @@ button:hover #custom-cursor::after {
 
               span {
                 display: block;
-                /* 每行獨占一行 */
                 margin-bottom: 0.5rem;
-                /* 增加段落之間的間距 */
                 line-height: 1.6;
-                /* 行距 */
+
                 @media (max-width:480px) {
                   margin-bottom: 0;
-                  
+
                 }
               }
 
@@ -5085,7 +5040,7 @@ button:hover #custom-cursor::after {
           justify-content: center;
           align-items: center;
           z-index: 1001;
-          overflow: hidden; // 防止內容溢出彈窗邊界
+          overflow: hidden; 
 
           .overlay {
             position: fixed;
@@ -5110,7 +5065,6 @@ button:hover #custom-cursor::after {
             width: 90%;
             max-width: 600px;
             overflow-y: auto;
-            /* 防止內容過多超出視窗 */
             background-color: $deep;
 
             .close-btn {
@@ -5119,7 +5073,6 @@ button:hover #custom-cursor::after {
               right: 10px;
               color: #fff;
               font-size: 20px;
-              cursor: pointer;
             }
 
             .form-header {
@@ -5148,7 +5101,6 @@ button:hover #custom-cursor::after {
               flex-direction: column;
               align-items: flex-start;
               width: 100%;
-              /* 確保表單寬度一致 */
               margin-bottom: 20px;
 
               label {
@@ -5200,8 +5152,8 @@ button:hover #custom-cursor::after {
 
                   .preview-image {
                     margin-top: 5px;
-                    width: 50px; // 預覽圖片寬度
-                    height: 50px; // 預覽圖片高度
+                    width: 50px; 
+                    height: 50px; 
                     object-fit: cover;
                     border-radius: 4px;
                   }
@@ -5217,7 +5169,7 @@ button:hover #custom-cursor::after {
 
             .form-actions {
               display: flex;
-              justify-content: space-between; // 按鈕兩端對齊
+              justify-content: space-between; 
               margin-top: 20px;
 
               button {
@@ -5225,7 +5177,6 @@ button:hover #custom-cursor::after {
                 font-size: 16px;
                 border: none;
                 border-radius: 4px;
-                cursor: pointer;
 
                 &:first-child {
                   background-color: #6c757d;
@@ -5262,6 +5213,7 @@ button:hover #custom-cursor::after {
   .forum-body {
     padding: 10% 2%;
     margin: 0;
+
 
     .forum-container {
       .forum-layout {
@@ -5343,6 +5295,11 @@ button:hover #custom-cursor::after {
       .nav-button-container {
         padding: 0;
 
+        .nav-button {
+          font-size: 14px;
+        }
+
+
         p {
           font-size: 14px;
         }
@@ -5389,21 +5346,58 @@ button:hover #custom-cursor::after {
   }
 }
 
+@media screen and (max-width: 374px) {
+  .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 0;
+
+    div img {
+      margin-right: 8px;
+    }
+
+    .nav-button-container .nav-button {
+      padding: 0;
+    }
+  }
+
+  .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
+    gap: 8px;
+
+    .search-bar-container {
+      width: 250px;
+
+      .search-bar {
+        height: 30px;
+
+        .search-button {
+          width: 30px;
+        }
+      }
+    }
+
+    .PostModal-bar {
+      padding: 5px;
+    }
+  }
+
+}
+
 
 // 文章內瀏覽頁
 .article-view {
   margin: 0 115px;
-  padding-top: 100px; // 確保和 Navbar 的高度一致或稍大
-  padding: 2rem;
+  padding-top: 100px;
+  padding: 10%;
   color: #ffffff;
   background-color: $deep;
-  padding-top: 130px !important; // 強制應用樣式
+  padding-top: 130px !important; 
+  cursor: none;
 
   .article-header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* 文字靠左對齊 */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 1rem;
 
@@ -5419,12 +5413,12 @@ button:hover #custom-cursor::after {
         display: flex;
 
         .category-icon {
-          width: 24px; // 設定圖片寬度
-          height: 24px; // 設定圖片高度
-          margin-right: 8px; // 與分類名稱之間的間距
-          vertical-align: middle; // 垂直置中對齊
-          border-radius: 50%; // 如果圖片需要圓形，取消此行可以移除圓形樣式
-          object-fit: contain; // 確保圖片不會被裁剪     
+          width: 24px; 
+          height: 24px; 
+          margin-right: 8px; 
+          vertical-align: middle; 
+          border-radius: 50%; 
+          object-fit: contain;
         }
 
         .category {
@@ -5456,12 +5450,10 @@ button:hover #custom-cursor::after {
 
         &::before {
           content: none !important;
-          /* 移除可能的全局箭頭符號 */
         }
 
         &::after {
           content: none !important;
-          /* 移除可能的全局箭頭符號 */
         }
 
       }
@@ -5531,7 +5523,7 @@ button:hover #custom-cursor::after {
 
 
     .article-image {
-      margin: 2rem auto;
+      margin: 5rem auto;
       max-width: 50%;
       height: auto;
       border-radius: 8px;
@@ -5562,29 +5554,22 @@ button:hover #custom-cursor::after {
   .interaction-bar {
     display: flex;
     align-items: center;
-    /* 垂直居中對齊 */
     justify-content: flex-start;
-    /* 從左到右排列 */
     gap: 1.5rem;
-    /* 控制圖標組之間的間距 */
     padding: 1rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    /* 底部分隔線 */
     margin-bottom: 1rem;
+
     .interaction-items {
       display: flex;
       align-items: center;
-      /* 確保圖標和文字垂直居中 */
       gap: 1rem;
-      /* 每個互動項目之間的間距 */
     }
 
     .interaction-item {
       display: flex;
       align-items: center;
-      /* 圖標和文字垂直居中 */
       gap: 0.5rem;
-      /* 圖標與文字之間的距離 */
 
       img {
         width: 24px;
@@ -5595,7 +5580,6 @@ button:hover #custom-cursor::after {
         font-size: 16px;
         color: #ffffff;
         white-space: nowrap;
-        /* 防止文字換行 */
         line-height: 20px;
       }
 
@@ -5605,7 +5589,6 @@ button:hover #custom-cursor::after {
         text-decoration: none;
         color: #ffffff;
         gap: 0.5rem;
-        /* 圖標與文字間距 */
 
       }
 
@@ -5614,7 +5597,7 @@ button:hover #custom-cursor::after {
     .share-button {
       display: flex;
       align-items: center;
-      cursor: pointer;
+
 
       img {
         width: 24px;
@@ -5653,9 +5636,7 @@ button:hover #custom-cursor::after {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          /* 垂直居中 */
           gap: 5px;
-          /* 元素之間的間距 */
           margin-bottom: 0.5rem;
           color: #808080;
           font-size: 0.9rem;
@@ -5664,11 +5645,8 @@ button:hover #custom-cursor::after {
           .comment-floor,
           .comment-time {
             display: inline-block;
-            /* 保持水平排列 */
             font-size: 14px;
-            /* 可根據需要調整字體大小 */
             color: #ffffff;
-            /* 文字顏色，可調整 */
           }
 
           .comment-user {
@@ -5686,24 +5664,18 @@ button:hover #custom-cursor::after {
 
           .comment-actions {
             margin-left: auto;
-            /* 推到最右邊 */
             display: flex;
-            /* 若有多個子元素，啟用 Flexbox */
             align-items: center;
-            /* 垂直居中 */
             gap: 5px;
 
-            /* 圖片與文字間距 */
             .like-button {
               margin-left: auto;
-              /* 將按鈕推到最右邊 */
               display: flex;
               align-items: center;
               gap: 5px;
-              /* 圖片與文字之間的間距 */
               background: none;
               border: none;
-              cursor: pointer;
+  
               color: #fff;
 
               img {
@@ -5713,7 +5685,7 @@ button:hover #custom-cursor::after {
 
               &:hover {
                 opacity: 0.8;
-                /* 增加懸停效果 */
+
               }
             }
           }
@@ -5732,106 +5704,73 @@ button:hover #custom-cursor::after {
 
   .comment-input {
     background: #333;
-    /* 背景色 */
     border-radius: 5px;
     display: flex;
     align-items: stretch;
-    /* 子元素高度一致 */
     margin: 0;
-    /* 移除外部間隔 */
     padding: 0;
-    /* 移除內部間隔 */
     width: 100%;
-    /* 確保寬度占滿容器 */
 
     .input-container {
       display: flex;
       align-items: stretch;
-      /* 子元素高度一致 */
       flex: 1;
-      /* 讓輸入框和按鈕可以自適應寬度 */
       margin: 0;
-      /* 移除外部間隔 */
       padding: 0;
-      /* 移除內部間隔 */
       gap: 0;
-      /* 移除子項目間距 */
 
       .user-info {
         display: flex;
         align-items: center;
         justify-content: center;
         background-color: $primary-green;
-        /* 頭像區背景色 */
-        
-        /* 固定寬度讓區塊更大 */
         padding: 0 1rem;
-        /* 左右填充 */
         border-top-left-radius: 8px;
         border-bottom-left-radius: 8px;
         margin: 0;
-        /* 移除外邊距 */
-
+  
         .user-avatar {
           width: 30px;
-          /* 頭像大小 */
           height: 30px;
           border-radius: 50%;
-          /* 圓形頭像 */
           margin-right: 0.5rem;
         }
 
         .user-name {
           color: #000;
-          /* 名稱文字顏色 */
           font-size: 16px;
           font-weight: bold;
           margin: 0;
-          /* 確保名稱文字無外邊距 */
         }
       }
 
       input {
         flex: 1;
-        /* 占滿剩餘空間 */
         padding: 1rem;
         font-size: 16px;
         border: none;
-        /* 移除邊框 */
         border-radius: 0;
-        /* 去掉圓角 */
         color: #ffffff;
-        /* 輸入文字顏色 */
         background: #444;
-        /* 輸入框背景色 */
         margin: 0;
-        /* 移除間隔 */
         border: none;
-        /* 移除邊框 */
       }
 
       button {
         background-color: $primary-green;
-        /* 送出按鈕背景色 */
         color: #000;
-        /* 按鈕文字顏色 */
         border: none;
         padding: 0 2rem;
-        /* 左右填充 */
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
         font-size: 16px;
-        cursor: pointer;
         margin: 0;
-        /* 移除間隔 */
-
       }
     }
   }
 }
 
 // .article-view RWD
-// 媒體查詢 - 768px 以下
 @media screen and (max-width: 768px) {
   .article-view {
     padding: 10px;
@@ -5844,18 +5783,21 @@ button:hover #custom-cursor::after {
         }
       }
 
-     
-      .author-info{
+
+      .author-info {
         display: flex;
         justify-content: center;
         width: 100%;
-        .author-details{
+
+        .author-details {
           flex-direction: column-reverse;
+
           .meta-info {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            .post-date{
+
+            .post-date {
               margin: 0;
             }
           }
@@ -5900,6 +5842,7 @@ button:hover #custom-cursor::after {
 @media screen and (max-width: 480px) {
   .article-view {
     margin: 5%;
+
     .article-header {
       .author-info .author-details .article-title {
         font-size: 20px;
@@ -5911,14 +5854,15 @@ button:hover #custom-cursor::after {
       display: flex;
       justify-content: center;
       width: 100%;
+
       .interaction-items {
         width: 80%;
         display: flex;
         justify-content: space-between;
         margin-bottom: 40px;
-        
+
       }
-  
+
     }
 
     .comments-section {
@@ -5937,31 +5881,32 @@ button:hover #custom-cursor::after {
     .comment-input {
       .input-container {
         width: 50%;
-        .user-info{
+
+        .user-info {
           padding: 0.5rem 0;
           width: 40px;
           align-items: center;
           justify-content: center;
-         
-          .user-name{
-         display: none;
-         
+
+          .user-name {
+            display: none;
+
           }
-          .user-avatar{
+
+          .user-avatar {
             width: 24px;
             height: 24px;
           }
 
         }
+
         input {
           font-size: 12px;
-          /* 減小字體大小 */
           padding: 8px;
         }
 
         button {
           font-size: 12px;
-          /* 按鈕字體縮小 */
           padding: 8px 16px;
         }
       }
@@ -5981,6 +5926,7 @@ button:hover #custom-cursor::after {
   z-index: 0;
   background: url("images/noise.jpg") repeat;
   overflow: hidden;
+  cursor: none;
 
   .faq-contact {
     padding: 100px 20px;
@@ -5991,9 +5937,8 @@ button:hover #custom-cursor::after {
       margin: 0 auto 50px;
       text-align: center;
       position: relative;
-      /* 確保可以使用絕對定位 */
       z-index: 2;
-      /* 層級設置，確保在 footer 上層 */
+      
 
       h1 {
         font-size: 2rem;
@@ -6016,7 +5961,6 @@ button:hover #custom-cursor::after {
           background-color: transparent;
           color: white;
           border: 1px solid $primary-green;
-          cursor: pointer;
           transition: all 0.3s;
           border-radius: 30px;
 
@@ -6045,11 +5989,9 @@ button:hover #custom-cursor::after {
             align-items: center;
             font-size: 1.2rem;
             color: white;
-            cursor: pointer;
 
             img {
               width: 30px !important;
-              /* 增大圖片大小 */
               margin-left: 10px;
             }
           }
@@ -6059,6 +6001,7 @@ button:hover #custom-cursor::after {
             padding: 10px;
             color: white;
             border-radius: 3px;
+            text-align: left;
           }
         }
       }
@@ -6072,9 +6015,6 @@ button:hover #custom-cursor::after {
       bottom: 0%;
       padding: 50px 15px;
       overflow: visible;
-      /* 防止元素影響滾動條 */
-
-      /* 確保佔滿可視區高度 */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -6088,48 +6028,34 @@ button:hover #custom-cursor::after {
           display: flex;
           flex: 1;
           margin-right: 20px;
-          /* 增加與表單的間距，避免擠壓 */
           flex-direction: column;
-          /* 垂直排列 */
           align-items: center;
-          /* 置中內容 */
-
           .contact-bubble {
             position: relative;
-            /* 設定為相對定位，方便內部絕對定位 */
             left: 20%;
 
             border-radius: 15px;
-            /* 圓角效果 */
             width: 100%;
-            /* 根據需求調整寬度 */
             padding: 20px;
             margin-bottom: 20px;
-            /* 與下方元素的間距 */
 
             .contact-info {
               position: absolute;
-              /* 絕對定位，壓在泡泡上 */
               top: 15%;
-              /* 距離上方 20% */
               left: 20%;
-              /* 距離左側 10% */
               color: #fff;
-              /* 白色文字 */
               font-size: 14px;
-              /* 調整文字大小 */
               line-height: 1.5;
-              /* 行高 */
 
               p {
-                text-align: left; // 靠左對齊
+                text-align: left; 
               }
 
               strong {
                 font-size: 18px;
-                text-align: left; // 靠左對齊
-                display: block; // 讓 strong 變成區塊元素
-                color: #A3E635; // 綠色關鍵字
+                text-align: left; 
+                display: block; 
+                color: #A3E635; 
               }
             }
           }
@@ -6139,14 +6065,10 @@ button:hover #custom-cursor::after {
           /* 人物圖片 */
           .person-image {
             position: absolute;
-            /* 絕對定位 */
             bottom: -80%;
-            /* 設定到 footer 下方一層 */
             left: 0%;
             z-index: 1;
-            /* 層級設置低於 footer */
             width: 500px;
-            /* 圖片大小 */
             opacity: 0.9;
 
           }
@@ -6156,27 +6078,19 @@ button:hover #custom-cursor::after {
         .contact-form {
           flex: 1;
           padding: 20px 40px;
-          /* 增加內部填充，讓表單看起來更大氣 */
           max-width: 50%;
-          /* 放寬表單的最大寬度 */
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          /* 靠左對齊 */
           margin-left: 80px;
-          /* 將整個區塊向右移動 */
+  
 
           p {
             margin-bottom: 8px;
-            /* 調整文字與輸入框的距離 */
             color: $light;
-            /* 使用綠色文字作為標籤顏色 */
             font-size: 14px;
-            /* 增加標籤字體大小 */
             font-weight: bold;
-            /* 突出顯示標籤文字 */
             text-align: left;
-            /* 標籤靠左對齊 */
             width: 100%;
           }
 
@@ -6184,58 +6098,40 @@ button:hover #custom-cursor::after {
           textarea {
             width: 100%;
             margin-bottom: 15px;
-            /* 增加輸入框與下一個元素的距離 */
             padding: 12px 15px;
-            /* 增加內部間距 */
             background-color: rgb(252, 251, 251, 0.7);
-            /* 增加透明背景 */
-            color: $light;
-            /* 白色字體 */
+            color: $deep;
             border: none;
             border-radius: 15px;
-            /* 圓角效果 */
             font-size: 14px;
-            /* 增大字體大小 */
             outline: none;
-            /* 移除聚焦時的外框 */
             transition: all 0.3s;
 
             &:focus {
               background-color: rgb(252, 251, 251, 0.9);
-              /* 聚焦時背景稍微變亮 */
               border-color: #fff;
-              /* 聚焦時邊框變白 */
             }
           }
 
           textarea {
             height: 150px;
-            /* 增加 textarea 的高度 */
           }
 
           button {
             width: 40%;
             margin: 30px auto 0;
-            /* 按鈕置中 */
-            /* 調整按鈕與內容的間距 */
             padding: 12px;
             background-color: $primary-purple;
             color: $primary-green;
             border: none;
             border-radius: 10px;
-            /* 圓角效果 */
             font-size: 16px;
-            /* 增大按鈕文字 */
             font-weight: bold;
-            /* 突出按鈕文字 */
-            cursor: pointer;
             transition: all 0.3s;
-
             &:hover {
               background-color: rgba(165, 118, 228, 0.8);
-              /* 增加透明效果 */
               color: $primary-green;
-              /* 改變字體顏色為白色 */
+             
             }
           }
         }
@@ -6245,103 +6141,123 @@ button:hover #custom-cursor::after {
 }
 
 /* 常見問題 RWD */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
   .contact-body {
-    padding: 10px;
 
-    .faq-buttons {
+
+    .faq-contact {
+      padding: 10%;
+      display: flex;
       flex-direction: column;
       align-items: center;
 
-      button {
+
+      .faq-section {
         width: 100%;
-        /* 撐滿螢幕寬度 */
-      }
-    }
-
-    .contact-content {
-      flex-direction: column;
-      /* 垂直排列 */
-      align-items: center;
-
-      .contact-right,
-      .contact-form {
-        width: 100%;
-        /* 撐滿螢幕寬度 */
       }
 
-      .contact-bubble {
-        width: 100%;
-        /* 撐滿寬度 */
-        text-align: center;
-      }
+      .faq-buttons {
+        flex-direction: column;
+        align-items: center;
 
-      .person-image {
-        max-width: 100px;
-        margin: 10px auto;
-        /* 居中顯示 */
-      }
-
-      .contact-form {
         button {
           width: 100%;
-          /* 按鈕撐滿寬度 */
         }
       }
+
+      .contact-section {
+        padding: 0;
+
+        .contact-content {
+          flex-direction: column;
+          align-items: center;
+
+          .contact-right {
+
+            flex: none;
+            width: 100%;
+            margin: 0;
+
+            .contact-bubble {
+              position: relative;
+              left: 0;
+              width: 100%;
+              text-align: center;
+              padding: 0;
+
+              .contact-info {
+                left: 10%;
+                top: 5%;
+              }
+            }
+
+            .person-image {
+              margin: 10px auto;
+              bottom: -40%;
+              opacity: 0.3;
+              pointer-events: none;
+            }
+          }
+
+
+
+
+          .contact-form {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            input{
+              box-sizing: border-box;
+              width: 100%;
+            }
+            textarea{
+              box-sizing: border-box;
+              width: 100%;
+            }
+            button {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+
     }
+
+
+
   }
 }
 
-@media screen and (max-width: 480px) {
-  .contact-body {
+@media screen and (max-width: 600px) {
 
-    .faq-section h1,
-    .contact-section h1 {
-      font-size: 20px;
-      /* 縮小標題字體 */
-      text-align: center;
-    }
-
-    .faq-buttons {
-      button {
-        font-size: 14px;
-        padding: 8px 10px;
-        /* 減小按鈕內邊距 */
-      }
-    }
-
-    .contact-content {
-      gap: 10px;
-      /* 減少區塊之間的距離 */
-
-      .contact-right .contact-bubble {
-        padding: 15px;
-        /* 縮小內邊距 */
-      }
-
-      .person-image {
-        max-width: 80px;
-      }
-
-      .contact-form {
-        p {
-          font-size: 14px;
-          /* 縮小標籤字體 */
+  .contact-body .faq-contact .contact-section .contact-content {
+    width:100% ;
+    justify-content: center;
+    .contact-right{
+      .contact-bubble{
+        display: flex;
+        
+        img{
+          display: none;
         }
-
-        input,
-        textarea {
-          font-size: 14px;
-          /* 調整輸入框字體 */
-          padding: 8px;
-        }
-
-        button {
-          font-size: 14px;
-          padding: 8px 10px;
+        .contact-info{
+          position: relative;
+          left: 0;
+          top:0;
+          padding: 20px;
+          border-radius: 20px;
+          background-color: rgba(108, 83, 135, 0.6);
         }
       }
-    }
+      .person-image{
+      bottom:40%;
+
+      }
+    } 
+
   }
 }
 
