@@ -1963,6 +1963,7 @@ a {
         width: 100%;
 
         .btn-group {
+          display: flex;
           flex-direction: row;
           margin: 0 0 20px 0;
           box-sizing: border-box;
@@ -1972,6 +1973,7 @@ a {
             border-radius: 5px 5px;
             box-sizing: border-box;
             padding: 5px 10px;
+            border-right: $primary-green 1.5px solid;
           }
         }
 
