@@ -24,6 +24,10 @@ const Forum = () => {
   const [hoveredIcon, setHoveredIcon] = useState(null); //紀錄更換排序按鈕
   const location = useLocation(); //帳戶名稱
   const userName = location.state?.userName || "匿名用戶";
+   useEffect(() => {
+      // 當路由變更時，將頁面滾動到頂部
+      window.scrollTo(0, 0);
+    }, [location]);
 
   useEffect(() => {
     // [撰寫新文章]加載靜態數據和 localStorage 中的數據

@@ -4071,6 +4071,10 @@ button:hover #custom-cursor::after {
       left: 40%;
 
     }
+    @media (max-width:390px) {
+      transform: translate(0%, 50%);
+
+    }
   }
 
 
@@ -4084,6 +4088,12 @@ button:hover #custom-cursor::after {
     z-index: 2;
     opacity: 40%;
     pointer-events: none;
+    @media (max-width:480px) {
+      top: 0%;
+      left: -20%;
+      width: 150%;
+    }
+
   }
 
   .tree {
@@ -4095,6 +4105,11 @@ button:hover #custom-cursor::after {
     margin: 0;
     z-index: 2;
     opacity: 1;
+    @media (max-width:480px) {
+      top: 30%;
+      left: -30%;
+      width: 250%;
+    }
 
   }
 
