@@ -89,16 +89,18 @@ a {
   .nav-wrapper {
     pointer-events: auto;
   }
-  .success-btn{
+
+  .success-btn {
     margin-top: 20px;
     pointer-events: auto;
     border: none;
-    color:$light;
+    color: $light;
     background-color: $primary-purple;
     @include font-style($font-medium-16);
     padding: 10px 20px;
     border-radius: 20px;
   }
+
   button {
     background: none;
     color: $primary-purple;
@@ -167,7 +169,7 @@ a {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     position: relative;
     text-align: center;
-  
+
   }
 
   /* 關閉按鈕 (叉叉) */
@@ -369,7 +371,7 @@ a {
       #news,
       #Group {
         margin-right: 8px;
-       
+
       }
 
     }
@@ -448,7 +450,7 @@ a {
       display: flex;
       align-items: center;
       position: absolute;
-      top: 50px; 
+      top: 50px;
       padding: 10px;
       border-radius: 5px;
 
@@ -475,7 +477,8 @@ a {
     width: 24px;
     cursor: not-allowed;
   }
-  .group-info{
+
+  .group-info {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -489,7 +492,7 @@ a {
     overflow: visible;
     z-index: 997;
     height: fit-content;
-    
+
 
     .hamburger {
       position: relative;
@@ -543,7 +546,7 @@ a {
       transform-origin: top right;
       opacity: 0;
       transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
-      pointer-events: none; 
+      pointer-events: none;
 
       &.show {
         transform: scale(1);
@@ -577,12 +580,13 @@ a {
             position: relative;
             display: inline-block;
             padding: 0px 30px;
+
             &::before {
               content: "";
               position: absolute;
               top: 42%;
-              left: 0; 
-              background: $primary-green; 
+              left: 0;
+              background: $primary-green;
               z-index: 998;
               width: 6px;
               height: 6px;
@@ -1926,24 +1930,7 @@ a {
     }
   }
 
-  @media (max-width:1024px) {
-    .top-markers .top-list .row .top-item {
-      .img-wrapper {
-        width: 100%;
 
-      }
-
-      flex-direction: column;
-      align-items: center;
-
-      .top-discription {
-        width: auto;
-        margin: 16px 0;
-
-      }
-    }
-
-  }
 
   @media (max-width:1439px) {
     display: flex;
@@ -2022,6 +2009,24 @@ a {
 
   }
 
+  @media (max-width:1024px) {
+    .top-markers .top-list .row .top-item {
+      .img-wrapper {
+        width: 100%;
+
+      }
+
+      flex-direction: column;
+      align-items: center;
+
+      .top-discription {
+        width: auto;
+        margin: 16px 0;
+
+      }
+    }
+
+  }
 
   @media (max-width:768px) {
     .map-content {
@@ -2612,93 +2617,114 @@ a {
         }
       }
     }
+
   }
+
 
   @media (max-width:1440px) {
     padding: 5% 10%;
 
-    .gallery-area {
-      height: 90vh
+    .page-container {
+
+
+      .gallery-area {
+        height: 90vh
+      }
+
     }
+
   }
 
   @media (max-width:768px) {
     padding: 5% 15%;
-    flex-direction: column;
 
-    .location-info {
-      width: 100%;
-      min-width: 100%;
+    .page-container {
+      flex-direction: column;
 
-      .cover-image {
+      .location-info {
         width: 100%;
-        height: 50%;
-        padding: 0;
-      }
+        min-width: 100%;
 
-      .info-area {
-        width: 100%;
-        height: 60vh;
-
-        .info-text {
-          display: flex;
-          flex-direction: column;
+        .cover-image {
           width: 100%;
-          margin: 8px 0;
+          height: 50%;
+          padding: 0;
+        }
 
-          h1 {
-            overflow: hidden;
+        .info-area {
+          width: 100%;
+          height: 60vh;
+
+          .info-text {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
             margin: 8px 0;
-            @include font-style($font-medium-26)
-          }
 
-          .user-rating {
-            overflow: hidden;
-
-            margin-bottom: 20px 0;
-
-            .comments-num {
-              flex-direction: row;
-
+            h1 {
+              overflow: hidden;
+              margin: 8px 0;
+              @include font-style($font-medium-26)
             }
+
+            .user-rating {
+              overflow: hidden;
+
+              margin-bottom: 20px 0;
+
+              .comments-num {
+                flex-direction: row;
+
+              }
+            }
+
+          }
+
+          .comments-area {
+            padding: 20px;
+            height: calc(60vh - 100px);
+
+          }
+
+          .commentlist {
+            width: 100%;
           }
 
         }
 
-        .comments-area {
-          padding: 20px;
-          height: calc(60vh - 100px);
-
-        }
-
-        .commentlist {
-          width: 100%;
-        }
 
       }
 
 
+      .gallery-area {
+        align-items: center;
+        width: 100%;
+        margin: 30px 0;
+        border: $primary-purple 1.5px solid;
+        border-radius: 5px;
+      }
+
     }
 
 
-    .gallery-area {
-      align-items: center;
-      width: 100%;
-      margin: 30px 0;
-      border: $primary-purple 1.5px solid;
-      border-radius: 5px;
-    }
+
 
   }
 
   @media (max-width:600px) {
-    padding: 5% 5%;
 
-    .gallery-area {
-      width: 100%;
+    padding: 5% 10%;
+    .page-container {
+     
+      .gallery-area {
+        width: 100%;
+      }
     }
 
+
+
   }
+
 }
 
 
@@ -3775,6 +3801,7 @@ button:hover #custom-cursor::after {
   /* 精選文章 內容 */
   .story-box {
     display: flex;
+
     .story {
       display: flex;
       flex-direction: column;
@@ -3891,7 +3918,7 @@ button:hover #custom-cursor::after {
     p {
       font-family: 'Noto Sans TC';
       font-weight: 300;
-      font-size: 1rem; 
+      font-size: 1rem;
       color: $light;
     }
 
@@ -3986,12 +4013,12 @@ button:hover #custom-cursor::after {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden; 
+      overflow: hidden;
       max-height: 100%;
     }
 
     .share-icon li {
-      margin: 0; 
+      margin: 0;
       padding: 4px;
 
 
@@ -3999,19 +4026,19 @@ button:hover #custom-cursor::after {
 
     .share-icon img {
       display: block;
-      width: 100%; 
-      height: auto; 
+      width: 100%;
+      height: auto;
     }
 
     .share-icon a {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%; 
+      width: 100%;
       height: 100%;
       text-decoration: none;
       overflow: hidden;
-      transition: transform 0.2s ease; 
+      transition: transform 0.2s ease;
     }
 
     .share-icon a:hover {
@@ -4073,6 +4100,7 @@ button:hover #custom-cursor::after {
       left: 40%;
 
     }
+
     @media (max-width:390px) {
       transform: translate(0%, 50%);
 
@@ -4090,6 +4118,7 @@ button:hover #custom-cursor::after {
     z-index: 2;
     opacity: 40%;
     pointer-events: none;
+
     @media (max-width:480px) {
       top: 0%;
       left: -20%;
@@ -4107,6 +4136,7 @@ button:hover #custom-cursor::after {
     margin: 0;
     z-index: 2;
     opacity: 1;
+
     @media (max-width:480px) {
       top: 30%;
       left: -30%;
@@ -4508,16 +4538,17 @@ button:hover #custom-cursor::after {
     width: 40%;
 
     height: 600px;
-  
+
 
     padding: 100px 50px;
- 
+
     box-sizing: border-box;
- 
+
 
     margin-left: auto;
 
     margin-right: 10%;
+
     @media(max-width:1440px) {
       width: 45%;
     }
@@ -4672,7 +4703,7 @@ button:hover #custom-cursor::after {
           .category-board {
             border: 1.5px solid $grey;
             border-radius: 5px;
-            padding: 44px; 
+            padding: 44px;
 
             // 分類列表
             .category-list {
@@ -4685,14 +4716,14 @@ button:hover #custom-cursor::after {
                 margin: 5px 0;
                 color: $primary-green;
                 transition: background-color 0.3s ease, color 0.3s ease;
-                border-radius: 8px; 
+                border-radius: 8px;
 
                 div {
                   display: flex;
                   justify-content: center;
 
                   img {
-                    width: 24px; 
+                    width: 24px;
                     height: 24px;
                   }
 
@@ -4712,7 +4743,7 @@ button:hover #custom-cursor::after {
                 }
 
                 &.active {
-                  background-color: $primary-purple; 
+                  background-color: $primary-purple;
                   color: $deep;
 
                   img {
@@ -4756,14 +4787,14 @@ button:hover #custom-cursor::after {
 
             div {
               display: flex;
-              align-items: center; 
+              align-items: center;
               padding: 5px 10px;
-              border-radius: 5px; 
+              border-radius: 5px;
               transition: all 0.3s ease;
               font-weight: 600;
 
               &:hover {
-                background-color: $primary-purple; 
+                background-color: $primary-purple;
 
                 p {
                   color: $deep;
@@ -4776,13 +4807,13 @@ button:hover #custom-cursor::after {
               }
 
               img {
-                width: 24px; 
+                width: 24px;
                 height: 24px;
-                margin-right: 8px; 
+                margin-right: 8px;
               }
 
               .nav-button {
-                color: #acff6c; 
+                color: #acff6c;
                 font-size: 18px;
                 border: none;
                 background: none;
@@ -4806,9 +4837,9 @@ button:hover #custom-cursor::after {
               display: flex;
               align-items: center;
               border: 2px solid $primary-green;
-              border-radius: 5px; 
+              border-radius: 5px;
               overflow: hidden;
-              height: 30px; 
+              height: 30px;
 
               .search-input {
                 flex: 1;
@@ -4818,7 +4849,7 @@ button:hover #custom-cursor::after {
                 font-size: 16px;
                 color: $light;
                 background-color: $deep;
-                height: 100%; 
+                height: 100%;
                 box-sizing: border-box;
 
 
@@ -4843,7 +4874,7 @@ button:hover #custom-cursor::after {
                 }
 
                 &:hover {
-                  background-color: #9fe75e; 
+                  background-color: #9fe75e;
                 }
               }
             }
@@ -4927,6 +4958,7 @@ button:hover #custom-cursor::after {
                   display: flex;
                   align-items: center;
                   gap: 10px;
+
                   .delete-button {
                     background-color: $grey;
                     border: none;
@@ -4960,12 +4992,12 @@ button:hover #custom-cursor::after {
 
               .article-Graphics-text {
                 display: flex;
-                justify-content: space-between; 
-                align-items: center; 
+                justify-content: space-between;
+                align-items: center;
 
                 .left {
                   flex: 1;
-                  padding-right: 20px; 
+                  padding-right: 20px;
 
                   .article-title {
                     color: $primary-green;
@@ -5019,10 +5051,10 @@ button:hover #custom-cursor::after {
 
                 .right {
                   flex-shrink: 0; // 防止 .right 區塊縮小，保持圖片大小
-                  width: 85px; 
+                  width: 85px;
 
                   .article-image {
-                    width: 100%; 
+                    width: 100%;
                     border-radius: 5px;
                     object-fit: cover;
                   }
@@ -5061,7 +5093,7 @@ button:hover #custom-cursor::after {
           justify-content: center;
           align-items: center;
           z-index: 1001;
-          overflow: hidden; 
+          overflow: hidden;
 
           .overlay {
             position: fixed;
@@ -5173,8 +5205,8 @@ button:hover #custom-cursor::after {
 
                   .preview-image {
                     margin-top: 5px;
-                    width: 50px; 
-                    height: 50px; 
+                    width: 50px;
+                    height: 50px;
                     object-fit: cover;
                     border-radius: 4px;
                   }
@@ -5190,7 +5222,7 @@ button:hover #custom-cursor::after {
 
             .form-actions {
               display: flex;
-              justify-content: space-between; 
+              justify-content: space-between;
               margin-top: 20px;
 
               button {
@@ -5412,7 +5444,7 @@ button:hover #custom-cursor::after {
   padding: 10%;
   color: #ffffff;
   background-color: $deep;
-  padding-top: 130px !important; 
+  padding-top: 130px !important;
   cursor: none;
 
   .article-header {
@@ -5434,11 +5466,11 @@ button:hover #custom-cursor::after {
         display: flex;
 
         .category-icon {
-          width: 24px; 
-          height: 24px; 
-          margin-right: 8px; 
-          vertical-align: middle; 
-          border-radius: 50%; 
+          width: 24px;
+          height: 24px;
+          margin-right: 8px;
+          vertical-align: middle;
+          border-radius: 50%;
           object-fit: contain;
         }
 
@@ -5696,7 +5728,7 @@ button:hover #custom-cursor::after {
               gap: 5px;
               background: none;
               border: none;
-  
+
               color: #fff;
 
               img {
@@ -5749,7 +5781,7 @@ button:hover #custom-cursor::after {
         border-top-left-radius: 8px;
         border-bottom-left-radius: 8px;
         margin: 0;
-  
+
         .user-avatar {
           width: 30px;
           height: 30px;
@@ -5959,7 +5991,7 @@ button:hover #custom-cursor::after {
       text-align: center;
       position: relative;
       z-index: 2;
-      
+
 
       h1 {
         font-size: 2rem;
@@ -6051,6 +6083,7 @@ button:hover #custom-cursor::after {
           margin-right: 20px;
           flex-direction: column;
           align-items: center;
+
           .contact-bubble {
             position: relative;
             left: 20%;
@@ -6069,14 +6102,14 @@ button:hover #custom-cursor::after {
               line-height: 1.5;
 
               p {
-                text-align: left; 
+                text-align: left;
               }
 
               strong {
                 font-size: 18px;
-                text-align: left; 
-                display: block; 
-                color: #A3E635; 
+                text-align: left;
+                display: block;
+                color: #A3E635;
               }
             }
           }
@@ -6104,7 +6137,7 @@ button:hover #custom-cursor::after {
           flex-direction: column;
           align-items: flex-start;
           margin-left: 80px;
-  
+
 
           p {
             margin-bottom: 8px;
@@ -6149,10 +6182,11 @@ button:hover #custom-cursor::after {
             font-size: 16px;
             font-weight: bold;
             transition: all 0.3s;
+
             &:hover {
               background-color: rgba(165, 118, 228, 0.8);
               color: $primary-green;
-             
+
             }
           }
         }
@@ -6229,14 +6263,17 @@ button:hover #custom-cursor::after {
             max-width: 100%;
             margin: 0;
             padding: 0;
-            input{
+
+            input {
               box-sizing: border-box;
               width: 100%;
             }
-            textarea{
+
+            textarea {
               box-sizing: border-box;
               width: 100%;
             }
+
             button {
               width: 100%;
             }
@@ -6255,29 +6292,32 @@ button:hover #custom-cursor::after {
 @media screen and (max-width: 600px) {
 
   .contact-body .faq-contact .contact-section .contact-content {
-    width:100% ;
+    width: 100%;
     justify-content: center;
-    .contact-right{
-      .contact-bubble{
+
+    .contact-right {
+      .contact-bubble {
         display: flex;
-        
-        img{
+
+        img {
           display: none;
         }
-        .contact-info{
+
+        .contact-info {
           position: relative;
           left: 0;
-          top:0;
+          top: 0;
           padding: 20px;
           border-radius: 20px;
           background-color: rgba(108, 83, 135, 0.6);
         }
       }
-      .person-image{
-      bottom:40%;
+
+      .person-image {
+        bottom: 40%;
 
       }
-    } 
+    }
 
   }
 }
