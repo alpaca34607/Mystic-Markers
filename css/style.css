@@ -2054,7 +2054,6 @@ a {
 .gallery-page {
   display: flex;
   flex-direction: column;
-  margin-top: 110px;
   padding: 110px 15%;
   cursor: none;
 }
@@ -2486,6 +2485,7 @@ a {
 }
 @media (max-width: 1440px) {
   .gallery-page {
+    margin-top: 10%;
     padding: 5% 10%;
   }
   .gallery-page .page-container .gallery-area {
@@ -2549,6 +2549,7 @@ a {
 }
 @media (max-width: 600px) {
   .gallery-page {
+    margin-top: 25%;
     padding: 5% 10%;
   }
   .gallery-page .page-container .gallery-area {
