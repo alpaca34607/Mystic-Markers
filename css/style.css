@@ -4857,12 +4857,15 @@ button:hover #custom-cursor::after {
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons {
     width: 100%;
+    justify-content: space-evenly;
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons .nav-button-container {
     padding: 0;
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons .nav-button-container .nav-button {
     font-size: 14px;
+    letter-spacing: 0;
+    padding-inline: 0;
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons .nav-button-container p {
     font-size: 14px;

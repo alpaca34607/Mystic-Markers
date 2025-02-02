@@ -5345,12 +5345,15 @@ button:hover #custom-cursor::after {
 
     .forum-layout .main-content .top-bar .nav-buttons {
       width: 100%;
+      justify-content: space-evenly;
 
       .nav-button-container {
         padding: 0;
 
         .nav-button {
           font-size: 14px;
+          letter-spacing: 0;
+          padding-inline: 0;
         }
 
 
