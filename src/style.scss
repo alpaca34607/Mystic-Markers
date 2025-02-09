@@ -2870,6 +2870,7 @@ a {
     .banner {
       background-size: cover;
       height: calc(100vh * 1200 / 1920);
+      
     }
   }
 
@@ -2996,6 +2997,7 @@ a {
       z-index: 4;
       width: 100%;
       height: 100vh;
+      min-height: 100vh;
 
       .carouselwrapper {
         position: absolute;
@@ -3057,6 +3059,7 @@ a {
       z-index: 5;
       overflow: visible;
       mix-blend-mode: lighten;
+      min-height: 100vh;
 
       .intro3fog-P {
         position: absolute;
@@ -3116,6 +3119,7 @@ a {
       width: 100%;
       overflow: hidden;
       z-index: 5;
+      min-height: 100vh;
 
       .forum-gallery {
         position: relative;
@@ -3267,11 +3271,13 @@ a {
       #intro3 {
 
         .map-area {
+          display: flex;
+          box-sizing: border-box;
           width: 100%;
-
-
+          padding: 20px;
           img {
             margin-left: 80px;
+            
           }
 
           .map-intro {
@@ -3370,6 +3376,7 @@ a {
   @media (max-width:768px) {
     .intro #intro3 .map-area img {
       min-width: 95%;
+      margin-left: 40px;
     }
   }
 

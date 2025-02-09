@@ -2807,6 +2807,7 @@ a {
   z-index: 4;
   width: 100%;
   height: 100vh;
+  min-height: 100vh;
   /* 完成動畫後，滑鼠事件接管 transform */
 }
 .home .intro #intro2 .carouselwrapper {
@@ -2861,6 +2862,7 @@ a {
   z-index: 5;
   overflow: visible;
   mix-blend-mode: lighten;
+  min-height: 100vh;
 }
 .home .intro #intro3 .intro3fog-P {
   position: absolute;
@@ -2921,6 +2923,7 @@ a {
   width: 100%;
   overflow: hidden;
   z-index: 5;
+  min-height: 100vh;
 }
 .home .intro #intro4 .forum-gallery {
   position: relative;
@@ -3049,7 +3052,10 @@ a {
     width: 80%;
   }
   .home .intro #intro3 .map-area {
+    display: flex;
+    box-sizing: border-box;
     width: 100%;
+    padding: 20px;
   }
   .home .intro #intro3 .map-area img {
     margin-left: 80px;
@@ -3150,6 +3156,7 @@ a {
 @media (max-width: 768px) {
   .home .intro #intro3 .map-area img {
     min-width: 95%;
+    margin-left: 40px;
   }
 }
 @media (max-width: 500px) {
