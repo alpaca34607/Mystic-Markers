@@ -208,7 +208,6 @@ body {
   /* 系統預設的無襯線字 */
   font-size: 100%;
   line-height: 1.5;
-  cursor: none;
   margin: 0;
   padding: 0;
   overflow: auto;
@@ -3325,11 +3324,6 @@ a {
   width: 32px;
   height: 32px;
 }
-@media (max-width: 768px) {
-  #custom-cursor {
-    display: none;
-  }
-}
 
 /* 外框動畫 - 初始狀態 */
 #custom-cursor::after {
@@ -5693,5 +5687,16 @@ footer .content .left .link li a:hover {
 @media (max-width: 600px) {
   footer {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    cursor: default;
+  }
+}
+@media (min-width: 768px) {
+  body {
+    cursor: none;
   }
 }/*# sourceMappingURL=style.css.map */

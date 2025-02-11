@@ -13,7 +13,6 @@ body {
   /* 系統預設的無襯線字 */
   font-size: 100%;
   line-height: 1.5;
-  cursor: none;
   margin: 0;
   padding: 0;
   overflow: auto;
@@ -23,6 +22,7 @@ body {
   color: $light;
   font-family: "Noto Sans TC", sans-serif;
   height: 100%;
+
 }
 
 /* 重置標題字重 */
@@ -3562,10 +3562,6 @@ a {
       height: 32px;
     }
   }
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 }
 
 /* 外框動畫 - 初始狀態 */
@@ -6421,4 +6417,14 @@ footer {
     display: none;
   }
 
+}
+@media (max-width:768px) {
+  body{
+    cursor: default;
+  }
+}
+@media (min-width:768px) {
+  body{
+    cursor: none;
+  }
 }
