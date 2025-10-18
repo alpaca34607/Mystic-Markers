@@ -119,7 +119,8 @@ function Navbar() {
         {/* 登入後顯示會員管理按鈕 */}
         {isLoggedIn && (
           <div className="group-info">
-            <button onClick={() => setIsAuthOpen(true)} className="auth-btn">
+            {/* <button onClick={() => setIsAuthOpen(true)} className="auth-btn"> */}
+            <button>
               <img
                 id="Group"
                 src="images/Group.svg"

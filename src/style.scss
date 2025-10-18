@@ -3597,6 +3597,9 @@ button:hover #custom-cursor::after {
     opacity: 1;
     animation: expand 2.5s infinite linear;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 /* 定義動畫 */
