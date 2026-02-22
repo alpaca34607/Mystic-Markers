@@ -1,5 +1,5 @@
 import React from "react";
-import "../../css/Fog.css";
+import "../../css/fog.css";
 
 
 const generateRandomFog = (count) => {
