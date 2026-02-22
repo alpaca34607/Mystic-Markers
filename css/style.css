@@ -270,13 +270,6 @@ a {
   z-index: 998;
   cursor: none;
   pointer-events: none;
-  /* 整體視窗背景遮罩 */
-  /* 容器來包住 modal 和關閉按鈕 */
-  /* 主視窗 */
-  /* 關閉按鈕 (叉叉) */
-  /* 成功訊息樣式 */
-  /* 錯誤提示樣式 */
-  /* 電子郵件提示區域 */
 }
 .Topbar .Topbar-right,
 .Topbar .nav-wrapper {
@@ -326,6 +319,9 @@ a {
   align-items: center;
   margin-left: 115px;
 }
+.Topbar {
+  /* 整體視窗背景遮罩 */
+}
 .Topbar .modal-overlay {
   position: fixed;
   top: 0;
@@ -338,10 +334,16 @@ a {
   align-items: center;
   z-index: 1000;
 }
+.Topbar {
+  /* 容器來包住 modal 和關閉按鈕 */
+}
 .Topbar .modal-container {
   position: relative;
   width: 400px;
   cursor: none;
+}
+.Topbar {
+  /* 主視窗 */
 }
 .Topbar .modal {
   background: #2a2a2a;
@@ -351,6 +353,9 @@ a {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   position: relative;
   text-align: center;
+}
+.Topbar {
+  /* 關閉按鈕 (叉叉) */
 }
 .Topbar .close-btn {
   position: absolute;
@@ -398,9 +403,6 @@ a {
   width: 100%;
   padding: 0 20px;
   box-sizing: border-box;
-  /* 所有按鈕的基本樣式 */
-  /* 登入按鈕特定樣式 */
-  /* 註冊按鈕特定樣式 */
 }
 .Topbar .form-container label {
   align-self: flex-start;
@@ -421,6 +423,9 @@ a {
 .Topbar .form-container input::placeholder {
   color: #999;
 }
+.Topbar .form-container {
+  /* 所有按鈕的基本樣式 */
+}
 .Topbar .form-container .login-btn,
 .Topbar .form-container .register-btn {
   width: 100%;
@@ -436,15 +441,22 @@ a {
   justify-content: center;
   font-weight: bold;
 }
+.Topbar .form-container {
+  /* 登入按鈕特定樣式 */
+}
 .Topbar .form-container .login-btn {
   background-color: #acff6c;
   color: #2A2A2A;
+  cursor: none;
 }
 .Topbar .form-container .login-btn:hover {
   opacity: 0.9;
 }
 .Topbar .form-container .login-btn.google {
-  background-color: #B3B3B3;
+  background-color: #B595FF;
+}
+.Topbar .form-container {
+  /* 註冊按鈕特定樣式 */
 }
 .Topbar .form-container .register-btn {
   background-color: #B595FF;
@@ -471,15 +483,24 @@ a {
 .Topbar .register-forgot-container span {
   color: #FFFFFF;
 }
+.Topbar {
+  /* 成功訊息樣式 */
+}
 .Topbar .success-message {
   color: #acff6c;
   font-size: 16px;
   margin: 20px 0;
 }
+.Topbar {
+  /* 錯誤提示樣式 */
+}
 .Topbar .error-message {
   color: #B595FF;
   font-size: 14px;
   margin-top: 10px;
+}
+.Topbar {
+  /* 電子郵件提示區域 */
 }
 .Topbar .email-hint {
   font-size: 12px;
@@ -1921,7 +1942,6 @@ a {
     display: flex;
     align-items: center;
     width: 100%;
-    flex-direction: column;
   }
   .map .map-content .map-left .btn-group {
     display: flex;
@@ -1935,6 +1955,9 @@ a {
     box-sizing: border-box;
     padding: 5px 10px;
     border-right: #acff6c 1.5px solid;
+  }
+  .map .map-content .map-left {
+    flex-direction: column;
   }
   .map .map-content .map-left .map-wrapper {
     width: 80%;
@@ -1968,12 +1991,12 @@ a {
   }
 }
 @media (max-width: 1024px) {
+  .map .top-markers .top-list .row .top-item .img-wrapper {
+    width: 100%;
+  }
   .map .top-markers .top-list .row .top-item {
     flex-direction: column;
     align-items: center;
-  }
-  .map .top-markers .top-list .row .top-item .img-wrapper {
-    width: 100%;
   }
   .map .top-markers .top-list .row .top-item .top-discription {
     width: auto;
@@ -2032,12 +2055,12 @@ a {
   .map .map-content .map-left .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content .location-info .marker-header .user-info .user-name {
     font-size: 14px;
   }
+  .map .map-content .map-left .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content .comments-area .comment-title h2 {
+    font-size: 14px;
+  }
   .map .map-content .map-left .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content .comments-area {
     max-height: 150px;
     padding: 10px 8px;
-  }
-  .map .map-content .map-left .map-wrapper .leaflet-container .custom-popup .leaflet-popup-content .comments-area .comment-title h2 {
-    font-size: 14px;
   }
   .map .list-panel .marker-list .list-area .list-section .marker-list-item .adress-group {
     flex-direction: column;
@@ -2807,7 +2830,6 @@ a {
   width: 100%;
   height: 100vh;
   min-height: 100vh;
-  /* 完成動畫後，滑鼠事件接管 transform */
 }
 .home .intro #intro2 .carouselwrapper {
   position: absolute;
@@ -2816,6 +2838,9 @@ a {
   z-index: 10;
   width: 100%;
   height: auto;
+}
+.home .intro #intro2 {
+  /* 完成動畫後，滑鼠事件接管 transform */
 }
 .home .intro #intro2 .laya-please.interactive {
   transform: none;
@@ -3357,6 +3382,11 @@ button:hover #custom-cursor::after {
   opacity: 1;
   animation: expand 2.5s infinite linear;
 }
+@media (max-width: 768px) {
+  #custom-cursor {
+    display: none;
+  }
+}
 
 /* 定義動畫 */
 @keyframes expand {
@@ -3451,36 +3481,13 @@ button:hover #custom-cursor::after {
   position: relative;
   z-index: 0;
   cursor: none;
-  background-color: rgb(26, 26, 26);
-  /* 精選文章 那些年一起追我們的女孩 */
-  /* 讓文字內容保持在背景圖範圍內 */
-  /* 精選文章 內容 */
-  /* 鄉野奇談 */
-  /*故事集共用區*/
-  /* 紅衣小女孩 */
-  /* 紅衣小女孩文字背景圖 */
-  /* 文字內容區 */
-  /* 文字標題 */
-  /* 文章段落 */
-  /* 黃色小飛俠 */
-  /* 黃色小飛俠 文字背景圖 */
-  /* 文字內容區 */
-  /* 文章段落 */
-  /* 宮燈姐姐 */
-  /* 宮燈姐姐 文字背景圖 */
-  /* 文字內容區 */
-  /* 文字標題 */
-  /* 文章段落 */
-  /* 山羊人 */
-  /* 山羊人 文字背景圖 */
-  /* 文字內容區 */
-  /* 文字標題 */
-  /* 文章段落 */
-  /* RWD */
 }
 .Story html {
   overflow: hidden;
   height: 100%;
+}
+.Story {
+  background-color: rgb(26, 26, 26);
 }
 .Story img,
 .Story video {
@@ -3493,6 +3500,9 @@ button:hover #custom-cursor::after {
   max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
+}
+.Story {
+  /* 精選文章 那些年一起追我們的女孩 */
 }
 .Story .feature-story {
   width: 100%;
@@ -3527,6 +3537,9 @@ button:hover #custom-cursor::after {
   max-width: 100%;
   height: auto;
 }
+.Story {
+  /* 讓文字內容保持在背景圖範圍內 */
+}
 .Story .feature-story-container p {
   margin: 0;
   padding: 10px;
@@ -3541,6 +3554,9 @@ button:hover #custom-cursor::after {
   right: 0;
   width: auto;
   transform: translate(10%, -10%);
+}
+.Story {
+  /* 精選文章 內容 */
 }
 .Story .story-box {
   display: flex;
@@ -3783,6 +3799,9 @@ button:hover #custom-cursor::after {
     width: 48px;
   }
 }
+.Story {
+  /* 鄉野奇談 */
+}
 .Story .countryside-story {
   position: absolute;
   top: -30px;
@@ -3863,6 +3882,9 @@ button:hover #custom-cursor::after {
   padding-bottom: 60px;
   overflow: hidden;
 }
+.Story {
+  /*故事集共用區*/
+}
 .Story .story-grid {
   height: 100vh;
   overflow: visible;
@@ -3870,6 +3892,9 @@ button:hover #custom-cursor::after {
 .Story h3 {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+.Story {
+  /* 紅衣小女孩 */
 }
 .Story .story-item {
   background-image: url("/images/Story/redgirl.png");
@@ -3898,6 +3923,9 @@ button:hover #custom-cursor::after {
     background-position: 82% 0%;
     background-size: 300%;
   }
+}
+.Story {
+  /* 紅衣小女孩文字背景圖 */
 }
 .Story .red-girl-container {
   background-image: url("/images/Story/old-torn-paper-inksplash-2.png");
@@ -3933,12 +3961,18 @@ button:hover #custom-cursor::after {
     margin: 0;
   }
 }
+.Story {
+  /* 文字內容區 */
+}
 .Story .red-girl-text {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
   width: 95%;
   box-sizing: border-box;
+}
+.Story {
+  /* 文字標題 */
 }
 .Story .red-girl-title h3 {
   font-family: "Noto Sans TC";
@@ -3972,6 +4006,9 @@ button:hover #custom-cursor::after {
   background-color: #B595FF;
   z-index: -1;
 }
+.Story {
+  /* 文章段落 */
+}
 .Story .red-girl-text p {
   text-indent: 2em;
   color: #f0f0f0;
@@ -3979,6 +4016,9 @@ button:hover #custom-cursor::after {
   margin-bottom: 10px;
   word-wrap: break-word;
   /* 當文字長度過長時換行 */
+}
+.Story {
+  /* 黃色小飛俠 */
 }
 .Story .story-item2 {
   background-image: url("/images/Story/yellowman.png");
@@ -4007,6 +4047,9 @@ button:hover #custom-cursor::after {
     background-position: 30% 0%;
     background-size: 300%;
   }
+}
+.Story {
+  /* 黃色小飛俠 文字背景圖 */
 }
 .Story .yellow-peter-pan-container {
   background-image: url("/images/Story/old-torn-paper-inksplash-2.png");
@@ -4042,6 +4085,9 @@ button:hover #custom-cursor::after {
     width: 80%;
     margin-right: 0;
   }
+}
+.Story {
+  /* 文字內容區 */
 }
 .Story .yellow-peter-pan {
   display: flex;
@@ -4081,12 +4127,18 @@ button:hover #custom-cursor::after {
   background-color: #B595FF;
   z-index: -1;
 }
+.Story {
+  /* 文章段落 */
+}
 .Story .yellow-peter-pan-text {
   text-indent: 2em;
   color: #f0f0f0;
   line-height: 1.8;
   margin-bottom: 10px;
   word-wrap: break-word;
+}
+.Story {
+  /* 宮燈姐姐 */
 }
 .Story .story-item3 {
   background-image: url("/images/Story/lightsis.png");
@@ -4103,6 +4155,9 @@ button:hover #custom-cursor::after {
   .Story .story-item3 {
     background-position: 65% 0%;
   }
+}
+.Story {
+  /* 宮燈姐姐 文字背景圖 */
 }
 .Story .lantern-sister-container {
   background-image: url("/images/Story/old-torn-paper-inksplash-2.png");
@@ -4138,12 +4193,18 @@ button:hover #custom-cursor::after {
     margin: 0;
   }
 }
+.Story {
+  /* 文字內容區 */
+}
 .Story .lantern-sister-text {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
   width: 95%;
   box-sizing: border-box;
+}
+.Story {
+  /* 文字標題 */
 }
 .Story .lantern-sister-title h3 {
   font-family: "Noto Sans TC";
@@ -4178,6 +4239,9 @@ button:hover #custom-cursor::after {
   background-color: #B595FF;
   z-index: -1;
 }
+.Story {
+  /* 文章段落 */
+}
 .Story .lantern-sister-text p {
   text-indent: 2em;
   color: #f0f0f0;
@@ -4185,6 +4249,9 @@ button:hover #custom-cursor::after {
   margin-bottom: 10px;
   word-wrap: break-word;
   /* 當文字長度過長時換行 */
+}
+.Story {
+  /* 山羊人 */
 }
 .Story .story-item4 {
   background-image: url("/images/Story/goatman.png");
@@ -4202,6 +4269,9 @@ button:hover #custom-cursor::after {
   .Story .story-item4 {
     background-position: 15% 0%;
   }
+}
+.Story {
+  /* 山羊人 文字背景圖 */
 }
 .Story .goat-man-container {
   background-image: url("/images/Story/old-torn-paper-inksplash-2.png");
@@ -4238,6 +4308,9 @@ button:hover #custom-cursor::after {
     margin-right: 0;
   }
 }
+.Story {
+  /* 文字內容區 */
+}
 .Story .goat-man-title {
   display: flex;
   flex-direction: column;
@@ -4245,6 +4318,9 @@ button:hover #custom-cursor::after {
   margin-left: 10px;
   width: 95%;
   box-sizing: border-box;
+}
+.Story {
+  /* 文字標題 */
 }
 .Story .goat-man-title h3 {
   font-family: "Noto Sans TC";
@@ -4279,6 +4355,9 @@ button:hover #custom-cursor::after {
   background-color: #B595FF;
   z-index: -1;
 }
+.Story {
+  /* 文章段落 */
+}
 .Story .goat-man-text {
   text-indent: 2em;
   color: #f0f0f0;
@@ -4286,6 +4365,9 @@ button:hover #custom-cursor::after {
   margin-bottom: 10px;
   word-wrap: break-word;
   /* 當文字長度過長時換行 */
+}
+.Story {
+  /* RWD */
 }
 @media screen and (max-width: 1439px) {
   .Story .feature-story .feature-story-container {
@@ -5348,7 +5430,6 @@ button:hover #custom-cursor::after {
 }
 .contact-body .faq-contact {
   padding: 100px 20px;
-  /* 聯絡我們 */
 }
 .contact-body .faq-contact .faq-section,
 .contact-body .faq-contact .contact-section {
@@ -5411,6 +5492,9 @@ button:hover #custom-cursor::after {
   border-radius: 3px;
   text-align: left;
 }
+.contact-body .faq-contact {
+  /* 聯絡我們 */
+}
 .contact-body .faq-contact .contact-section {
   position: relative;
   margin-top: 70px;
@@ -5432,7 +5516,6 @@ button:hover #custom-cursor::after {
   margin-right: 20px;
   flex-direction: column;
   align-items: center;
-  /* 人物圖片 */
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-right .contact-bubble {
   position: relative;
@@ -5458,6 +5541,9 @@ button:hover #custom-cursor::after {
   text-align: left;
   display: block;
   color: #A3E635;
+}
+.contact-body .faq-contact .contact-section .contact-content .contact-right {
+  /* 人物圖片 */
 }
 .contact-body .faq-contact .contact-section .contact-content .contact-right .person-image {
   position: absolute;

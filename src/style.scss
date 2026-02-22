@@ -268,13 +268,14 @@ a {
     .login-btn {
       background-color: $primary-green;
       color: $deep;
+      cursor: none;
 
       &:hover {
         opacity: 0.9;
       }
 
       &.google {
-        background-color: $grey;
+        background-color: $primary-purple;
       }
     }
 
@@ -3597,8 +3598,8 @@ button:hover #custom-cursor::after {
     opacity: 1;
     animation: expand 2.5s infinite linear;
   }
-  @media (max-width: 768px) {
-    display: none;
+  @media (max-width: 768px), (hover: none), (pointer: coarse) {
+    display: none !important;
   }
 }
 

@@ -1,11 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import "../style.scss";
 
-const Cursor = ({ isAddingLocation }) => {
+const Cursor = ({ isAddingLocation = false }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hovering, setHovering] = useState(false);
+  const [enabled, setEnabled] = useState(true);
 
   useEffect(() => {
+    const mql = window.matchMedia(
+      "(max-width: 768px), (hover: none), (pointer: coarse)"
+    );
+
+    const updateEnabled = () => setEnabled(!mql.matches);
+    updateEnabled();
+
+    if (mql.addEventListener) {
+      mql.addEventListener("change", updateEnabled);
+    } else {
+      // Safari 舊版相容
+      mql.addListener(updateEnabled);
+    }
+
+    return () => {
+      if (mql.removeEventListener) {
+        mql.removeEventListener("change", updateEnabled);
+      } else {
+        mql.removeListener(updateEnabled);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) {
+      document.body.style.cursor = "default";
+      return;
+    }
+
     // 根據 isAddingLocation 狀態控制原始游標的顯示
     if (isAddingLocation) {
       document.body.style.cursor = 'none';
@@ -46,7 +76,9 @@ const Cursor = ({ isAddingLocation }) => {
       // 清理時恢復原始游標
       document.body.style.cursor = 'default';
     };
-  }, [isAddingLocation]); 
+  }, [isAddingLocation, enabled]); 
+
+  if (!enabled) return null;
 
   return (
     <div
