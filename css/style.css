@@ -275,6 +275,81 @@ a {
 .Topbar .Topbar-right,
 .Topbar .nav-wrapper {
   pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.Topbar .news-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.Topbar .news-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 200px;
+  background: #2A2A2A;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: #acff6c 1px solid;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.Topbar .news-dropdown .news-dropdown-content {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.Topbar .news-dropdown .news-item {
+  padding: 10px;
+  border-bottom: 1px solid #B3B3B3;
+}
+.Topbar .news-dropdown .news-item a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF;
+}
+.Topbar .news-dropdown .news-item a .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.Topbar .news-dropdown .news-item a .title .dot {
+  width: 5px;
+  height: 5px;
+  background-color: #acff6c;
+  border-radius: 50%;
+}
+.Topbar .news-dropdown .news-item a .title span {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+.Topbar .news-dropdown .news-item a p {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  color: #B3B3B3;
+}
+.Topbar .news-dropdown .news-item:hover, .Topbar .news-dropdown .news-item:active {
+  background-color: #acff6c;
+}
+.Topbar .news-dropdown .news-item:hover a span,
+.Topbar .news-dropdown .news-item:hover a p, .Topbar .news-dropdown .news-item:active a span,
+.Topbar .news-dropdown .news-item:active a p {
+  color: #2A2A2A;
 }
 .Topbar .success-btn {
   margin-top: 20px;
@@ -288,11 +363,18 @@ a {
   padding: 10px 20px;
   border-radius: 20px;
 }
-.Topbar button {
+.Topbar button, .Topbar a {
   background: none;
   color: #B595FF;
   pointer-events: auto;
   border: none;
+  cursor: none;
+  transition: transform 0.3s ease;
+  padding: 0;
+  margin: 0;
+}
+.Topbar button:hover, .Topbar a:hover {
+  filter: brightness(1.1);
 }
 .Topbar .logo {
   width: 240px;
@@ -540,10 +622,7 @@ a {
   }
   .Topbar .nav-wrapper {
     margin-right: 15px;
-  }
-  .Topbar .nav-wrapper #news,
-  .Topbar .nav-wrapper #Group {
-    margin-right: 8px;
+    gap: 10px;
   }
   .Topbar .Topbar-right {
     margin-left: 15px;
@@ -598,9 +677,14 @@ a {
   /* 會員圖示 */
 }
 .nav-wrapper #Group {
-  margin-right: 20px;
-  width: 26px;
-  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  box-sizing: border-box;
 }
 .nav-wrapper #Group .group-info {
   display: flex;
@@ -624,9 +708,11 @@ a {
   filter: brightness(200%);
 }
 .nav-wrapper #news {
-  margin-right: 20px;
-  width: 24px;
-  cursor: not-allowed;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  box-sizing: border-box;
+  cursor: none;
 }
 .nav-wrapper .group-info {
   display: flex;
@@ -670,13 +756,12 @@ a {
 .nav-wrapper .navbar .navigation {
   position: absolute;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   top: 0;
   right: 0;
-  width: 220px;
-  height: 500px;
-  max-height: 600px;
-  padding: 85px;
+  padding: 100px 50px;
   border-radius: 8px;
   background: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
   transform: scale(0);
@@ -684,6 +769,7 @@ a {
   opacity: 0;
   transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
   pointer-events: none;
+  box-sizing: border-box;
 }
 .nav-wrapper .navbar .navigation.show {
   transform: scale(1);
@@ -692,7 +778,7 @@ a {
 }
 .nav-wrapper .navbar .navigation .menu {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-direction: column;
   font-family: "Noto Sans TC";
   font-size: 26px;
@@ -701,6 +787,8 @@ a {
   margin: 0;
   padding: 0;
   overflow: visible;
+  gap: 50px;
+  width: fit-content;
 }
 .nav-wrapper .navbar .navigation .menu li {
   position: relative;
@@ -708,6 +796,7 @@ a {
   display: flex;
   align-items: center;
   padding-left: 30px;
+  flex-shrink: 0;
 }
 .nav-wrapper .navbar .navigation .menu li a {
   text-decoration: none;
@@ -720,6 +809,7 @@ a {
   position: relative;
   display: inline-block;
   padding: 0px 30px;
+  white-space: nowrap;
 }
 .nav-wrapper .navbar .navigation .menu li a::before {
   content: "";
@@ -746,6 +836,17 @@ a {
 }
 .nav-wrapper .navbar .navigation .menu li a:hover::after, .nav-wrapper .navbar .navigation .menu li a.active::after {
   transform: translateY(-50%) scaleX(1);
+}
+@media (max-width: 768px) {
+  .nav-wrapper .navbar .navigation {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    max-height: 100vh;
+    padding-bottom: 60px;
+  }
 }
 
 /* 回到頂部 */
@@ -2653,7 +2754,7 @@ a {
   position: relative;
   background: url("/images/home_banner.png");
   background-size: cover;
-  background-position: right top;
+  background-position: center top;
   background-repeat: no-repeat;
   overflow: hidden;
   width: 100%;
@@ -5841,4 +5942,57 @@ footer .content .left .link li a:hover {
   body {
     cursor: none;
   }
+}
+/* 會員管理 */
+.user-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #2A2A2A;
+}
+.user-page .user-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.user-page .user-page-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #acff6c;
+  font-family: "Noto Sans TC";
+}
+.user-page .user-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.user-page .user-info .user-info-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.user-page .user-info .user-info-header .user-img-wrapper img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.user-page .user-info .user-info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }

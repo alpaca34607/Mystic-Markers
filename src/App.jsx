@@ -2,6 +2,7 @@ import "./style.scss";
 // import "../css/style.css";
 import Navbar from "./components/Navbar";
 import { Link, Route, Routes } from "react-router-dom";
+import User from "./pages/User";
 import Story from "./pages/Story";
 import Map from "./pages/Map";
 import Gallerypage from "./pages/Gallerypage";
@@ -37,12 +38,12 @@ const App = () => {
   const fadeInRefs = useRef([]);
   const fadeInaRefs = useRef([]);
 
-  
-  
+
+
   useEffect(() => {
 
-     // 只有淡入
-     fadeInaRefs.current.forEach((el) => {
+    // 只有淡入
+    fadeInaRefs.current.forEach((el) => {
       gsap.fromTo(
         el,
         { opacity: 0, x: 0 },
@@ -170,7 +171,7 @@ const App = () => {
           path="/"
           element={
             <main className="home">
-              <section ref={(el) =>  fadeInaRefs.current.push(el)} className="banner">
+              <section ref={(el) => fadeInaRefs.current.push(el)} className="banner">
                 <div className="fog-area-p">
                   <Fog className="purpleFog" />
                 </div>
@@ -352,7 +353,7 @@ const App = () => {
         <Route path="/Forum" element={<Forum />} />
         <Route path="/Contact" element={<Contact />} />
         <Route path="/Forum/article/:articleId/*" element={<ArticleView />} />
-
+        <Route path="/User" element={<User />} />
       </Routes>
     </>
   );

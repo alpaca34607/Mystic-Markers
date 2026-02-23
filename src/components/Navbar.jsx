@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AuthModal from "./AuthModal";
 import "../style.scss";
 import { Link } from "react-router-dom";
@@ -6,14 +6,31 @@ import { Link } from "react-router-dom";
 // Menu
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // 登入/註冊
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authType, setAuthType] = useState("login");
+  // 通知
+  const [isNewsOpen, setIsNewsOpen] = useState(false);
+  const newsDropdownRef = useRef(null);
+
+  // 點擊外部關閉 news-dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (newsDropdownRef.current && !newsDropdownRef.current.contains(event.target)) {
+        setIsNewsOpen(false);
+      }
+    };
+    if (isNewsOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isNewsOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // 登入/註冊
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [authType, setAuthType] = useState("login");
+
 
   const openModal = (type) => {
     setAuthType(type);
@@ -46,6 +63,12 @@ function Navbar() {
     setIsLoggedIn(false);
     setUserName("");
   };
+
+  const newsList = [
+    { title: "本月精選文章新出爐", content: "那些年，一起追我們的女孩", link: "/Story" },
+    { title: "系統更新通知", content: "新增了地圖功能，可以查看地圖上的標記，並查看標記的詳細資訊。", link: "/Map" },
+    { title: "論壇熱門話題", content: "鬧鬼工廠的不尋常聲音！發現奇怪的符號", link: "/Forum" },
+  ];
 
   return (
     <header className="Topbar">
@@ -102,31 +125,37 @@ function Navbar() {
       </nav>
       {/* 通知/會員管理/MENU */}
       <nav className="nav-wrapper">
-        {/* <a href=""> */}
-          <img id="news" src="images/news.svg" alt="news" />
-        {/* </a> */}
-        {/* 僅在未登入時顯示 Group 按鈕 */}
-        {!isLoggedIn && (
-          // <a href="">
-            <img
-              id="Group"
-              src="images/Group.svg"
-              alt="Group"
-              // onClick={() => setIsAuthOpen(true)}
-            />
-          // </a>
-        )}
+        <div className="news-dropdown-wrapper" ref={newsDropdownRef}>
+          <button className="news-btn" onClick={() => setIsNewsOpen(!isNewsOpen)}>
+            <img id="news" src="images/news.svg" alt="news" />
+          </button>
+          {isNewsOpen && (
+            <div className="news-dropdown">
+              <ul className="news-dropdown-content">
+                {newsList.length > 0 && newsList.map((news, index) => (
+                  <li className="news-item" key={index}>
+                    <Link to={news.link}>
+                      <div className="title">
+                        <div className="dot"></div>
+                        <span>{news.title}</span>
+                      </div>
+                      <p>{news.content}</p>
+                    </Link>
+                  </li>))}
+              </ul>
+            </div>
+          )}
+        </div>
         {/* 登入後顯示會員管理按鈕 */}
         {isLoggedIn && (
           <div className="group-info">
-            {/* <button onClick={() => setIsAuthOpen(true)} className="auth-btn"> */}
-            <button>
+            <Link to="/User">
               <img
                 id="Group"
                 src="images/Group.svg"
                 alt="Group"
               />
-            </button>
+            </Link>
           </div>
         )}
         {/* Menu */}
