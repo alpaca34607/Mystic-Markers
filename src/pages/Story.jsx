@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Navbar from "../components/Navbar"; //Navbar
 import Footer from "../components/Footer";
+import { swalSuccess } from "../utils/swal";
 import "../style.scss";
 import { Link, Routes, Route } from "react-router-dom";
 import Contact from "./Contact";
@@ -29,7 +30,7 @@ export default function Story() {
 
   const copyLink = () => {
     navigator.clipboard.writeText(shareUrl).then(() => {
-      alert("連結已複製到剪貼板！");
+      swalSuccess("連結已複製到剪貼板！");
     });
   };
 

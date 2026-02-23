@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom"; // 確保引入 useParams
 import Navbar from "../components/Navbar"; //Navbar
+import { swalInfoHtml } from "../utils/swal";
 import "../style.scss";
 import ArticleList from "../components/ArticleList"; // 文章列表
 import ArticleView from "../components/ArticleView";
@@ -115,8 +116,9 @@ const Forum = () => {
 
   // [發文規則]按鈕
   const showPostingRules = () => {
-    alert(
-      "發文規則：\n1. 請保持友善與尊重。\n2. 禁止發表不當內容。\n3. 內容需與分類相關。"
+    swalInfoHtml(
+      "發文規則：<br>1. 請保持友善與尊重。<br>2. 禁止發表不當內容。<br>3. 內容需與分類相關。",
+      "發文規則"
     );
   };
 

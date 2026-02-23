@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "../style.scss";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provide } from "../config/firebase";
+import { swalSuccess, swalError, swalWarning } from "../utils/swal";
 const AuthModal = ({ isOpen, onClose, initialView }) => {
   const [currentView, setCurrentView] = useState(initialView);
   const [formData, setFormData] = useState({
@@ -21,12 +22,12 @@ const AuthModal = ({ isOpen, onClose, initialView }) => {
       localStorage.setItem("isLoggedIn", true);
       localStorage.setItem("userName", user.displayName || "訪客");
 
-      alert(`Google 登入成功！歡迎 ${user.displayName || "訪客"}`);
+      swalSuccess(`歡迎 ${user.displayName || "訪客"}！`, "Google 登入成功");
       onClose();
       window.dispatchEvent(new Event("storage")); // 通知其他元件更新狀態
     } catch (error) {
       console.error("Google 登入失敗", error);
-      alert("Google 登入失敗，請重試！");
+      swalError("請重試！", "Google 登入失敗");
     }
   };
 
@@ -49,7 +50,7 @@ const AuthModal = ({ isOpen, onClose, initialView }) => {
   // 登入
   const handleLogin = () => {
     if (!formData.email.trim() || !formData.password.trim()) {
-      alert("請輸入帳號和密碼！");
+      swalWarning("請輸入帳號和密碼！");
       return;
     }
 
@@ -61,18 +62,12 @@ const AuthModal = ({ isOpen, onClose, initialView }) => {
     ) {
       localStorage.setItem("isLoggedIn", true); // 登入狀態
       localStorage.setItem("userName", storedData.name); // 使用者姓名
-      alert("登入成功！");
+      swalSuccess("登入成功！");
       onClose();
       window.dispatchEvent(new Event("storage")); // 通知 Navbar 更新狀態
     } else {
-      alert("帳號或密碼錯誤！");
+      swalError("帳號或密碼錯誤！");
     }
-  };
-  // 登出
-  const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userName");
-    window.dispatchEvent(new Event("storage"));
   };
 
   const handleForgotPassword = () => {
@@ -80,7 +75,7 @@ const AuthModal = ({ isOpen, onClose, initialView }) => {
     if (storedData && forgotPasswordPhone === storedData.phone) {
       setRetrievedPassword(storedData.password);
     } else {
-      alert("電話號碼錯誤，無法查詢密碼！");
+      swalError("電話號碼錯誤，無法查詢密碼！");
     }
   };
 

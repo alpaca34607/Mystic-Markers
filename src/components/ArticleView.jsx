@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import articlesData from "../js/articlesData";
+import { swalSuccess } from "../utils/swal";
 import "../style.scss";
 
 const ArticleView = () => {
@@ -374,7 +375,7 @@ const ArticleView = () => {
           onClick={() => {
             navigator.clipboard
               .writeText(window.location.href) // 複製網址到剪貼板
-              .then(() => alert("文章連結已複製"))
+              .then(() => swalSuccess("文章連結已複製"))
               .catch((error) => console.error("無法複製連結", error));
           }}
           role="button" // 提供可訪問性
@@ -383,7 +384,7 @@ const ArticleView = () => {
             if (e.key === "Enter" || e.key === " ") {
               navigator.clipboard
                 .writeText(window.location.href)
-                .then(() => alert("文章連結已複製"))
+                .then(() => swalSuccess("文章連結已複製"))
                 .catch((error) => console.error("無法複製連結", error));
             }
           }}

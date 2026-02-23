@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import AuthModal from "./AuthModal";
 import "../style.scss";
 import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 // Menu
 function Navbar() {
@@ -57,11 +59,20 @@ function Navbar() {
     return () => window.removeEventListener("storage", updateAuthState);
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (e) {
+      // 非 Firebase 登入時 signOut 可能無效，忽略錯誤
+    }
+    // 清除登入相關 localStorage
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userName");
+    localStorage.removeItem("userProfile");
     setIsLoggedIn(false);
     setUserName("");
+    window.dispatchEvent(new Event("storage"));
+    window.location.href = "/";
   };
 
   const newsList = [

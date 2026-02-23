@@ -7,6 +7,7 @@ import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
 import { Link } from "react-router-dom";
 import { presetComments, generateComments } from "../components/presetComments";
+import { swalWarning } from "../utils/swal";
 import "../style.scss";
 
 
@@ -108,7 +109,7 @@ function GalleryPage() {
       // 新增評論
       const hasComment = comments.some((comment) => comment.userId === 'user123');
       if (hasComment) {
-        alert('每個用戶只能發表一則評論，請編輯現有評論');
+        swalWarning('每個用戶只能發表一則評論，請編輯現有評論');
         return;
       }
 
