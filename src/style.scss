@@ -135,23 +135,26 @@ a {
         gap: 8px; // 標題與內容之間的間距
         color: $light;
 
-        .title{
+        .title {
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 8px;
+
           .dot {
             width: 5px;
             height: 5px;
             background-color: $primary-green;
             border-radius: 50%;
           }
-        span {
-          font-size: 14px;
-          font-weight: 500;
-          margin: 0;
-          padding: 0;
-        }}
+
+          span {
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+            padding: 0;
+          }
+        }
 
 
         p {
@@ -190,7 +193,8 @@ a {
     border-radius: 20px;
   }
 
-  button, a {
+  button,
+  a {
     background: none;
     color: $primary-purple;
     pointer-events: auto;
@@ -199,6 +203,7 @@ a {
     transition: transform 0.3s ease;
     padding: 0;
     margin: 0;
+
     &:hover {
       filter: brightness(1.1);
     }
@@ -665,7 +670,7 @@ a {
         padding: 0;
         overflow: visible;
         gap: 50px;
-        width: fit-content; 
+        width: fit-content;
 
         li {
           position: relative;
@@ -673,7 +678,7 @@ a {
           display: flex;
           align-items: center;
           padding-left: 30px;
-          flex-shrink: 0; 
+          flex-shrink: 0;
 
           a {
             text-decoration: none;
@@ -4877,7 +4882,7 @@ button:hover #custom-cursor::after {
     .forum-layout {
       width: 100%;
       display: flex;
-      gap: 40px;
+      gap: 20px;
       justify-content: space-between;
 
       /* 網格間隙*/
@@ -4959,7 +4964,11 @@ button:hover #custom-cursor::after {
       }
 
       .main-content {
-        width: 70%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        box-sizing: border-box;
+        width: 100%;
         border: 1.5px solid $grey;
         border-radius: 5px;
         padding: 20px;
@@ -5016,14 +5025,10 @@ button:hover #custom-cursor::after {
           }
 
           .right-bar {
-            display: inline-flex;
+            display: flex;
             gap: 16px;
             align-items: center;
             justify-content: center;
-
-            .search-bar-container {
-              width: 350px;
-            }
 
             .search-bar {
               display: flex;
@@ -5034,7 +5039,7 @@ button:hover #custom-cursor::after {
               height: 30px;
 
               .search-input {
-                flex: 1;
+                width: 100%;
                 padding: 0 12px;
                 border: none;
                 outline: none;
@@ -5081,8 +5086,8 @@ button:hover #custom-cursor::after {
               cursor: none;
 
               img {
-                padding: 0;
-                display: block;
+                width: 100%;
+                height: 100%;
               }
             }
 
@@ -5441,11 +5446,6 @@ button:hover #custom-cursor::after {
           }
 
         }
-
-        @media (max-width:1439px) {
-          width: calc(100% - 45px);
-          max-width: 100%;
-        }
       }
     }
   }
@@ -5456,9 +5456,9 @@ button:hover #custom-cursor::after {
 // Forum RWD
 @media screen and (max-width: 1439px) {
   .forum-body {
-    padding: 10% 2%;
+    padding: 100px 30px;
     margin: 0;
-
+    box-sizing: border-box;
 
     .forum-container {
       .forum-layout {
@@ -5505,10 +5505,6 @@ button:hover #custom-cursor::after {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-
-    .search-bar {
-      width: 100%;
-    }
   }
 
   .article-list {
@@ -5531,7 +5527,6 @@ button:hover #custom-cursor::after {
   }
 
   .forum-body .forum-container {
-    padding: 5px 5px;
     width: 100%;
 
     .forum-layout .main-content .top-bar .nav-buttons {
@@ -5564,7 +5559,7 @@ button:hover #custom-cursor::after {
 
   .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
     .search-bar-container {
-      width: 260px;
+      width: 100%;
 
       .search-bar {
         height: 30px;
@@ -5613,8 +5608,6 @@ button:hover #custom-cursor::after {
     gap: 8px;
 
     .search-bar-container {
-      width: 250px;
-
       .search-bar {
         height: 30px;
 
@@ -6177,7 +6170,7 @@ button:hover #custom-cursor::after {
   cursor: none;
 
   .faq-contact {
-    padding: 100px 20px;
+    padding: 100px 30px;
 
     .faq-section,
     .contact-section {
@@ -6396,11 +6389,10 @@ button:hover #custom-cursor::after {
 
 
     .faq-contact {
-      padding: 10%;
+      padding: 100px 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
-
 
       .faq-section {
         width: 100%;
@@ -6621,13 +6613,31 @@ footer {
 
 /* 會員管理 */
 .user-page {
+  width: 100%;
   min-height: 100vh;
-  padding: 120px 20px 60px;
-  background-color: $deep;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+
+
 
   .user-page-container {
-    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 0;
+    padding-top: 160px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
+    box-sizing: border-box;
+    @media (max-width: 768px) {
+      padding: 80px 30px;
+    }
   }
 
   .user-page-loading,
@@ -6647,11 +6657,39 @@ footer {
     text-align: center;
   }
 
+  /* 個人資料區塊 */
+  .profile-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    border-radius: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border-radius: 12px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+  }
+
   /* 大頭貼區塊 */
   .user-profile-header {
     display: flex;
     justify-content: center;
-    margin-bottom: 32px;
+    background-color: $primary-purple;
+    padding: 30px;
+    height: stretch;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
   }
 
   .user-avatar-section {
@@ -6665,14 +6703,14 @@ footer {
     position: relative;
     width: 120px;
     height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid $deep;
 
     .user-avatar-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border: 3px solid $primary-purple;
-      box-shadow: 0 0 20px rgba($primary-green, 0.2);
     }
 
     .user-avatar-edit {
@@ -6703,32 +6741,47 @@ footer {
 
   /* 基本資訊卡片 */
   .user-info-card {
-    background: rgba($light, 0.03);
+    background: #2a2a2a;
+    border-radius: 0 12px 12px 0;
     border: 1px solid rgba($primary-green, 0.3);
-    border-radius: 12px;
-    padding: 24px;
+    padding: 40px;
+    width: 100%;
+    height: stretch;
+    box-sizing: border-box;
+    @media (max-width: 768px) {
+      border-radius: 0px 0px 12px 12px;
+      padding: 20px;
+    }
   }
 
   .user-info-card-title {
     font-size: 1rem;
     font-weight: 600;
     color: $primary-green;
-    margin: 0 0 20px 0;
     padding-bottom: 12px;
     border-bottom: 1px solid rgba($primary-green, 0.2);
   }
 
   .user-info-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+    padding: 40px 0;
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 10px;
+      padding: 20px 0;
+    }
   }
 
   .user-info-row {
     display: flex;
     align-items: center;
     gap: 16px;
-
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
     &.user-info-row-bio {
       align-items: flex-start;
     }
@@ -6739,6 +6792,9 @@ footer {
     width: 90px;
     font-size: 0.9rem;
     color: rgba($light, 0.7);
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   .user-info-value {
@@ -6758,6 +6814,7 @@ footer {
     border: 1px solid $primary-purple;
     border-radius: 8px;
     outline: none;
+    box-sizing: border-box;
 
     &::placeholder {
       color: rgba($light, 0.4);
@@ -6766,6 +6823,9 @@ footer {
     &:focus {
       border-color: $primary-green;
       box-shadow: 0 0 0 2px rgba($primary-green, 0.2);
+    }
+    @media (max-width: 768px) {
+      width: 100%;
     }
   }
 
@@ -6781,10 +6841,11 @@ footer {
   /* 按鈕區 */
   .user-actions {
     display: flex;
-    gap: 12px;
-    margin-top: 24px;
-    padding-top: 20px;
+    gap: 20px;
+    padding-top: 40px;
     border-top: 1px solid rgba($primary-green, 0.2);
+    width: 100%;
+    justify-content: flex-end;
   }
 
   .user-btn {
@@ -6820,5 +6881,170 @@ footer {
       border-color: $primary-purple;
       color: $primary-purple;
     }
+  }
+}
+
+.user-page-background {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.3;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* 修改密碼彈窗（本地註冊用） */
+.user-password-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: user-password-modal-fade-in 0.25s ease forwards;
+}
+
+.user-password-modal-container {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 20px;
+  background: #2a2a2a;
+  border-radius: 16px;
+  border: 1px solid rgba($primary-green, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  padding: 32px 28px;
+  transform: scale(0.95);
+  animation: user-password-modal-scale-in 0.3s ease forwards;
+}
+
+.user-password-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: rgba($light, 0.7);
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s;
+
+  &:hover {
+    color: $primary-green;
+    background: rgba($primary-green, 0.1);
+  }
+}
+
+.user-password-modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $primary-green;
+  margin: 0 0 24px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba($primary-green, 0.2);
+}
+
+.user-password-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  label {
+    font-size: 0.9rem;
+    color: rgba($light, 0.9);
+    margin-bottom: -4px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid rgba($light, 0.2);
+    border-radius: 8px;
+    background: rgba($light, 0.08);
+    color: $light;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &::placeholder {
+      color: rgba($light, 0.4);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $primary-green;
+      box-shadow: 0 0 0 2px rgba($primary-green, 0.2);
+    }
+  }
+}
+
+.user-password-modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba($primary-green, 0.15);
+
+  button {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .user-password-modal-submit {
+    background-color: $primary-green;
+    color: $deep;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .user-password-modal-cancel {
+    background: transparent;
+    color: $light;
+    border: 1px solid rgba($light, 0.3);
+
+    &:hover {
+      border-color: $primary-purple;
+      color: $primary-purple;
+    }
+  }
+}
+
+@keyframes user-password-modal-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes user-password-modal-scale-in {
+  to {
+    transform: scale(1);
   }
 }

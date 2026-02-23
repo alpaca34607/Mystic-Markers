@@ -363,7 +363,8 @@ a {
   padding: 10px 20px;
   border-radius: 20px;
 }
-.Topbar button, .Topbar a {
+.Topbar button,
+.Topbar a {
   background: none;
   color: #B595FF;
   pointer-events: auto;
@@ -373,7 +374,8 @@ a {
   padding: 0;
   margin: 0;
 }
-.Topbar button:hover, .Topbar a:hover {
+.Topbar button:hover,
+.Topbar a:hover {
   filter: brightness(1.1);
 }
 .Topbar .logo {
@@ -4571,7 +4573,7 @@ button:hover #custom-cursor::after {
 .forum-body .forum-container .forum-layout {
   width: 100%;
   display: flex;
-  gap: 40px;
+  gap: 20px;
   justify-content: space-between;
   /* 網格間隙*/
 }
@@ -4635,7 +4637,11 @@ button:hover #custom-cursor::after {
   justify-content: center;
 }
 .forum-body .forum-container .forum-layout .main-content {
-  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  width: 100%;
   border: 1.5px solid #B3B3B3;
   border-radius: 5px;
   padding: 20px;
@@ -4683,13 +4689,10 @@ button:hover #custom-cursor::after {
   letter-spacing: 2.7px;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
-  display: inline-flex;
+  display: flex;
   gap: 16px;
   align-items: center;
   justify-content: center;
-}
-.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container {
-  width: 350px;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar {
   display: flex;
@@ -4700,7 +4703,7 @@ button:hover #custom-cursor::after {
   height: 30px;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar .search-input {
-  flex: 1;
+  width: 100%;
   padding: 0 12px;
   border: none;
   outline: none;
@@ -4740,8 +4743,8 @@ button:hover #custom-cursor::after {
   cursor: none;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .PostModal-bar img {
-  padding: 0;
-  display: block;
+  width: 100%;
+  height: 100%;
 }
 .forum-body .forum-container .forum-layout .main-content .article-list {
   display: flex;
@@ -5033,17 +5036,12 @@ button:hover #custom-cursor::after {
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-actions button:hover {
   opacity: 0.9;
 }
-@media (max-width: 1439px) {
-  .forum-body .forum-container .forum-layout .main-content {
-    width: calc(100% - 45px);
-    max-width: 100%;
-  }
-}
 
 @media screen and (max-width: 1439px) {
   .forum-body {
-    padding: 10% 2%;
+    padding: 100px 30px;
     margin: 0;
+    box-sizing: border-box;
   }
   .forum-body .forum-container .forum-layout {
     display: flex;
@@ -5075,9 +5073,6 @@ button:hover #custom-cursor::after {
     align-items: flex-start;
     gap: 10px;
   }
-  .top-bar .search-bar {
-    width: 100%;
-  }
   .article-list .article-card {
     flex: 1 1 calc(50% - 10px);
     /* 每行兩列 */
@@ -5092,7 +5087,6 @@ button:hover #custom-cursor::after {
     flex-direction: column;
   }
   .forum-body .forum-container {
-    padding: 5px 5px;
     width: 100%;
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons {
@@ -5115,7 +5109,7 @@ button:hover #custom-cursor::after {
     gap: 30px;
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container {
-    width: 260px;
+    width: 100%;
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container .search-bar {
     height: 30px;
@@ -5148,9 +5142,6 @@ button:hover #custom-cursor::after {
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
     gap: 8px;
-  }
-  .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container {
-    width: 250px;
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container .search-bar {
     height: 30px;
@@ -5586,7 +5577,7 @@ button:hover #custom-cursor::after {
   cursor: none;
 }
 .contact-body .faq-contact {
-  padding: 100px 20px;
+  padding: 100px 30px;
 }
 .contact-body .faq-contact .faq-section,
 .contact-body .faq-contact .contact-section {
@@ -5768,7 +5759,7 @@ button:hover #custom-cursor::after {
 /* 常見問題 RWD */
 @media screen and (max-width: 1200px) {
   .contact-body .faq-contact {
-    padding: 10%;
+    padding: 100px 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -5945,54 +5936,424 @@ footer .content .left .link li a:hover {
 }
 /* 會員管理 */
 .user-page {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #2A2A2A;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 .user-page .user-page-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 80px 0;
+  padding-top: 160px;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .user-page .user-page-container {
+    padding: 80px 30px;
+  }
+}
+.user-page .user-page-loading,
+.user-page .user-page-empty {
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  padding: 60px 20px;
 }
 .user-page .user-page-title {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 32px;
   color: #acff6c;
   font-family: "Noto Sans TC";
+  text-align: center;
 }
-.user-page .user-info {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+.user-page {
+  /* 個人資料區塊 */
 }
-.user-page .user-info .user-info-header {
+.user-page .profile-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.user-page .user-info .user-info-header .user-img-wrapper img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-.user-page .user-info .user-info-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .user-page .profile-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+}
+.user-page {
+  /* 大頭貼區塊 */
+}
+.user-page .user-profile-header {
+  display: flex;
+  justify-content: center;
+  background-color: #B595FF;
+  padding: 30px;
+  height: stretch;
+}
+@media (max-width: 768px) {
+  .user-page .user-profile-header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
+.user-page .user-avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.user-page .user-avatar-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #2A2A2A;
+}
+.user-page .user-avatar-wrapper .user-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.user-page .user-avatar-wrapper .user-avatar-edit {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: #B595FF;
+  color: #2A2A2A;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.user-page .user-avatar-wrapper .user-avatar-edit:hover {
+  background-color: rgb(216.6037735849, 200, 255);
+}
+.user-page .user-display-name {
+  font-size: 1.25rem;
+  color: #FFFFFF;
+  margin: 0;
+}
+.user-page {
+  /* 基本資訊卡片 */
+}
+.user-page .user-info-card {
+  background: #2a2a2a;
+  border-radius: 0 12px 12px 0;
+  border: 1px solid rgba(172, 255, 108, 0.3);
+  padding: 40px;
+  width: 100%;
+  height: stretch;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .user-page .user-info-card {
+    border-radius: 0px 0px 12px 12px;
+    padding: 20px;
+  }
+}
+.user-page .user-info-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #acff6c;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(172, 255, 108, 0.2);
+}
+.user-page .user-info-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 40px 0;
+}
+@media (max-width: 768px) {
+  .user-page .user-info-list {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    padding: 20px 0;
+  }
+}
+.user-page .user-info-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+@media (max-width: 768px) {
+  .user-page .user-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+.user-page .user-info-row.user-info-row-bio {
+  align-items: flex-start;
+}
+.user-page .user-info-label {
+  flex-shrink: 0;
+  width: 90px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+@media (max-width: 768px) {
+  .user-page .user-info-label {
+    width: 100%;
+  }
+}
+.user-page .user-info-value {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+}
+.user-page {
+  /* 編輯輸入框 */
+}
+.user-page .user-edit-input,
+.user-page .user-edit-textarea {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  background-color: rgba(42, 42, 42, 0.8);
+  border: 1px solid #B595FF;
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+}
+.user-page .user-edit-input::placeholder,
+.user-page .user-edit-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.user-page .user-edit-input:focus,
+.user-page .user-edit-textarea:focus {
+  border-color: #acff6c;
+  box-shadow: 0 0 0 2px rgba(172, 255, 108, 0.2);
+}
+@media (max-width: 768px) {
+  .user-page .user-edit-input,
+  .user-page .user-edit-textarea {
+    width: 100%;
+  }
+}
+.user-page .user-edit-input-inline {
+  max-width: 280px;
+}
+.user-page .user-edit-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+.user-page {
+  /* 按鈕區 */
+}
+.user-page .user-actions {
+  display: flex;
+  gap: 20px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(172, 255, 108, 0.2);
+  width: 100%;
+  justify-content: flex-end;
+}
+.user-page .user-btn {
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.user-page .user-btn:hover {
+  opacity: 0.9;
+}
+.user-page .user-btn-edit {
+  background-color: #B595FF;
+  color: #2A2A2A;
+}
+.user-page .user-btn-save {
+  background-color: #acff6c;
+  color: #2A2A2A;
+}
+.user-page .user-btn-cancel {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.user-page .user-btn-cancel:hover {
+  border-color: #B595FF;
+  color: #B595FF;
+}
+
+.user-page-background {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.3;
+  overflow: hidden;
+}
+.user-page-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 修改密碼彈窗（本地註冊用） */
+.user-password-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: user-password-modal-fade-in 0.25s ease forwards;
+}
+
+.user-password-modal-container {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 20px;
+  background: #2a2a2a;
+  border-radius: 16px;
+  border: 1px solid rgba(172, 255, 108, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  padding: 32px 28px;
+  transform: scale(0.95);
+  animation: user-password-modal-scale-in 0.3s ease forwards;
+}
+
+.user-password-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s;
+}
+.user-password-modal-close:hover {
+  color: #acff6c;
+  background: rgba(172, 255, 108, 0.1);
+}
+
+.user-password-modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #acff6c;
+  margin: 0 0 24px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(172, 255, 108, 0.2);
+}
+
+.user-password-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.user-password-modal-form label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: -4px;
+}
+.user-password-modal-form input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.user-password-modal-form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.user-password-modal-form input:focus {
+  outline: none;
+  border-color: #acff6c;
+  box-shadow: 0 0 0 2px rgba(172, 255, 108, 0.2);
+}
+
+.user-password-modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(172, 255, 108, 0.15);
+}
+.user-password-modal-actions button {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.user-password-modal-actions .user-password-modal-submit {
+  background-color: #acff6c;
+  color: #2A2A2A;
+}
+.user-password-modal-actions .user-password-modal-submit:hover {
+  opacity: 0.9;
+}
+.user-password-modal-actions .user-password-modal-cancel {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.user-password-modal-actions .user-password-modal-cancel:hover {
+  border-color: #B595FF;
+  color: #B595FF;
+}
+
+@keyframes user-password-modal-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes user-password-modal-scale-in {
+  to {
+    transform: scale(1);
+  }
 }
