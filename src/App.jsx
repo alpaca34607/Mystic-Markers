@@ -19,6 +19,7 @@ import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GotoTop from "./components/GotoTop";
+import Footer from "./components/Footer";
 import ArticleView from "./components/ArticleView"; //文章瀏覽頁
 
 gsap.registerPlugin(ScrollTrigger);
@@ -319,30 +320,7 @@ const App = () => {
                   </div>
                 </div>
               </section>
-              <footer>
-                <div className="content">
-                  <div className="left">
-                    <ul className="link">
-                      <li>
-                        <Link to="/Story">怪談博物館</Link>
-                      </li>
-                      <li>
-                        <Link to="/Map">靈異導航</Link>
-                      </li>
-                      <li>
-                        <Link to="/Forum">鬼影探索</Link>
-                      </li>
-                      <li>
-                        <Link to="/Contact">解謎之門</Link>
-                      </li>
-                    </ul>
-                    <small>
-                      &copy; 2024 Mystic Markers. All Rights Reserved.  此網站設計學生練習作品，無任何商業營利用途。
-                    </small>
-                  </div>
-                  <img src="images/LOGO_footer.svg" alt="神秘座標" />
-                </div>
-              </footer>
+              <Footer />
             </main>
           }
         />

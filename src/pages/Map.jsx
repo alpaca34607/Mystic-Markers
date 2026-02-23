@@ -1,5 +1,6 @@
 import "../style.scss";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { Link, Route, Routes } from "react-router-dom";
 import App from "../App";
 import Gallerypage from "./Gallerypage";
@@ -1099,28 +1100,7 @@ export default function Map() {
                 </div>
                 {/* <img src="../assets/Map/product-SoftzillaS-thumb.jpg" alt="" style={{width:"100px",height:"100px"}}/> */}
               </section>
-              <footer>
-                <div className="content">
-                  <div className="left">
-                    <ul className="link">
-                      <li>
-                        <Link to="/">首頁</Link>
-                      </li>
-                      <li>
-                        <Link to="/Story">怪談博物館</Link>
-                      </li>
-                      <li>
-                        <Link to="/Forum">鬼影探索</Link>
-                      </li>
-                      <li>
-                        <Link to="/Contact">解謎之門</Link>
-                      </li>
-                    </ul>
-                    <small>&copy; 2024 Mystic Markers. All Rights Reserved.  此網站設計學生練習作品，無任何商業營利用途。</small>
-                  </div>
-                  <img src="images/LOGO_footer.svg" alt="神秘座標" />
-                </div>
-              </footer>
+              <Footer />
 
 
             </main>
