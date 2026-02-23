@@ -22,6 +22,7 @@ body {
   color: $light;
   font-family: "Noto Sans TC", sans-serif;
   height: 100%;
+  box-sizing: border-box;
 
 }
 
@@ -784,6 +785,7 @@ a {
         overflow: hidden;
         border-radius: 10px;
         border: $primary-green 2px solid;
+        box-sizing: border-box;
 
 
         .leaflet-container {
@@ -821,6 +823,10 @@ a {
             border: none;
             margin: 0;
             padding: 0;
+
+            @media(max-width:768px) {
+              left: 0;
+            }
 
             a {
               border: $primary-green 1px solid;
@@ -1564,6 +1570,7 @@ a {
     height: 78vh;
     overflow: hidden;
     cursor: none;
+    box-sizing: border-box;
 
     .control-panel {
       width: 100%;
@@ -1987,9 +1994,6 @@ a {
           }
 
           .leaflet-container {
-            width: 100% !important;
-            /* 使用 !important 確保覆蓋其他樣式 */
-            height: 100% !important;
             margin: 0 auto;
           }
 
@@ -1998,12 +2002,13 @@ a {
       }
 
       .list-panel {
-        width: 100%;
-        margin-top: 20px;
-        padding: 20px;
-        height: auto;
-        max-width: 80%;
+        margin-top: 40px;
+        width: 80%;
       }
+    }
+
+    .top-markers {
+      display: none;
     }
 
 
@@ -2030,43 +2035,109 @@ a {
   }
 
   @media (max-width:768px) {
+
     .map-content {
-      padding-top: 15%;
-    }
+      min-height: 100vh;
+      height: 100vh;
+      padding-top: 80px;
+      width: 100%;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      justify-content: flex-start;
+      align-items: stretch;
 
-    .top-markers .top-list .row {
-      gap: 10% 30px;
+      .map-left {
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+        max-width: 100%;
 
-      .top-item {
-        flex-direction: column;
-        align-items: center;
-
-        .top-discription {
-          width: auto;
-          margin: 16px 0;
-
-          p {
-            display: none;
-          }
+        .map-wrapper {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+          height: 100%;
+          min-height: 0;
+          flex: 1;
         }
       }
 
 
+      .list-panel {
+        transform: translateX(-50%);
+        position: fixed;
+        left: 50%;
+        bottom: -340px;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        padding-top: 40px;
+        height: 500px;
+        max-height: 500px;
+        z-index: 500;
+        transition: all 0.3s ease-in-out;
+        background-color: $deep;
+        border-radius: 10px 10px 0 0;
+        border: $primary-purple 1.5px solid;
+        border-bottom: none;
+
+        /* 頂部開關區域*/
+        .list-panel-handle {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 50px;
+          cursor: pointer;
+          &::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background-color: $grey;
+            border-radius: 10px 10px 0 0;
+          }
+        }
+
+
+        &.active {
+          bottom: 0;
+        }
+        .marker-list .list-area .list-section{
+          max-height: 250px;
+          height: 100%;
+        }
+      }
+
+
+      .top-markers .top-list .row {
+        gap: 10% 30px;
+
+        .top-item {
+          flex-direction: column;
+          align-items: center;
+
+          .top-discription {
+            width: auto;
+            margin: 16px 0;
+
+            p {
+              display: none;
+            }
+          }
+        }
+
+
+      }
     }
 
-
-  }
-
-  @media (max-width:767px) {
-    .map-content .map-left .map-wrapper .leaflet-container .leaflet-left a {
-      display: none;
-    }
   }
 
   @media (max-width:600px) {
     .map-content {
-      padding-top: 20%;
-
       .map-left .map-wrapper {
         width: 100%;
         max-width: 100%;
@@ -2080,17 +2151,12 @@ a {
 
   @media(max-width: 480px) {
     .map-content {
-      padding-top: 25%;
 
       .map-left .map-wrapper {
-        max-width: 85%;
-        min-width: 320px;
-        height: 75vh;
+        border-left: none;
+        border-right: none;
 
         .leaflet-container .custom-popup .leaflet-popup-content {
-          width: 280px !important;
-          height: 400px !important;
-
           .location-info .marker-header .user-info .user-name {
             font-size: 14px;
           }
@@ -2623,7 +2689,7 @@ a {
 
   @media (max-width:1440px) {
     margin-top: 10%;
-  
+
     padding: 5% 10%;
 
     .page-container {
@@ -2716,8 +2782,9 @@ a {
   @media (max-width:600px) {
     margin-top: 25%;
     padding: 5% 10%;
+
     .page-container {
-     
+
       .gallery-area {
         width: 100%;
       }
@@ -2871,7 +2938,7 @@ a {
     .banner {
       background-size: cover;
       height: calc(100vh * 1200 / 1920);
-      
+
     }
   }
 
@@ -3276,9 +3343,10 @@ a {
           box-sizing: border-box;
           width: 100%;
           padding: 20px;
+
           img {
             margin-left: 80px;
-            
+
           }
 
           .map-intro {
@@ -3598,7 +3666,10 @@ button:hover #custom-cursor::after {
     opacity: 1;
     animation: expand 2.5s infinite linear;
   }
-  @media (max-width: 768px), (hover: none), (pointer: coarse) {
+
+  @media (max-width: 768px),
+  (hover: none),
+  (pointer: coarse) {
     display: none !important;
   }
 }
@@ -6422,13 +6493,15 @@ footer {
   }
 
 }
+
 @media (max-width:768px) {
-  body{
+  body {
     cursor: default;
   }
 }
+
 @media (min-width:768px) {
-  body{
+  body {
     cursor: none;
   }
 }

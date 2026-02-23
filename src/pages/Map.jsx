@@ -199,6 +199,7 @@ export default function Map() {
   // 收藏
   const [favorites, setFavorites] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [showListPanel, setShowListPanel] = useState(false);
 
   //初始化收藏列表
   useEffect(() => {
@@ -236,9 +237,16 @@ export default function Map() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingComment, setEditingComment] = useState(null);
 
+  // 台灣範圍（用於新增標記驗證，僅允許在台灣境內新增）
   const taiwanBounds = [
     [21.8, 119.3],
     [25.3, 122.0]
+  ];
+
+  // 擴展邊界：允許地圖平移至台灣四周以外，避免點擊邊緣標記時 popup 超出視窗且地圖被 maxBounds 拉回
+  const taiwanBoundsExtended = [
+    [18.0, 114.0],
+    [28.5, 126.5]
   ];
 
 
@@ -581,8 +589,9 @@ export default function Map() {
     const bounds = map.getBounds();
     const latDiff = bounds._northEast.lat - bounds._southWest.lat;
 
-    // 計算新的中心點，將標記位置設在視圖下方 40% 的位置
-    const offsetLat = targetLat + (latDiff * 0.4);
+    // 小螢幕需較大偏移，讓 popup 有足夠空間顯示在視窗內
+    const offsetRatio = window.innerWidth < 768 ? 0.5 : 0.4;
+    const offsetLat = targetLat + (latDiff * offsetRatio);
 
     // 更新 activeMarkerId
     setActiveMarkerId(marker.id);
@@ -672,7 +681,7 @@ export default function Map() {
                 />
               )}
 
-            
+
               <div className="map-content">
                 <div className="map-left">
                   <div className="btn-group">
@@ -701,7 +710,7 @@ export default function Map() {
                       center={[23.5, 121]}
                       zoom={8}
                       style={{ height: "100%", width: "100%" }}
-                      maxBounds={taiwanBounds}
+                      maxBounds={taiwanBoundsExtended}
                       minZoom={7}
                       maxBoundsViscosity={1.0}
                       markers={displayedMarkers}
@@ -735,6 +744,10 @@ export default function Map() {
                             className="custom-popup"
                             onOpen={() => setActiveMarkerId(marker.id)}
                             onClose={() => setActiveMarkerId(null)}
+                            autoPan={true}
+                            autoPanPadding={[50, 50]}
+                            autoPanPaddingTopLeft={[50, 100]}
+                            autoPanPaddingBottomRight={[50, 50]}
                           >
                             {editingMarker?.id === marker.id ? (
                               <div className="marker-form">
@@ -886,7 +899,17 @@ export default function Map() {
                   </div>
                 </div>
 
-                <div className="list-panel" >
+                <div className={`list-panel ${showListPanel ? 'active' : ''}`}>
+                  <div
+                    className="list-panel-handle"
+                    onClick={() => setShowListPanel(!showListPanel)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === 'Enter' && setShowListPanel(!showListPanel)}
+                    aria-label={showListPanel ? '收起列表' : '展開列表'}
+                  >
+                    {/* 頂部開關，點擊此區展開收起 */}
+                  </div>
                   <div className="control-panel">
                     <div className="message">
                       <Notice
