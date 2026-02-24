@@ -297,11 +297,13 @@ const Forum = () => {
                     </div>
 
                     {/* 文章列表 */}
+                    <div className="article-list-container">
                     <ArticleList
                       articles={sortedArticles} // 排序並篩選後的文章資料
                       onFavorite={handleArticleFavorite} //傳遞收藏功能
                       onDelete={handleDeleteArticle} // 傳遞刪除功能
                     />
+                    </div>
                   </div>
                 </div>
               </div>

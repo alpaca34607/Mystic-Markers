@@ -5090,6 +5090,14 @@ button:hover #custom-cursor::after {
         }
 
         // 文章顯示頁面
+        .article-list-container {
+          max-height: 100vh;
+          overflow-y: auto;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        }
+
         .article-list {
           display: flex;
           flex-direction: column;
@@ -5602,7 +5610,9 @@ button:hover #custom-cursor::after {
   .forum-body .forum-container {
     width: 100%;
 
-    .forum-layout .main-content .top-bar .nav-buttons {
+    .forum-layout .main-content .top-bar {
+    margin-bottom: 0px;
+    .nav-buttons {
       width: 100%;
       justify-content: space-evenly;
 
@@ -5622,7 +5632,7 @@ button:hover #custom-cursor::after {
       }
 
     }
-
+    }
   }
 
   .top-bar {
