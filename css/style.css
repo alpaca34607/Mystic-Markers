@@ -279,10 +279,13 @@ a {
   align-items: center;
   justify-content: center;
   gap: 20px;
+  padding-top: 8px;
 }
 .Topbar .news-dropdown-wrapper {
   position: relative;
   display: inline-block;
+  box-sizing: border-box;
+  max-height: 40px;
 }
 .Topbar .news-dropdown {
   position: absolute;
@@ -424,7 +427,6 @@ a {
 }
 .Topbar .modal-container {
   position: relative;
-  width: 400px;
   cursor: none;
 }
 .Topbar {
@@ -436,7 +438,6 @@ a {
   width: 300px;
   padding: 30px 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  position: relative;
   text-align: center;
 }
 .Topbar {
@@ -618,22 +619,22 @@ a {
 .Topbar .welcome-container span {
   color: white;
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .Topbar {
     padding: 25px 0 50px 0;
   }
   .Topbar .nav-wrapper {
+    padding: 0;
     margin-right: 15px;
     gap: 10px;
   }
   .Topbar .Topbar-right {
     margin-left: 15px;
-  }
-  .Topbar .Topbar-right .member {
-    display: none;
+    gap: 0;
   }
   .Topbar .Topbar-right .logo {
     width: auto;
+    margin: 0;
   }
   .Topbar .Topbar-right .logo img {
     margin: 0;
@@ -839,9 +840,14 @@ a {
 .nav-wrapper .navbar .navigation .menu li a:hover::after, .nav-wrapper .navbar .navigation .menu li a.active::after {
   transform: translateY(-50%) scaleX(1);
 }
+.nav-wrapper .navbar .navigation .member {
+  display: none;
+}
 @media (max-width: 768px) {
   .nav-wrapper .navbar .navigation {
+    background: linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
     position: fixed;
+    justify-content: space-between;
     top: 0;
     right: 0;
     height: 100vh;

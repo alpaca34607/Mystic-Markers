@@ -14,6 +14,31 @@ function Navbar() {
   // 通知
   const [isNewsOpen, setIsNewsOpen] = useState(false);
   const newsDropdownRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 768px)").matches);
+
+  // 監聽視窗寬度，判斷是否為手機版
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const handler = () => setIsMobile(mq.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  // 登入/註冊彈窗開啟時禁止頁面滾動；手機版 Menu 開啟時也禁止
+  useEffect(() => {
+    const shouldLock = isAuthOpen || (isMobile && isMenuOpen);
+    if (shouldLock) {
+      document.body.style.overflow = "hidden";
+      document.body.style.height = "100vh";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.height = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.height = "";
+    };
+  }, [isMenuOpen, isAuthOpen, isMobile]);
 
   // 點擊外部關閉 news-dropdown
   useEffect(() => {

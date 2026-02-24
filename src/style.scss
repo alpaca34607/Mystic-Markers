@@ -93,11 +93,14 @@ a {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    padding-top: 8px;
   }
 
   .news-dropdown-wrapper {
     position: relative;
     display: inline-block;
+    box-sizing: border-box;
+    max-height: 40px;
   }
 
   .news-dropdown {
@@ -257,7 +260,6 @@ a {
   /* 容器來包住 modal 和關閉按鈕 */
   .modal-container {
     position: relative;
-    width: 400px;
     cursor: none;
   }
 
@@ -268,7 +270,6 @@ a {
     width: 300px;
     padding: 30px 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
     text-align: center;
 
   }
@@ -464,23 +465,26 @@ a {
     }
   }
 
-  @media (max-width:768px) {
+  @media (max-width: 1024px) {
     padding: 25px 0 50px 0;
 
     .nav-wrapper {
+      padding: 0;
       margin-right: 15px;
       gap: 10px;
     }
 
     .Topbar-right {
       margin-left: 15px;
+      gap:0;
 
       .member {
-        display: none;
+        // display: none;
       }
 
       .logo {
         width: auto;
+        margin: 0;
 
         img {
           margin: 0;
@@ -723,8 +727,16 @@ a {
         }
       }
 
+      .member {
+        display: none;
+      }
+
       @media (max-width:768px) {
+        background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.8) 100%);
         position: fixed;
+        justify-content: space-between;
         top: 0;
         right: 0;
         height: 100vh;
