@@ -4,6 +4,8 @@ import "../style.scss";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { RiLoginBoxFill } from "react-icons/ri";
+import { RiLogoutBoxFill } from "react-icons/ri";
 
 // Menu
 function Navbar() {
@@ -127,8 +129,7 @@ function Navbar() {
             </div>
           ) : (
             <div className="auth-buttons">
-              <a
-                href="#"
+              <button
                 onClick={() => {
                   setAuthType("login"); // 設置視圖為登入
                   setIsAuthOpen(true); // 打開彈窗
@@ -136,9 +137,9 @@ function Navbar() {
                 className="auth-btn"
               >
                 登入
-              </a>
+              </button>
               |
-              <a
+              <button
                 href="#"
                 onClick={() => {
                   setAuthType("register"); // 設置視圖為註冊
@@ -147,7 +148,7 @@ function Navbar() {
                 className="auth-btn"
               >
                 註冊
-              </a>
+              </button >
             </div>
           )}
           {isAuthOpen && (
@@ -161,8 +162,9 @@ function Navbar() {
       </nav>
       {/* 通知/會員管理/MENU */}
       <nav className="nav-wrapper">
+
         <div className="news-dropdown-wrapper" ref={newsDropdownRef}>
-          <button className="news-btn" onClick={() => setIsNewsOpen(!isNewsOpen)}>
+          <button onClick={() => setIsNewsOpen(!isNewsOpen)} className="auth-btn">
             <img id="news" src="images/news.svg" alt="news" />
           </button>
           {isNewsOpen && (
@@ -184,7 +186,7 @@ function Navbar() {
         </div>
         {/* 登入後顯示會員管理按鈕 */}
         {isLoggedIn && (
-          <div className="group-info">
+          <div className="auth-btn">
             <Link to="/User">
               <img
                 id="Group"
@@ -194,6 +196,19 @@ function Navbar() {
             </Link>
           </div>
         )}
+        {/* 手機版登入*/}
+        {isMobile && !isLoggedIn && (
+          <button
+            onClick={() => {
+              setAuthType("login"); // 設置視圖為登入
+              setIsAuthOpen(true); // 打開彈窗
+            }}
+            className="auth-btn"
+          >
+            <RiLoginBoxFill size={24} />
+          </button>
+        )}
+
         {/* Menu */}
         <div className="navbar">
           {/* 漢堡按鈕 */}
@@ -224,6 +239,12 @@ function Navbar() {
                 <Link to="/Contact">解謎之門</Link>
               </li>
             </ul>
+            {/* 手機版登出 */}
+            {isMobile && isLoggedIn && (
+              <button onClick={handleLogout} className="auth-btn" style={{display:"flex", alignItems:"center", justifyContent:"center", gap:"16px", marginLeft: "30px", width:"max-content", fontSize:"18px"}}>
+                <RiLogoutBoxFill size={32} />登出
+              </button>
+            )}
           </nav>
         </div>
       </nav>

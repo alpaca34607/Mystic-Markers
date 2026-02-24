@@ -382,8 +382,6 @@ a {
   filter: brightness(1.1);
 }
 .Topbar .logo {
-  width: 240px;
-  margin-right: 20px;
   display: flex;
   align-items: center;
   pointer-events: auto;
@@ -601,6 +599,9 @@ a {
   gap: 20px;
 }
 .Topbar .welcome-container .auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: none;
   width: 60px;
   color: #B595FF;
@@ -611,6 +612,7 @@ a {
   border-left: transparent 1px solid;
   border-right: transparent 1px solid;
   border: none;
+  text-align: center;
 }
 .Topbar .welcome-container .auth-btn:hover {
   border-left: #B595FF 1px solid;
@@ -632,6 +634,9 @@ a {
     margin-left: 15px;
     gap: 0;
   }
+  .Topbar .Topbar-right .member {
+    display: none;
+  }
   .Topbar .Topbar-right .logo {
     width: auto;
     margin: 0;
@@ -651,7 +656,10 @@ a {
   margin: 8px;
   margin-bottom: 5px;
 }
-.member a {
+.member button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #B595FF;
   font-weight: 400;
   margin: 0 8px;
@@ -659,14 +667,20 @@ a {
   border-radius: 5px;
   border-left: transparent 1px solid;
   border-right: transparent 1px solid;
+  width: 60px;
+  text-align: center;
 }
-.member a:hover {
+.member button:hover {
   border-left: #B595FF 1px solid;
   border-right: #B595FF 1px solid;
 }
 .member .auth-buttons {
   display: flex;
   cursor: none;
+}
+
+.welcome-container span {
+  display: none;
 }
 
 .nav-wrapper {
@@ -677,50 +691,29 @@ a {
   margin-right: 115px;
   overflow: visible;
   z-index: 997;
+}
+.nav-wrapper .auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  width: 40px;
+  height: 40px;
+}
+.nav-wrapper .auth-btn:hover {
+  filter: brightness(200%);
+}
+.nav-wrapper {
   /* 會員圖示 */
 }
 .nav-wrapper #Group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: none;
-  width: 40px;
-  height: 40px;
   padding: 4px;
   box-sizing: border-box;
 }
-.nav-wrapper #Group .group-info {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 50px;
-  padding: 10px;
-  border-radius: 5px;
-}
-.nav-wrapper #Group .group-info p {
-  color: white;
-  margin: 0 0 10px;
-}
-.nav-wrapper #Group .group-info .auth-btn {
-  display: none;
-  background: none;
-  padding: 5px 10px;
-  border: none;
-}
-.nav-wrapper #Group .group-info .auth-btn:hover {
-  filter: brightness(200%);
-}
 .nav-wrapper #news {
-  width: 40px;
-  height: 40px;
   padding: 8px;
   box-sizing: border-box;
   cursor: none;
-}
-.nav-wrapper .group-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .nav-wrapper .navbar {
   position: relative;
@@ -6120,7 +6113,7 @@ footer .content .left .link li a:hover {
 @media (max-width: 768px) {
   .user-page .user-info-list {
     grid-template-columns: repeat(1, 1fr);
-    gap: 10px;
+    gap: 16px;
     padding: 20px 0;
   }
 }
@@ -6133,6 +6126,7 @@ footer .content .left .link li a:hover {
   .user-page .user-info-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 4px;
   }
 }
 .user-page .user-info-row.user-info-row-bio {
