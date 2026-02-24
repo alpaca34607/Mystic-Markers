@@ -151,13 +151,6 @@ function Navbar() {
               </button >
             </div>
           )}
-          {isAuthOpen && (
-            <AuthModal
-              isOpen={isAuthOpen}
-              onClose={() => setIsAuthOpen(false)}
-              initialView={authType}
-            />
-          )}
         </div>
       </nav>
       {/* 通知/會員管理/MENU */}
@@ -248,6 +241,14 @@ function Navbar() {
           </nav>
         </div>
       </nav>
+      {/* 登入/註冊 彈窗 */}
+      {isAuthOpen && (
+        <AuthModal
+          isOpen={isAuthOpen}
+          onClose={() => setIsAuthOpen(false)}
+          initialView={authType}
+        />
+      )}
     </header>
   );
 }
