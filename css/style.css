@@ -4602,18 +4602,14 @@ button:hover #custom-cursor::after {
   color: #acff6c;
   transition: background-color 0.3s ease, color 0.3s ease;
   border-radius: 8px;
-}
-.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item div {
+  margin-left: 12px;
+  font-size: 18px;
   display: flex;
   justify-content: center;
 }
-.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item div img {
+.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item img {
   width: 24px;
   height: 24px;
-}
-.forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item div p {
-  margin-left: 12px;
-  font-size: 18px;
 }
 .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item:hover {
   background-color: #B595FF;
@@ -5043,6 +5039,23 @@ button:hover #custom-cursor::after {
     margin: 0;
     box-sizing: border-box;
   }
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board {
+    padding: 20px;
+  }
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .ad-section {
+    width: 0;
+  }
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .article-list .article-card {
+    flex: 1 1 calc(50% - 10px);
+    /* 每行兩列 */
+  }
+}
+@media screen and (max-width: 1024px) {
   .forum-body .forum-container .forum-layout {
     display: flex;
     flex-direction: column;
@@ -5058,33 +5071,40 @@ button:hover #custom-cursor::after {
   }
   .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board {
     width: 100%;
+    padding: 20px;
+  }
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board {
+    overflow-x: auto;
+    border: none;
+    padding: 0;
+  }
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board::-webkit-scrollbar {
+    display: none;
   }
   .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    width: max-content;
+    justify-content: space-between;
+    min-width: 100%;
   }
-  .forum-container .forum-layout .sidebar .sidebar-content .ad-section {
-    width: 0;
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item {
+    font-size: 14px;
+    padding: 4px 16px;
+    color: #B3B3B3;
+    margin: 0;
+    border-bottom: 1px solid rgba(179, 179, 179, 0.5);
+    border-radius: 0;
+    flex: 1;
+    gap: 8px;
   }
-  .top-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item.hover, .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item.active {
+    background: none;
+    color: rgba(181, 149, 255, 0.8);
+    border-bottom: 2px solid #B595FF;
   }
-  .article-list .article-card {
-    flex: 1 1 calc(50% - 10px);
-    /* 每行兩列 */
-  }
-}
-@media screen and (max-width: 480px) {
-  .forum-container {
-    flex-direction: column;
-  }
-  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list {
-    display: flex;
-    flex-direction: column;
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item.hover img, .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list .category-item.active img {
+    filter: brightness(0) saturate(100%) invert(66%) sepia(34%) saturate(4258%) hue-rotate(213deg) brightness(106%) contrast(101%);
   }
   .forum-body .forum-container {
     width: 100%;
@@ -5944,6 +5964,7 @@ footer .content .left .link li a:hover {
   align-items: center;
   flex-direction: column;
   box-sizing: border-box;
+  cursor: none;
 }
 .user-page .user-page-container {
   display: flex;
@@ -6203,6 +6224,25 @@ footer .content .left .link li a:hover {
 .user-page .user-btn-cancel:hover {
   border-color: #B595FF;
   color: #B595FF;
+}
+.user-page .hobby-list {
+  color: #B3B3B3;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.user-page .hobby-tag-list {
+  display: flex;
+  gap: 8px;
+}
+.user-page .hobby-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border: rgba(181, 149, 255, 0.8) solid 1px;
+  border-radius: 5px;
+  color: rgba(181, 149, 255, 0.8);
+  box-sizing: border-box;
 }
 
 .user-page-background {

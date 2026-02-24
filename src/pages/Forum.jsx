@@ -173,13 +173,11 @@ const Forum = () => {
                                 handleCategoryClick(category.label)
                               }
                             >
-                              <div>
                                 <img
                                   src={`images/Forum/${category.icon}.svg`}
                                   alt={category.label}
                                 />
                                 <p>{category.label}</p>
-                              </div>
                             </li>
                           ))}
                         </ul>

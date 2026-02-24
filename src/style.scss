@@ -4914,21 +4914,16 @@ button:hover #custom-cursor::after {
                 color: $primary-green;
                 transition: background-color 0.3s ease, color 0.3s ease;
                 border-radius: 8px;
+                margin-left: 12px;
+                font-size: 18px;
+                display: flex;
+                justify-content: center;
 
-                div {
-                  display: flex;
-                  justify-content: center;
-
-                  img {
-                    width: 24px;
-                    height: 24px;
-                  }
-
-                  p {
-                    margin-left: 12px;
-                    font-size: 18px;
-                  }
+                img {
+                  width: 24px;
+                  height: 24px;
                 }
+
 
                 &:hover {
                   background-color: $primary-purple;
@@ -5459,44 +5454,17 @@ button:hover #custom-cursor::after {
     padding: 100px 30px;
     margin: 0;
     box-sizing: border-box;
-
-    .forum-container {
-      .forum-layout {
-        display: flex;
-        flex-direction: column;
-
-        .sidebar {
-          width: 100%;
-          flex: 0 0 auto;
-          margin-bottom: 20px;
-
-          .sidebar-content {
-            flex-direction: row;
-            gap: 0;
-
-            .category-board {
-              width: 100%;
-
-              .category-list {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-              }
-
-            }
-          }
-
-        }
-
-      }
-
-    }
   }
 
 
-  .forum-container .forum-layout .sidebar .sidebar-content .ad-section {
-    width: 0;
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content {
+    .category-board {
+      padding: 20px;
+    }
+
+    .ad-section {
+      width: 0;
+    }
   }
 
 
@@ -5515,15 +5483,74 @@ button:hover #custom-cursor::after {
   }
 }
 
-@media screen and (max-width: 480px) {
-  .forum-container {
-    flex-direction: column;
+@media screen and (max-width: 1024px) {
+  .forum-body .forum-container {
+    .forum-layout {
+      display: flex;
+      flex-direction: column;
+
+      .sidebar {
+        width: 100%;
+        flex: 0 0 auto;
+        margin-bottom: 20px;
+
+        .sidebar-content {
+          flex-direction: row;
+          gap: 0;
+
+          .category-board {
+            width: 100%;
+            padding: 20px;
+          }
+        }
+
+      }
+
+    }
+
   }
 
-  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board .category-list {
-    display: flex;
-    flex-direction: column;
+  .forum-body .forum-container .forum-layout .sidebar .sidebar-content .category-board {
+    overflow-x: auto;
+    border: none;
+    padding: 0;
 
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    ;
+
+    .category-list {
+      display: flex;
+      flex-direction: row;
+      width: max-content;
+      justify-content: space-between;
+      min-width: 100%;
+
+      .category-item {
+        font-size: 14px;
+        padding: 4px 16px;
+        color: $grey;
+        margin: 0;
+        border-bottom: 1px solid rgba($grey, 0.5);
+        border-radius: 0;
+        flex: 1;
+        gap: 8px;
+
+        &.hover,
+        &.active {
+          background: none;
+          color: rgba($primary-purple, 0.8);
+          border-bottom: 2px solid $primary-purple;
+
+          img {
+            filter: brightness(0) saturate(100%) invert(66%) sepia(34%) saturate(4258%) hue-rotate(213deg) brightness(106%) contrast(101%);
+          }
+
+        }
+      }
+    }
   }
 
   .forum-body .forum-container {
@@ -6621,6 +6648,7 @@ footer {
   align-items: center;
   flex-direction: column;
   box-sizing: border-box;
+  cursor: none;
 
 
 
@@ -6635,6 +6663,7 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     box-sizing: border-box;
+
     @media (max-width: 768px) {
       padding: 80px 30px;
     }
@@ -6666,6 +6695,7 @@ footer {
     border-radius: 12px;
     box-sizing: border-box;
     overflow: hidden;
+
     @media (max-width: 768px) {
       flex-direction: column;
       align-items: center;
@@ -6684,6 +6714,7 @@ footer {
     background-color: $primary-purple;
     padding: 30px;
     height: stretch;
+
     @media (max-width: 768px) {
       flex-direction: column;
       align-items: center;
@@ -6748,6 +6779,7 @@ footer {
     width: 100%;
     height: stretch;
     box-sizing: border-box;
+
     @media (max-width: 768px) {
       border-radius: 0px 0px 12px 12px;
       padding: 20px;
@@ -6767,6 +6799,7 @@ footer {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     padding: 40px 0;
+
     @media (max-width: 768px) {
       grid-template-columns: repeat(1, 1fr);
       gap: 10px;
@@ -6778,10 +6811,12 @@ footer {
     display: flex;
     align-items: center;
     gap: 16px;
+
     @media (max-width: 768px) {
       flex-direction: column;
       align-items: flex-start;
     }
+
     &.user-info-row-bio {
       align-items: flex-start;
     }
@@ -6792,6 +6827,7 @@ footer {
     width: 90px;
     font-size: 0.9rem;
     color: rgba($light, 0.7);
+
     @media (max-width: 768px) {
       width: 100%;
     }
@@ -6824,6 +6860,7 @@ footer {
       border-color: $primary-green;
       box-shadow: 0 0 0 2px rgba($primary-green, 0.2);
     }
+
     @media (max-width: 768px) {
       width: 100%;
     }
@@ -6881,6 +6918,28 @@ footer {
       border-color: $primary-purple;
       color: $primary-purple;
     }
+  }
+
+  .hobby-list {
+    color: $grey;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .hobby-tag-list {
+    display: flex;
+    gap: 8px;
+  }
+
+  .hobby-tag {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border: rgba($primary-purple, 0.8) solid 1px;
+    border-radius: 5px;
+    color: rgba($primary-purple, 0.8);
+    box-sizing: border-box;
   }
 }
 
