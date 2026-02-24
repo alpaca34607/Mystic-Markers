@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import StarRating from './StarRating';
+import { useCurrentUserProfile } from './getCurrentUserProfile';
+
+
 
 const CustomAlert = ({ message, onClose }) => (
   <div className="alert-message">
@@ -10,14 +13,19 @@ const CustomAlert = ({ message, onClose }) => (
   </div>
 );
 
-function CommentForm({ onSubmit, existingComment, isEditing, onCancelEdit, comments, onEditComment,rows = 6,}) {
+function CommentForm({ onSubmit, existingComment, isEditing, onCancelEdit, comments, onEditComment, rows = 6}) {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const userProfile = useCurrentUserProfile();
+  const { userId, userName, userAvatar } = userProfile;
+
+  const basePath = process.env.NODE_ENV === 'production' ? '/Mystic-Markers' : '';
+  const defaultAvatar = userAvatar || `${basePath}/images/Avatars/avatar%20(1).jpg`;
 
   // 找到當前用戶的評論
-  const userComment = comments?.find(comment => comment.userId === 'user123');
+  const userComment = comments?.find(comment => comment.userId === userProfile.userId);
 
   // 判斷是否應該禁用輸入
   const isDisabled = userComment && !isEditing;
@@ -53,16 +61,13 @@ function CommentForm({ onSubmit, existingComment, isEditing, onCancelEdit, comme
       setShowAlert(true);
       return;
     }
-    const basePath = process.env.NODE_ENV === 'production' 
-    ? '/Mystic-Markers' // GitHub Pages 專案的路徑
-    : ''; // 本地環境根路徑
     onSubmit({
       rating,
       text: comment,
       timestamp: new Date(),
-      userId: 'user123',
-      userName: '訪客',
-      userAvatar: `${basePath}/images/Avatars/avatar%20(1).jpg`,
+      userId,
+      userName,
+      userAvatar: defaultAvatar,
       isEdited: isEditing
     });
 

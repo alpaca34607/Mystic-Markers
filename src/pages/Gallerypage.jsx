@@ -8,8 +8,8 @@ import CommentList from "../components/CommentList";
 import { Link } from "react-router-dom";
 import { presetComments, generateComments } from "../components/presetComments";
 import { swalWarning } from "../utils/swal";
+import { useCurrentUserProfile } from "../components/getCurrentUserProfile";
 import "../style.scss";
-
 
 const REPO_NAME = '/Mystic-Markers'
 function useWindowSize() {
@@ -40,7 +40,6 @@ function useWindowSize() {
 function GalleryPage() {
   const { pageId } = useParams();
   const location = imageConfig[pageId]?.location || "未登錄地點";
-  const windowSize = useWindowSize(); // 使用自定義 Hook
 
   useEffect(() => {
     // 當路由變更時，將頁面滾動到頂部
@@ -65,7 +64,7 @@ function GalleryPage() {
   // 生成圖片路徑
   const images = generateImagePaths(pageId);
 
-  // 評論相關狀態
+  const userProfile = useCurrentUserProfile();
   const [comments, setComments] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingComment, setEditingComment] = useState(null);
@@ -107,7 +106,7 @@ function GalleryPage() {
       setEditingComment(null);
     } else {
       // 新增評論
-      const hasComment = comments.some((comment) => comment.userId === 'user123');
+      const hasComment = comments.some((comment) => comment.userId === userProfile.userId);
       if (hasComment) {
         swalWarning('每個用戶只能發表一則評論，請編輯現有評論');
         return;
@@ -142,63 +141,64 @@ function GalleryPage() {
 
 
 
-  return (  
-   
+  return (
+
     <div className="gallery-page">
-       <Link to="/Map" ><div className="backto-map"><img src="images/Mapgallery/go-back.svg" alt="回到地圖按鈕" /><span>回到地圖</span></div></Link>
-       <div className="page-container">
-      <div className="location-info">
-        {images.length > 0 && (
-          <div className="cover-image">
-            <img src={images[0]} alt="封面圖片" />
-          </div>
-        )}
-        <div className="info-area">
-          <div className="info-text">
-          <h1 className={location.length > 4 ? 'long-title' : ''}>
-    {location}
-  </h1>
-            <div className="user-rating">
-              <div className="average-rating">
-                <StarRating rating={averageRating} />
-                <span className="average-starnum">{averageRating.toFixed(1)}</span>
+      <Link to="/Map" ><div className="backto-map"><img src="images/Mapgallery/go-back.svg" alt="回到地圖按鈕" /><span>回到地圖</span></div></Link>
+      <div className="page-container">
+        <div className="location-info">
+          {images.length > 0 && (
+            <div className="cover-image">
+              <img src={images[0]} alt="封面圖片" />
+            </div>
+          )}
+          <div className="info-area">
+            <div className="info-text">
+              <h1 className={location.length > 4 ? 'long-title' : ''}>
+                {location}
+              </h1>
+              <div className="user-rating">
+                <div className="average-rating">
+                  <StarRating rating={averageRating} />
+                  <span className="average-starnum">{averageRating.toFixed(1)}</span>
+                </div>
+                <span className="comments-num">
+                  {comments.length} 則<br />評論
+                </span>
               </div>
-              <span className="comments-num">
-                {comments.length} 則<br />評論
-              </span>
+            </div>
+            <hr />
+            <div className="comments-area">
+              <CommentForm
+                onSubmit={handleSubmitComment}
+                existingComment={editingComment}
+                isEditing={isEditing}
+                onCancelEdit={handleCancelEdit}
+                comments={comments}
+                onEditComment={handleEditComment}
+                rows={6}
+              />
+              <CommentList
+                comments={comments}
+                onEditComment={handleEditComment}
+                currentUserId={userProfile.userId}
+              />
             </div>
           </div>
-          <hr />
-          <div className="comments-area">
-            <CommentForm
-              onSubmit={handleSubmitComment}
-              existingComment={editingComment}
-              isEditing={isEditing}
-              onCancelEdit={handleCancelEdit}
-              comments={comments}
-              onEditComment={handleEditComment}
-              rows={6}
-            />
-            <CommentList
-              comments={comments}
-              onEditComment={handleEditComment}
-            />
-          </div>
+        </div>
+
+        <div className="gallery-area">
+          <ResponsiveMasonry columnsCountBreakPoints={{ 600: 1, 900: 2, 1440: 3 }}>
+            <Masonry gutter="1rem">
+              {images.map((src, index) => (
+                <div key={index} className="image-wrapper">
+                  <img src={src} alt={`地點圖片 ${index + 1}`} loading="lazy" />
+                </div>
+              ))}
+            </Masonry>
+          </ResponsiveMasonry>
         </div>
       </div>
-
-      <div className="gallery-area">
-        <ResponsiveMasonry columnsCountBreakPoints={{ 600: 1, 900: 2, 1440: 3 }}>
-          <Masonry gutter="1rem">
-            {images.map((src, index) => (
-              <div key={index} className="image-wrapper">
-                <img src={src} alt={`地點圖片 ${index + 1}`} loading="lazy" />
-              </div>
-            ))}
-          </Masonry>
-        </ResponsiveMasonry>
-      </div>
-    </div>
     </div>
   );
 }

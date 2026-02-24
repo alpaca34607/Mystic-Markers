@@ -100,163 +100,166 @@ const AuthModal = ({ isOpen, onClose, initialView }) => {
 
   return (
     <div className="modal-overlay">
-       <div className="modal-container">
-      <button className="close-btn" onClick={onClose}>
-        &times; {/* 叉叉按鈕 */}
-      </button>
-      <div className="modal" ref={modalRef}>
+      <div className="modal-container">
+        <button className="close-btn" onClick={onClose}>
+          &times; {/* 叉叉按鈕 */}
+        </button>
+        <div className="modal" ref={modalRef}>
 
-        {currentView === "login" && (
-          <>
-            <div className="title-login">
-              <img
-                className="login-LOGO"
-                src="images/LOGO.svg"
-                alt="LOGO"
-              ></img>
-              <h1>Mystic Markers</h1>
-            </div>
-            <div className="form-container">
-              <label htmlFor="email">帳號</label>
-              <input
-                id="email"
-                type="email"
-                placeholder="請輸入Email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-              <label htmlFor="password">密碼</label>
-              <input
-                id="password"
-                type="password"
-                placeholder="請輸入密碼"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-
-
-              <button className="login-btn" onClick={handleLogin}>
-                登入
-              </button>
-              {/* Google 登入區域 */}
-              <button className="login-btn google" onClick={handleGoogleLogin}>
-                使用 Google 帳號登入
-              </button>
-              <div className="register-forgot-container">
-                <p onClick={() => setCurrentView("register")}>前往註冊</p>
-                <span>/</span>
-                <p onClick={() => setCurrentView("forgotPassword")}>忘記密碼</p>
+          {currentView === "login" && (
+            <>
+              <div className="title-login">
+                <img
+                  className="login-LOGO"
+                  src="images/LOGO.svg"
+                  alt="LOGO"
+                ></img>
+                <h1>Mystic Markers</h1>
               </div>
+              <div className="form-container">
+                <label htmlFor="email">帳號</label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="請輸入Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                <label htmlFor="password">密碼</label>
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="請輸入密碼"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
 
-            </div>
-          </>
-        )}
-        {currentView === "register" && (
-          <>
-            <div className="title-login">
-              <img
-                className="login-LOGO"
-                src="images/LOGO.svg"
-                alt="LOGO"
-              ></img>
+
+                <button className="login-btn" onClick={handleLogin}>
+                  登入
+                </button>
+                {/* Google 登入區域 */}
+                <button className="login-btn google" onClick={handleGoogleLogin}>
+                  使用 Google 帳號登入
+                </button>
+                <div className="register-forgot-container">
+                  <p onClick={() => setCurrentView("register")}>前往註冊</p>
+                  <span>/</span>
+                  <p onClick={() => setCurrentView("forgotPassword")}>忘記密碼</p>
+                </div>
+
+              </div>
+            </>
+          )}
+          {currentView === "register" && (
+            <>
+              <div className="title-login">
+                <img
+                  className="login-LOGO"
+                  src="images/LOGO.svg"
+                  alt="LOGO"
+                ></img>
+                <h1>Mystic Markers</h1>
+              </div>
+              <div className="form-container">
+                <label htmlFor="text">姓名</label>
+                <input
+                  type="text"
+                  placeholder="請輸入姓名"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+                <label htmlFor="text">電話</label>
+                <input
+                  type="text"
+                  placeholder="請輸入電話"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+                <label htmlFor="email">帳號</label>
+                <input
+                  type="email"
+                  placeholder="請輸入帳號"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                <label htmlFor="password">密碼</label>
+                <input
+                  type="password"
+                  placeholder="請輸入密碼"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <button className="register-btn" onClick={handleRegister}>
+                  註冊
+                </button>
+                {/* 返回登入按鈕 */}
+                <button
+                  className="login-btn"
+                  onClick={() => setCurrentView("login")}
+                >
+                  返回登入
+                </button>
+              </div>
+            </>
+          )}
+          {currentView === "forgotPassword" && (
+            <>
+              <div className="title-login">
+                <img
+                  className="login-LOGO"
+                  src="images/LOGO.svg"
+                  alt="LOGO"
+                ></img>
+                <h1>Mystic Markers</h1>
+              </div>
+              <div className="form-container">
+                <input
+                  type="text"
+                  placeholder="請輸入電話號碼"
+                  value={forgotPasswordPhone}
+                  onChange={(e) => setForgotPasswordPhone(e.target.value)}
+                />
+                {retrievedPassword && (
+                  <p>
+                    您的密碼是：<strong>{retrievedPassword}</strong>
+                  </p>
+                )}
+                <div className="btn-group">
+                  <button className="login-btn" onClick={handleForgotPassword}>
+                    查詢密碼
+                  </button>
+
+                  <button
+                    className="login-btn"
+                    onClick={() => setCurrentView("login")}
+                  >
+                    返回登入
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+          {currentView === "success" && (
+            <>
               <h1>Mystic Markers</h1>
-            </div>
-            <div className="form-container">
-              <label htmlFor="text">姓名</label>
-              <input
-                type="text"
-                placeholder="請輸入姓名"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-              <label htmlFor="text">電話</label>
-              <input
-                type="text"
-                placeholder="請輸入電話"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-              />
-              <label htmlFor="email">帳號</label>
-              <input
-                type="email"
-                placeholder="請輸入帳號"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-              <label htmlFor="password">密碼</label>
-              <input
-                type="password"
-                placeholder="請輸入密碼"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <button className="register-btn" onClick={handleRegister}>
-                註冊
-              </button>
-              {/* 返回登入按鈕 */}
-              <button
-                className="login-btn"
-                onClick={() => setCurrentView("login")}
-              >
-                返回登入
-              </button>
-            </div>
-          </>
-        )}
-        {currentView === "forgotPassword" && (
-          <>
-            <div className="title-login">
-              <img
-                className="login-LOGO"
-                src="images/LOGO.svg"
-                alt="LOGO"
-              ></img>
-              <h1>Mystic Markers</h1>
-            </div>
-            <div className="form-container">
-              <input
-                type="text"
-                placeholder="請輸入電話號碼"
-                value={forgotPasswordPhone}
-                onChange={(e) => setForgotPasswordPhone(e.target.value)}
-              />
-              <button className="success-btn" onClick={handleForgotPassword}>
-                查詢密碼
-              </button>
-              {retrievedPassword && (
-                <p>
-                  您的密碼是：<strong>{retrievedPassword}</strong>
-                </p>
-              )}
+              <p>註冊成功！請重新登入</p>
               <button
                 className="success-btn"
                 onClick={() => setCurrentView("login")}
               >
-                返回登入
+                前往登入
               </button>
-            </div>
-          </>
-        )}
-        {currentView === "success" && (
-          <>
-            <h1>Mystic Markers</h1>
-            <p>註冊成功！請重新登入</p>
-            <button
-              className="success-btn"
-              onClick={() => setCurrentView("login")}
-            >
-              前往登入
-            </button>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
     </div>
   );
 };

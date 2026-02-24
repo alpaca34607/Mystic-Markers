@@ -30,6 +30,7 @@ const DEFAULT_COVER_PHOTO = 'images/default-location.jpg';
 const DEFAULT_AVATAR = 'images/Avatars/avatar (1).jpg';
 import templeMarkers from "../components/templeMarkers";
 import Notice from '../components/Notice';
+import { useCurrentUserProfile } from '../components/getCurrentUserProfile';
 
 
 
@@ -40,7 +41,6 @@ const searchResultIcon = L.icon({
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
 });
-
 
 
 // 預設與被點擊的圖示
@@ -59,10 +59,6 @@ const activeIcon = L.icon({
 });
 
 
-
-const handlePopupOpen = (markerId) => {
-  setActiveMarkerId(markerId);
-};
 
 // 未填入完整時的警告
 const CustomAlert = ({ message, onClose }) => (
@@ -112,7 +108,7 @@ export default function Map() {
   const mapboxAccessToken = import.meta.env.VITE_MAPBOX_TOKEN;
   const mapboxStyleURL = `https://api.mapbox.com/styles/v1/alison34607/cm589twvs00nz01sp790tayrs/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`;
   const [isAddingLocation, setIsAddingLocation] = useState(false);
-
+  const userProfile = useCurrentUserProfile();
 
   useEffect(() => {
     // 當路由變更時，將頁面滾動到頂部
@@ -134,8 +130,6 @@ export default function Map() {
     setMarkers(markersWithComments);
     setDisplayedMarkers(markersWithComments);
   }, []);
-
-
 
 
   const SearchControl = () => {
@@ -323,7 +317,7 @@ export default function Map() {
         } else {
           // 檢查是否已有評論
           const hasComment = currentComments.some(
-            comment => comment.userId === 'user123'
+            comment => comment.userId === userProfile.userId
           );
 
           if (hasComment) {
@@ -453,9 +447,9 @@ export default function Map() {
           position: [lat, lng],
           title: '',
           coverPhoto: DEFAULT_COVER_PHOTO,
-          userId: 'user123',
-          userName: '訪客',
-          userAvatar: DEFAULT_AVATAR,
+          userId: userProfile.userId,
+          userName: userProfile.userName,
+          userAvatar: userProfile.userAvatar,
           comments: [],
           city: city,
           district: district
@@ -757,6 +751,11 @@ export default function Map() {
                                     <img
                                       src={marker.userAvatar}
                                       alt={marker.userName}
+                                      referrerPolicy="no-referrer"
+                                      onError={(e) => {
+                                        const basePath = process.env.NODE_ENV === 'production' ? '/Mystic-Markers' : '';
+                                        e.target.src = `${basePath}/images/Avatars/avatar%20(1).jpg`;
+                                      }}
                                     />
                                   </div>
                                   <span className="user-name">{marker.userName}</span>
@@ -824,6 +823,11 @@ export default function Map() {
                                         <img
                                           src={marker.userAvatar}
                                           alt={marker.userName}
+                                          referrerPolicy="no-referrer"
+                                          onError={(e) => {
+                                            const basePath = process.env.NODE_ENV === 'production' ? '/Mystic-Markers' : '';
+                                            e.target.src = `${basePath}/images/Avatars/avatar%20(1).jpg`;
+                                          }}
                                         />
                                       </div>
                                       <span className="user-name">{marker.userName}</span>
@@ -838,7 +842,7 @@ export default function Map() {
                                     >
                                       {isFavorite(marker.id) ? <BsBookmarkFill /> : <BsBookmark />}
                                     </button>
-                                    {marker.userId === 'user123' && (
+                                    {marker.userId === userProfile.userId && (
                                       <div className="button-group">
                                         <button onClick={() => setEditingMarker(marker)}>
                                           編輯
@@ -884,10 +888,14 @@ export default function Map() {
                                       comments={marker.comments || []}
                                       onEditComment={(comment) => handleEditComment(marker.id, comment)}
                                       rows={3}
+                                      userId={userProfile.userId}
+                                      userName={userProfile.userName}
+                                      userAvatar={userProfile.userAvatar}
                                     />
                                     <CommentList
                                       comments={marker.comments || []}
                                       onEditComment={(comment) => handleEditComment(marker.id, comment)}
+                                      currentUserId={userProfile.userId}
                                     />
                                   </div>
                                 </div>

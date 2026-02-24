@@ -96,6 +96,8 @@ const PostModal = ({ isOpen, onClose, onNewArticle, userName }) => {
             src={authorAvatar || "images/Forum/light.png"}
             alt="頭像"
             className="avatar"
+            referrerPolicy="no-referrer"
+            onError={(e) => { e.target.src = "images/Forum/default-avatar.svg"; }}
           />
           <input
             type="text"

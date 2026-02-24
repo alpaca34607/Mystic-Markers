@@ -253,6 +253,7 @@ a {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    pointer-events: auto;
   }
 
   /* 容器來包住 modal 和關閉按鈕 */
@@ -335,7 +336,7 @@ a {
     input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       border: none;
       border-radius: 8px;
       background: $light;
@@ -345,6 +346,14 @@ a {
       &::placeholder {
         color: #999;
       }
+    }
+
+    .btn-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      width: 100%;
     }
 
     /* 所有按鈕的基本樣式 */
@@ -357,7 +366,7 @@ a {
       border-radius: 8px;
       font-size: 14px;
       padding: 0;
-      margin: 8px 0;
+      margin: 16px 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1090,7 +1099,6 @@ a {
                     justify-content: center;
                     @include font-style($font-medium-16);
                     color: $deep;
-
                   }
 
                   .user-avatar {
@@ -1111,6 +1119,7 @@ a {
                 }
 
                 input {
+                  padding: 2px 10px;
                   margin-top: 16px;
                   border: $primary-purple 1px solid;
                   border-radius: 10px;
@@ -1300,7 +1309,6 @@ a {
                 align-items: flex-end;
                 box-sizing: border-box;
                 margin-right: 10px;
-                margin-left: 60px;
 
                 p {
                   margin: 0;
@@ -1588,22 +1596,24 @@ a {
                       }
 
                       .user-name {
+                        max-width: 100px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                         @include font-style($font-medium-14);
                         margin-left: 8px;
                         color: $deep;
                       }
 
                       button {
+                        display: inline-flex;
+                        justify-content: center;
+                        align-items: center;
                         background-color: transparent;
                         border: none;
-                        text-align: center;
-                        line-height: 24px;
-                        border-radius: 8px;
-                        padding: 0px 3px;
                         color: $primary-purple;
-                        margin: 3px 0 0 0;
                         @include font-style($font-regular-13);
-                        cursor: pointer;
+                        cursor: none;
 
                         &:hover {
                           color: $primary-green;
@@ -1622,7 +1632,6 @@ a {
                       display: flex;
                       justify-content: flex-start;
                       align-items: center;
-                      margin-left: 16px;
                       cursor: none;
                     }
 
@@ -1631,15 +1640,14 @@ a {
                       justify-content: flex-start;
                       align-items: center;
                       flex-direction: row;
-                      gap: 1px;
                       cursor: none;
 
                       .star-inarrow {
                         display: inline-flex;
 
                         .star-size {
-                          height: 20px;
-                          width: 20px;
+                          height: 18px;
+                          width: 18px;
                           color: $primary-purple;
                         }
                       }
@@ -1647,8 +1655,15 @@ a {
                   }
 
                   .comment-text {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    overflow: hidden;
                     margin: 8px 0 0 0;
                     @include font-style($font-regular-14);
+                    word-break: break-all;
+                    overflow-wrap: break-word;
                   }
 
                   .comment-footer {
@@ -2723,28 +2738,13 @@ a {
 
               }
             }
-
-            .preuser-rating {
-              display: flex;
-              justify-content: flex-start;
-              align-items: center;
-              margin-left: 16px;
-              cursor: none;
-            }
-
-            .rating {
-              display: inline-flex;
-              justify-content: flex-start;
-              align-items: center;
-              flex-direction: row;
-              gap: 1px;
-              cursor: none;
-            }
           }
 
           .comment-text {
             margin: 24px 0 0 45px;
             @include font-style($font-regular-16);
+            word-break: break-all;
+            overflow-wrap: break-word;
           }
 
           .comment-footer {
@@ -5962,6 +5962,8 @@ button:hover #custom-cursor::after {
           margin-bottom: 0.75rem;
           line-height: 1.5;
           color: #e0e0e0;
+          word-break: break-all;
+          overflow-wrap: break-word;
         }
 
 
@@ -6156,6 +6158,10 @@ button:hover #custom-cursor::after {
           justify-content: center;
 
           .user-name {
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             display: none;
 
           }

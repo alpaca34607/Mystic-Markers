@@ -1,42 +1,20 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { auth } from "../config/firebase";
-import { onAuthStateChanged } from "firebase/auth";
 import Footer from "../components/Footer";
 import { swalSuccess, swalError, swalWarning } from "../utils/swal";
+import { useUserProfile, saveProfile } from "../components/getCurrentUserProfile";
 
 import "../style.scss";
 
-const STORAGE_KEY = "userProfile";
-
-// 從 localStorage 載入會員自訂資料
-function loadProfile(userId) {
-    try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (!stored) return null;
-        const data = JSON.parse(stored);
-        return data.userId === userId ? data : null;
-    } catch {
-        return null;
-    }
-}
-
-// 儲存會員自訂資料到 localStorage
-function saveProfile(profile) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
-}
-
 export default function User() {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const { user, profile, setProfile, loading } = useUserProfile();
     const [isEditing, setIsEditing] = useState(false);
-    const [profile, setProfile] = useState({
+    const [editForm, setEditForm] = useState({
         displayName: "",
         avatar: "",
         phone: "",
         bio: "",
         hobbies: [],
     });
-    const [editForm, setEditForm] = useState({ ...profile });
     const [avatarLoadError, setAvatarLoadError] = useState(false);
     const fileInputRef = useRef(null);
     // 修改密碼彈窗（本地註冊用）
@@ -49,52 +27,11 @@ export default function User() {
     const firstPasswordInputRef = useRef(null);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
-                setUser(currentUser);
-                const saved = loadProfile(currentUser.uid);
-                const avatar = saved?.avatar || currentUser.photoURL || "";
-                const baseProfile = {
-                    displayName: saved?.displayName || currentUser.displayName || "",
-                    avatar,
-                    phone: saved?.phone || "",
-                    bio: saved?.bio || "",
-                    hobbies: saved?.hobbies || [],
-                };
-                setProfile(baseProfile);
-                setEditForm(baseProfile);
-                setAvatarLoadError(false);
-            } else {
-                // 檢查是否為註冊方式登入（localStorage）
-                const isLoggedIn = localStorage.getItem("isLoggedIn");
-                const registeredData = JSON.parse(localStorage.getItem("registeredData") || "null");
-                if (isLoggedIn && registeredData) {
-                    const mockUser = {
-                        uid: `mock-${registeredData.email}`,
-                        displayName: registeredData.name,
-                        email: registeredData.email,
-                        photoURL: null,
-                        metadata: { creationTime: null },
-                    };
-                    setUser(mockUser);
-                    const saved = loadProfile(mockUser.uid);
-                    const baseProfile = {
-                        displayName: saved?.displayName || registeredData.name || "",
-                        avatar: saved?.avatar || "",
-                        phone: saved?.phone || registeredData.phone || "",
-                        bio: saved?.bio || "",
-                        hobbies: saved?.hobbies || [],
-                    };
-                    setProfile(baseProfile);
-                    setEditForm(baseProfile);
-                } else {
-                    setUser(null);
-                }
-            }
-            setLoading(false);
-        });
-        return () => unsubscribe();
-    }, []);
+        if (profile && Object.keys(profile).length > 0 && !isEditing) {
+            setEditForm(profile);
+            setAvatarLoadError(false);
+        }
+    }, [profile, isEditing]);
 
     // 轉換日期格式
     const formattedDate = (date) => {

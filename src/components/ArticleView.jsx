@@ -286,9 +286,11 @@ const ArticleView = () => {
             <h1 className="article-title">{article.title}</h1>
             <div className="meta-info">
               <img
-                src={`${article.authorAvatar}`}
+                src={article.authorAvatar || "images/Forum/default-avatar.svg"}
                 alt="作者頭像"
                 className="author-avatar"
+                referrerPolicy="no-referrer"
+                onError={(e) => { e.target.src = "images/Forum/default-avatar.svg"; }}
               />
               <span className="author-name">{article.authorName}</span>
               <span className="post-date">昨天 18:28</span>
@@ -405,6 +407,8 @@ const ArticleView = () => {
               src={comment.avatar}
               alt="使用者頭像"
               className="comment-avatar"
+              referrerPolicy="no-referrer"
+              onError={(e) => { e.target.src = "images/Forum/default-avatar.svg"; }}
             />
             <div className="comment-content">
               <div className="comment-header">

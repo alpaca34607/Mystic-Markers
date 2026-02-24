@@ -91,6 +91,8 @@ const ArticleList = ({ articles, onFavorite, onDelete }) => {
                   src={article.authorAvatar || "images/Forum/default-avatar.svg"}
                   alt="Author Avatar"
                   className="author-avatar"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => { e.target.src = "images/Forum/default-avatar.svg"; }}
                 />
                 <span className="author-name">{article.authorName}</span>
               </div>
