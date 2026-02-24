@@ -2,42 +2,30 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import articlesData from "../js/articlesData";
 import { swalSuccess } from "../utils/swal";
+import { useCurrentUserProfile } from "./getCurrentUserProfile";
+import { useAnonymousIdentity } from "../hooks/useAnonymousIdentity";
 import "../style.scss";
 
 const ArticleView = () => {
   const { articleId } = useParams(); // 從路由參數獲取 articleId
-  const article = articlesData.find((item) => item.id === parseInt(articleId));
+  const storedArticles = JSON.parse(localStorage.getItem("articlesData")) || [];
+  const allArticles = [...articlesData, ...storedArticles];
+  const article = allArticles.find(
+    (item) => item.id === parseInt(articleId) || String(item.id) === String(articleId)
+  );
   const [comments, setComments] = useState([]); // 儲存留言內容
   const [newComment, setNewComment] = useState(""); // 新留言
-  const [commentCount, setCommentCount] = useState(article.commentCount || 0); // 留言數
+  const [commentCount, setCommentCount] = useState(article?.commentCount || 0); // 留言數
   const [isCommentExpanded, setIsCommentExpanded] = useState(false);
   const [interactions, setInteractions] = useState([]);
-  const storedArticles = JSON.parse(localStorage.getItem("articlesData")) || []; //獲取文章
-  const allArticles = [...articlesData, ...storedArticles]; // 合併靜態與動態文章資料
-  const randomNames = [
-    "神秘訪客",
-    "都市探險家",
-    "夜遊者",
-    "好奇寶寶",
-    "探險家",
-    "夜行者",
-    "暗夜低語者",
-    "幽影追隨者",
-    "荒廢詠嘆者",
-    "迷霧探險者",
-    "深淵凝視者",
-  ];
+  const userProfile = useCurrentUserProfile();
+  const { userName, userAvatar } = userProfile;
+  const { isAnonymous, setIsAnonymous, anonymousAvatar, anonymousName } =
+    useAnonymousIdentity();
 
-  const avatars = [
-    // 預設隨機頭像
-    "images/Forum/lost-cat.png",
-    "images/Forum/light.png",
-    "images/Forum/Lillian.png",
-    "images/Forum/Night-Explorer.png",
-  ];
-
-  // 初始化留言內容與留言數
+  // 初始化留言內容與留言數（使用 articleId 避免 article 物件引用每次渲染都變動導致無限循環）
   useEffect(() => {
+    if (!articleId || !article) return;
     const storedComments = JSON.parse(
       localStorage.getItem(`comments-${article.id}`)
     );
@@ -45,12 +33,13 @@ const ArticleView = () => {
       setComments(storedComments); // 加載本地留言內容
       setCommentCount(storedComments.length); // 更新留言數
     }
-  }, [article]);
+  }, [articleId]);
 
   // 將留言內容與數據保存到 localStorage
   useEffect(() => {
+    if (!articleId || !article) return;
     localStorage.setItem(`comments-${article.id}`, JSON.stringify(comments));
-  }, [comments]);
+  }, [comments, articleId]);
 
   // 更新留言數
   const updateCommentCount = () => {
@@ -87,55 +76,57 @@ const ArticleView = () => {
         .getHours()
         .toString()
         .padStart(2, "0")}:${commentDate
-        .getMinutes()
-        .toString()
-        .padStart(2, "0")}`;
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}`;
     } else if (diffDays === 1) {
       return `昨天 ${commentDate
         .getHours()
         .toString()
         .padStart(2, "0")}:${commentDate
-        .getMinutes()
-        .toString()
-        .padStart(2, "0")}`;
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}`;
     } else if (diffDays === 2) {
       return `前天 ${commentDate
         .getHours()
         .toString()
         .padStart(2, "0")}:${commentDate
-        .getMinutes()
-        .toString()
-        .padStart(2, "0")}`;
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}`;
     } else {
       return `${(commentDate.getMonth() + 1)
         .toString()
         .padStart(2, "0")}/${commentDate
-        .getDate()
-        .toString()
-        .padStart(2, "0")} ${commentDate
-        .getHours()
-        .toString()
-        .padStart(2, "0")}:${commentDate
-        .getMinutes()
-        .toString()
-        .padStart(2, "0")}`;
+          .getDate()
+          .toString()
+          .padStart(2, "0")} ${commentDate
+            .getHours()
+            .toString()
+            .padStart(2, "0")}:${commentDate
+              .getMinutes()
+              .toString()
+              .padStart(2, "0")}`;
     }
   };
 
   // 新增留言並保存
   const handleAddComment = () => {
     if (newComment.trim()) {
-      // 隨機匿名訪客
-      const randomName =
-        randomNames[Math.floor(Math.random() * randomNames.length)];
-      // 隨機選擇頭像
-      const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+      // 匿名留言：使用已儲存的匿名頭像與名稱；非匿名：使用登入者資訊
+      const displayAvatar = isAnonymous
+        ? (anonymousAvatar || "images/Forum/default-avatar.svg")
+        : (userAvatar || "images/Forum/default-avatar.svg");
+      const displayName = isAnonymous
+        ? (anonymousName || "匿名訪客")
+        : (userName || "訪客");
       const newCommentData = {
         text: newComment,
         likes: 0,
         floor: `B${comments.length + 1}`,
-        avatar: randomAvatar,
-        userName: randomName,
+        avatar: displayAvatar,
+        userName: displayName,
         time: new Date().toISOString(), // 時間格式
         isLiked: false,
       };
@@ -177,10 +168,10 @@ const ArticleView = () => {
       prevComments.map((comment, idx) =>
         idx === index
           ? {
-              ...comment,
-              likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1,
-              isLiked: !comment.isLiked,
-            }
+            ...comment,
+            likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1,
+            isLiked: !comment.isLiked,
+          }
           : comment
       )
     );
@@ -215,7 +206,7 @@ const ArticleView = () => {
       );
       setIsFavorite(article.isFavorite || false); // 確保 isFavorite 初始化
     }
-  }, [article]);
+  }, [articleId]);
   // 防呆
   if (!article) {
     return <p>文章不存在！</p>;
@@ -227,12 +218,12 @@ const ArticleView = () => {
       prevInteractions.map((interaction, idx) =>
         idx === interactionIndex
           ? {
-              ...interaction,
-              isLiked: !interaction.isLiked,
-              count: interaction.isLiked
-                ? interaction.count - 1 // 若已按讚，數字減 1
-                : interaction.count + 1, // 若未按讚，數字加 1
-            }
+            ...interaction,
+            isLiked: !interaction.isLiked,
+            count: interaction.isLiked
+              ? interaction.count - 1 // 若已按讚，數字減 1
+              : interaction.count + 1, // 若未按讚，數字加 1
+          }
           : interaction
       )
     );
@@ -242,12 +233,20 @@ const ArticleView = () => {
   const handleFavoriteClick = () => {
     setIsFavorite((prevFavorite) => !prevFavorite);
 
-    // 更新全域文章資料中的收藏狀態
+    // 更新靜態文章資料
     articlesData.forEach((item) => {
       if (item.id === article.id) {
         item.isFavorite = !item.isFavorite;
       }
     });
+
+    // 用戶新增的文章需同步更新 localStorage
+    if (article.isUserCreated) {
+      const updated = storedArticles.map((item) =>
+        item.id === article.id ? { ...item, isFavorite: !item.isFavorite } : item
+      );
+      localStorage.setItem("articlesData", JSON.stringify(updated));
+    }
   };
 
   const categoryIcons = {
@@ -275,7 +274,11 @@ const ArticleView = () => {
             <span className="category">{article.category}</span>
           </div>
 
-          <Link to="/Forum" className="back-link">
+          <Link
+            to="/Forum"
+            className="back-link"
+            replace
+          >
             <img src="images/Forum/pajamas_go-back.svg" alt="回到文章符號" />
             回到文章列表
           </Link>
@@ -292,7 +295,7 @@ const ArticleView = () => {
                 referrerPolicy="no-referrer"
                 onError={(e) => { e.target.src = "images/Forum/default-avatar.svg"; }}
               />
-              <span className="author-name">{article.authorName}</span>
+              <span className="author-name">{article.authorName || article.userName}</span>
               <span className="post-date">昨天 18:28</span>
             </div>
           </div>
@@ -300,7 +303,7 @@ const ArticleView = () => {
       </div>
       {/* 文章內文 */}
       <div className="article-content">
-        {article.preview
+        {(article.preview || "")
           .split(/(。|！|？)/g)
           .filter(Boolean)
           .map((segment, index) => (
@@ -309,11 +312,13 @@ const ArticleView = () => {
               {segment.match(/。|！|？/) && <br />} {/* 標點符號後插入換行 */}
             </span>
           ))}
+        {article.articleImage &&
         <img
           src={`${article.articleImage}`}
           alt="文章圖片"
           className="article-image"
         />
+        }
       </div>
       {/* Tag */}
       <div className="tags">
@@ -338,11 +343,10 @@ const ArticleView = () => {
                 }}
               >
                 <img
-                  src={`${
-                    interaction.isLiked
+                  src={`${interaction.isLiked
                       ? interaction.filledIcon
                       : interaction.icon
-                  }`}
+                    }`}
                   alt={interaction.altText}
                 />
                 <span>{interaction.count}</span>
@@ -359,11 +363,10 @@ const ArticleView = () => {
               }}
             >
               <img
-                src={`${
-                  isFavorite
-                    ? article.interactions[2].filledIcon // 使用 interactions[2] 的已收藏圖案
-                    : article.interactions[2].icon // 使用 interactions[2] 的未收藏圖案
-                }`}
+                src={`${isFavorite
+                    ? article.interactions?.[2]?.filledIcon ?? "images/Forum/MapCollect.png"
+                    : article.interactions?.[2]?.icon ?? "images/Forum/Forum_label.svg"
+                  }`}
                 alt={isFavorite ? "已收藏" : "收藏"}
               />
             </a>
@@ -423,11 +426,10 @@ const ArticleView = () => {
                     onClick={() => handleLikeComment(index)}
                   >
                     <img
-                      src={`${
-                        comment.isLiked
+                      src={`${comment.isLiked
                           ? "images/Forum/solar_ghost-outline.svg"
                           : "images/Forum/Forum_ghost.svg"
-                      }`}
+                        }`}
                       alt="like"
                     />
                     <span>{comment.likes}</span>
@@ -445,11 +447,15 @@ const ArticleView = () => {
           {/* 頭像與名稱 */}
           <div className="user-info" style={{ backgroundColor: "#acff6c" }}>
             <img
-              src="images/Forum/lost-cat.png" // 預設匿名者頭像
-              alt="匿名者頭像"
+              src={isAnonymous ? (anonymousAvatar || "images/Forum/default-avatar.svg") : (userAvatar || "images/Forum/default-avatar.svg")}
+              alt="使用者頭像"
               className="user-avatar"
+              referrerPolicy="no-referrer"
+              onError={(e) => { e.target.src = "images/Forum/default-avatar.svg"; }}
             />
-            <span className="user-name">匿名者</span> {/* 預設名稱 */}
+            <span className="user-name">
+              {isAnonymous ? (anonymousName || "匿名訪客") : (userName || "訪客")}
+            </span>
           </div>
           {/* 輸入框 */}
           <input
@@ -466,6 +472,20 @@ const ArticleView = () => {
           >
             送出
           </button>
+        </div>
+        {/* 匿名留言 */}
+        <div className="comment-anonymous-checkbox">
+          <label>
+            <input
+              type="checkbox"
+              checked={isAnonymous}
+              onChange={(e) => setIsAnonymous(e.target.checked)}
+            />
+            匿名留言
+          </label>
+          <span className="checkbox-hint">
+            勾選後將使用隨機頭像與名稱，重新勾選會重新隨機生成
+          </span>
         </div>
       </div>
     </div>

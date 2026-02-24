@@ -1,28 +1,20 @@
 import React, { useState } from "react";
 import "../style.scss";
+import { useCurrentUserProfile } from "./getCurrentUserProfile";
+import { useAnonymousIdentity } from "../hooks/useAnonymousIdentity";
 
-const PostModal = ({ isOpen, onClose, onNewArticle, userName }) => {
+const PostModal = ({ isOpen, onClose, onNewArticle }) => {
   if (!isOpen) return null;
+  const userProfile = useCurrentUserProfile();
+  const { userName, userAvatar } = userProfile;
+  const { isAnonymous, setIsAnonymous, anonymousAvatar, anonymousName } =
+    useAnonymousIdentity();
 
   // 本地狀態管理表單輸入
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("都市傳說");
-  const [authorName, setAuthorName] = useState(userName || "匿名用戶");
-  const [authorAvatar, setAuthorAvatar] = useState("");
   const [articleImage, setArticleImage] = useState("");
-
-  // 圖片處理
-  const handleAvatarUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAuthorAvatar(reader.result); // 保存 Base64 字符串
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleArticleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -32,22 +24,29 @@ const PostModal = ({ isOpen, onClose, onNewArticle, userName }) => {
         setArticleImage(reader.result); // 保存 Base64 字符串
       };
       reader.readAsDataURL(file);
+    }else{
+      setArticleImage("");
     }
   };
 
   // 提交新文章
   const handleSubmit = () => {
+    const displayName = isAnonymous ? (anonymousName || "匿名訪客") : userName;
+    const displayAvatar = isAnonymous ? (anonymousAvatar || "images/Forum/default-avatar.svg") : (userAvatar || "images/Forum/default-avatar.svg");
+
     const newArticle = {
       id: Date.now(), // 唯一 ID
       commentCount: 0,
       comments: [],
       category,
-      authorName,
-      authorAvatar: authorAvatar || "images/Forum/default-avatar.svg",
+      userName: displayName,
+      userAvatar: displayAvatar,
+      authorName: displayName, // ArticleList / ArticleView 使用
+      authorAvatar: displayAvatar,
       title,
       preview: content.substring(0, 100), // 預覽文字
       isFavorite: false,
-      articleImage: articleImage || "images/Forum/default-image.svg",
+      articleImage: articleImage || "",
       createdAt: new Date().toISOString(), // 自動生成當前時間
       interactions: [
         {
@@ -93,18 +92,26 @@ const PostModal = ({ isOpen, onClose, onNewArticle, userName }) => {
         </div>
         <div className="form-header">
           <img
-            src={authorAvatar || "images/Forum/light.png"}
+            src={isAnonymous ? (anonymousAvatar || "images/Forum/default-avatar.svg") : (userAvatar || "images/Forum/light.png")}
             alt="頭像"
             className="avatar"
             referrerPolicy="no-referrer"
             onError={(e) => { e.target.src = "images/Forum/default-avatar.svg"; }}
           />
-          <input
-            type="text"
-            className="author-name"
-            value={authorName}
-            readOnly
-          />
+          <span className="user-name">
+            {isAnonymous ? (anonymousName || "匿名訪客") : userName}
+          </span>
+        </div>
+        <div className="form-group form-group-checkbox">
+          <label>
+            <input
+              type="checkbox"
+              checked={isAnonymous}
+              onChange={(e) => setIsAnonymous(e.target.checked)}
+            />
+            匿名發布
+          </label>
+          <span className="checkbox-hint">勾選後將使用隨機頭像與匿名名稱，取消勾選後重新勾選會重新隨機</span>
         </div>
         <div className="form-group">
           <label>選擇發文看板</label>
@@ -137,22 +144,10 @@ const PostModal = ({ isOpen, onClose, onNewArticle, userName }) => {
           />
         </div>
         <div className="form-group">
-          <label>上傳圖片</label>
+          <label>上傳文章圖片</label>
           <div className="image-upload-group">
             <div>
-              <input type="file" onChange={handleAvatarUpload} />
-              <span>頭像</span>
-              {authorAvatar && (
-                <img
-                  src={authorAvatar}
-                  alt="預覽頭像"
-                  className="preview-image"
-                />
-              )}
-            </div>
-            <div>
-              <input type="file" onChange={handleArticleImageUpload} />
-              <span>文章圖片</span>
+              <input type="file" accept="image/*" onChange={handleArticleImageUpload} />
               {articleImage && (
                 <img
                   src={articleImage}

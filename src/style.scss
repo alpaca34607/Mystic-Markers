@@ -5259,7 +5259,6 @@ button:hover #custom-cursor::after {
 
               span {
                 display: block;
-                margin-bottom: 0.5rem;
                 line-height: 1.6;
 
                 @media (max-width:480px) {
@@ -5322,7 +5321,8 @@ button:hover #custom-cursor::after {
             .form-header {
               display: flex;
               align-items: center;
-              margin-bottom: 20px;
+              margin: 20px 0;
+              gap: 10px;
 
               .avatar {
                 width: 50px;
@@ -5379,33 +5379,55 @@ button:hover #custom-cursor::after {
                 height: 100px;
               }
 
+              &.form-group-checkbox {
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 8px;
+
+                label {
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  margin-bottom: 0;
+                  cursor: pointer;
+                  color: $light;
+                }
+
+                input[type="checkbox"] {
+                  width: auto;
+                  cursor: pointer;
+                }
+
+                .checkbox-hint {
+                  width: 100%;
+                  font-size: 12px;
+                  color: $grey;
+                  margin-top: 4px;
+                }
+              }
+
               .image-upload-group {
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-start;
                 gap: 10px;
 
                 div {
                   display: flex;
                   flex-direction: column;
-                  align-items: center;
+                  align-items: flex-start;
 
                   input[type="file"] {
                     width: 100%;
-                    max-width: 120px;
+                    max-width: 200px;
                   }
 
                   .preview-image {
-                    margin-top: 5px;
-                    width: 50px;
-                    height: 50px;
+                    margin-top: 8px;
+                    max-width: 120px;
+                    max-height: 120px;
                     object-fit: cover;
                     border-radius: 4px;
-                  }
-
-                  span {
-                    margin-top: 5px;
-                    font-size: 14px;
-                    color: #ccc;
                   }
                 }
               }
@@ -5666,7 +5688,6 @@ button:hover #custom-cursor::after {
     flex-direction: column;
     align-items: flex-start;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 1rem;
 
     .category-nav {
       display: flex;
@@ -5741,6 +5762,8 @@ button:hover #custom-cursor::after {
       .author-details {
         display: flex;
         flex-direction: column;
+        padding: 1rem 0;
+        box-sizing: border-box;
 
         .article-title {
           font-size: 1.75rem;
@@ -5804,10 +5827,11 @@ button:hover #custom-cursor::after {
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-bottom: 2rem;
+    justify-content: flex-start;
 
     .tag {
       color: $primary-purple;
-      padding: 0.5rem 0.5rem;
+      padding: 0.25rem 0.5rem;
       border-radius: 5px;
       font-size: 0.9rem;
       border: 1px solid $primary-purple;
@@ -5972,13 +5996,15 @@ button:hover #custom-cursor::after {
   }
 
   .comment-input {
-    background: #333;
+
     border-radius: 5px;
     display: flex;
+    flex-direction: column;
     align-items: stretch;
     margin: 0;
     padding: 0;
     width: 100%;
+    gap: 12px;
 
     .input-container {
       display: flex;
@@ -6036,6 +6062,35 @@ button:hover #custom-cursor::after {
         margin: 0;
       }
     }
+
+    .comment-anonymous-checkbox {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 1rem 0;
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        color: $light;
+        font-size: 14px;
+      }
+
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+
+      .checkbox-hint {
+        width: 100%;
+        font-size: 12px;
+        color: $grey;
+      }
+    }
   }
 }
 
@@ -6055,16 +6110,16 @@ button:hover #custom-cursor::after {
 
       .author-info {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         width: 100%;
 
         .author-details {
           flex-direction: column-reverse;
 
           .meta-info {
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            margin-top: 1rem;
 
             .post-date {
               margin: 0;
@@ -6076,7 +6131,13 @@ button:hover #custom-cursor::after {
     }
 
     .tags {
-      justify-content: center;
+      justify-content: flex-start;
+      
+      .tag {
+        padding: 0.25rem 0.5rem;
+        border-radius: 5px;
+        font-size: 0.75rem;
+      }
     }
 
     .interaction-bar {
@@ -6149,8 +6210,6 @@ button:hover #custom-cursor::after {
 
     .comment-input {
       .input-container {
-        width: 50%;
-
         .user-info {
           padding: 0.5rem 0;
           width: 40px;
@@ -6174,7 +6233,7 @@ button:hover #custom-cursor::after {
         }
 
         input {
-          font-size: 12px;
+          font-size: 14px;
           padding: 8px;
         }
 

@@ -4880,7 +4880,6 @@ button:hover #custom-cursor::after {
 }
 .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content span {
   display: block;
-  margin-bottom: 0.5rem;
   line-height: 1.6;
 }
 @media (max-width: 480px) {
@@ -4935,7 +4934,8 @@ button:hover #custom-cursor::after {
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-header {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 20px 0;
+  gap: 10px;
 }
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-header .avatar {
   width: 50px;
@@ -4985,31 +4985,50 @@ button:hover #custom-cursor::after {
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group textarea {
   height: 100px;
 }
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group.form-group-checkbox {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group.form-group-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group.form-group-checkbox input[type=checkbox] {
+  width: auto;
+  cursor: pointer;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group.form-group-checkbox .checkbox-hint {
+  width: 100%;
+  font-size: 12px;
+  color: #B3B3B3;
+  margin-top: 4px;
+}
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group .image-upload-group {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 10px;
 }
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group .image-upload-group div {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group .image-upload-group div input[type=file] {
   width: 100%;
-  max-width: 120px;
+  max-width: 200px;
 }
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group .image-upload-group div .preview-image {
-  margin-top: 5px;
-  width: 50px;
-  height: 50px;
+  margin-top: 8px;
+  max-width: 120px;
+  max-height: 120px;
   object-fit: cover;
   border-radius: 4px;
-}
-.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group .image-upload-group div span {
-  margin-top: 5px;
-  font-size: 14px;
-  color: #ccc;
 }
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-actions {
   display: flex;
@@ -5188,7 +5207,6 @@ button:hover #custom-cursor::after {
   flex-direction: column;
   align-items: flex-start;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 1rem;
 }
 .article-view .article-header .category-nav {
   display: flex;
@@ -5249,6 +5267,8 @@ button:hover #custom-cursor::after {
 .article-view .article-header .author-info .author-details {
   display: flex;
   flex-direction: column;
+  padding: 1rem 0;
+  box-sizing: border-box;
 }
 .article-view .article-header .author-info .author-details .article-title {
   font-size: 1.75rem;
@@ -5300,10 +5320,11 @@ button:hover #custom-cursor::after {
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-bottom: 2rem;
+  justify-content: flex-start;
 }
 .article-view .tags .tag {
   color: #B595FF;
-  padding: 0.5rem 0.5rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 5px;
   font-size: 0.9rem;
   border: 1px solid #B595FF;
@@ -5435,13 +5456,14 @@ button:hover #custom-cursor::after {
   overflow-wrap: break-word;
 }
 .article-view .comment-input {
-  background: #333;
   border-radius: 5px;
   display: flex;
+  flex-direction: column;
   align-items: stretch;
   margin: 0;
   padding: 0;
   width: 100%;
+  gap: 12px;
 }
 .article-view .comment-input .input-container {
   display: flex;
@@ -5494,6 +5516,31 @@ button:hover #custom-cursor::after {
   font-size: 16px;
   margin: 0;
 }
+.article-view .comment-input .comment-anonymous-checkbox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 1rem 0;
+}
+.article-view .comment-input .comment-anonymous-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #FFFFFF;
+  font-size: 14px;
+}
+.article-view .comment-input .comment-anonymous-checkbox input[type=checkbox] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.article-view .comment-input .comment-anonymous-checkbox .checkbox-hint {
+  width: 100%;
+  font-size: 12px;
+  color: #B3B3B3;
+}
 
 @media screen and (max-width: 768px) {
   .article-view {
@@ -5504,22 +5551,27 @@ button:hover #custom-cursor::after {
   }
   .article-view .article-header .author-info {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
   }
   .article-view .article-header .author-info .author-details {
     flex-direction: column-reverse;
   }
   .article-view .article-header .author-info .author-details .meta-info {
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 1rem;
   }
   .article-view .article-header .author-info .author-details .meta-info .post-date {
     margin: 0;
   }
   .article-view .tags {
-    justify-content: center;
+    justify-content: flex-start;
+  }
+  .article-view .tags .tag {
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.75rem;
   }
   .article-view .interaction-bar {
     flex-direction: column;
@@ -5565,9 +5617,6 @@ button:hover #custom-cursor::after {
     width: 30px;
     height: 30px;
   }
-  .article-view .comment-input .input-container {
-    width: 50%;
-  }
   .article-view .comment-input .input-container .user-info {
     padding: 0.5rem 0;
     width: 40px;
@@ -5586,7 +5635,7 @@ button:hover #custom-cursor::after {
     height: 24px;
   }
   .article-view .comment-input .input-container input {
-    font-size: 12px;
+    font-size: 14px;
     padding: 8px;
   }
   .article-view .comment-input .input-container button {

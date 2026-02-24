@@ -176,11 +176,14 @@ const ArticleList = ({ articles, onFavorite, onDelete }) => {
               </Link>
 
               <div className="right">
-                <img
-                  src={article.articleImage}
-                  alt="Article"
-                  className="article-image"
-                />
+                {article.articleImage &&
+                  article.articleImage !== "" && (
+                  <img
+                    src={article.articleImage}
+                    alt="Article"
+                    className="article-image"
+                  />
+                )}
               </div>
             </div>
           </div>

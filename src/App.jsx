@@ -328,9 +328,9 @@ const App = () => {
         <Route path="/Story/*" element={<Story />} />
         <Route path="/Map" element={<Map />} />
         <Route path="/page/:pageId" element={<Gallerypage />} />
-        <Route path="/Forum" element={<Forum />} />
+        <Route path="/Forum/article/:articleId" element={<ArticleView />} />
+        <Route path="/Forum/*" element={<Forum />} />
         <Route path="/Contact" element={<Contact />} />
-        <Route path="/Forum/article/:articleId/*" element={<ArticleView />} />
         <Route path="/User" element={<User />} />
       </Routes>
     </>
