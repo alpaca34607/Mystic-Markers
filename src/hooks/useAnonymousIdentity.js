@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 
 // 匿名頭像列表（從 public/images/Avatars 隨機選用）
+// 使用 import.meta.env.BASE_URL 以支援 Vite 部署路徑（如 GitHub Pages 的 /Mystic-Markers/）
 const getAnonymousAvatars = () => {
-  const basePath =
-    process.env.NODE_ENV === "production" ? "/Mystic-Markers/images" : "/images";
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "";
+  const basePath = base ? `${base}/images` : "/images";
   return Array.from(
     { length: 100 },
     (_, i) => `${basePath}/Avatars/avatar%20(${i + 1}).jpg`
