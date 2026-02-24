@@ -7,24 +7,46 @@ const getAnonymousAvatars = () => {
   const basePath = base ? `${base}/images` : "/images";
   return Array.from(
     { length: 100 },
-    (_, i) => `${basePath}/Avatars/avatar%20(${i + 1}).jpg`
+    (_, i) => `${basePath}/Avatars/avatar%20(${i + 1}).jpg`,
   );
 };
 
 // 匿名名稱組合：形容詞 + 名稱
-const RANDOM_ADJS = ["神秘的", "都市的", "夜行的", "好奇的", "探險的", "夜遊的", "暗夜的"];
+const RANDOM_ADJS = [
+  "神秘",
+  "都市",
+  "深淵",
+  "今日",
+  "明日",
+  "探險的",
+  "夜遊的",
+  "暗夜",
+  "飢餓的",
+  "冷漠的",
+  "孤獨的",
+  "幽暗的",
+  "霧中的",
+  "優雅的",
+  "沒朋友的",
+];
 const RANDOM_NAMES = [
-  "神秘訪客",
-  "都市探險家",
+  "旅人",
+  "浪人",
+  "引路人",
+  "訪客",
+  "探險家",
   "夜遊者",
-  "好奇寶寶",
+  "寶寶",
+  "阿嬤",
+  "幽靈",
   "探險家",
   "夜行者",
-  "暗夜低語者",
-  "幽影追隨者",
-  "荒廢詠嘆者",
-  "迷霧探險者",
-  "深淵凝視者",
+  "低語者",
+  "追隨者",
+  "詠嘆者",
+  "探險者",
+  "凝視者",
+  "道士",
 ];
 
 /**
@@ -44,7 +66,7 @@ export function useAnonymousIdentity() {
       setAnonymousName(
         "匿名--" +
           RANDOM_ADJS[Math.floor(Math.random() * RANDOM_ADJS.length)] +
-          RANDOM_NAMES[Math.floor(Math.random() * RANDOM_NAMES.length)]
+          RANDOM_NAMES[Math.floor(Math.random() * RANDOM_NAMES.length)],
       );
     } else {
       setAnonymousAvatar("");

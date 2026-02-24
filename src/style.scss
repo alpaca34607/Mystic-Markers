@@ -563,13 +563,14 @@ a {
   overflow: visible;
   z-index: 997;
 
-  .auth-btn{
+  .auth-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: none;
     width: 40px;
     height: 40px;
+
     &:hover {
       filter: brightness(200%)
     }
@@ -5093,6 +5094,7 @@ button:hover #custom-cursor::after {
         .article-list-container {
           max-height: 100vh;
           overflow-y: auto;
+
           &::-webkit-scrollbar {
             display: none;
           }
@@ -5327,6 +5329,7 @@ button:hover #custom-cursor::after {
             max-height: 80vh;
             background-color: $deep;
             box-sizing: border-box;
+
             &::-webkit-scrollbar {
               display: none;
             }
@@ -5368,6 +5371,7 @@ button:hover #custom-cursor::after {
               width: 100%;
               max-height: 40vh;
               overflow-y: auto;
+
               &::-webkit-scrollbar {
                 display: none;
               }
@@ -5611,27 +5615,28 @@ button:hover #custom-cursor::after {
     width: 100%;
 
     .forum-layout .main-content .top-bar {
-    margin-bottom: 0px;
-    .nav-buttons {
-      width: 100%;
-      justify-content: space-evenly;
+      margin-bottom: 0px;
 
-      .nav-button-container {
-        padding: 0;
+      .nav-buttons {
+        width: 100%;
+        justify-content: space-evenly;
 
-        .nav-button {
-          font-size: 14px;
-          letter-spacing: 0;
-          padding-inline: 0;
+        .nav-button-container {
+          padding: 0;
+
+          .nav-button {
+            font-size: 14px;
+            letter-spacing: 0;
+            padding-inline: 0;
+          }
+
+
+          p {
+            font-size: 14px;
+          }
         }
 
-
-        p {
-          font-size: 14px;
-        }
       }
-
-    }
     }
   }
 
@@ -5710,78 +5715,92 @@ button:hover #custom-cursor::after {
 
 // 文章內瀏覽頁
 .article-view {
-  margin: 0 115px;
-  padding-top: 100px;
-  padding: 10%;
+
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: #ffffff;
-  background-color: $deep;
-  padding-top: 130px !important;
+  padding-top: 130px;
   cursor: none;
+
+  .article-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    background-color: $deep;
+    padding: 40px 60px;
+    box-sizing: border-box;
+  }
+
+  .category-nav {
+    background-color: $deep;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .category-c {
+      display: flex;
+
+      .category-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+        vertical-align: middle;
+        border-radius: 50%;
+        object-fit: contain;
+      }
+
+      .category {
+        font-size: 1rem;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+
+
+    .back-link {
+      color: $primary-green;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+
+      img {
+        width: 20px;
+        height: auto;
+        margin: 8px;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &::before {
+        content: none !important;
+      }
+
+      &::after {
+        content: none !important;
+      }
+
+    }
+
+  }
 
   .article-header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
 
-    .category-nav {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      /* 區塊填滿寬度 */
-      align-items: center !important; // 確保垂直居中
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1); //水平線
-
-      .category-c {
-        display: flex;
-
-        .category-icon {
-          width: 24px;
-          height: 24px;
-          margin-right: 8px;
-          vertical-align: middle;
-          border-radius: 50%;
-          object-fit: contain;
-        }
-
-        .category {
-          font-size: 1rem;
-          color: #ffffff;
-          display: flex;
-          align-items: center;
-        }
-      }
-
-
-
-      .back-link {
-        color: $primary-green;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        font-size: 0.9rem;
-
-        img {
-          width: 20px;
-          height: auto;
-          margin: 8px;
-        }
-
-        &:hover {
-          text-decoration: underline;
-        }
-
-        &::before {
-          content: none !important;
-        }
-
-        &::after {
-          content: none !important;
-        }
-
-      }
-
-    }
 
     .author-info {
       display: flex;
@@ -5849,8 +5868,8 @@ button:hover #custom-cursor::after {
 
     .article-image {
       margin: 5rem auto;
-      max-width: 50%;
       height: auto;
+      max-height: 500px;
       border-radius: 8px;
       display: block;
       object-fit: contain;
@@ -5881,14 +5900,15 @@ button:hover #custom-cursor::after {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 1.5rem;
     padding: 1rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 1rem;
+    gap: 1rem;
 
     .interaction-items {
       display: flex;
       align-items: center;
+      justify-content: flex-start;
       gap: 1rem;
     }
 
@@ -5923,6 +5943,7 @@ button:hover #custom-cursor::after {
     .share-button {
       display: flex;
       align-items: center;
+      justify-content: flex-end;
 
 
       img {
@@ -5934,6 +5955,12 @@ button:hover #custom-cursor::after {
 
   .comments-section {
     margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 100px;
 
     h2 {
       font-size: 1.5rem;
@@ -5948,6 +5975,7 @@ button:hover #custom-cursor::after {
       padding: 1rem;
       background-color: rgba(255, 255, 255, 0.05);
       border-radius: 8px;
+      width: 100%;
 
       .comment-avatar {
         width: 40px;
@@ -6031,7 +6059,13 @@ button:hover #custom-cursor::after {
   }
 
   .comment-input {
-
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $deep;
+    padding: 20px;
+    box-sizing: border-box;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -6039,6 +6073,7 @@ button:hover #custom-cursor::after {
     margin: 0;
     padding: 0;
     width: 100%;
+    max-width: 1200px;
     gap: 12px;
 
     .input-container {
@@ -6103,7 +6138,7 @@ button:hover #custom-cursor::after {
       flex-wrap: wrap;
       align-items: center;
       gap: 8px;
-      padding: 1rem 0;
+      padding: 40px 30px;
 
       label {
         display: flex;
@@ -6130,9 +6165,8 @@ button:hover #custom-cursor::after {
 }
 
 // .article-view RWD
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1440px) {
   .article-view {
-    padding: 10px;
 
     .article-header {
       .category-nav {
@@ -6150,10 +6184,11 @@ button:hover #custom-cursor::after {
 
         .author-details {
           flex-direction: column-reverse;
+          align-items: flex-start;
 
           .meta-info {
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             margin-top: 1rem;
 
             .post-date {
@@ -6167,7 +6202,7 @@ button:hover #custom-cursor::after {
 
     .tags {
       justify-content: flex-start;
-      
+
       .tag {
         padding: 0.25rem 0.5rem;
         border-radius: 5px;
@@ -6176,7 +6211,6 @@ button:hover #custom-cursor::after {
     }
 
     .interaction-bar {
-      flex-direction: column;
       gap: 10px;
     }
   }
@@ -6184,6 +6218,7 @@ button:hover #custom-cursor::after {
   .comments-section {
     .comment-item {
       flex-direction: column;
+      box-sizing: border-box;
 
       .comment-header {
         flex-direction: column;
@@ -6203,10 +6238,12 @@ button:hover #custom-cursor::after {
   }
 }
 
-//  480px 以下
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 1024px) {
   .article-view {
-    margin: 5%;
+    padding: 0;
+    .article-container {
+      padding: 100px 30px;
+    }
 
     .article-header {
       .author-info .author-details .article-title {
@@ -6216,16 +6253,11 @@ button:hover #custom-cursor::after {
     }
 
     .interaction-bar {
-      display: flex;
-      justify-content: center;
-      width: 100%;
+      box-sizing: border-box;
+      gap: 2rem;
 
       .interaction-items {
-        width: 80%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 40px;
-
+        gap: 2rem;
       }
 
     }
