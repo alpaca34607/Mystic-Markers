@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../style.scss";
 import { useCurrentUserProfile } from "./getCurrentUserProfile";
 import { useAnonymousIdentity } from "../hooks/useAnonymousIdentity";
 
 const PostModal = ({ isOpen, onClose, onNewArticle }) => {
-  if (!isOpen) return null;
   const userProfile = useCurrentUserProfile();
   const { userName, userAvatar } = userProfile;
   const { isAnonymous, setIsAnonymous, anonymousAvatar, anonymousName } =
@@ -15,6 +14,23 @@ const PostModal = ({ isOpen, onClose, onNewArticle }) => {
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("都市傳說");
   const [articleImage, setArticleImage] = useState("");
+
+  // 展開時禁止頁面滾動（所有 Hooks 必須在條件 return 之前呼叫）
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.height = "100vh";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.height = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.height = "";
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   const handleArticleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -113,6 +129,7 @@ const PostModal = ({ isOpen, onClose, onNewArticle }) => {
           </label>
           <span className="checkbox-hint">勾選後將使用隨機頭像與匿名名稱，取消勾選後重新勾選會重新隨機</span>
         </div>
+        <div className="form-content">
         <div className="form-group">
           <label>選擇發文看板</label>
           <select
@@ -157,6 +174,7 @@ const PostModal = ({ isOpen, onClose, onNewArticle }) => {
               )}
             </div>
           </div>
+        </div>
         </div>
         <div className="form-actions">
           <button onClick={onClose}>取消</button>

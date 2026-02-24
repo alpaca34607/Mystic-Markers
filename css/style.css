@@ -4921,8 +4921,12 @@ button:hover #custom-cursor::after {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 600px;
-  overflow-y: auto;
+  max-height: 80vh;
   background-color: #2A2A2A;
+  box-sizing: border-box;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content::-webkit-scrollbar {
+  display: none;
 }
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .close-btn {
   position: absolute;
@@ -4949,6 +4953,17 @@ button:hover #custom-cursor::after {
   color: #fff;
   font-size: 16px;
   outline: none;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+.forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-content::-webkit-scrollbar {
+  display: none;
 }
 .forum-body .forum-container .forum-layout .main-content .post-modal .modal-content .form-group {
   display: flex;

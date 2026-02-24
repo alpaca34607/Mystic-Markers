@@ -5236,6 +5236,15 @@ button:hover #custom-cursor::after {
                       align-items: center;
                       gap: 5px;
                       color: $light;
+
+                      .interaction-link {
+                        background: none;
+                        border: none;
+                        padding: 0;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                      }
                     }
                   }
                 }
@@ -5307,8 +5316,12 @@ button:hover #custom-cursor::after {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 600px;
-            overflow-y: auto;
+            max-height: 80vh;
             background-color: $deep;
+            box-sizing: border-box;
+            &::-webkit-scrollbar {
+              display: none;
+            }
 
             .close-btn {
               position: absolute;
@@ -5337,6 +5350,18 @@ button:hover #custom-cursor::after {
                 color: #fff;
                 font-size: 16px;
                 outline: none;
+              }
+            }
+
+            .form-content {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              width: 100%;
+              max-height: 40vh;
+              overflow-y: auto;
+              &::-webkit-scrollbar {
+                display: none;
               }
             }
 

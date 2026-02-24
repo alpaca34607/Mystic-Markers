@@ -82,7 +82,7 @@ const ArticleList = ({ articles, onFavorite, onDelete }) => {
   return (
     <div className="article-list">
       {articles.map((article, index) => (
-        <article className="article-card" key={article.id}>
+        <article className="article-card" key={`${article.id}-${index}`}>
           <div className="article-content">
             {/* 作者區塊 + 更多選項 */}
             <div className="article-header">
@@ -130,10 +130,12 @@ const ArticleList = ({ articles, onFavorite, onDelete }) => {
                         className="interaction-item"
                         key={`${interaction.altText}`}
                       >
-                        <Link
-                          to="#"
+                        <button
+                          type="button"
+                          className="interaction-link"
                           onClick={(e) => {
-                            e.preventDefault(); // 防止頁面跳轉
+                            e.preventDefault();
+                            e.stopPropagation();
                             if (interaction.altText === "like") {
                               handleInteractionClick(index, idx); // 按讚功能
                             }
@@ -147,7 +149,7 @@ const ArticleList = ({ articles, onFavorite, onDelete }) => {
                             }
                             alt={interaction.altText}
                           />
-                        </Link>
+                        </button>
                         <span>{interaction.count}</span>
                       </div>
                     ))}
