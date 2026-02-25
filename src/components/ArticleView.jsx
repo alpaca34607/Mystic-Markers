@@ -300,7 +300,7 @@ const ArticleView = () => {
         </div>
         {/* 文章內文 */}
         <div className="article-content">
-          {(article.preview || "")
+          {(article.content || article.preview || "")
             .split(/(。|！|？)/g)
             .filter(Boolean)
             .map((segment, index) => (

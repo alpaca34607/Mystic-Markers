@@ -60,7 +60,8 @@ const PostModal = ({ isOpen, onClose, onNewArticle }) => {
       authorName: displayName, // ArticleList / ArticleView 使用
       authorAvatar: displayAvatar,
       title,
-      preview: content.substring(0, 100), // 預覽文字
+      content, // 完整內文
+      preview: content.substring(0, 100), // 預覽文字（用於列表摘要）
       isFavorite: false,
       articleImage: articleImage || "",
       createdAt: new Date().toISOString(), // 自動生成當前時間
