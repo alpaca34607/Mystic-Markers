@@ -5,7 +5,7 @@ import { useAnonymousIdentity } from "../hooks/useAnonymousIdentity";
 
 const PostModal = ({ isOpen, onClose, onNewArticle }) => {
   const userProfile = useCurrentUserProfile();
-  const { userName, userAvatar } = userProfile;
+  const { userId, userName, userAvatar } = userProfile;
   const { isAnonymous, setIsAnonymous, anonymousAvatar, anonymousName } =
     useAnonymousIdentity();
 
@@ -64,26 +64,11 @@ const PostModal = ({ isOpen, onClose, onNewArticle }) => {
       isFavorite: false,
       articleImage: articleImage || "",
       createdAt: new Date().toISOString(), // 自動生成當前時間
-      interactions: [
-        {
-          icon: "images/Forum/Forum_ghost.svg",
-          filledIcon: "images/Forum/solar_ghost-outline.svg",
-          count: 0,
-          altText: "like",
-        },
-        {
-          icon: "images/Forum/mynaui_message.svg",
-          count: 0,
-          altText: "message",
-        },
-        {
-          icon: "images/Forum/Forum_label.svg",
-          filledIcon: "images/Forum/MapCollect.png",
-          count: 0,
-          altText: "label",
-        },
-      ],
-      isUserCreated: true, // 標記為用戶自己新增的文章
+      likeCount: 0,
+      messageCount: 0,
+      collectCount: 0,
+      isUserCreated: true,
+      authorId: userId, // 用於判斷是否為原 PO 留言
     };
 
     // 更新 localStorage
@@ -127,7 +112,7 @@ const PostModal = ({ isOpen, onClose, onNewArticle }) => {
             />
             匿名發布
           </label>
-          <span className="checkbox-hint">勾選後將使用隨機頭像與匿名名稱，取消勾選後重新勾選會重新隨機</span>
+          <span className="checkbox-hint">勾選後將使用隨機頭像與匿名名稱，取消勾選後重新勾選會重新隨機生成</span>
         </div>
         <div className="form-content">
         <div className="form-group">

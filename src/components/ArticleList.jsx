@@ -1,65 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getStoredLikeCount, saveLikeCount } from "../utils/articleLikeStorage";
+import InteractionBar from "./InteractionBar";
 import "../style.scss";
 
 // ArticleList 組件
 const ArticleList = ({ articles, onFavorite, onDelete }) => {
-  const [interactions, setInteractions] = useState([]);
-  const storedArticles = JSON.parse(localStorage.getItem("articlesData")) || []; //獲取文章資料
-  const allArticles = [...articles, ...storedArticles]; // 合併靜態與動態文章資料
-
-  useEffect(() => {
-    // 初始化文章的留言數據和內容
+  // 追蹤每篇文章的按讚狀態 { articleIndex: boolean }
+  const [likedMap, setLikedMap] = useState({});
+  // 追蹤每篇文章的留言數 { articleId: number }，從 localStorage 讀入
+  const [messageCountMap, setMessageCountMap] = useState(() => {
+    const map = {};
     articles.forEach((article) => {
-      const storedComments = JSON.parse(
-        localStorage.getItem(`comments-${article.id}`)
-      );
-      if (storedComments) {
-        article.commentCount = storedComments.length; // 同步留言數
-        article.comments = storedComments; // 同步留言內容
-      }
+      const stored = JSON.parse(localStorage.getItem(`comments-${article.id}`));
+      if (stored) map[article.id] = stored.length;
     });
-  }, [articles]);
+    return map;
+  });
 
-  // 追蹤每個 interaction 的狀態
-  // 當 articles 改變時重新初始化 interactions
-  useEffect(() => {
-    setInteractions(
-      articles.map(
-        (article) =>
-          (article.interactions || [])
-            .map((interaction) => ({
-              ...interaction,
-              count:
-                interaction.altText === "message"
-                  ? article.commentCount // 更新為最新的留言數
-                  : interaction.count, // 更新留言數
-              isLiked: false, // 初始按讚狀態
-            }))
-            .filter((interaction) => interaction.altText !== "label") // 過濾掉收藏項目
-      )
-    );
-  }, [articles]);
+  const handleLikeClick = (article, articleIndex) => {
+    const isLiked = likedMap[articleIndex];
+    const baseCount =
+      getStoredLikeCount(article.id) ??
+      article.likeCount ??
+      article.interactions?.[0]?.count ??
+      0;
+    const newCount = isLiked ? baseCount - 1 : baseCount + 1;
 
+    saveLikeCount(article.id, newCount);
+    article.likeCount = newCount; // 同步更新記憶體中的物件
 
-  const handleInteractionClick = (articleIndex, interactionIndex) => {
-    setInteractions((prevInteractions) =>
-      prevInteractions.map((articleInteractions, idx) =>
-        idx === articleIndex
-          ? articleInteractions.map((interaction, i) =>
-              i === interactionIndex
-                ? {
-                    ...interaction,
-                    isLiked: !interaction.isLiked, // 切換按讚狀態
-                    count: interaction.isLiked
-                      ? interaction.count - 1 // 若已按讚，數字減 1
-                      : interaction.count + 1, // 若未按讚，數字加 1
-                  }
-                : interaction
-            )
-          : articleInteractions
-      )
-    );
+    // 用戶自建文章需同步更新 localStorage 的 articlesData
+    if (article.isUserCreated) {
+      const stored = JSON.parse(localStorage.getItem("articlesData")) || [];
+      const updated = stored.map((a) =>
+        a.id === article.id ? { ...a, likeCount: newCount } : a
+      );
+      localStorage.setItem("articlesData", JSON.stringify(updated));
+    }
+
+    setLikedMap((prev) => ({
+      ...prev,
+      [articleIndex]: !isLiked,
+    }));
   };
   // 時間處理邏輯
   const getRelativeTime = (createdAt) => {
@@ -97,8 +80,8 @@ const ArticleList = ({ articles, onFavorite, onDelete }) => {
                 <span className="author-name">{article.authorName}</span>
               </div>
               <div className="delete-date-wrapper">
-                  {/* 僅顯示用戶新增文章的刪除按鈕 */}
-                  {article.isUserCreated && (
+                {/* 僅顯示用戶新增文章的刪除按鈕 */}
+                {article.isUserCreated && (
                   <button
                     className="delete-button"
                     onClick={() => onDelete(article.id)}
@@ -110,88 +93,56 @@ const ArticleList = ({ articles, onFavorite, onDelete }) => {
                 <p className="article-date">
                   {getRelativeTime(article.createdAt)}
                 </p>
-              
+
               </div>
             </div>
             {/* 文章內容 */}
             <div className="article-Graphics-text">
-              <Link
-                to={`article/${article.id}`}
-                className="styled-article-link"
-              >
-                <div className="left">
-                  {/* 顯示文章標題和摘要 */}
+              <div className="left">
+                {/* 顯示文章標題和摘要 */}
+                <Link
+                  to={`article/${article.id}`}
+                  className="article-link"
+                >
                   <h2 className="article-title">{article.title}</h2>
                   <p className="article-preview">{article.preview}</p>
-                  {/* Icon 列表 */}
-                  <div className="interaction-bar">
-                    {interactions[index]?.map((interaction, idx) => (
-                      <div
-                        className="interaction-item"
-                        key={`${interaction.altText}`}
-                      >
-                        <button
-                          type="button"
-                          className="interaction-link"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            if (interaction.altText === "like") {
-                              handleInteractionClick(index, idx); // 按讚功能
-                            }
-                          }}
-                        >
-                          <img
-                            src={
-                              interaction.isLiked
-                                ? interaction.filledIcon // 按讚後的圖案
-                                : interaction.icon // 初始未按讚的圖案
-                            }
-                            alt={interaction.altText}
-                          />
-                        </button>
-                        <span>{interaction.count}</span>
-                      </div>
-                    ))}
-                    {/* 收藏按鈕 */}
-                    <div className="interaction-item">
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault(); // 防止頁面跳轉
-                          onFavorite(article.id); // 切換收藏狀態
-                        }}
-                      >
-                        <img
-                          src={
-                            article.isFavorite
-                              ? article.interactions[2].filledIcon // 使用 interactions[2] 的已收藏圖案
-                              : article.interactions[2].icon // 使用 interactions[2] 的未收藏圖案
-                          }
-                          alt={article.isFavorite ? "已收藏" : "收藏"}
-                        />
-                      </a>
-                      <span>{article.isFavorite ? "已收藏" : "收藏"}</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+                </Link>
+                  <InteractionBar
+                    likeCount={
+                      getStoredLikeCount(article.id) ??
+                      article.likeCount ??
+                      0
+                    }
+                    isLiked={likedMap[index]}
+                    onLikeClick={() => handleLikeClick(article, index)}
+                    messageCount={
+                      messageCountMap[article.id] ??
+                      article.messageCount ??
+                      article.commentCount ??
+                      0
+                    }
+                    isFavorite={article.isFavorite}
+                    onFavoriteClick={() => onFavorite(article.id)}
+                    showShare={false}
+                  />
+              </div>
 
-              <div className="right">
-                {article.articleImage &&
-                  article.articleImage !== "" && (
+            <div className="right">
+              {article.articleImage &&
+                article.articleImage !== "" && (
                   <img
                     src={article.articleImage}
                     alt="Article"
                     className="article-image"
                   />
                 )}
-              </div>
             </div>
           </div>
+        </div>
         </article>
-      ))}
-    </div>
+  ))
+}
+    </div >
   );
 };
 

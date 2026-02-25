@@ -3,7 +3,8 @@ import { useParams, useLocation } from "react-router-dom"; // 確保引入 usePa
 import Navbar from "../components/Navbar"; //Navbar
 import { swalInfoHtml } from "../utils/swal";
 import "../style.scss";
-import ArticleList from "../components/ArticleList"; // 文章列表
+import ArticleList from "../components/ArticleList";
+import { getStoredLikeCount } from "../utils/articleLikeStorage";
 import ArticleView from "../components/ArticleView";
 import articlesData from "../js/articlesData"; // 原始文章資料
 import PostModal from "../components/PostModal"; // 發文彈窗組件
@@ -31,10 +32,12 @@ const Forum = () => {
   }, [location]);
 
   useEffect(() => {
-    // [撰寫新文章]加載靜態數據和 localStorage 中的數據
+    // [撰寫新文章]加載靜態數據和 localStorage 中的數據，以 id 去重避免重複渲染
     const storedArticles =
       JSON.parse(localStorage.getItem("articlesData")) || [];
-    setArticles([...storedArticles, ...articlesData]);
+    const storedIds = new Set(storedArticles.map((a) => a.id));
+    const uniqueStaticArticles = articlesData.filter((a) => !storedIds.has(a.id));
+    setArticles([...storedArticles, ...uniqueStaticArticles]);
   }, []);
 
   // [撰寫新文章]提交新文章時添加到文章列表
@@ -86,8 +89,16 @@ const Forum = () => {
   const sortedArticles = useMemo(() => {
     return [...filteredArticles_category].sort((a, b) => {
       if (sortType === "popular") {
-        const aLikes = a.interactions.find((i) => i.altText === "like").count;
-        const bLikes = b.interactions.find((i) => i.altText === "like").count;
+        const aLikes =
+          getStoredLikeCount(a.id) ??
+          a.likeCount ??
+          a.interactions?.[0]?.count ??
+          0;
+        const bLikes =
+          getStoredLikeCount(b.id) ??
+          b.likeCount ??
+          b.interactions?.[0]?.count ??
+          0;
         return ascending ? aLikes - bLikes : bLikes - aLikes; // 熱門排序
       } else if (sortType === "latest") {
         return ascending
@@ -287,9 +298,7 @@ const Forum = () => {
                           <PostModal
                             isOpen={isModalOpen}
                             onClose={() => setModalOpen(false)}
-                            onNewArticle={(handleNewArticle) => {
-                              setArticles([handleNewArticle, ...articles]); // 新增文章置頂
-                            }}
+                            onNewArticle={handleNewArticle}
                             userName={userName} // 傳遞使用者名稱給 PostModal
                           />
                         </div>

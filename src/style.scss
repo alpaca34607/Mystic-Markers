@@ -4882,6 +4882,7 @@ button:hover #custom-cursor::after {
     .forum-layout {
       width: 100%;
       display: flex;
+      align-items: stretch;
       gap: 20px;
       justify-content: space-between;
 
@@ -4967,6 +4968,7 @@ button:hover #custom-cursor::after {
         border: 1.5px solid $grey;
         border-radius: 5px;
         padding: 20px;
+        min-height: 0;
 
         .top-bar {
           display: flex;
@@ -4974,9 +4976,10 @@ button:hover #custom-cursor::after {
           justify-content: space-between;
           margin-bottom: 30px;
           cursor: none;
+          gap: 20px;
 
           .nav-buttons {
-
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -5020,14 +5023,22 @@ button:hover #custom-cursor::after {
           }
 
           .right-bar {
+            flex: 1;
+            min-width: 0;
             display: flex;
             gap: 16px;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
+
+            .search-bar-container {
+              flex: 1;
+              min-width: 0;
+            }
 
             .search-bar {
               display: flex;
               align-items: center;
+              width: 100%;
               border: 2px solid $primary-green;
               border-radius: 5px;
               overflow: hidden;
@@ -5092,6 +5103,7 @@ button:hover #custom-cursor::after {
 
         // 文章顯示頁面
         .article-list-container {
+          flex: 1; 
           max-height: 100vh;
           overflow-y: auto;
 
@@ -5195,17 +5207,20 @@ button:hover #custom-cursor::after {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                width: 100%;
 
                 .left {
-                  flex: 1;
                   padding-right: 20px;
+                  width: 100%;
+
+                  .article-link {
+                    width: 100%;
+                  }
 
                   .article-title {
                     color: $primary-green;
                     font-size: 20px;
                     margin: 10px 0;
-
-
                   }
 
 
@@ -5214,7 +5229,6 @@ button:hover #custom-cursor::after {
                     font-size: 14px;
                     line-height: 1.5;
                     margin-bottom: 15px;
-
                     display: -webkit-box; // 讓容器變為多行文本容器
                     -webkit-line-clamp: 1; // 限制顯示一行
                     -webkit-box-orient: vertical; // 設定文本顯示方向為垂直
@@ -5240,6 +5254,12 @@ button:hover #custom-cursor::after {
                   .interaction-bar {
                     display: flex;
                     gap: 20px;
+
+                    .interaction-items {
+                      display: flex;
+                      align-items: center;
+                      gap: 20px;
+                    }
 
                     .interaction-item {
                       display: flex;
@@ -5529,8 +5549,12 @@ button:hover #custom-cursor::after {
 
   .top-bar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch; // 子元素填滿寬度
     gap: 10px;
+
+    .right-bar {
+      width: 100%;
+    }
   }
 
   .article-list {
@@ -5642,10 +5666,13 @@ button:hover #custom-cursor::after {
 
   .top-bar {
     flex-direction: column;
+    align-items: stretch;
     gap: 30px;
   }
 
   .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
+    width: 100%;
+
     .search-bar-container {
       width: 100%;
 
@@ -5693,6 +5720,7 @@ button:hover #custom-cursor::after {
   }
 
   .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
+    width: 100%;
     gap: 8px;
 
     .search-bar-container {
@@ -5910,12 +5938,14 @@ button:hover #custom-cursor::after {
       align-items: center;
       justify-content: flex-start;
       gap: 1rem;
+
     }
 
     .interaction-item {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+
 
       img {
         width: 24px;
@@ -5929,13 +5959,16 @@ button:hover #custom-cursor::after {
         line-height: 20px;
       }
 
-      a {
+      button {
         display: flex;
         align-items: center;
         text-decoration: none;
         color: #ffffff;
         gap: 0.5rem;
-
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
       }
 
     }
@@ -5944,7 +5977,10 @@ button:hover #custom-cursor::after {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
 
       img {
         width: 24px;
@@ -5954,13 +5990,14 @@ button:hover #custom-cursor::after {
   }
 
   .comments-section {
-    margin-bottom: 100px;
+    padding-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    min-height: 100px;
+    min-height: 300px;
+    box-sizing: border-box;
 
     h2 {
       font-size: 1.5rem;
@@ -5985,6 +6022,10 @@ button:hover #custom-cursor::after {
 
       .comment-content {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
 
         .comment-header {
           display: flex;
@@ -5994,7 +6035,12 @@ button:hover #custom-cursor::after {
           margin-bottom: 0.5rem;
           color: #808080;
           font-size: 0.9rem;
-
+          width: 100%;
+          .comment-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
           .comment-user,
           .comment-floor,
           .comment-time {
@@ -6047,6 +6093,7 @@ button:hover #custom-cursor::after {
 
         .comment-text {
           margin-bottom: 0.75rem;
+          margin-left: 50px;
           line-height: 1.5;
           color: #e0e0e0;
           word-break: break-all;
@@ -6090,8 +6137,6 @@ button:hover #custom-cursor::after {
         justify-content: center;
         background-color: $primary-green;
         padding: 0 1rem;
-        border-top-left-radius: 8px;
-        border-bottom-left-radius: 8px;
         margin: 0;
 
         .user-avatar {
@@ -6126,8 +6171,6 @@ button:hover #custom-cursor::after {
         color: #000;
         border: none;
         padding: 0 2rem;
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
         font-size: 16px;
         margin: 0;
       }
@@ -6139,6 +6182,7 @@ button:hover #custom-cursor::after {
       align-items: center;
       gap: 8px;
       padding: 40px 30px;
+      padding-top: 20px;
 
       label {
         display: flex;
@@ -6221,8 +6265,7 @@ button:hover #custom-cursor::after {
       box-sizing: border-box;
 
       .comment-header {
-        flex-direction: column;
-        align-items: flex-start;
+        justify-content: space-between;
       }
     }
 
@@ -6241,6 +6284,7 @@ button:hover #custom-cursor::after {
 @media screen and (max-width: 1024px) {
   .article-view {
     padding: 0;
+
     .article-container {
       padding: 100px 30px;
     }
@@ -6266,7 +6310,12 @@ button:hover #custom-cursor::after {
       h2 {
         font-size: 18px;
       }
-
+      .comment-item .comment-content {
+        gap: 0px;
+        .comment-text {
+          margin-left: 40px;
+        }
+      }
       .comment-item {
         .comment-avatar {
           width: 30px;

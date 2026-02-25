@@ -4574,6 +4574,7 @@ button:hover #custom-cursor::after {
 .forum-body .forum-container .forum-layout {
   width: 100%;
   display: flex;
+  align-items: stretch;
   gap: 20px;
   justify-content: space-between;
   /* 網格間隙*/
@@ -4642,6 +4643,7 @@ button:hover #custom-cursor::after {
   border: 1.5px solid #B3B3B3;
   border-radius: 5px;
   padding: 20px;
+  min-height: 0;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar {
   display: flex;
@@ -4649,8 +4651,10 @@ button:hover #custom-cursor::after {
   justify-content: space-between;
   margin-bottom: 30px;
   cursor: none;
+  gap: 20px;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .nav-buttons {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 15px;
@@ -4686,14 +4690,21 @@ button:hover #custom-cursor::after {
   letter-spacing: 2.7px;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
+  flex: 1;
+  min-width: 0;
   display: flex;
   gap: 16px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+}
+.forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container {
+  flex: 1;
+  min-width: 0;
 }
 .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar {
   display: flex;
   align-items: center;
+  width: 100%;
   border: 2px solid #acff6c;
   border-radius: 5px;
   overflow: hidden;
@@ -4744,6 +4755,7 @@ button:hover #custom-cursor::after {
   height: 100%;
 }
 .forum-body .forum-container .forum-layout .main-content .article-list-container {
+  flex: 1;
   max-height: 100vh;
   overflow-y: auto;
 }
@@ -4827,10 +4839,14 @@ button:hover #custom-cursor::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left {
-  flex: 1;
   padding-right: 20px;
+  width: 100%;
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .article-link {
+  width: 100%;
 }
 .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .article-title {
   color: #acff6c;
@@ -4863,6 +4879,11 @@ button:hover #custom-cursor::after {
 }
 .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .interaction-bar {
   display: flex;
+  gap: 20px;
+}
+.forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .interaction-bar .interaction-items {
+  display: flex;
+  align-items: center;
   gap: 20px;
 }
 .forum-body .forum-container .forum-layout .main-content .article-list .article-card .article-content .article-Graphics-text .left .interaction-bar .interaction-item {
@@ -5097,8 +5118,11 @@ button:hover #custom-cursor::after {
   }
   .top-bar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 10px;
+  }
+  .top-bar .right-bar {
+    width: 100%;
   }
   .article-list .article-card {
     flex: 1 1 calc(50% - 10px);
@@ -5179,7 +5203,11 @@ button:hover #custom-cursor::after {
   }
   .top-bar {
     flex-direction: column;
+    align-items: stretch;
     gap: 30px;
+  }
+  .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
+    width: 100%;
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container {
     width: 100%;
@@ -5214,6 +5242,7 @@ button:hover #custom-cursor::after {
     padding: 0;
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar {
+    width: 100%;
     gap: 8px;
   }
   .forum-body .forum-container .forum-layout .main-content .top-bar .right-bar .search-bar-container .search-bar {
@@ -5406,30 +5435,39 @@ button:hover #custom-cursor::after {
   white-space: nowrap;
   line-height: 20px;
 }
-.article-view .interaction-bar .interaction-item a {
+.article-view .interaction-bar .interaction-item button {
   display: flex;
   align-items: center;
   text-decoration: none;
   color: #ffffff;
   gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 .article-view .interaction-bar .share-button {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 .article-view .interaction-bar .share-button img {
   width: 24px;
   height: 24px;
 }
 .article-view .comments-section {
-  margin-bottom: 100px;
+  padding-bottom: 100px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  min-height: 100px;
+  min-height: 300px;
+  box-sizing: border-box;
 }
 .article-view .comments-section h2 {
   font-size: 1.5rem;
@@ -5452,6 +5490,10 @@ button:hover #custom-cursor::after {
 }
 .article-view .comments-section .comment-item .comment-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 }
 .article-view .comments-section .comment-item .comment-content .comment-header {
   display: flex;
@@ -5461,6 +5503,12 @@ button:hover #custom-cursor::after {
   margin-bottom: 0.5rem;
   color: #808080;
   font-size: 0.9rem;
+  width: 100%;
+}
+.article-view .comments-section .comment-item .comment-content .comment-header .comment-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .article-view .comments-section .comment-item .comment-content .comment-header .comment-user,
 .article-view .comments-section .comment-item .comment-content .comment-header .comment-floor,
@@ -5503,6 +5551,7 @@ button:hover #custom-cursor::after {
 }
 .article-view .comments-section .comment-item .comment-content .comment-text {
   margin-bottom: 0.75rem;
+  margin-left: 50px;
   line-height: 1.5;
   color: #e0e0e0;
   word-break: break-all;
@@ -5540,8 +5589,6 @@ button:hover #custom-cursor::after {
   justify-content: center;
   background-color: #acff6c;
   padding: 0 1rem;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
   margin: 0;
 }
 .article-view .comment-input .input-container .user-info .user-avatar {
@@ -5572,8 +5619,6 @@ button:hover #custom-cursor::after {
   color: #000;
   border: none;
   padding: 0 2rem;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
   font-size: 16px;
   margin: 0;
 }
@@ -5583,6 +5628,7 @@ button:hover #custom-cursor::after {
   align-items: center;
   gap: 8px;
   padding: 40px 30px;
+  padding-top: 20px;
 }
 .article-view .comment-input .comment-anonymous-checkbox label {
   display: flex;
@@ -5640,8 +5686,7 @@ button:hover #custom-cursor::after {
     box-sizing: border-box;
   }
   .comments-section .comment-item .comment-header {
-    flex-direction: column;
-    align-items: flex-start;
+    justify-content: space-between;
   }
   .comments-section .comment-input .input-container {
     flex-direction: column;
@@ -5670,6 +5715,12 @@ button:hover #custom-cursor::after {
   }
   .article-view .comments-section h2 {
     font-size: 18px;
+  }
+  .article-view .comments-section .comment-item .comment-content {
+    gap: 0px;
+  }
+  .article-view .comments-section .comment-item .comment-content .comment-text {
+    margin-left: 40px;
   }
   .article-view .comments-section .comment-item .comment-avatar {
     width: 30px;
@@ -6511,4 +6562,4 @@ footer .content .left .link li a:hover {
   to {
     transform: scale(1);
   }
-}/*# sourceMappingURL=style.css.map */
+}

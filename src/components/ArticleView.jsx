@@ -8,6 +8,8 @@ import { swalSuccess } from "../utils/swal";
 import { useCurrentUserProfile } from "./getCurrentUserProfile";
 
 import { useAnonymousIdentity } from "../hooks/useAnonymousIdentity";
+import { getStoredLikeCount, saveLikeCount } from "../utils/articleLikeStorage";
+import InteractionBar from "./InteractionBar";
 import "../style.scss";
 
 const ArticleView = () => {
@@ -18,60 +20,42 @@ const ArticleView = () => {
     (item) =>
       item.id === parseInt(articleId) || String(item.id) === String(articleId),
   );
-  const [comments, setComments] = useState([]); // 儲存留言內容
+  const [comments, setComments] = useState(() => {
+    // 留言初始值從 localStorage 讀入
+    if (!article) return [];
+    const stored = JSON.parse(localStorage.getItem(`comments-${article.id}`));
+    return stored ?? [];
+  });
   const [newComment, setNewComment] = useState(""); // 新留言
-  const [commentCount, setCommentCount] = useState(article?.commentCount || 0); // 留言數
   const [isCommentExpanded, setIsCommentExpanded] = useState(false);
-  const [interactions, setInteractions] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
   const userProfile = useCurrentUserProfile();
 
-  const { userName, userAvatar } = userProfile;
+  const { userId, userName, userAvatar } = userProfile;
+  const messageCount = comments.length; // 留言數
+
+  // 判斷是否為文章作者（用 authorId 比對，僅用戶自建文章有 authorId）
+  const isAuthor =
+    article?.isUserCreated &&
+    article?.authorId &&
+    userId &&
+    String(article.authorId) === String(userId);
 
   const { isAnonymous, setIsAnonymous, anonymousAvatar, anonymousName } =
     useAnonymousIdentity();
 
-  // 初始化留言內容與留言數（使用 articleId 避免 article 物件引用每次渲染都變動導致無限循環）
+  // articleId 切換時重新從 localStorage 讀入對應文章的留言
   useEffect(() => {
     if (!articleId || !article) return;
-
-    const storedComments = JSON.parse(
-      localStorage.getItem(`comments-${article.id}
-
-          `),
-    );
-
-    if (storedComments) {
-      setComments(storedComments); // 加載本地留言內容
-      setCommentCount(storedComments.length); // 更新留言數
-    }
+    const stored = JSON.parse(localStorage.getItem(`comments-${article.id}`));
+    setComments(stored ?? []);
   }, [articleId]);
 
-  // 將留言內容與數據保存到 localStorage
+  // comments 變動時寫回 localStorage（初始空陣列不寫入）
   useEffect(() => {
-    if (!articleId || !article) return;
-
-    localStorage.setItem(
-      `comments-${article.id}
-
-        `,
-      JSON.stringify(comments),
-    );
+    if (!articleId || !article || comments.length === 0) return;
+    localStorage.setItem(`comments-${article.id}`, JSON.stringify(comments));
   }, [comments, articleId]);
-
-  // 更新留言數
-  const updateCommentCount = () => {
-    articlesData.forEach((item) => {
-      if (item.id === article.id) {
-        item.commentCount += 1;
-
-        item.interactions.forEach((interaction) => {
-          if (interaction.altText === "message") {
-            interaction.count = comments.length + 1; // 更新留言數
-          }
-        });
-      }
-    });
-  };
 
   // 時間計算格式
   const formatRelativeDate = (dateString) => {
@@ -123,13 +107,17 @@ const ArticleView = () => {
   // 新增留言並保存
   const handleAddComment = () => {
     if (newComment.trim()) {
-      // 匿名留言：使用已儲存的匿名頭像與名稱；非匿名：使用登入者資訊
+      // 原 PO：使用「原PO」+ 文章頭像；匿名：隨機頭像與名稱；一般：登入者資訊
       const displayAvatar = isAnonymous
         ? anonymousAvatar || "images/Forum/default-avatar.svg"
-        : userAvatar || "images/Forum/default-avatar.svg";
+        : isAuthor
+          ? article.authorAvatar || "images/Forum/default-avatar.svg"
+          : userAvatar || "images/Forum/default-avatar.svg";
       const displayName = isAnonymous
         ? anonymousName || "匿名訪客"
-        : userName || "訪客";
+        : isAuthor
+          ? "原PO"
+          : userName || "訪客";
 
       const newCommentData = {
         text: newComment,
@@ -147,12 +135,8 @@ const ArticleView = () => {
       // 更新本地留言數據
       setComments((prevComments) => {
         const updatedComments = [...prevComments, newCommentData];
-
-        // 保存到 localStorage
         localStorage.setItem(
-          `comments-${article.id}
-
-            `,
+          `comments-${article.id}`,
           JSON.stringify(updatedComments),
         );
         return updatedComments;
@@ -160,24 +144,26 @@ const ArticleView = () => {
 
       setNewComment("");
 
-      // 更新留言數到全域文章數據
+      // 更新留言數到 articlesData 與 localStorage（用戶自建文章）
       articlesData.forEach((item) => {
         if (item.id === article.id) {
-          item.commentCount += 1; // 更新留言數
-
-          item.interactions.forEach((interaction) => {
-            if (interaction.altText === "message") {
-              interaction.count += 1; // 同步更新留言數
-            }
-          });
-
-          item.comments = JSON.parse(
-            localStorage.getItem(`comments-${article.id}
-
-                `),
-          ); // 同步留言內容
+          item.commentCount = (item.commentCount ?? 0) + 1;
+          item.messageCount = (item.messageCount ?? 0) + 1;
         }
       });
+      if (article.isUserCreated) {
+        const stored = JSON.parse(localStorage.getItem("articlesData")) || [];
+        const updated = stored.map((a) =>
+          a.id === article.id
+            ? {
+              ...a,
+              commentCount: (a.commentCount ?? 0) + 1,
+              messageCount: (a.messageCount ?? 0) + 1,
+            }
+            : a
+        );
+        localStorage.setItem("articlesData", JSON.stringify(updated));
+      }
     }
   };
 
@@ -187,49 +173,20 @@ const ArticleView = () => {
       prevComments.map((comment, idx) =>
         idx === index
           ? {
-              ...comment,
-              likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1,
-              isLiked: !comment.isLiked,
-            }
+            ...comment,
+            likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1,
+            isLiked: !comment.isLiked,
+          }
           : comment,
       ),
     );
-  };
-
-  // 新增留言數
-  const handleNewComment = (newComment) => {
-    setArticle((prevArticle) => ({
-      ...prevArticle,
-      comments: [...prevArticle.comments, newComment],
-      commentCount: prevArticle.commentCount + 1, // 更新本地留言數
-    }));
-
-    // 同步更新 articlesData.js
-    const updatedArticles = articles.map((a) =>
-      a.id === article.id
-        ? {
-            ...a,
-            commentCount: a.commentCount + 1,
-          }
-        : a,
-    );
-    setArticles(updatedArticles);
   };
 
   const [isFavorite, setIsFavorite] = useState(false); // 初始化 isFavorite
 
   useEffect(() => {
     if (article) {
-      setInteractions(
-        (article.interactions || [])
-          .filter((interaction) => interaction.altText !== "label") // 預設過濾
-
-          .map((interaction) => ({
-            ...interaction,
-            isLiked: false, // 初始按讚狀態
-          })),
-      );
-      setIsFavorite(article.isFavorite || false); // 確保 isFavorite 初始化
+      setIsFavorite(article.isFavorite || false);
     }
   }, [articleId]);
 
@@ -238,21 +195,27 @@ const ArticleView = () => {
     return <p>文章不存在！</p>;
   }
 
-  // 文章按讚功能
-  const handleInteractionClick = (interactionIndex) => {
-    setInteractions((prevInteractions) =>
-      prevInteractions.map((interaction, idx) =>
-        idx === interactionIndex
-          ? {
-              ...interaction,
-              isLiked: !interaction.isLiked,
-              count: interaction.isLiked
-                ? interaction.count - 1 // 若已按讚，數字減 1
-                : interaction.count + 1, // 若未按讚，數字加 1
-            }
-          : interaction,
-      ),
-    );
+  // 文章按讚功能（儲存至 localStorage）
+  const handleLikeClick = () => {
+    const baseCount =
+      getStoredLikeCount(article.id) ??
+      article.likeCount ??
+      article.interactions?.[0]?.count ??
+      0;
+    const newCount = isLiked ? baseCount - 1 : baseCount + 1;
+
+    saveLikeCount(article.id, newCount);
+    article.likeCount = newCount;
+
+    if (article.isUserCreated) {
+      const stored = JSON.parse(localStorage.getItem("articlesData")) || [];
+      const updated = stored.map((a) =>
+        a.id === article.id ? { ...a, likeCount: newCount } : a
+      );
+      localStorage.setItem("articlesData", JSON.stringify(updated));
+    }
+
+    setIsLiked((prev) => !prev);
   };
 
   // 收藏功能
@@ -271,9 +234,9 @@ const ArticleView = () => {
       const updated = storedArticles.map((item) =>
         item.id === article.id
           ? {
-              ...item,
-              isFavorite: !item.isFavorite,
-            }
+            ...item,
+            isFavorite: !item.isFavorite,
+          }
           : item,
       );
       localStorage.setItem("articlesData", JSON.stringify(updated));
@@ -367,116 +330,51 @@ const ArticleView = () => {
             ),
           )}
         </div>
-        {/* icon */}
-        <div className="interaction-bar">
-          <div className="interaction-items">
-            {interactions.map((interaction, idx) => (
-              <div
-                key={`${interaction.altText}
-
-            `}
-                className="interaction-item"
-              >
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-
-                    if (interaction.altText === "like") {
-                      handleInteractionClick(idx);
-                    }
-                  }}
-                >
-                  <img
-                    src={`${
-                      interaction.isLiked
-                        ? interaction.filledIcon
-                        : interaction.icon
-                    }
-
-            `}
-                    alt={interaction.altText}
-                  />
-                  <span> {interaction.count}</span>
-                </a>
-              </div>
-            ))}
-            {/* 收藏按鈕 */}
-            <div className="interaction-item">
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleFavoriteClick();
-                }}
-              >
-                <img
-                  src={`${
-                    isFavorite
-                      ? (article.interactions?.[2]?.filledIcon ??
-                        "images/Forum/MapCollect.png")
-                      : (article.interactions?.[2]?.icon ??
-                        "images/Forum/Forum_label.svg")
-                  }
-
-      `}
-                  alt={isFavorite ? "已收藏" : "收藏"}
-                />
-              </a>
-              {/* <span>{article.interactions[2]?.count}</span>  這是顯示收藏數 */}
-              <span> {article.isFavorite ? "已收藏" : "收藏"}</span>
-            </div>
-          </div>
-          {/* 分享 */}
-          <div
-            className="share-button"
-            onClick={() => {
-              navigator.clipboard
-                .writeText(window.location.href) // 複製網址到剪貼板
-                .then(() => swalSuccess("文章連結已複製"))
-                .catch((error) => console.error("無法複製連結", error));
-            }}
-            role="button" // 提供可訪問性
-            tabIndex="0" // 讓 div 可被聚焦
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                navigator.clipboard
-                  .writeText(window.location.href)
-                  .then(() => swalSuccess("文章連結已複製"))
-                  .catch((error) => console.error("無法複製連結", error));
-              }
-            }}
-          >
-            <img
-              src={`${"images/Forum/ic_outline-share.png"}
-
-      `}
-              alt="分享"
-              className="share-icon"
-            />
-          </div>
-        </div>
+        <InteractionBar
+          likeCount={
+            getStoredLikeCount(article.id) ??
+            article.likeCount ??
+            article.interactions?.[0]?.count ??
+            0
+          }
+          isLiked={isLiked}
+          onLikeClick={handleLikeClick}
+          messageCount={messageCount}
+          isFavorite={isFavorite}
+          onFavoriteClick={handleFavoriteClick}
+          showShare={true}
+          onShareClick={() => {
+            navigator.clipboard
+              .writeText(window.location.href)
+              .then(() => swalSuccess("文章連結已複製"))
+              .catch((error) => console.error("無法複製連結", error));
+          }}
+        />
         {/* 留言列表 */}
         <div className="comments-section">
           <h2>留言區</h2>
           {comments.length > 0 ? comments.map((comment, index) => (
             <div key={index} className="comment-item">
-              <img
-                src={comment.avatar}
-                alt="使用者頭像"
-                className="comment-avatar"
-                referrerPolicy="no-referrer"
-                onError={(e) => {
-                  e.target.src = "images/Forum/default-avatar.svg";
-                }}
-              />
+
               <div className="comment-content">
                 <div className="comment-header">
-                  <span className="comment-user"> {comment.userName}</span>
-                  <span className="comment-floor"> {comment.floor}</span>
-                  <span className="comment-time">
-                    {formatRelativeDate(comment.time)}
-                  </span>
+                  <div className="comment-header-left">
+                    <img
+                      src={comment.avatar}
+                      alt="使用者頭像"
+                      className="comment-avatar"
+                      referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        e.target.src = "images/Forum/default-avatar.svg";
+                      }}
+                    />
+                    <span className="comment-user"> {comment.userName}</span>
+                    <span className="comment-floor"> {comment.floor}</span>
+                    <span className="comment-time">
+                      {formatRelativeDate(comment.time)}
+                    </span>
+                  </div>
+
                   <div className="comment-actions">
                     <button
                       className={`like-button ${comment.isLiked ? "liked" : ""}
@@ -485,11 +383,10 @@ const ArticleView = () => {
                       onClick={() => handleLikeComment(index)}
                     >
                       <img
-                        src={`${
-                          comment.isLiked
-                            ? "images/Forum/solar_ghost-outline.svg"
-                            : "images/Forum/Forum_ghost.svg"
-                        }
+                        src={`${comment.isLiked
+                          ? "images/Forum/solar_ghost-outline.svg"
+                          : "images/Forum/Forum_ghost.svg"
+                          }
 
             `}
                         alt="like"
@@ -501,7 +398,7 @@ const ArticleView = () => {
                 <p className="comment-text"> {comment.text}</p>
               </div>
             </div>
-          )):( <div className="comment-item"><p className="comment-text">還沒有人留下留言，來搶頭香吧！</p></div>)}
+          )) : (<div className="comment-item"><p className="comment-text">還沒有人留下留言，來搶頭香吧！</p></div>)}
         </div>
       </div>
 
@@ -523,7 +420,9 @@ const ArticleView = () => {
               src={
                 isAnonymous
                   ? anonymousAvatar || "images/Forum/default-avatar.svg"
-                  : userAvatar || "images/Forum/default-avatar.svg"
+                  : isAuthor
+                    ? article.authorAvatar || "images/Forum/default-avatar.svg"
+                    : userAvatar || "images/Forum/default-avatar.svg"
               }
               alt="使用者頭像"
               className="user-avatar"
@@ -533,7 +432,11 @@ const ArticleView = () => {
               }}
             />
             <span className="user-name">
-              {isAnonymous ? anonymousName || "匿名訪客" : userName || "訪客"}
+              {isAnonymous
+                ? anonymousName || "匿名訪客"
+                : isAuthor
+                  ? "原PO"
+                  : userName || "訪客"}
             </span>
           </div>
           {/* 輸入框 */}
@@ -555,19 +458,21 @@ const ArticleView = () => {
           </button>
         </div>
         {/* 匿名留言 */}
-        <div className="comment-anonymous-checkbox">
-          <label>
-            <input
-              type="checkbox"
-              checked={isAnonymous}
-              onChange={(e) => setIsAnonymous(e.target.checked)}
-            />
-            匿名留言
-          </label>
-          <span className="checkbox-hint">
-            勾選後將使用隨機頭像與名稱，重新勾選會重新隨機生成
-          </span>
-        </div>
+        {!isAuthor && (
+          <div className="comment-anonymous-checkbox">
+            <label>
+              <input
+                type="checkbox"
+                checked={isAnonymous}
+                onChange={(e) => setIsAnonymous(e.target.checked)}
+              />
+              匿名留言
+            </label>
+            <span className="checkbox-hint">
+              勾選後將使用隨機頭像與名稱，重新勾選會重新隨機生成
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

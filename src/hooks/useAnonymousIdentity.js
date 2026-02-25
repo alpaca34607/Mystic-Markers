@@ -11,7 +11,7 @@ const getAnonymousAvatars = () => {
   );
 };
 
-// 匿名名稱組合：形容詞 + 名稱
+// 匿名名稱組合形容詞 + 名稱
 const RANDOM_ADJS = [
   "神秘",
   "都市",
@@ -64,7 +64,7 @@ export function useAnonymousIdentity() {
       const avatars = getAnonymousAvatars();
       setAnonymousAvatar(avatars[Math.floor(Math.random() * avatars.length)]);
       setAnonymousName(
-        "匿名--" +
+        "匿名-" +
           RANDOM_ADJS[Math.floor(Math.random() * RANDOM_ADJS.length)] +
           RANDOM_NAMES[Math.floor(Math.random() * RANDOM_NAMES.length)],
       );
