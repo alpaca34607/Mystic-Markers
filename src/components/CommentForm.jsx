@@ -21,8 +21,9 @@ function CommentForm({ onSubmit, existingComment, isEditing, onCancelEdit, comme
   const userProfile = useCurrentUserProfile();
   const { userId, userName, userAvatar } = userProfile;
 
-  const basePath = process.env.NODE_ENV === 'production' ? '/Mystic-Markers' : '';
-  const defaultAvatar = userAvatar || `${basePath}/images/Avatars/avatar%20(1).jpg`;
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "";
+  const imageBasePath = base ? `${base}/images` : "/images";
+  const defaultAvatar = userAvatar || `${imageBasePath}/Avatars/avatar%20(1).jpg`;
 
   // 找到當前用戶的評論
   const userComment = comments?.find(comment => comment.userId === userProfile.userId);

@@ -34,7 +34,7 @@ const ArticleList = ({ articles, onFavorite, onDelete }) => {
     if (article.isUserCreated) {
       const stored = JSON.parse(localStorage.getItem("articlesData")) || [];
       const updated = stored.map((a) =>
-        a.id === article.id ? { ...a, likeCount: newCount } : a
+        a.id === article.id ? { ...a, likeCount: newCount } : a,
       );
       localStorage.setItem("articlesData", JSON.stringify(updated));
     }
@@ -71,11 +71,15 @@ const ArticleList = ({ articles, onFavorite, onDelete }) => {
             <div className="article-header">
               <div className="author-info">
                 <img
-                  src={article.authorAvatar || "images/Forum/default-avatar.svg"}
+                  src={
+                    article.authorAvatar || "images/Avatars/avatar%20(1).jpg"
+                  }
                   alt="Author Avatar"
                   className="author-avatar"
                   referrerPolicy="no-referrer"
-                  onError={(e) => { e.target.src = "images/Forum/default-avatar.svg"; }}
+                  onError={(e) => {
+                    e.target.src = "images/Avatars/avatar%20(1).jpg";
+                  }}
                 />
                 <span className="author-name">{article.authorName}</span>
               </div>
@@ -93,56 +97,48 @@ const ArticleList = ({ articles, onFavorite, onDelete }) => {
                 <p className="article-date">
                   {getRelativeTime(article.createdAt)}
                 </p>
-
               </div>
             </div>
             {/* 文章內容 */}
             <div className="article-Graphics-text">
               <div className="left">
                 {/* 顯示文章標題和摘要 */}
-                <Link
-                  to={`article/${article.id}`}
-                  className="article-link"
-                >
+                <Link to={`article/${article.id}`} className="article-link">
                   <h2 className="article-title">{article.title}</h2>
                   <p className="article-preview">{article.preview}</p>
                 </Link>
-                  <InteractionBar
-                    likeCount={
-                      getStoredLikeCount(article.id) ??
-                      article.likeCount ??
-                      0
-                    }
-                    isLiked={likedMap[index]}
-                    onLikeClick={() => handleLikeClick(article, index)}
-                    messageCount={
-                      messageCountMap[article.id] ??
-                      article.messageCount ??
-                      article.commentCount ??
-                      0
-                    }
-                    isFavorite={article.isFavorite}
-                    onFavoriteClick={() => onFavorite(article.id)}
-                    showShare={false}
-                  />
+                <InteractionBar
+                  likeCount={
+                    getStoredLikeCount(article.id) ?? article.likeCount ?? 0
+                  }
+                  isLiked={likedMap[index]}
+                  onLikeClick={() => handleLikeClick(article, index)}
+                  messageCount={
+                    messageCountMap[article.id] ??
+                    article.messageCount ??
+                    article.commentCount ??
+                    0
+                  }
+                  isFavorite={article.isFavorite}
+                  onFavoriteClick={() => onFavorite(article.id)}
+                  showShare={false}
+                />
               </div>
 
-            <div className="right">
-              {article.articleImage &&
-                article.articleImage !== "" && (
+              <div className="right">
+                {article.articleImage && article.articleImage !== "" && (
                   <img
                     src={article.articleImage}
                     alt="Article"
                     className="article-image"
                   />
                 )}
+              </div>
             </div>
           </div>
-        </div>
         </article>
-  ))
-}
-    </div >
+      ))}
+    </div>
   );
 };
 

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import StarRating from "./StarRating";
 
 function CommentList({ comments, onEditComment, currentUserId = 'guest' }) {
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "";
+  const imageBasePath = base ? `${base}/images` : "/images";
   const sortedComments = [...comments].sort((a, b) =>
     new Date(b.timestamp) - new Date(a.timestamp)
   );
@@ -22,8 +24,7 @@ function CommentList({ comments, onEditComment, currentUserId = 'guest' }) {
                   alt={comment.userName}
                   referrerPolicy="no-referrer"
                   onError={(e) => {
-                    const basePath = process.env.NODE_ENV === 'production' ? '/Mystic-Markers' : '';
-                    e.target.src = `${basePath}/images/Avatars/avatar%20(1).jpg`;
+                    e.target.src = `${imageBasePath}/Avatars/avatar%20(1).jpg`;
                   }}
                 />
               </div>

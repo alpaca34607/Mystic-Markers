@@ -40,15 +40,17 @@ const PostModal = ({ isOpen, onClose, onNewArticle }) => {
         setArticleImage(reader.result); // 保存 Base64 字符串
       };
       reader.readAsDataURL(file);
-    }else{
+    } else {
       setArticleImage("");
     }
   };
 
   // 提交新文章
   const handleSubmit = () => {
-    const displayName = isAnonymous ? (anonymousName || "匿名訪客") : userName;
-    const displayAvatar = isAnonymous ? (anonymousAvatar || "images/Forum/default-avatar.svg") : (userAvatar || "images/Forum/default-avatar.svg");
+    const displayName = isAnonymous ? anonymousName || "匿名訪客" : userName;
+    const displayAvatar = isAnonymous
+      ? anonymousAvatar || "images/Avatars/avatar%20(1).jpg"
+      : userAvatar || "images/Avatars/avatar%20(1).jpg";
 
     const newArticle = {
       id: Date.now(), // 唯一 ID
@@ -94,14 +96,20 @@ const PostModal = ({ isOpen, onClose, onNewArticle }) => {
         </div>
         <div className="form-header">
           <img
-            src={isAnonymous ? (anonymousAvatar || "images/Forum/default-avatar.svg") : (userAvatar || "images/Forum/light.png")}
+            src={
+              isAnonymous
+                ? anonymousAvatar || "images/Avatars/avatar%20(1).jpg"
+                : userAvatar || "images/Forum/light.png"
+            }
             alt="頭像"
             className="avatar"
             referrerPolicy="no-referrer"
-            onError={(e) => { e.target.src = "images/Forum/default-avatar.svg"; }}
+            onError={(e) => {
+              e.target.src = "images/Avatars/avatar%20(1).jpg";
+            }}
           />
           <span className="user-name">
-            {isAnonymous ? (anonymousName || "匿名訪客") : userName}
+            {isAnonymous ? anonymousName || "匿名訪客" : userName}
           </span>
         </div>
         <div className="form-group form-group-checkbox">
@@ -113,54 +121,60 @@ const PostModal = ({ isOpen, onClose, onNewArticle }) => {
             />
             匿名發布
           </label>
-          <span className="checkbox-hint">勾選後將使用隨機頭像與匿名名稱，取消勾選後重新勾選會重新隨機生成</span>
+          <span className="checkbox-hint">
+            勾選後將使用隨機頭像與匿名名稱，取消勾選後重新勾選會重新隨機生成
+          </span>
         </div>
         <div className="form-content">
-        <div className="form-group">
-          <label>選擇發文看板</label>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="都市傳說">都市傳說</option>
-            <option value="廢墟探險">廢墟探險</option>
-            <option value="恐怖獵奇">恐怖獵奇</option>
-            <option value="恐怖作品">恐怖作品</option>
-            <option value="驅邪收驚">驅邪收驚</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label>文章標題</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="請輸入文章標題"
-          />
-        </div>
-        <div className="form-group">
-          <label>內容</label>
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="撰寫您的文章內容..."
-          />
-        </div>
-        <div className="form-group">
-          <label>上傳文章圖片</label>
-          <div className="image-upload-group">
-            <div>
-              <input type="file" accept="image/*" onChange={handleArticleImageUpload} />
-              {articleImage && (
-                <img
-                  src={articleImage}
-                  alt="預覽文章圖片"
-                  className="preview-image"
+          <div className="form-group">
+            <label>選擇發文看板</label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="都市傳說">都市傳說</option>
+              <option value="廢墟探險">廢墟探險</option>
+              <option value="恐怖獵奇">恐怖獵奇</option>
+              <option value="恐怖作品">恐怖作品</option>
+              <option value="驅邪收驚">驅邪收驚</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>文章標題</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="請輸入文章標題"
+            />
+          </div>
+          <div className="form-group">
+            <label>內容</label>
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="撰寫您的文章內容..."
+            />
+          </div>
+          <div className="form-group">
+            <label>上傳文章圖片</label>
+            <div className="image-upload-group">
+              <div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleArticleImageUpload}
                 />
-              )}
+                {articleImage && (
+                  <img
+                    src={articleImage}
+                    alt="預覽文章圖片"
+                    className="preview-image"
+                  />
+                )}
+              </div>
             </div>
           </div>
-        </div>
         </div>
         <div className="form-actions">
           <button onClick={onClose}>取消</button>

@@ -11,7 +11,10 @@ import { swalWarning } from "../utils/swal";
 import { useCurrentUserProfile } from "../components/getCurrentUserProfile";
 import "../style.scss";
 
-const REPO_NAME = '/Mystic-Markers'
+const getImageBasePath = () => {
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "";
+  return base ? `${base}/images` : "/images";
+};
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
@@ -51,10 +54,8 @@ function GalleryPage() {
     const config = imageConfig[pageId];
     if (!config) return [];
 
-    // 在開發環境使用原始路徑，在生產環境添加倉庫名稱
-    const basePath = process.env.NODE_ENV === 'production'
-      ? `${REPO_NAME}/images`
-      : '/images';
+    // 依部署 base URL 產生圖片路徑（同時相容 Vercel 與 GitHub Pages）
+    const basePath = getImageBasePath();
     return Array.from(
       { length: config.count },
       (_, index) => `${basePath}/${config.folder}/image${index + 1}.jpg`

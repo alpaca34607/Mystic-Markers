@@ -32,6 +32,11 @@ import templeMarkers from "../components/templeMarkers";
 import Notice from '../components/Notice';
 import { useCurrentUserProfile } from '../components/getCurrentUserProfile';
 
+const getImageBasePath = () => {
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "";
+  return base ? `${base}/images` : "/images";
+};
+
 
 
 // 預設搜尋結果標記
@@ -753,8 +758,7 @@ export default function Map() {
                                       alt={marker.userName}
                                       referrerPolicy="no-referrer"
                                       onError={(e) => {
-                                        const basePath = process.env.NODE_ENV === 'production' ? '/Mystic-Markers' : '';
-                                        e.target.src = `${basePath}/images/Avatars/avatar%20(1).jpg`;
+                                        e.target.src = `${getImageBasePath()}/Avatars/avatar%20(1).jpg`;
                                       }}
                                     />
                                   </div>
@@ -825,8 +829,7 @@ export default function Map() {
                                           alt={marker.userName}
                                           referrerPolicy="no-referrer"
                                           onError={(e) => {
-                                            const basePath = process.env.NODE_ENV === 'production' ? '/Mystic-Markers' : '';
-                                            e.target.src = `${basePath}/images/Avatars/avatar%20(1).jpg`;
+                                            e.target.src = `${getImageBasePath()}/Avatars/avatar%20(1).jpg`;
                                           }}
                                         />
                                       </div>

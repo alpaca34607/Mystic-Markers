@@ -109,10 +109,10 @@ const ArticleView = () => {
     if (newComment.trim()) {
       // 原 PO：使用「原PO」+ 文章頭像；匿名：隨機頭像與名稱；一般：登入者資訊
       const displayAvatar = isAnonymous
-        ? anonymousAvatar || "images/Forum/default-avatar.svg"
+        ? anonymousAvatar || "images/Avatars/avatar%20(1).jpg"
         : isAuthor
-          ? article.authorAvatar || "images/Forum/default-avatar.svg"
-          : userAvatar || "images/Forum/default-avatar.svg";
+          ? article.authorAvatar || "images/Avatars/avatar%20(1).jpg"
+          : userAvatar || "images/Avatars/avatar%20(1).jpg";
       const displayName = isAnonymous
         ? anonymousName || "匿名訪客"
         : isAuthor
@@ -156,11 +156,11 @@ const ArticleView = () => {
         const updated = stored.map((a) =>
           a.id === article.id
             ? {
-              ...a,
-              commentCount: (a.commentCount ?? 0) + 1,
-              messageCount: (a.messageCount ?? 0) + 1,
-            }
-            : a
+                ...a,
+                commentCount: (a.commentCount ?? 0) + 1,
+                messageCount: (a.messageCount ?? 0) + 1,
+              }
+            : a,
         );
         localStorage.setItem("articlesData", JSON.stringify(updated));
       }
@@ -173,10 +173,10 @@ const ArticleView = () => {
       prevComments.map((comment, idx) =>
         idx === index
           ? {
-            ...comment,
-            likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1,
-            isLiked: !comment.isLiked,
-          }
+              ...comment,
+              likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1,
+              isLiked: !comment.isLiked,
+            }
           : comment,
       ),
     );
@@ -210,7 +210,7 @@ const ArticleView = () => {
     if (article.isUserCreated) {
       const stored = JSON.parse(localStorage.getItem("articlesData")) || [];
       const updated = stored.map((a) =>
-        a.id === article.id ? { ...a, likeCount: newCount } : a
+        a.id === article.id ? { ...a, likeCount: newCount } : a,
       );
       localStorage.setItem("articlesData", JSON.stringify(updated));
     }
@@ -234,9 +234,9 @@ const ArticleView = () => {
       const updated = storedArticles.map((item) =>
         item.id === article.id
           ? {
-            ...item,
-            isFavorite: !item.isFavorite,
-          }
+              ...item,
+              isFavorite: !item.isFavorite,
+            }
           : item,
       );
       localStorage.setItem("articlesData", JSON.stringify(updated));
@@ -281,13 +281,13 @@ const ArticleView = () => {
               <div className="meta-info">
                 <img
                   src={
-                    article.authorAvatar || "images/Forum/default-avatar.svg"
+                    article.authorAvatar || "images/Avatars/avatar%20(1).jpg"
                   }
                   alt="作者頭像"
                   className="author-avatar"
                   referrerPolicy="no-referrer"
                   onError={(e) => {
-                    e.target.src = "images/Forum/default-avatar.svg";
+                    e.target.src = "images/Avatars/avatar%20(1).jpg";
                   }}
                 />
                 <span className="author-name">
@@ -353,52 +353,58 @@ const ArticleView = () => {
         {/* 留言列表 */}
         <div className="comments-section">
           <h2>留言區</h2>
-          {comments.length > 0 ? comments.map((comment, index) => (
-            <div key={index} className="comment-item">
+          {comments.length > 0 ? (
+            comments.map((comment, index) => (
+              <div key={index} className="comment-item">
+                <div className="comment-content">
+                  <div className="comment-header">
+                    <div className="comment-header-left">
+                      <img
+                        src={comment.avatar}
+                        alt="使用者頭像"
+                        className="comment-avatar"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          e.target.src = "images/Avatars/avatar%20(1).jpg";
+                        }}
+                      />
+                      <span className="comment-user"> {comment.userName}</span>
+                      <span className="comment-floor"> {comment.floor}</span>
+                      <span className="comment-time">
+                        {formatRelativeDate(comment.time)}
+                      </span>
+                    </div>
 
-              <div className="comment-content">
-                <div className="comment-header">
-                  <div className="comment-header-left">
-                    <img
-                      src={comment.avatar}
-                      alt="使用者頭像"
-                      className="comment-avatar"
-                      referrerPolicy="no-referrer"
-                      onError={(e) => {
-                        e.target.src = "images/Forum/default-avatar.svg";
-                      }}
-                    />
-                    <span className="comment-user"> {comment.userName}</span>
-                    <span className="comment-floor"> {comment.floor}</span>
-                    <span className="comment-time">
-                      {formatRelativeDate(comment.time)}
-                    </span>
-                  </div>
-
-                  <div className="comment-actions">
-                    <button
-                      className={`like-button ${comment.isLiked ? "liked" : ""}
+                    <div className="comment-actions">
+                      <button
+                        className={`like-button ${comment.isLiked ? "liked" : ""}
 
             `}
-                      onClick={() => handleLikeComment(index)}
-                    >
-                      <img
-                        src={`${comment.isLiked
-                          ? "images/Forum/solar_ghost-outline.svg"
-                          : "images/Forum/Forum_ghost.svg"
+                        onClick={() => handleLikeComment(index)}
+                      >
+                        <img
+                          src={`${
+                            comment.isLiked
+                              ? "images/Forum/solar_ghost-outline.svg"
+                              : "images/Forum/Forum_ghost.svg"
                           }
 
             `}
-                        alt="like"
-                      />
-                      <span> {comment.likes}</span>
-                    </button>
+                          alt="like"
+                        />
+                        <span> {comment.likes}</span>
+                      </button>
+                    </div>
                   </div>
+                  <p className="comment-text"> {comment.text}</p>
                 </div>
-                <p className="comment-text"> {comment.text}</p>
               </div>
+            ))
+          ) : (
+            <div className="comment-item">
+              <p className="comment-text">還沒有人留下留言，來搶頭香吧！</p>
             </div>
-          )) : (<div className="comment-item"><p className="comment-text">還沒有人留下留言，來搶頭香吧！</p></div>)}
+          )}
         </div>
       </div>
 
@@ -419,16 +425,16 @@ const ArticleView = () => {
             <img
               src={
                 isAnonymous
-                  ? anonymousAvatar || "images/Forum/default-avatar.svg"
+                  ? anonymousAvatar || "images/Avatars/avatar%20(1).jpg"
                   : isAuthor
-                    ? article.authorAvatar || "images/Forum/default-avatar.svg"
-                    : userAvatar || "images/Forum/default-avatar.svg"
+                    ? article.authorAvatar || "images/Avatars/avatar%20(1).jpg"
+                    : userAvatar || "images/Avatars/avatar%20(1).jpg"
               }
               alt="使用者頭像"
               className="user-avatar"
               referrerPolicy="no-referrer"
               onError={(e) => {
-                e.target.src = "images/Forum/default-avatar.svg";
+                e.target.src = "images/Avatars/avatar%20(1).jpg";
               }}
             />
             <span className="user-name">

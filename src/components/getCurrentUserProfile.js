@@ -4,10 +4,11 @@ import { onAuthStateChanged } from "firebase/auth";
 
 export const STORAGE_KEY = "userProfile";
 
-const getBasePath = () =>
-  process.env.NODE_ENV === "production" ? "/Mystic-Markers" : "";
-const getDefaultAvatar = () =>
-  getBasePath() + "/images/Avatars/avatar%20(1).jpg";
+const getImageBasePath = () => {
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "";
+  return base ? `${base}/images` : "/images";
+};
+const getDefaultAvatar = () => `${getImageBasePath()}/Avatars/avatar%20(1).jpg`;
 
 /** 從 localStorage 載入會員自訂資料 */
 export function loadProfile(userId) {
