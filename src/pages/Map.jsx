@@ -1,5 +1,6 @@
 import "../style.scss";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { Link, Route, Routes } from "react-router-dom";
 import App from "../App";
 import Gallerypage from "./Gallerypage";
@@ -29,6 +30,12 @@ const DEFAULT_COVER_PHOTO = 'images/default-location.jpg';
 const DEFAULT_AVATAR = 'images/Avatars/avatar (1).jpg';
 import templeMarkers from "../components/templeMarkers";
 import Notice from '../components/Notice';
+import { useCurrentUserProfile } from '../components/getCurrentUserProfile';
+
+const getImageBasePath = () => {
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "";
+  return base ? `${base}/images` : "/images";
+};
 
 
 
@@ -39,7 +46,6 @@ const searchResultIcon = L.icon({
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
 });
-
 
 
 // 預設與被點擊的圖示
@@ -58,10 +64,6 @@ const activeIcon = L.icon({
 });
 
 
-
-const handlePopupOpen = (markerId) => {
-  setActiveMarkerId(markerId);
-};
 
 // 未填入完整時的警告
 const CustomAlert = ({ message, onClose }) => (
@@ -108,10 +110,10 @@ export default function Map() {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const location = useLocation();
-  const mapboxAccessToken = 'pk.eyJ1IjoiYWxpc29uMzQ2MDciLCJhIjoiY201ODlqM2U5M2o2MDJscHpiMWF6NzczdSJ9.D76vzn6QIzDViT9R7nVPVA';
+  const mapboxAccessToken = import.meta.env.VITE_MAPBOX_TOKEN;
   const mapboxStyleURL = `https://api.mapbox.com/styles/v1/alison34607/cm589twvs00nz01sp790tayrs/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`;
   const [isAddingLocation, setIsAddingLocation] = useState(false);
-
+  const userProfile = useCurrentUserProfile();
 
   useEffect(() => {
     // 當路由變更時，將頁面滾動到頂部
@@ -133,8 +135,6 @@ export default function Map() {
     setMarkers(markersWithComments);
     setDisplayedMarkers(markersWithComments);
   }, []);
-
-
 
 
   const SearchControl = () => {
@@ -199,6 +199,7 @@ export default function Map() {
   // 收藏
   const [favorites, setFavorites] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [showListPanel, setShowListPanel] = useState(false);
 
   //初始化收藏列表
   useEffect(() => {
@@ -236,9 +237,16 @@ export default function Map() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingComment, setEditingComment] = useState(null);
 
+  // 台灣範圍（用於新增標記驗證，僅允許在台灣境內新增）
   const taiwanBounds = [
     [21.8, 119.3],
     [25.3, 122.0]
+  ];
+
+  // 擴展邊界：允許地圖平移至台灣四周以外，避免點擊邊緣標記時 popup 超出視窗且地圖被 maxBounds 拉回
+  const taiwanBoundsExtended = [
+    [18.0, 114.0],
+    [28.5, 126.5]
   ];
 
 
@@ -314,7 +322,7 @@ export default function Map() {
         } else {
           // 檢查是否已有評論
           const hasComment = currentComments.some(
-            comment => comment.userId === 'user123'
+            comment => comment.userId === userProfile.userId
           );
 
           if (hasComment) {
@@ -444,9 +452,9 @@ export default function Map() {
           position: [lat, lng],
           title: '',
           coverPhoto: DEFAULT_COVER_PHOTO,
-          userId: 'user123',
-          userName: '訪客',
-          userAvatar: DEFAULT_AVATAR,
+          userId: userProfile.userId,
+          userName: userProfile.userName,
+          userAvatar: userProfile.userAvatar,
           comments: [],
           city: city,
           district: district
@@ -581,8 +589,9 @@ export default function Map() {
     const bounds = map.getBounds();
     const latDiff = bounds._northEast.lat - bounds._southWest.lat;
 
-    // 計算新的中心點，將標記位置設在視圖下方 40% 的位置
-    const offsetLat = targetLat + (latDiff * 0.4);
+    // 小螢幕需較大偏移，讓 popup 有足夠空間顯示在視窗內
+    const offsetRatio = window.innerWidth < 768 ? 0.5 : 0.4;
+    const offsetLat = targetLat + (latDiff * offsetRatio);
 
     // 更新 activeMarkerId
     setActiveMarkerId(marker.id);
@@ -672,7 +681,7 @@ export default function Map() {
                 />
               )}
 
-            
+
               <div className="map-content">
                 <div className="map-left">
                   <div className="btn-group">
@@ -701,7 +710,7 @@ export default function Map() {
                       center={[23.5, 121]}
                       zoom={8}
                       style={{ height: "100%", width: "100%" }}
-                      maxBounds={taiwanBounds}
+                      maxBounds={taiwanBoundsExtended}
                       minZoom={7}
                       maxBoundsViscosity={1.0}
                       markers={displayedMarkers}
@@ -735,6 +744,10 @@ export default function Map() {
                             className="custom-popup"
                             onOpen={() => setActiveMarkerId(marker.id)}
                             onClose={() => setActiveMarkerId(null)}
+                            autoPan={true}
+                            autoPanPadding={[50, 50]}
+                            autoPanPaddingTopLeft={[50, 100]}
+                            autoPanPaddingBottomRight={[50, 50]}
                           >
                             {editingMarker?.id === marker.id ? (
                               <div className="marker-form">
@@ -743,6 +756,10 @@ export default function Map() {
                                     <img
                                       src={marker.userAvatar}
                                       alt={marker.userName}
+                                      referrerPolicy="no-referrer"
+                                      onError={(e) => {
+                                        e.target.src = `${getImageBasePath()}/Avatars/avatar%20(1).jpg`;
+                                      }}
                                     />
                                   </div>
                                   <span className="user-name">{marker.userName}</span>
@@ -810,6 +827,10 @@ export default function Map() {
                                         <img
                                           src={marker.userAvatar}
                                           alt={marker.userName}
+                                          referrerPolicy="no-referrer"
+                                          onError={(e) => {
+                                            e.target.src = `${getImageBasePath()}/Avatars/avatar%20(1).jpg`;
+                                          }}
                                         />
                                       </div>
                                       <span className="user-name">{marker.userName}</span>
@@ -824,7 +845,7 @@ export default function Map() {
                                     >
                                       {isFavorite(marker.id) ? <BsBookmarkFill /> : <BsBookmark />}
                                     </button>
-                                    {marker.userId === 'user123' && (
+                                    {marker.userId === userProfile.userId && (
                                       <div className="button-group">
                                         <button onClick={() => setEditingMarker(marker)}>
                                           編輯
@@ -870,10 +891,14 @@ export default function Map() {
                                       comments={marker.comments || []}
                                       onEditComment={(comment) => handleEditComment(marker.id, comment)}
                                       rows={3}
+                                      userId={userProfile.userId}
+                                      userName={userProfile.userName}
+                                      userAvatar={userProfile.userAvatar}
                                     />
                                     <CommentList
                                       comments={marker.comments || []}
                                       onEditComment={(comment) => handleEditComment(marker.id, comment)}
+                                      currentUserId={userProfile.userId}
                                     />
                                   </div>
                                 </div>
@@ -886,7 +911,17 @@ export default function Map() {
                   </div>
                 </div>
 
-                <div className="list-panel" >
+                <div className={`list-panel ${showListPanel ? 'active' : ''}`}>
+                  <div
+                    className="list-panel-handle"
+                    onClick={() => setShowListPanel(!showListPanel)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === 'Enter' && setShowListPanel(!showListPanel)}
+                    aria-label={showListPanel ? '收起列表' : '展開列表'}
+                  >
+                    {/* 頂部開關，點擊此區展開收起 */}
+                  </div>
                   <div className="control-panel">
                     <div className="message">
                       <Notice
@@ -1076,28 +1111,7 @@ export default function Map() {
                 </div>
                 {/* <img src="../assets/Map/product-SoftzillaS-thumb.jpg" alt="" style={{width:"100px",height:"100px"}}/> */}
               </section>
-              <footer>
-                <div className="content">
-                  <div className="left">
-                    <ul className="link">
-                      <li>
-                        <Link to="/">首頁</Link>
-                      </li>
-                      <li>
-                        <Link to="/Story">怪談博物館</Link>
-                      </li>
-                      <li>
-                        <Link to="/Forum">鬼影探索</Link>
-                      </li>
-                      <li>
-                        <Link to="/Contact">解謎之門</Link>
-                      </li>
-                    </ul>
-                    <small>&copy; 2024 Mystic Markers. All Rights Reserved.  此網站設計學生練習作品，無任何商業營利用途。</small>
-                  </div>
-                  <img src="images/LOGO_footer.svg" alt="神秘座標" />
-                </div>
-              </footer>
+              <Footer />
 
 
             </main>

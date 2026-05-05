@@ -1,4 +1,4 @@
-@use './variables/' as *;
+@use './variables/'as *;
 html,
 
 body,
@@ -142,10 +142,10 @@ textarea {
 /* 卷軸樣式 */
 ::-webkit-scrollbar {
   //卷動長條
-  width: 15px;
+  width: 12px;
   height: 12px; //有水平卷軸時設定
   background: transparent;
-  border: 1px solid $primary-purple ;
+  border: 1px solid $primary-purple;
   z-index: 1;
   /* 設置較低的 z-index */
   cursor: default;
@@ -163,7 +163,7 @@ textarea {
 ::-webkit-scrollbar-thumb {
   //卷軸手柄
   background: $grey;
-  border: 1px solid $primary-purple ;
+  border: 1px solid $primary-purple;
   z-index: 1;
   /* 設置較低的 z-index */
   cursor: default;

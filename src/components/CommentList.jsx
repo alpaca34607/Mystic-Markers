@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import StarRating from "./StarRating";
 
-function CommentList({ comments, onEditComment }) {
-  const sortedComments = [...comments].sort((a, b) => 
+function CommentList({ comments, onEditComment, currentUserId = 'guest' }) {
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "";
+  const imageBasePath = base ? `${base}/images` : "/images";
+  const sortedComments = [...comments].sort((a, b) =>
     new Date(b.timestamp) - new Date(a.timestamp)
   );
 
@@ -20,36 +22,39 @@ function CommentList({ comments, onEditComment }) {
                 <img
                   src={comment.userAvatar}
                   alt={comment.userName}
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    e.target.src = `${imageBasePath}/Avatars/avatar%20(1).jpg`;
+                  }}
                 />
               </div>
               <span className="user-name">{comment.userName}</span>
-              {comment.userId === 'user123' && ( // 確認是否為當前用戶的評論
-              <button
-                onClick={() => onEditComment(comment)}
-                className="edit-btn"
-              >▪︎編輯</button>
-            )}
+              {comment.userId === currentUserId && ( // 確認是否為當前用戶的評論
+                <button
+                  onClick={() => onEditComment(comment)}
+                  className="edit-btn"
+                >▪︎編輯</button>
+              )}
             </div>
-
             <div className="rating">
               <div className="preuser-rating">
-                <StarRating rating={comment.rating}/>
+                <StarRating rating={comment.rating} />
               </div>
             </div>
           </div>
-          
-          <p className="comment-text">{comment.text}</p>
-          
+
+          <div className="comment-text">{comment.text}</div>
+
           <div className="comment-footer">
-          
+           
             <div className="comment-date">
               {new Date(comment.timestamp).toLocaleDateString()}
               {comment.isEdited && <span className="edited-tag"> (已編輯)</span>}
             </div>
-           
+
           </div>
-          
-          <hr/>
+
+          <hr />
         </div>
       ))}
     </div>

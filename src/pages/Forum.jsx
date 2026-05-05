@@ -1,8 +1,10 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom"; // 確保引入 useParams
 import Navbar from "../components/Navbar"; //Navbar
+import { swalInfoHtml } from "../utils/swal";
 import "../style.scss";
-import ArticleList from "../components/ArticleList"; // 文章列表
+import ArticleList from "../components/ArticleList";
+import { getStoredLikeCount } from "../utils/articleLikeStorage";
 import ArticleView from "../components/ArticleView";
 import articlesData from "../js/articlesData"; // 原始文章資料
 import PostModal from "../components/PostModal"; // 發文彈窗組件
@@ -24,16 +26,18 @@ const Forum = () => {
   const [hoveredIcon, setHoveredIcon] = useState(null); //紀錄更換排序按鈕
   const location = useLocation(); //帳戶名稱
   const userName = location.state?.userName || "匿名用戶";
-   useEffect(() => {
-      // 當路由變更時，將頁面滾動到頂部
-      window.scrollTo(0, 0);
-    }, [location]);
+  useEffect(() => {
+    // 當路由變更時，將頁面滾動到頂部
+    window.scrollTo(0, 0);
+  }, [location]);
 
   useEffect(() => {
-    // [撰寫新文章]加載靜態數據和 localStorage 中的數據
+    // [撰寫新文章]加載靜態數據和 localStorage 中的數據，以 id 去重避免重複渲染
     const storedArticles =
       JSON.parse(localStorage.getItem("articlesData")) || [];
-    setArticles([...storedArticles, ...articlesData]);
+    const storedIds = new Set(storedArticles.map((a) => a.id));
+    const uniqueStaticArticles = articlesData.filter((a) => !storedIds.has(a.id));
+    setArticles([...storedArticles, ...uniqueStaticArticles]);
   }, []);
 
   // [撰寫新文章]提交新文章時添加到文章列表
@@ -85,8 +89,16 @@ const Forum = () => {
   const sortedArticles = useMemo(() => {
     return [...filteredArticles_category].sort((a, b) => {
       if (sortType === "popular") {
-        const aLikes = a.interactions.find((i) => i.altText === "like").count;
-        const bLikes = b.interactions.find((i) => i.altText === "like").count;
+        const aLikes =
+          getStoredLikeCount(a.id) ??
+          a.likeCount ??
+          a.interactions?.[0]?.count ??
+          0;
+        const bLikes =
+          getStoredLikeCount(b.id) ??
+          b.likeCount ??
+          b.interactions?.[0]?.count ??
+          0;
         return ascending ? aLikes - bLikes : bLikes - aLikes; // 熱門排序
       } else if (sortType === "latest") {
         return ascending
@@ -115,8 +127,9 @@ const Forum = () => {
 
   // [發文規則]按鈕
   const showPostingRules = () => {
-    alert(
-      "發文規則：\n1. 請保持友善與尊重。\n2. 禁止發表不當內容。\n3. 內容需與分類相關。"
+    swalInfoHtml(
+      "發文規則：<br>1. 請保持友善與尊重。<br>2. 禁止發表不當內容。<br>3. 內容需與分類相關。",
+      "發文規則"
     );
   };
 
@@ -171,13 +184,11 @@ const Forum = () => {
                                 handleCategoryClick(category.label)
                               }
                             >
-                              <div>
-                                <img
-                                  src={`images/Forum/${category.icon}.svg`}
-                                  alt={category.label}
-                                />
-                                <p>{category.label}</p>
-                              </div>
+                              <img
+                                src={`images/Forum/${category.icon}.svg`}
+                                alt={category.label}
+                              />
+                              <p>{category.label}</p>
                             </li>
                           ))}
                         </ul>
@@ -287,9 +298,7 @@ const Forum = () => {
                           <PostModal
                             isOpen={isModalOpen}
                             onClose={() => setModalOpen(false)}
-                            onNewArticle={(handleNewArticle) => {
-                              setArticles([handleNewArticle, ...articles]); // 新增文章置頂
-                            }}
+                            onNewArticle={handleNewArticle}
                             userName={userName} // 傳遞使用者名稱給 PostModal
                           />
                         </div>
@@ -297,11 +306,13 @@ const Forum = () => {
                     </div>
 
                     {/* 文章列表 */}
+                    <div className="article-list-container">
                     <ArticleList
                       articles={sortedArticles} // 排序並篩選後的文章資料
                       onFavorite={handleArticleFavorite} //傳遞收藏功能
                       onDelete={handleDeleteArticle} // 傳遞刪除功能
                     />
+                    </div>
                   </div>
                 </div>
               </div>

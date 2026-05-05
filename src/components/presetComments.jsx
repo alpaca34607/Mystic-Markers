@@ -1,4 +1,7 @@
-const REPO_NAME = '/Mystic-Markers';
+const getImageBasePath = () => {
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "";
+  return base ? `${base}/images` : "/images";
+};
 // 評論數據庫
 const commentDB = {
   userIds: Array.from({ length: 100 }, (_, i) => `user${i + 1}`),
@@ -16,12 +19,10 @@ const commentDB = {
 
   ],
 
-  avatars: Array.from({ length: 100 }, (_, i) => {
-    const basePath = process.env.NODE_ENV === 'production' 
-      ? `${REPO_NAME}/images` 
-      : '/images';
-    return `${basePath}/Avatars/avatar%20(${i + 1}).jpg`;
-  }),
+  avatars: Array.from(
+    { length: 100 },
+    (_, i) => `${getImageBasePath()}/Avatars/avatar%20(${i + 1}).jpg`,
+  ),
 
   ratings: [1, 1, 1, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5], 
 

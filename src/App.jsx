@@ -2,6 +2,7 @@ import "./style.scss";
 // import "../css/style.css";
 import Navbar from "./components/Navbar";
 import { Link, Route, Routes } from "react-router-dom";
+import User from "./pages/User";
 import Story from "./pages/Story";
 import Map from "./pages/Map";
 import Gallerypage from "./pages/Gallerypage";
@@ -18,6 +19,7 @@ import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GotoTop from "./components/GotoTop";
+import Footer from "./components/Footer";
 import ArticleView from "./components/ArticleView"; //文章瀏覽頁
 
 gsap.registerPlugin(ScrollTrigger);
@@ -37,12 +39,12 @@ const App = () => {
   const fadeInRefs = useRef([]);
   const fadeInaRefs = useRef([]);
 
-  
-  
+
+
   useEffect(() => {
 
-     // 只有淡入
-     fadeInaRefs.current.forEach((el) => {
+    // 只有淡入
+    fadeInaRefs.current.forEach((el) => {
       gsap.fromTo(
         el,
         { opacity: 0, x: 0 },
@@ -170,7 +172,7 @@ const App = () => {
           path="/"
           element={
             <main className="home">
-              <section ref={(el) =>  fadeInaRefs.current.push(el)} className="banner">
+              <section ref={(el) => fadeInaRefs.current.push(el)} className="banner">
                 <div className="fog-area-p">
                   <Fog className="purpleFog" />
                 </div>
@@ -318,30 +320,7 @@ const App = () => {
                   </div>
                 </div>
               </section>
-              <footer>
-                <div className="content">
-                  <div className="left">
-                    <ul className="link">
-                      <li>
-                        <Link to="/Story">怪談博物館</Link>
-                      </li>
-                      <li>
-                        <Link to="/Map">靈異導航</Link>
-                      </li>
-                      <li>
-                        <Link to="/Forum">鬼影探索</Link>
-                      </li>
-                      <li>
-                        <Link to="/Contact">解謎之門</Link>
-                      </li>
-                    </ul>
-                    <small>
-                      &copy; 2024 Mystic Markers. All Rights Reserved.  此網站設計學生練習作品，無任何商業營利用途。
-                    </small>
-                  </div>
-                  <img src="images/LOGO_footer.svg" alt="神秘座標" />
-                </div>
-              </footer>
+              <Footer />
             </main>
           }
         />
@@ -349,10 +328,10 @@ const App = () => {
         <Route path="/Story/*" element={<Story />} />
         <Route path="/Map" element={<Map />} />
         <Route path="/page/:pageId" element={<Gallerypage />} />
-        <Route path="/Forum" element={<Forum />} />
+        <Route path="/Forum/article/:articleId" element={<ArticleView />} />
+        <Route path="/Forum/*" element={<Forum />} />
         <Route path="/Contact" element={<Contact />} />
-        <Route path="/Forum/article/:articleId/*" element={<ArticleView />} />
-
+        <Route path="/User" element={<User />} />
       </Routes>
     </>
   );

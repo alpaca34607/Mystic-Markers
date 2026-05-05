@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Navbar from "../components/Navbar"; //Navbar
+import Footer from "../components/Footer";
+import { swalSuccess } from "../utils/swal";
 import "../style.scss";
 import { Link, Routes, Route } from "react-router-dom";
 import Contact from "./Contact";
@@ -28,7 +30,7 @@ export default function Story() {
 
   const copyLink = () => {
     navigator.clipboard.writeText(shareUrl).then(() => {
-      alert("連結已複製到剪貼板！");
+      swalSuccess("連結已複製到剪貼板！");
     });
   };
 
@@ -464,30 +466,7 @@ export default function Story() {
               </div>
 
               {/* 頁尾區 */}
-              <footer>
-                <div className="content">
-                  <div className="left">
-                    <ul className="link">
-                      <li>
-                        <Link to="/">首頁</Link>
-                      </li>
-                      <li>
-                        <Link to="/Map">靈異導航</Link>
-                      </li>
-                      <li>
-                        <Link to="/Forum">鬼影探索</Link>
-                      </li>
-                      <li>
-                        <Link to="/Contact">解謎之門</Link>
-                      </li>
-                    </ul>
-                    <small>
-                      &copy; 2024 Mystic Markers. All Rights Reserved. 此網站設計學生練習作品，無任何商業營利用途。
-                    </small>
-                  </div>
-                  <img src="images/LOGO_footer.svg" alt="神秘座標" />
-                </div>
-              </footer>
+              <Footer />
             </main>
           }
         />
